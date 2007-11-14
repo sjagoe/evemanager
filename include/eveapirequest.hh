@@ -76,7 +76,7 @@ class EveApiRequest: public QObject
         //! QMap mapping request IDs to buffers
         QMap<int, QPair<QBuffer*, QBuffer*> > _requestBuffers;
 
-        //! QMap mapping IDs to readable requests
+        //! QMap mapping IDs to readable requests (QPair<scope, file>)
         QMap<int, QPair<QString, QString> > _requests;
 
         //! QMap mapping http id to a unique QString ID
@@ -96,7 +96,7 @@ class EveApiRequest: public QObject
         /*!
         return a QStringList of filesystem directories, relative to the data directory, in which to store cache
         */
-        virtual QStringList cachePath( const QPair<QString, QString>& characterID ) = 0;
+        virtual QStringList cachePath( QString& scope, const QPair<QString, QString>& characterID ) = 0;
 
     private slots:
         /*!

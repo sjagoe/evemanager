@@ -105,6 +105,7 @@ void EveApiRequest::requestFinished( int id, bool error )
 
     QPair<QBuffer*, QBuffer*> buffers = this->_requestBuffers.take(id);
     QPair<QString, QString> request = this->_requests.take(id);
+    QString scope = request.first;
     QString idStr = this->_id.take(id);
     QString response = this->_response.take(id);
     QPair<QString, QString> characterID = this->_characterID.take(id);
