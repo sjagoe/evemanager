@@ -52,13 +52,35 @@
 		</Compiler>
 		<Unit filename="EVE_API_Qt.pro" />
 		<Unit filename="include\eveapi.hh" />
+		<Unit filename="include\eveapiaccountbalance.hh" />
 		<Unit filename="include\eveapicharacter.hh" />
+		<Unit filename="include\eveapicharactersheet.hh" />
 		<Unit filename="include\eveapicorporation.hh" />
 		<Unit filename="include\eveapieve.hh" />
+		<Unit filename="include\eveapimap.hh" />
+		<Unit filename="include\eveapimembertracking.hh" />
+		<Unit filename="include\eveapireftypes.hh" />
+		<Unit filename="include\eveapirequest.hh" />
+		<Unit filename="include\eveapiskillintraining.hh" />
+		<Unit filename="include\eveapiskilltree.hh" />
+		<Unit filename="include\eveapisovereignty.hh" />
+		<Unit filename="include\eveapiwalletjournal.hh" />
+		<Unit filename="include\eveapiwallettransactions.hh" />
 		<Unit filename="src\eveapi.cpp" />
+		<Unit filename="src\eveapiaccountbalance.cpp" />
 		<Unit filename="src\eveapicharacter.cpp" />
+		<Unit filename="src\eveapicharactersheet.cpp" />
 		<Unit filename="src\eveapicorporation.cpp" />
 		<Unit filename="src\eveapieve.cpp" />
+		<Unit filename="src\eveapimap.cpp" />
+		<Unit filename="src\eveapimembertracking.cpp" />
+		<Unit filename="src\eveapireftypes.cpp" />
+		<Unit filename="src\eveapirequest.cpp" />
+		<Unit filename="src\eveapiskillintraining.cpp" />
+		<Unit filename="src\eveapiskilltree.cpp" />
+		<Unit filename="src\eveapisovereignty.cpp" />
+		<Unit filename="src\eveapiwalletjournal.cpp" />
+		<Unit filename="src\eveapiwallettransactions.cpp" />
 		<Unit filename="src\main.cpp" />
 		<Extensions>
 			<code_completion />

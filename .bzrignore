@@ -3,3 +3,6 @@ bin
 release
 debug
 *.layout
+Makefile*
+*.Debug
+*.Release

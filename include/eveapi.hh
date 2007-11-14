@@ -1,9 +1,9 @@
 #ifndef __EVEAPI_HH__
 #define __EVEAPI_HH__
 
-#include <QThread>
+#include <QObject>
 
-class EveApi: public QThread
+class EveApi: public QObject
 {
     Q_OBJECT
 };
