@@ -34,7 +34,7 @@ void Window::run()
     params.insert( QString("characterID"), QString("767637297") );
     params.insert( QString("apiKey"), QString("VhNtTIJbptLoberHr0RcYFhmusa8aMllvXrqp8D0udzXFly9Xc3EBSmWoSy3clJ3") );
     //QMessageBox::information(this, "button", "clicked", QMessageBox::Ok);
-    QString result = this->_api.character().skillInTraining( params );
+    QString result = this->_api.eve().refTypes( params );
     QMessageBox::information(this, "request", result, QMessageBox::Ok);
 }
 

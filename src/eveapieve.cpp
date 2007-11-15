@@ -1,6 +1,6 @@
 #include "eveapieve.hh"
 
-#include "eveapigeneralscope.hh"
+#include "eveapigeneralrequest.hh"
 //#include "eveapiskilltree.hh"
 
 EveApiEve::EveApiEve( QString& host, QString& dataPath, int& xmlIndent,
@@ -9,13 +9,13 @@ EveApiEve::EveApiEve( QString& host, QString& dataPath, int& xmlIndent,
 {
     // RefTypes request
     QString requestID = this->refTypesRequestID();
-    EveApiRequest* newRequest = new EveApiGeneralScope(requestID, this->dataPath(),
+    EveApiRequest* newRequest = new EveApiGeneralRequest(requestID, this->dataPath(),
         this->xmlIndent());
     this->addRequestType( requestID, newRequest );
 
     // SkillTree request
     requestID = this->skillTreeRequestID();
-    newRequest = new EveApiGeneralScope(requestID, this->dataPath(),
+    newRequest = new EveApiGeneralRequest(requestID, this->dataPath(),
         this->xmlIndent());
     this->addRequestType( requestID, newRequest );
 }

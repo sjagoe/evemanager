@@ -22,8 +22,8 @@ CONFIG(debug, debug|release)
 # Input
 HEADERS += include/eveapi.hh \
            include/eveapirequest.hh \
-           include/eveapigeneralscope.hh \
-           include/eveapicharacterscope.hh \
+           include/eveapigeneralrequest.hh \
+           include/eveapicharacterrequest.hh \
            include/eveapiscope.hh \
            include/eveapieve.hh \
            include/eveapimap.hh \
@@ -33,8 +33,8 @@ HEADERS += include/eveapi.hh \
 
 SOURCES += src/eveapi.cpp \
            src/eveapirequest.cpp \
-           src/eveapigeneralscope.cpp \
-           src/eveapicharacterscope.cpp \
+           src/eveapigeneralrequest.cpp \
+           src/eveapicharacterrequest.cpp \
            src/eveapiscope.cpp \
            src/eveapieve.cpp \
            src/eveapimap.cpp \

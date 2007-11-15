@@ -1,8 +1,8 @@
-#include "eveapigeneralscope.hh"
+#include "eveapigeneralrequest.hh"
 
 //#include <iostream>
 
-EveApiGeneralScope::EveApiGeneralScope( const QString& requestType, const QString& dataPath, const int& xmlIndent, QObject* parent )
+EveApiGeneralRequest::EveApiGeneralRequest( const QString& requestType, const QString& dataPath, const int& xmlIndent, QObject* parent )
     : EveApiRequest( requestType, dataPath, xmlIndent, parent )
 {
 
@@ -11,7 +11,7 @@ EveApiGeneralScope::EveApiGeneralScope( const QString& requestType, const QStrin
 /*!
 Check the paramaters
 */
-bool EveApiGeneralScope::validateParamaters(
+bool EveApiGeneralRequest::validateParamaters(
     const QMap<QString, QString>& parameters, QUrl& url )
 {
     QString userID = parameters.value("userID");
@@ -28,7 +28,7 @@ bool EveApiGeneralScope::validateParamaters(
 /*!
 return a QStringList of filesystem directories, relative to the data directory, in which to store cache
 */
-QStringList EveApiGeneralScope::cachePath( const QString& scope,
+QStringList EveApiGeneralRequest::cachePath( const QString& scope,
             const QMap<QString, QString>& /*parameters*/ )
 {
     QStringList dirs;

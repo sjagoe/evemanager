@@ -1,6 +1,6 @@
 #include "eveapicharacter.hh"
 
-#include "eveapicharacterscope.hh"
+#include "eveapicharacterrequest.hh"
 //#include "eveapiskillintraining.hh"
 
 /*!
@@ -12,13 +12,13 @@ EveApiCharacter::EveApiCharacter( QString& host, QString& dataPath, int& xmlInde
 {
     // CharacterSheet request
     QString requestID = this->characterSheetRequestID();
-    EveApiRequest* newRequest = new EveApiCharacterScope(requestID,
+    EveApiRequest* newRequest = new EveApiCharacterRequest(requestID,
         this->dataPath(), this->xmlIndent());
     this->addRequestType( requestID, newRequest );
 
     // SkillInTraining request
     requestID = this->skillInTrainingRequestID();
-    newRequest = new EveApiCharacterScope(requestID,
+    newRequest = new EveApiCharacterRequest(requestID,
         this->dataPath(), this->xmlIndent());
     this->addRequestType( requestID, newRequest );
 }
