@@ -7,7 +7,10 @@ class EveApiRefTypes: public EveApiRequest
 {
     Q_OBJECT
     public:
-        EveApiRefTypes( QString& dataPath, int& xmlIndent, QObject* parent = 0 );
+        /*!
+        pass the constructor args to the super-class
+        */
+        EveApiRefTypes( const QString& requestType, const QString& dataPath, const int& xmlIndent, QObject* parent = 0 );
 
     private:
         /*!
@@ -18,7 +21,8 @@ class EveApiRefTypes: public EveApiRequest
         /*!
         return a QStringList of filesystem directories, relative to the data directory, in which to store cache
         */
-        QStringList cachePath( QString& scope, const QPair<QString, QString>& characterID );
+        QStringList cachePath( const QString& scope,
+            const QMap<QString, QString>& parameters );
 };
 
 #endif

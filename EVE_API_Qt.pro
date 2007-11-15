@@ -10,7 +10,7 @@ TARGET = EVE_API_Qt
 
 QT += network xml
 
-CONFIG += thread
+CONFIG += thread console
 CONFIG += debug_and_release
 CONFIG(debug, debug|release)
 {
@@ -26,6 +26,7 @@ HEADERS += include/eveapi.hh \
            include/eveapicharacter.hh \
            include/eveapicharactersheet.hh \
            include/eveapicorporation.hh \
+           include/eveapiscope.hh \
            include/eveapieve.hh \
            include/eveapimap.hh \
            include/eveapimembertracking.hh \
@@ -35,13 +36,15 @@ HEADERS += include/eveapi.hh \
            include/eveapiskilltree.hh \
            include/eveapisovereignty.hh \
            include/eveapiwalletjournal.hh \
-           include/eveapiwallettransactions.hh
+           include/eveapiwallettransactions.hh \
+           include/main.hh
 
 SOURCES += src/eveapi.cpp \
            src/eveapiaccountbalance.cpp \
            src/eveapicharacter.cpp \
            src/eveapicharactersheet.cpp \
            src/eveapicorporation.cpp \
+           src/eveapiscope.cpp \
            src/eveapieve.cpp \
            src/eveapimap.cpp \
            src/eveapimembertracking.cpp \

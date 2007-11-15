@@ -61,11 +61,13 @@
 		<Unit filename="include\eveapimembertracking.hh" />
 		<Unit filename="include\eveapireftypes.hh" />
 		<Unit filename="include\eveapirequest.hh" />
+		<Unit filename="include\eveapiscope.hh" />
 		<Unit filename="include\eveapiskillintraining.hh" />
 		<Unit filename="include\eveapiskilltree.hh" />
 		<Unit filename="include\eveapisovereignty.hh" />
 		<Unit filename="include\eveapiwalletjournal.hh" />
 		<Unit filename="include\eveapiwallettransactions.hh" />
+		<Unit filename="include\main.hh" />
 		<Unit filename="src\eveapi.cpp" />
 		<Unit filename="src\eveapiaccountbalance.cpp" />
 		<Unit filename="src\eveapicharacter.cpp" />
@@ -76,6 +78,7 @@
 		<Unit filename="src\eveapimembertracking.cpp" />
 		<Unit filename="src\eveapireftypes.cpp" />
 		<Unit filename="src\eveapirequest.cpp" />
+		<Unit filename="src\eveapiscope.cpp" />
 		<Unit filename="src\eveapiskillintraining.cpp" />
 		<Unit filename="src\eveapiskilltree.cpp" />
 		<Unit filename="src\eveapisovereignty.cpp" />
