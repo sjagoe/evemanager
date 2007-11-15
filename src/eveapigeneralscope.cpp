@@ -1,8 +1,8 @@
-#include "eveapireftypes.hh"
+#include "eveapigeneralscope.hh"
 
-#include <iostream>
+//#include <iostream>
 
-EveApiRefTypes::EveApiRefTypes( const QString& requestType, const QString& dataPath, const int& xmlIndent, QObject* parent )
+EveApiGeneralScope::EveApiGeneralScope( const QString& requestType, const QString& dataPath, const int& xmlIndent, QObject* parent )
     : EveApiRequest( requestType, dataPath, xmlIndent, parent )
 {
 
@@ -11,7 +11,7 @@ EveApiRefTypes::EveApiRefTypes( const QString& requestType, const QString& dataP
 /*!
 Check the paramaters
 */
-bool EveApiRefTypes::validateParamaters(
+bool EveApiGeneralScope::validateParamaters(
     const QMap<QString, QString>& parameters, QUrl& url )
 {
     QString userID = parameters.value("userID");
@@ -28,7 +28,7 @@ bool EveApiRefTypes::validateParamaters(
 /*!
 return a QStringList of filesystem directories, relative to the data directory, in which to store cache
 */
-QStringList EveApiRefTypes::cachePath( const QString& scope,
+QStringList EveApiGeneralScope::cachePath( const QString& scope,
             const QMap<QString, QString>& /*parameters*/ )
 {
     QStringList dirs;

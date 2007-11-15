@@ -3,7 +3,7 @@
 /*!
 pass the constructor args to the super-class
 */
-EveApiCharacterScope::EveApiCharacterSheet( const QString& requestType,
+EveApiCharacterScope::EveApiCharacterScope( const QString& requestType,
     const QString& dataPath, const int& xmlIndent, QObject* parent )
         : EveApiRequest( requestType, dataPath, xmlIndent, parent )
 {

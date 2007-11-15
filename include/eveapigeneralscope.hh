@@ -1,16 +1,16 @@
-#ifndef __EVEAPIREFTYPE_HH__
-#define __EVEAPIREFTYPE_HH__
+#ifndef __EVEAPIGENERALSCOPE_HH__
+#define __EVEAPIGENERALSCOPE_HH__
 
 #include "eveapirequest.hh"
 
-class EveApiRefTypes: public EveApiRequest
+class EveApiGeneralScope: public EveApiRequest
 {
     Q_OBJECT
     public:
         /*!
         pass the constructor args to the super-class
         */
-        EveApiRefTypes( const QString& requestType, const QString& dataPath, const int& xmlIndent, QObject* parent = 0 );
+        EveApiGeneralScope( const QString& requestType, const QString& dataPath, const int& xmlIndent, QObject* parent = 0 );
 
     private:
         /*!

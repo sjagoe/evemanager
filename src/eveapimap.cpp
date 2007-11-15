@@ -1,6 +1,6 @@
 #include "eveapimap.hh"
 
-#include "eveapisovereignty.hh"
+#include "eveapigeneralscope.hh"
 
 /*!
 create the child classes that provide API functionality
@@ -11,7 +11,7 @@ EveApiMap::EveApiMap( QString& host, QString& dataPath, int& xmlIndent,
 {
     // Sovereignty request
     QString requestID = this->sovereigntyRequestID();
-    EveApiRequest* newRequest = new EveApiSovereignty(requestID,
+    EveApiRequest* newRequest = new EveApiGeneralScope(requestID,
         this->dataPath(), this->xmlIndent());
     this->addRequestType( requestID, newRequest );
 }

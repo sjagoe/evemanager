@@ -19,40 +19,25 @@ CONFIG(debug, debug|release)
     DESTDIR = bin/release
 }
 
-
 # Input
 HEADERS += include/eveapi.hh \
-           include/eveapiaccountbalance.hh \
-           include/eveapicharacter.hh \
+           include/eveapirequest.hh \
+           include/eveapigeneralscope.hh \
            include/eveapicharacterscope.hh \
-           include/eveapicorporation.hh \
            include/eveapiscope.hh \
            include/eveapieve.hh \
            include/eveapimap.hh \
-           include/eveapimembertracking.hh \
-           include/eveapireftypes.hh \
-           include/eveapirequest.hh \
-           include/eveapiskillintraining.hh \
-           include/eveapiskilltree.hh \
-           include/eveapisovereignty.hh \
-           include/eveapiwalletjournal.hh \
-           include/eveapiwallettransactions.hh \
+           include/eveapicharacter.hh \
+           include/eveapicorporation.hh \
            include/main.hh
 
 SOURCES += src/eveapi.cpp \
-           src/eveapiaccountbalance.cpp \
-           src/eveapicharacter.cpp \
+           src/eveapirequest.cpp \
+           src/eveapigeneralscope.cpp \
            src/eveapicharacterscope.cpp \
-           src/eveapicorporation.cpp \
            src/eveapiscope.cpp \
            src/eveapieve.cpp \
            src/eveapimap.cpp \
-           src/eveapimembertracking.cpp \
-           src/eveapireftypes.cpp \
-           src/eveapirequest.cpp \
-           src/eveapiskillintraining.cpp \
-           src/eveapiskilltree.cpp \
-           src/eveapisovereignty.cpp \
-           src/eveapiwalletjournal.cpp \
-           src/eveapiwallettransactions.cpp \
+           src/eveapicharacter.cpp \
+           src/eveapicorporation.cpp \
            src/main.cpp
