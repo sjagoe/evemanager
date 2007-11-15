@@ -24,7 +24,6 @@ HEADERS += include/eveapi.hh \
            include/eveapirequest.hh \
            include/eveapigeneralrequest.hh \
            include/eveapicharacterrequest.hh \
-           include/eveapiwalletjournalrequest.hh \
            include/eveapiscope.hh \
            include/eveapieve.hh \
            include/eveapimap.hh \
@@ -36,7 +35,6 @@ SOURCES += src/eveapi.cpp \
            src/eveapirequest.cpp \
            src/eveapigeneralrequest.cpp \
            src/eveapicharacterrequest.cpp \
-           src/eveapiwalletjournalrequest.cpp \
            src/eveapiscope.cpp \
            src/eveapieve.cpp \
            src/eveapimap.cpp \
