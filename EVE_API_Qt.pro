@@ -11,6 +11,7 @@ TARGET = EVE_API_Qt
 QT += network xml
 
 CONFIG += dll
+VERSION = 1.0.0
 
 CONFIG += thread
 CONFIG += debug_and_release
