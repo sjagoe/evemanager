@@ -8,6 +8,7 @@
 #include "eveapieve.hh"
 #include "eveapimap.hh"
 #include "eveapicharacter.hh"
+#include "eveapicorporation.hh"
 
 class EveApi: public QObject
 {
@@ -33,6 +34,11 @@ class EveApi: public QObject
         */
         EveApiCharacter& character();
 
+        /*!
+        provide access to aread of the api in the "/corp/" context
+        */
+        EveApiCorporation& corp();
+
     private:
         //! API Server hostname
         QString _hostName;
@@ -54,6 +60,9 @@ class EveApi: public QObject
 
         //! "/char/" scope
         EveApiCharacter* _char;
+
+        //! "/corp/" scope
+        EveApiCorporation* _corp;
 
         /*!
         connect the signals of each scope member

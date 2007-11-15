@@ -32,9 +32,9 @@ void Window::run()
     QMap<QString, QString> params;
     params.insert( QString("userID"), QString("695163") );
     params.insert( QString("characterID"), QString("767637297") );
-    params.insert( QString("apiKey"), QString("VhNtTIJbptLoberHr0RcYFhmusa8aMllvXrqp8D0udzXFly9Xc3EBSmWoSy3clJ3") );
+    params.insert( QString("apiKey"), QString("iQbt9dFt42VVdhdbjtlOzwW41WJLWkgnL4ImZc0GqOLJOiEkv9E3vSrRJjZWzTbG") );
     //QMessageBox::information(this, "button", "clicked", QMessageBox::Ok);
-    QString result = this->_api.eve().refTypes( params );
+    QString result = this->_api.character().walletJournal( params );
     QMessageBox::information(this, "request", result, QMessageBox::Ok);
 }
 

@@ -5,24 +5,29 @@
 
 class EveApiGeneralRequest: public EveApiRequest
 {
-    Q_OBJECT
+        Q_OBJECT
     public:
         /*!
         pass the constructor args to the super-class
         */
-        EveApiGeneralRequest( const QString& requestType, const QString& dataPath, const int& xmlIndent, QObject* parent = 0 );
+        EveApiGeneralRequest( const QString& requestType,
+                              const QString& dataPath,
+                              const int& xmlIndent,
+                              const QList<QString>& requiredParams,
+                              const QList<QString>& optionalParams,
+                              QObject* parent = 0 );
 
     private:
-        /*!
-        Check the paramaters
-        */
-        bool validateParamaters( const QMap<QString, QString>& parameters, QUrl& url );
+//        /*!
+//        Check the paramaters
+//        */
+//        bool validateParamaters( const QMap<QString, QString>& parameters, QUrl& url );
 
         /*!
         return a QStringList of filesystem directories, relative to the data directory, in which to store cache
         */
         QStringList cachePath( const QString& scope,
-            const QMap<QString, QString>& parameters );
+                               const QMap<QString, QString>& parameters );
 };
 
 #endif

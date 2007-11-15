@@ -13,19 +13,24 @@
 #include <QUrl>
 #include <QStringList>
 #include <QDateTime>
+#include <QList>
 
 class QHttp;
 class QBuffer;
 
 class EveApiRequest: public QObject
 {
-    Q_OBJECT
+        Q_OBJECT
     public:
         /*!
         Contructor, calls super-class constructor, creates dynamic objects
         */
-        EveApiRequest( const QString& requestType, const QString& dataPath,
-            const int& xmlIndent, QObject* parent = 0 );
+        EveApiRequest( const QString& requestType,
+                       const QString& dataPath,
+                       const int& xmlIndent,
+                       const QList<QString>& requiredParams,
+                       const QList<QString>& optionalParams,
+                       QObject* parent = 0 );
 
         virtual ~EveApiRequest() {};
 
@@ -35,7 +40,7 @@ class EveApiRequest: public QObject
         \return unique request identifier (used to id a completed request)
         */
         QString addRequest( const QString& host, const QString& scope,
-            QMap<QString, QString>& parameters );
+                            QMap<QString, QString>& parameters );
 
     protected:
         /*!
@@ -92,22 +97,28 @@ class EveApiRequest: public QObject
         //! QMap of character identifiers
         QMap<int, QMap<QString, QString> > _paramaters;
 
+        //! required api function parameters
+        QList<QString> _requiredParamaters;
+
+        //! optional api function parameters
+        QList<QString> _optionalParameters;
+
         /*!
         Check the paramaters
         */
-        virtual bool validateParamaters( const QMap<QString, QString>& parameters, QUrl& url ) = 0;
+        bool validateParamaters( const QMap<QString, QString>& parameters, QUrl& url );
 
         /*!
         return a QStringList of filesystem directories, relative to the data directory, in which to store cache
         */
         virtual QStringList cachePath( const QString& scope,
-            const QMap<QString, QString>& parameters ) = 0;
+                                       const QMap<QString, QString>& parameters ) = 0;
 
         /*!
         Fetch from API
         */
         QString fetchFromApi( const QString& host, const QString& scope,
-            const QMap<QString, QString>& parameters );
+                              const QMap<QString, QString>& parameters );
 
         /*!
         Get the time that the cache expires from a QDomDocument

@@ -32,6 +32,12 @@ EveApi::EveApi( QObject* parent )
     this->_char = new EveApiCharacter( this->_hostName, this->_dataPath,
         this->_xmlIndent, scope );
     this->connectScope( this->_char );
+
+    // "corp" scope
+    scope = "corp";
+    this->_corp = new EveApiCorporation( this->_hostName, this->_dataPath,
+        this->_xmlIndent, scope );
+    this->connectScope( this->_corp );
 }
 
 /*!
@@ -56,6 +62,14 @@ provide access to aread of the api in the "/char/" context
 EveApiCharacter& EveApi::character()
 {
     return (*this->_char);
+}
+
+/*!
+provide access to aread of the api in the "/corp/" context
+*/
+EveApiCorporation& EveApi::corp()
+{
+    return (*this->_corp);
 }
 
 /*!

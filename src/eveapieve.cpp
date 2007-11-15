@@ -1,22 +1,40 @@
 #include "eveapieve.hh"
 
 #include "eveapigeneralrequest.hh"
-//#include "eveapiskilltree.hh"
+
+#include <QList>
 
 EveApiEve::EveApiEve( QString& host, QString& dataPath, int& xmlIndent,
-    QString& scope, QObject* parent )
-        : EveApiScope ( host, dataPath, xmlIndent, scope, parent )
+                      QString& scope, QObject* parent )
+        : EveApiScope( host, dataPath, xmlIndent, scope, parent )
 {
+    QList<QString> requiredParams;
+    QList<QString> optionalParams;
+
     // RefTypes request
+    requiredParams.clear();
+    requiredParams.append( "userID" );
+    requiredParams.append( "apiKey" );
+    optionalParams.clear();
     QString requestID = this->refTypesRequestID();
-    EveApiRequest* newRequest = new EveApiGeneralRequest(requestID, this->dataPath(),
-        this->xmlIndent());
+    EveApiRequest* newRequest = new EveApiGeneralRequest( requestID,
+            this->dataPath(),
+            this->xmlIndent(),
+            requiredParams,
+            optionalParams );
     this->addRequestType( requestID, newRequest );
 
     // SkillTree request
+    requiredParams.clear();
+    requiredParams.append( "userID" );
+    requiredParams.append( "apiKey" );
+    optionalParams.clear();
     requestID = this->skillTreeRequestID();
-    newRequest = new EveApiGeneralRequest(requestID, this->dataPath(),
-        this->xmlIndent());
+    newRequest = new EveApiGeneralRequest( requestID,
+                                           this->dataPath(),
+                                           this->xmlIndent(),
+                                           requiredParams,
+                                           optionalParams );
     this->addRequestType( requestID, newRequest );
 }
 

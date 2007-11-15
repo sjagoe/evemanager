@@ -12,13 +12,17 @@
 #include <QTextStream>
 
 EveApiRequest::EveApiRequest( const QString& requestType,
-    const QString& dataPath, const int& xmlIndent, QObject* parent )
-    : QObject ( parent )
+    const QString& dataPath, const int& xmlIndent,
+    const QList<QString>& requiredParams, const QList<QString>& optionalParams,
+    QObject* parent )
+        : QObject ( parent )
 {
     this->_http = new QHttp;
     this->_requestType = requestType;
     this->_dataPath = dataPath;
     this->_xmlIndent = xmlIndent;
+    this->_requiredParamaters = requiredParams;
+    this->_optionalParameters = optionalParams;
     this->_currentRequest = 0;
 
     connect( this->_http, SIGNAL(requestStarted( int )),
@@ -85,7 +89,11 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
             {
 //                std::cout << "cache valid" << std::endl;
                 // cache valid, return it
-                idStr = requestType();
+                idStr = this->path( scope );
+//                idStr = "/";
+//                idStr = idStr.append(scope);
+//                idStr = idStr.append("/");
+//                idStr = idStr.append(requestType());
                 idStr = idStr.append("-");
                 idStr = idStr.append(parameters.value("userID"));
                 idStr = idStr.append("-");
@@ -139,6 +147,30 @@ QString EveApiRequest::makeID( const QString& scope, int& id )
     QString idStr = this->path( scope );
     idStr = idStr.append(QString("-%1").arg(id));
     return idStr;
+}
+
+/*!
+Check the paramaters
+*/
+bool EveApiRequest::validateParamaters( const QMap<QString, QString>& parameters, QUrl& url )
+{
+    QString paramID;
+    // check all the required params
+    foreach( paramID, this->_requiredParamaters )
+    {
+        QString param = parameters.value( paramID );
+        if (param.isNull());
+            return false;
+        url.addQueryItem(paramID, param);
+    }
+    // check optional parameters
+    foreach( paramID, this->_optionalParameters )
+    {
+        QString param = parameters.value( paramID );
+        if (!param.isNull());
+            url.addQueryItem(paramID, param);
+    }
+    return true;
 }
 
 /*!

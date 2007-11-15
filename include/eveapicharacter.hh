@@ -23,6 +23,16 @@ class EveApiCharacter: public EveApiScope
         */
         QString skillInTraining( QMap<QString, QString>& parameters );
 
+        /*!
+        access the AccountBalance api function
+        */
+        QString accountBalance( QMap<QString, QString>& parameters );
+
+        /*!
+        access the WalletJournal api function
+        */
+        QString walletJournal( QMap<QString, QString>& parameters );
+
     private:
         /*!
         return the filename of the Sovereignty.xml request
@@ -38,6 +48,22 @@ class EveApiCharacter: public EveApiScope
         static const QString skillInTrainingRequestID()
         {
             return QString("SkillInTraining.xml");
+        };
+
+        /*!
+        return the filename of the AccountBalance.xml request
+        */
+        static const QString accountBalanceRequestID()
+        {
+            return QString("AccountBalance.xml");
+        };
+
+        /*!
+        return the filename of the WalletJournal.xml request
+        */
+        static const QString walletJournalRequestID()
+        {
+            return QString("WalletJournal.xml");
         };
 };
 
