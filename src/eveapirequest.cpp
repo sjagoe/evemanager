@@ -86,9 +86,9 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
             QDateTime cacheTime = this->getCacheTime( cacheDom );
             QDateTime now = QDateTime::currentDateTime();
             QDateTime nowUTC = now.toUTC();
-            // over by 30 secs, prevent accidental fetch if the cache has not
+            // over by 60 secs, prevent accidental fetch if the cache has not
             // expired (due to differences in clocks)
-            if ( nowUTC.secsTo( cacheTime ) <= -30 )
+            if ( nowUTC.secsTo( cacheTime ) <= -60 )
             {
 //                std::cout << "cache expired, fetch new" << std::endl;
                 // cache invalid, fetch new
@@ -107,7 +107,7 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
                 idStr = idStr.append( "-" );
                 idStr = idStr.append( parameters.value( "apiKey" ) );
 
-                emit requestComplete( idStr, cacheDom, QString( "FROM CACHE" ) );
+                emit requestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ) );
             }
         }
         else

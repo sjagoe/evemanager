@@ -2,10 +2,14 @@
 #define __MAIN_HH__
 
 #include <QWidget>
-#include <QPushButton>
-#include <QVBoxLayout>
 
 #include "eveapi.hh"
+
+class QPushButton;
+class QGroupBox;
+class QTextEdit;
+class QLineEdit;
+class QLabel;
 
 class Window: public QWidget
 {
@@ -26,6 +30,36 @@ class Window: public QWidget
         QPushButton* _charBalance;
         QPushButton* _corpBalance;
         QPushButton* _corpMembers;
+
+        QGroupBox* _eve;
+        QGroupBox* _map;
+        QGroupBox* _char;
+        QGroupBox* _corp;
+        QGroupBox* _apiInfo;
+
+        QLabel* _lblUserID;
+        QLabel* _lblLimitedApiKey;
+        QLabel* _lblFullApiKey;
+        QLabel* _lblCharacterID;
+        QLabel* _lblAccountID;
+        QLabel* _lblBeforeRefID;
+        QLabel* _lblBeforeTransID;
+
+        QLineEdit* _edtUserID;
+        QLineEdit* _edtLimitedApiKey;
+        QLineEdit* _edtFullApiKey;
+        QLineEdit* _edtCharacterID;
+        QLineEdit* _edtAccountID;
+        QLineEdit* _edtBeforeRefID;
+        QLineEdit* _edtBeforeTransID;
+
+        QTextEdit* _edtResult;
+        QLineEdit* _edtId;
+        QLineEdit* _edtResponse;
+
+        QLabel* _lblResult;
+        QLabel* _lblId;
+        QLabel* _lblResponse;
 
         EveApi* _api;
 
