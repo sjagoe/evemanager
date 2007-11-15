@@ -50,7 +50,7 @@ class EveApiScope: public QObject
         void addRequestType( QString& id, EveApiRequest* request );
 
         /*!
-        Add a request of the specified type
+        Call a request of the specified type
         */
         QString request( QString& id, QMap<QString, QString>& parameters );
 

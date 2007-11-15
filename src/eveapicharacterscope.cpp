@@ -1,9 +1,9 @@
-#include "eveapiskillintraining.hh"
+#include "eveapicharacterscope.hh"
 
 /*!
 pass the constructor args to the super-class
 */
-EveApiSkillInTraining::EveApiSkillInTraining( const QString& requestType,
+EveApiCharacterScope::EveApiCharacterSheet( const QString& requestType,
     const QString& dataPath, const int& xmlIndent, QObject* parent )
         : EveApiRequest( requestType, dataPath, xmlIndent, parent )
 {
@@ -13,7 +13,7 @@ EveApiSkillInTraining::EveApiSkillInTraining( const QString& requestType,
 /*!
 Check the paramaters
 */
-bool EveApiSkillInTraining::validateParamaters( const QMap<QString, QString>& parameters, QUrl& url )
+bool EveApiCharacterScope::validateParamaters( const QMap<QString, QString>& parameters, QUrl& url )
 {
     QString userID = parameters.value("userID");
     QString charID = parameters.value("characterID");
@@ -32,7 +32,7 @@ bool EveApiSkillInTraining::validateParamaters( const QMap<QString, QString>& pa
 return a QStringList of filesystem directories,
 relative to the data directory, in which to store cache
 */
-QStringList EveApiSkillInTraining::cachePath( const QString& scope,
+QStringList EveApiCharacterScope::cachePath( const QString& scope,
     const QMap<QString, QString>& parameters )
 {
     QStringList dirs;

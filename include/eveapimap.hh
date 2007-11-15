@@ -14,7 +14,7 @@ class EveApiMap: public EveApiScope
             QString& scope, QObject* parent = 0 );
 
         /*!
-        access the RefTypes api function
+        access the Sovereignty api function
         */
         QString sovereignty( QMap<QString, QString>& parameters );
 

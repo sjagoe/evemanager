@@ -17,7 +17,7 @@ EveApiMap::EveApiMap( QString& host, QString& dataPath, int& xmlIndent,
 }
 
 /*!
-access the RefTypes api function
+access the Sovereignty api function
 */
 QString EveApiMap::sovereignty( QMap<QString, QString>& parameters )
 {

@@ -7,6 +7,7 @@
 
 #include "eveapieve.hh"
 #include "eveapimap.hh"
+#include "eveapicharacter.hh"
 
 class EveApi: public QObject
 {
@@ -20,12 +21,17 @@ class EveApi: public QObject
         /*!
         provide access to areas of the api in the "/eve/" context
         */
-        EveApiEve* eve();
+        EveApiEve& eve();
 
         /*!
         provide access to areas of the api in the "/map/" context
         */
-        EveApiMap* map();
+        EveApiMap& map();
+
+        /*!
+        provide access to aread of the api in the "/char/" context
+        */
+        EveApiCharacter& character();
 
     private:
         //! API Server hostname
@@ -45,6 +51,14 @@ class EveApi: public QObject
 
         //! "/map/" scope
         EveApiMap* _map;
+
+        //! "/char/" scope
+        EveApiCharacter* _char;
+
+        /*!
+        connect the signals of each scope member
+        */
+        void connectScope( EveApiScope* scope );
 
     signals:
         void requestComplete( QString id, QDomDocument result, QString httpResponse );

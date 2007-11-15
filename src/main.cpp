@@ -10,7 +10,7 @@
 Window::Window( QWidget* parent )
     : QWidget( parent )
 {
-    this->_btn = new QPushButton("getRefTypes!");
+    this->_btn = new QPushButton("Test!");
 
     connect( this->_btn, SIGNAL(clicked()), this, SLOT(run()));
 
@@ -31,9 +31,10 @@ void Window::run()
 {
     QMap<QString, QString> params;
     params.insert( QString("userID"), QString("695163") );
+    params.insert( QString("characterID"), QString("767637297") );
     params.insert( QString("apiKey"), QString("VhNtTIJbptLoberHr0RcYFhmusa8aMllvXrqp8D0udzXFly9Xc3EBSmWoSy3clJ3") );
     //QMessageBox::information(this, "button", "clicked", QMessageBox::Ok);
-    QString result = this->_api.map()->sovereignty( params );
+    QString result = this->_api.character().skillInTraining( params );
     QMessageBox::information(this, "request", result, QMessageBox::Ok);
 }
 

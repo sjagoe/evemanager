@@ -1,16 +1,16 @@
-#ifndef __EVEAPISKILLINTRAINING_HH__
-#define __EVEAPISKILLINTRAINING_HH__
+#ifndef __EVEAPICHARACTERSHEET_HH__
+#define __EVEAPICHARACTERSHEET_HH__
 
 #include "eveapirequest.hh"
 
-class EveApiSkillInTraining: public EveApiRequest
+class EveApiCharacterScope: public EveApiRequest
 {
     Q_OBJECT
     public:
         /*!
         pass the constructor args to the super-class
         */
-        EveApiSkillInTraining( const QString& requestType, const QString& dataPath,
+        EveApiCharacterScope( const QString& requestType, const QString& dataPath,
             const int& xmlIndent, QObject* parent = 0 );
 
     private:

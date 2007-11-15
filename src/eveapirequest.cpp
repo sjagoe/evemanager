@@ -89,7 +89,7 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
                 idStr = idStr.append("-");
                 idStr = idStr.append(parameters.value("userID"));
                 idStr = idStr.append("-");
-                idStr = idStr.append(parameters.value("charID"));
+                idStr = idStr.append(parameters.value("characterID"));
                 idStr = idStr.append("-");
                 idStr = idStr.append(parameters.value("apiKey"));
 

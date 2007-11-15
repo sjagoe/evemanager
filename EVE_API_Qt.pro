@@ -24,7 +24,7 @@ CONFIG(debug, debug|release)
 HEADERS += include/eveapi.hh \
            include/eveapiaccountbalance.hh \
            include/eveapicharacter.hh \
-           include/eveapicharactersheet.hh \
+           include/eveapicharacterscope.hh \
            include/eveapicorporation.hh \
            include/eveapiscope.hh \
            include/eveapieve.hh \
@@ -42,7 +42,7 @@ HEADERS += include/eveapi.hh \
 SOURCES += src/eveapi.cpp \
            src/eveapiaccountbalance.cpp \
            src/eveapicharacter.cpp \
-           src/eveapicharactersheet.cpp \
+           src/eveapicharacterscope.cpp \
            src/eveapicorporation.cpp \
            src/eveapiscope.cpp \
            src/eveapieve.cpp \
