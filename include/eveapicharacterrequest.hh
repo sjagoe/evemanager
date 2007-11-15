@@ -15,14 +15,10 @@ class EveApiCharacterRequest: public EveApiRequest
                                 const int& xmlIndent,
                                 const QList<QString>& requiredParams,
                                 const QList<QString>& optionalParams,
+                                const QList<QString>& fileIDParam,
                                 QObject* parent = 0 );
 
     private:
-//        /*!
-//        Check the paramaters
-//        */
-//        bool validateParamaters( const QMap<QString, QString>& parameters, QUrl& url );
-
         /*!
         return a QStringList of filesystem directories,
         relative to the data directory, in which to store cache

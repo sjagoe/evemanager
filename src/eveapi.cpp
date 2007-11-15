@@ -3,14 +3,14 @@
 /*!
 set up the scopes of the API
 */
-EveApi::EveApi( QObject* parent )
+EveApi::EveApi( QString& dataPath, QObject* parent )
     : QObject( parent )
 {
     //! API Server hostname
     this->_hostName = "api.eve-online.com";
 
     //! path to the data subdirectory
-    this->_dataPath = "data";
+    this->_dataPath = dataPath;
 
     //! amount to indent XML blocks when writing files
     this->_xmlIndent = 4;

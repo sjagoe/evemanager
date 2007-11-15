@@ -10,18 +10,21 @@ EveApiEve::EveApiEve( QString& host, QString& dataPath, int& xmlIndent,
 {
     QList<QString> requiredParams;
     QList<QString> optionalParams;
+    QList<QString> cacheID;
 
     // RefTypes request
     requiredParams.clear();
     requiredParams.append( "userID" );
     requiredParams.append( "apiKey" );
     optionalParams.clear();
+    cacheID.clear();
     QString requestID = this->refTypesRequestID();
     EveApiRequest* newRequest = new EveApiGeneralRequest( requestID,
             this->dataPath(),
             this->xmlIndent(),
             requiredParams,
-            optionalParams );
+            optionalParams,
+            cacheID );
     this->addRequestType( requestID, newRequest );
 
     // SkillTree request
@@ -29,12 +32,14 @@ EveApiEve::EveApiEve( QString& host, QString& dataPath, int& xmlIndent,
     requiredParams.append( "userID" );
     requiredParams.append( "apiKey" );
     optionalParams.clear();
+    cacheID.clear();
     requestID = this->skillTreeRequestID();
     newRequest = new EveApiGeneralRequest( requestID,
                                            this->dataPath(),
                                            this->xmlIndent(),
                                            requiredParams,
-                                           optionalParams );
+                                           optionalParams,
+                                           cacheID );
     this->addRequestType( requestID, newRequest );
 }
 

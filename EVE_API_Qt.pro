@@ -10,7 +10,7 @@ TARGET = EVE_API_Qt
 
 QT += network xml
 
-CONFIG += thread console
+CONFIG += thread
 CONFIG += debug_and_release
 CONFIG(debug, debug|release)
 {

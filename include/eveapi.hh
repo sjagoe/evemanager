@@ -17,7 +17,7 @@ class EveApi: public QObject
         /*!
         set up the scopes of the API
         */
-        EveApi( QObject* parent = 0 );
+        EveApi( QString& dataPath, QObject* parent = 0 );
 
         /*!
         provide access to areas of the api in the "/eve/" context

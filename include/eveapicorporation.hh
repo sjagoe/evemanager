@@ -14,6 +14,16 @@ class EveApiCorporation: public EveApiScope
             QString& scope, QObject* parent = 0 );
 
         /*!
+        access the WalletJournal api function
+        */
+        QString walletJournal( QMap<QString, QString>& parameters );
+
+        /*!
+        access the WalletTransactions api function
+        */
+        QString walletTransactions( QMap<QString, QString>& parameters );
+
+        /*!
         access the AccountBalance api function
         */
         QString accountBalance( QMap<QString, QString>& parameters );
@@ -24,6 +34,22 @@ class EveApiCorporation: public EveApiScope
         QString memberTracking( QMap<QString, QString>& parameters );
 
     private:
+        /*!
+        return the filename of the WalletJournal.xml request
+        */
+        static const QString walletJournalRequestID()
+        {
+            return QString("WalletJournal.xml");
+        };
+
+        /*!
+        return the filename of the WalletTransactions.xml request
+        */
+        static const QString walletTransactionsRequestID()
+        {
+            return QString("WalletTransactions.xml");
+        };
+
         /*!
         return the filename of the AccountBalance.xml request
         */

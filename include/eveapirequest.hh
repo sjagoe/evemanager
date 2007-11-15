@@ -30,6 +30,7 @@ class EveApiRequest: public QObject
                        const int& xmlIndent,
                        const QList<QString>& requiredParams,
                        const QList<QString>& optionalParams,
+                       const QList<QString>& fileIDParam,
                        QObject* parent = 0 );
 
         virtual ~EveApiRequest() {};
@@ -102,6 +103,13 @@ class EveApiRequest: public QObject
 
         //! optional api function parameters
         QList<QString> _optionalParameters;
+
+        /*!
+        API params that will allow the cache file to be identified
+        (where there could be more than one with the same name, such as when
+        journal walking)
+        */
+        QList<QString> _fileIDParam;
 
         /*!
         Check the paramaters

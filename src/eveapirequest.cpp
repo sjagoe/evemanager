@@ -12,10 +12,13 @@
 #include <QTextStream>
 
 EveApiRequest::EveApiRequest( const QString& requestType,
-    const QString& dataPath, const int& xmlIndent,
-    const QList<QString>& requiredParams, const QList<QString>& optionalParams,
-    QObject* parent )
-        : QObject ( parent )
+                              const QString& dataPath,
+                              const int& xmlIndent,
+                              const QList<QString>& requiredParams,
+                              const QList<QString>& optionalParams,
+                              const QList<QString>& fileIDParam,
+                              QObject* parent )
+        : QObject( parent )
 {
     this->_http = new QHttp;
     this->_requestType = requestType;
@@ -23,16 +26,17 @@ EveApiRequest::EveApiRequest( const QString& requestType,
     this->_xmlIndent = xmlIndent;
     this->_requiredParamaters = requiredParams;
     this->_optionalParameters = optionalParams;
+    this->_fileIDParam = fileIDParam;
     this->_currentRequest = 0;
 
-    connect( this->_http, SIGNAL(requestStarted( int )),
-        this, SLOT( requestStarted( int ) ));
+    connect( this->_http, SIGNAL( requestStarted( int ) ),
+             this, SLOT( requestStarted( int ) ) );
 
-    connect( this->_http, SIGNAL(requestFinished( int, bool )),
-        this, SLOT( requestFinished( int, bool ) ) );
+    connect( this->_http, SIGNAL( requestFinished( int, bool ) ),
+             this, SLOT( requestFinished( int, bool ) ) );
 
-    connect( this->_http, SIGNAL(responseHeaderReceived( QHttpResponseHeader ) ),
-        this, SLOT( responseHeaderReceived( QHttpResponseHeader ) ) );
+    connect( this->_http, SIGNAL( responseHeaderReceived( QHttpResponseHeader ) ),
+             this, SLOT( responseHeaderReceived( QHttpResponseHeader ) ) );
 }
 
 /*!
@@ -41,7 +45,7 @@ Add a request to be handled.
 \return unique request identifier (used to id a completed request)
 */
 QString EveApiRequest::addRequest( const QString& host, const QString& scope,
-    QMap<QString, QString>& parameters )
+                                   QMap<QString, QString>& parameters )
 {
 //    std::cout << "EveApiRequest::addRequest()" << std::endl;
 
@@ -49,7 +53,7 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
 
     QStringList cacheDirs = cachePath( scope, parameters );
 
-    QString cachePathStr(QCoreApplication::applicationDirPath());
+    QString cachePathStr( QCoreApplication::applicationDirPath() );
     cachePathStr = cachePathStr.append( "/" );
     cachePathStr = cachePathStr.append( this->_dataPath );
     QString dir;
@@ -59,6 +63,11 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
         cachePathStr = cachePathStr.append( dir );
     }
     cachePathStr = cachePathStr.append( "/" );
+    QString cacheID;
+    foreach( cacheID, this->_fileIDParam )
+    {
+        cachePathStr = cachePathStr.append( parameters.value( cacheID ) );
+    }
     cachePathStr = cachePathStr.append( this->requestType() );
 
 //    std::cout << cachePathStr.toStdString() << std::endl;
@@ -66,7 +75,7 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
     QDomDocument cacheDom;
 
     QFile loadFile( cachePathStr );
-    if (loadFile.open( QIODevice::ReadOnly ))
+    if ( loadFile.open( QIODevice::ReadOnly ) )
     {
 //        std::cout << "check file" << std::endl;
         if ( cacheDom.setContent( &loadFile ) )
@@ -79,7 +88,7 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
             QDateTime nowUTC = now.toUTC();
             // over by 30 secs, prevent accidental fetch if the cache has not
             // expired (due to differences in clocks)
-            if (nowUTC.secsTo(cacheTime) <= -30)
+            if ( nowUTC.secsTo( cacheTime ) <= -30 )
             {
 //                std::cout << "cache expired, fetch new" << std::endl;
                 // cache invalid, fetch new
@@ -90,18 +99,14 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
 //                std::cout << "cache valid" << std::endl;
                 // cache valid, return it
                 idStr = this->path( scope );
-//                idStr = "/";
-//                idStr = idStr.append(scope);
-//                idStr = idStr.append("/");
-//                idStr = idStr.append(requestType());
-                idStr = idStr.append("-");
-                idStr = idStr.append(parameters.value("userID"));
-                idStr = idStr.append("-");
-                idStr = idStr.append(parameters.value("characterID"));
-                idStr = idStr.append("-");
-                idStr = idStr.append(parameters.value("apiKey"));
+                idStr = idStr.append( "-" );
+                idStr = idStr.append( parameters.value( "userID" ) );
+                idStr = idStr.append( "-" );
+                idStr = idStr.append( parameters.value( "characterID" ) );
+                idStr = idStr.append( "-" );
+                idStr = idStr.append( parameters.value( "apiKey" ) );
 
-                emit requestComplete( idStr, cacheDom, QString("FROM CACHE") );
+                emit requestComplete( idStr, cacheDom, QString( "FROM CACHE" ) );
             }
         }
         else
@@ -127,9 +132,9 @@ return the server path (URI) to access the requested information
 QString EveApiRequest::path( const QString& scope )
 {
     QString pathStr = "/";
-    pathStr = pathStr.append(scope);
-    pathStr = pathStr.append("/");
-    pathStr = pathStr.append(this->requestType());
+    pathStr = pathStr.append( scope );
+    pathStr = pathStr.append( "/" );
+    pathStr = pathStr.append( this->requestType() );
     pathStr = pathStr.append( QString( this->fileExtension() ) );
     return pathStr;
 }
@@ -145,7 +150,7 @@ make a unique string ID
 QString EveApiRequest::makeID( const QString& scope, int& id )
 {
     QString idStr = this->path( scope );
-    idStr = idStr.append(QString("-%1").arg(id));
+    idStr = idStr.append( QString( "-%1" ).arg( id ) );
     return idStr;
 }
 
@@ -154,21 +159,25 @@ Check the paramaters
 */
 bool EveApiRequest::validateParamaters( const QMap<QString, QString>& parameters, QUrl& url )
 {
+//    std::cout << "EveApiRequest::validateParamaters()" << std::endl;
+    //std::cout <<  << std::endl;
     QString paramID;
     // check all the required params
     foreach( paramID, this->_requiredParamaters )
     {
         QString param = parameters.value( paramID );
-        if (param.isNull());
+//        std::cout << paramID.toStdString() << ": " << param.toStdString() << std::endl;
+        if ( param.isNull() )
             return false;
-        url.addQueryItem(paramID, param);
+        url.addQueryItem( paramID, param );
     }
     // check optional parameters
     foreach( paramID, this->_optionalParameters )
     {
         QString param = parameters.value( paramID );
-        if (!param.isNull());
-            url.addQueryItem(paramID, param);
+//        std::cout << paramID.toStdString() << ": " << param.toStdString() << std::endl;
+        if ( !param.isNull() )
+            url.addQueryItem( paramID, param );
     }
     return true;
 }
@@ -177,35 +186,43 @@ bool EveApiRequest::validateParamaters( const QMap<QString, QString>& parameters
 Fetch from API
 */
 QString EveApiRequest::fetchFromApi( const QString& host, const QString& scope,
-    const QMap<QString, QString>& parameters )
+                                     const QMap<QString, QString>& parameters )
 {
+//    std::cout << "EveApiRequest::fetchFromApi()" << std::endl;
+//    std::cout << "host: " << host.toStdString() << std::endl;
+//    std::cout << "scope: " << host.toStdString() << std::endl;
+
     int id = 0;
 
     QString idStr = QString();
 
     QString serverPath = this->path( scope );
 
+//    std::cout << "serverPath: " << serverPath.toStdString() << std::endl;
+
     QUrl url( serverPath );
-    if (this->validateParamaters( parameters, url ))
+    if ( this->validateParamaters( parameters, url ) )
     {
-        QHttpRequestHeader head("POST", serverPath);
-        head.setValue("Host", host);
-        head.setValue("Content-type", "application/x-www-form-urlencoded");
+        QHttpRequestHeader head( "POST", serverPath );
+        head.setValue( "Host", host );
+        head.setValue( "Content-type", "application/x-www-form-urlencoded" );
 
         QBuffer* data = new QBuffer;
 
-        data->setData(url.encodedQuery());
+        data->setData( url.encodedQuery() );
 
         this->_http->setHost( host );
-        id = this->_http->request(head, data);
+        id = this->_http->request( head, data );
 
         this->_requestBuffers.insert( id, data );
 
         this->_requests.insert( id, qMakePair( scope, this->requestType() ) );
 
-        idStr = makeID(scope, id);
+        idStr = makeID( scope, id );
 
-        this->_id.insert(id, idStr);
+//        std::cout << "idStr: " << idStr.toStdString() << std::endl;
+
+        this->_id.insert( id, idStr );
 
         this->_paramaters.insert( id, parameters );
     }
@@ -221,7 +238,7 @@ QDateTime EveApiRequest::getCacheTime( const QDomDocument& xmlDocument )
     QString cachedUntilString;
     QDateTime cachedUntil;
     QDomElement root = xmlDocument.documentElement();
-    if (root.tagName() != "eveapi")
+    if ( root.tagName() != "eveapi" )
     {
         return QDateTime();
     }
@@ -233,7 +250,7 @@ QDateTime EveApiRequest::getCacheTime( const QDomDocument& xmlDocument )
     QDomNode firstLevel = root.firstChild();
     while ( !firstLevel.isNull() )
     {
-        if ( firstLevel.toElement().tagName() == QString("cachedUntil") )
+        if ( firstLevel.toElement().tagName() == QString( "cachedUntil" ) )
         {
             cachedUntilString = firstLevel.toElement().text();
             cachedUntil = this->eveApiTimeToQDateTime( cachedUntilString );
@@ -248,22 +265,22 @@ convert a time specified in the API XML output to a QDateTime
 */
 QDateTime EveApiRequest::eveApiTimeToQDateTime( QString timeString )
 {
-    QStringList dateAndTime = timeString.split(" ");
-    QStringList dateStrings = dateAndTime.at(0).split("-");
-    QStringList timeStrings = dateAndTime.at(1).split(":");
+    QStringList dateAndTime = timeString.split( " " );
+    QStringList dateStrings = dateAndTime.at( 0 ).split( "-" );
+    QStringList timeStrings = dateAndTime.at( 1 ).split( ":" );
 
-    int year = dateStrings.at(0).toInt();
-    int month = dateStrings.at(1).toInt();
-    int day = dateStrings.at(2).toInt();
+    int year = dateStrings.at( 0 ).toInt();
+    int month = dateStrings.at( 1 ).toInt();
+    int day = dateStrings.at( 2 ).toInt();
 
-    int hours = timeStrings.at(0).toInt();
-    int minutes = timeStrings.at(1).toInt();
-    int seconds = timeStrings.at(2).toInt();
+    int hours = timeStrings.at( 0 ).toInt();
+    int minutes = timeStrings.at( 1 ).toInt();
+    int seconds = timeStrings.at( 2 ).toInt();
 
-    QDate date(year, month, day);
-    QTime time(hours, minutes, seconds);
+    QDate date( year, month, day );
+    QTime time( hours, minutes, seconds );
 
-    QDateTime dateTime(date, time, Qt::UTC);
+    QDateTime dateTime( date, time, Qt::UTC );
 
     return dateTime;
 }
@@ -284,26 +301,26 @@ void EveApiRequest::requestFinished( int id, bool error )
 //    std::cout << "EveApiRequest::requestFinished()" << std::endl;
     this->_currentRequest = 0;
 
-    QBuffer* buffer = this->_requestBuffers.take(id);
-    QPair<QString, QString> request = this->_requests.take(id);
+    QBuffer* buffer = this->_requestBuffers.take( id );
+    QPair<QString, QString> request = this->_requests.take( id );
     QString scope = request.first;
-    QString idStr = this->_id.take(id);
-    QString response = this->_response.take(id);
-    QMap<QString, QString> parameters = this->_paramaters.take(id);
+    QString idStr = this->_id.take( id );
+    QString response = this->_response.take( id );
+    QMap<QString, QString> parameters = this->_paramaters.take( id );
 
     QByteArray data = this->_http->readAll();
 
-    if (error)
+    if ( error )
     {
         QString err = this->_http->errorString();
         emit requestFailed( idStr, err, response );
     }
     else
     {
-        if (!scope.isEmpty())
+        if ( !scope.isEmpty() )
         {
-            QDir cwd(QCoreApplication::applicationDirPath());
-            if (!cwd.exists( this->_dataPath ))
+            QDir cwd( QCoreApplication::applicationDirPath() );
+            if ( !cwd.exists( this->_dataPath ) )
             {
                 cwd.mkdir( this->_dataPath );
             }
@@ -313,7 +330,7 @@ void EveApiRequest::requestFinished( int id, bool error )
             QString dir;
             foreach( dir, dirs )
             {
-                if (!cwd.exists( dir ))
+                if ( !cwd.exists( dir ) )
                 {
                     cwd.mkdir( dir );
                 }
@@ -322,8 +339,13 @@ void EveApiRequest::requestFinished( int id, bool error )
 
             QString thisCachePath = cwd.path();
 
-            thisCachePath = thisCachePath.append("/");
-            thisCachePath = thisCachePath.append(this->requestType());
+            thisCachePath = thisCachePath.append( "/" );
+            QString cacheID;
+            foreach( cacheID, this->_fileIDParam )
+            {
+                thisCachePath = thisCachePath.append( parameters.value( cacheID ) );
+            }
+            thisCachePath = thisCachePath.append( this->requestType() );
 
             QDomDocument xmlData;
             xmlData.setContent( data );
@@ -332,7 +354,7 @@ void EveApiRequest::requestFinished( int id, bool error )
 
             QFile saveFile( thisCachePath );
 
-            if (saveFile.open( QIODevice::ReadWrite | QIODevice::Truncate ))
+            if ( saveFile.open( QIODevice::ReadWrite | QIODevice::Truncate ) )
             {
                 QTextStream save( &saveFile );
                 xmlData.save( save, this->_xmlIndent );
@@ -350,8 +372,8 @@ An http response is received
 */
 void EveApiRequest::responseHeaderReceived( QHttpResponseHeader head )
 {
-    QString response = QString("%1 - ").arg(head.statusCode());
-    response = response.append(head.reasonPhrase());
+    QString response = QString( "%1 - " ).arg( head.statusCode() );
+    response = response.append( head.reasonPhrase() );
 
-    this->_response.insert(this->_currentRequest, response);
+    this->_response.insert( this->_currentRequest, response );
 }

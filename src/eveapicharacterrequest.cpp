@@ -8,8 +8,9 @@ EveApiCharacterRequest::EveApiCharacterRequest( const QString& requestType,
         const int& xmlIndent,
         const QList<QString>& requiredParams,
         const QList<QString>& optionalParams,
+        const QList<QString>& fileIDParam,
         QObject* parent )
-        : EveApiRequest( requestType, dataPath, xmlIndent, requiredParams, optionalParams, parent )
+        : EveApiRequest( requestType, dataPath, xmlIndent, requiredParams, optionalParams, fileIDParam, parent )
 {
 
 }

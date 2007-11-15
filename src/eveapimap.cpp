@@ -12,18 +12,21 @@ EveApiMap::EveApiMap( QString& host, QString& dataPath, int& xmlIndent,
 {
     QList<QString> requiredParams;
     QList<QString> optionalParams;
+    QList<QString> cacheID;
 
     // Sovereignty request
     requiredParams.clear();
     requiredParams.append( "userID" );
     requiredParams.append( "apiKey" );
     optionalParams.clear();
+    cacheID.clear();
     QString requestID = this->sovereigntyRequestID();
     EveApiRequest* newRequest = new EveApiGeneralRequest( requestID,
             this->dataPath(),
             this->xmlIndent(),
             requiredParams,
-            optionalParams );
+            optionalParams,
+            cacheID );
     this->addRequestType( requestID, newRequest );
 }
 
