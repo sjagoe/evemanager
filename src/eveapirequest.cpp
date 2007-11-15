@@ -92,6 +92,7 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
             {
 //                std::cout << "cache expired, fetch new" << std::endl;
                 // cache invalid, fetch new
+                this->cleanCache( scope, parameters );
                 idStr = this->fetchFromApi( host, scope, parameters );
             }
             else
@@ -113,6 +114,7 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
         {
 //            std::cout << "unable to load file, fetch new" << std::endl;
             loadFile.close();
+            this->cleanCache( scope, parameters );
             // error (fetch new one?)
             idStr = this->fetchFromApi( host, scope, parameters );
         }
@@ -283,6 +285,52 @@ QDateTime EveApiRequest::eveApiTimeToQDateTime( QString timeString )
     QDateTime dateTime( date, time, Qt::UTC );
 
     return dateTime;
+}
+
+/*!
+remove expired cache files (related to the one that has been checked).
+
+This is intended for use with journal/transaction walking, where
+multiple cache files are created. If the journal is requested after
+the cache has expired, then only the first file will be overwritten
+(as the request that created the other files will not be repeated,
+because different beforeRefID numbers will be used) and the others will
+remain, and more may be created (if journal walking is used).
+
+This method removes all related cache files when the first expires
+(i.e. when /char/WalletJournal.xml expires, regular expressions are
+used to find all other files in the /char/ scope that end with the text
+"WalletJournal.xml", so that the other cache files are removed as well).
+*/
+void EveApiRequest::cleanCache( const QString& scope,
+                                QMap<QString, QString>& parameters )
+{
+    QStringList cacheDirs = cachePath( scope, parameters );
+
+    QString cachePathStr( QCoreApplication::applicationDirPath() );
+    cachePathStr = cachePathStr.append( "/" );
+    cachePathStr = cachePathStr.append( this->_dataPath );
+    QString dir;
+    foreach( dir, cacheDirs )
+    {
+        cachePathStr = cachePathStr.append( "/" );
+        cachePathStr = cachePathStr.append( dir );
+    }
+
+    QDir cacheDir( cachePathStr );
+
+    QStringList files = cacheDir.entryList();
+    QString fileName;
+    foreach( fileName, files )
+    {
+        if ( fileName.endsWith( this->_requestType ) )
+        {
+            QString file = cachePathStr;
+            file = file.append("/");
+            file = file.append(fileName);
+            QFile::remove( file );
+        }
+    }
 }
 
 /*!

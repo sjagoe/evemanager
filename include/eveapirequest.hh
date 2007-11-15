@@ -138,6 +138,24 @@ class EveApiRequest: public QObject
         */
         QDateTime eveApiTimeToQDateTime( QString timeString );
 
+        /*!
+        remove expired cache files (related to the one that has been checked).
+
+        This is intended for use with journal/transaction walking, where
+        multiple cache files are created. If the journal is requested after
+        the cache has expired, then only the first file will be overwritten
+        (as the request that created the other files will not be repeated,
+        because different beforeRefID numbers will be used) and the others will
+        remain, and more may be created (if journal walking is used).
+
+        This method removes all related cache files when the first expires
+        (i.e. when /char/WalletJournal.xml expires, regular expressions are
+        used to find all other files in the /char/ scope that end with the text
+        "WalletJournal.xml", so that the other cache files are removed as well).
+        */
+        void cleanCache( const QString& scope,
+                         QMap<QString, QString>& parameters );
+
     private slots:
         /*!
         signal that a request has begun
