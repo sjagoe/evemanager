@@ -61,6 +61,8 @@
 		<Unit filename="include\eveapimap.hh" />
 		<Unit filename="include\eveapirequest.hh" />
 		<Unit filename="include\eveapiscope.hh" />
+		<Unit filename="include\eveapiwalker.hh" />
+		<Unit filename="include\eveapiwalkerthread.hh" />
 		<Unit filename="include\main.hh" />
 		<Unit filename="src\eveapi.cpp" />
 		<Unit filename="src\eveapicharacter.cpp" />
@@ -71,6 +73,8 @@
 		<Unit filename="src\eveapimap.cpp" />
 		<Unit filename="src\eveapirequest.cpp" />
 		<Unit filename="src\eveapiscope.cpp" />
+		<Unit filename="src\eveapiwalker.cpp" />
+		<Unit filename="src\eveapiwalkerthread.cpp" />
 		<Unit filename="src\main.cpp" />
 		<Extensions>
 			<code_completion />

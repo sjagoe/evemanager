@@ -27,7 +27,9 @@ contains ( TEMPLATE, lib ) {
                include/eveapieve.hh \
                include/eveapimap.hh \
                include/eveapicharacter.hh \
-               include/eveapicorporation.hh
+               include/eveapicorporation.hh \
+               include/eveapiwalker.hh \
+               include/eveapiwalkerthread.hh
 
     SOURCES += src/eveapi.cpp \
                src/eveapirequest.cpp \
@@ -37,10 +39,12 @@ contains ( TEMPLATE, lib ) {
                src/eveapieve.cpp \
                src/eveapimap.cpp \
                src/eveapicharacter.cpp \
-               src/eveapicorporation.cpp
+               src/eveapicorporation.cpp \
+               src/eveapiwalker.cpp \
+               src/eveapiwalkerthread.cpp
 }
 
-VERSION = 1.1.0
+VERSION = 1.2.0
 TARGET = EVE_API_Qt
 
 DEPENDPATH += . include src
