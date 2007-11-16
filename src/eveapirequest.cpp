@@ -99,7 +99,11 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
             {
 //                std::cout << "cache valid" << std::endl;
                 // cache valid, return it
-                idStr = this->path( scope );
+                //idStr = now.toString();
+                //idStr = idStr.append( "::" );
+                //idStr = idStr.append( this->path( scope ) );
+                int idi = 0;
+                idStr = this->makeID( scope, idi );
                 idStr = idStr.append( "-" );
                 idStr = idStr.append( parameters.value( "userID" ) );
                 idStr = idStr.append( "-" );
@@ -151,7 +155,10 @@ make a unique string ID
 */
 QString EveApiRequest::makeID( const QString& scope, int& id )
 {
-    QString idStr = this->path( scope );
+    QDateTime timeStamp = QDateTime::currentDateTime();
+    QString idStr = timeStamp.toString(QString( "yyyyMMddhhmmsszzz" ));
+    idStr = idStr.append( "::" );
+    idStr = idStr.append( this->path( scope ) );
     idStr = idStr.append( QString( "-%1" ).arg( id ) );
     return idStr;
 }
