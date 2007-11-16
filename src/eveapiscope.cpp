@@ -18,6 +18,7 @@ EveApiScope::EveApiScope( QString& host, QString& dataPath, int& xmlIndent,
     this->_scope = scope;
 
     qRegisterMetaType<QDomDocument>("QDomDocument");
+    qRegisterMetaType<QDateTime>("QDateTime");
 }
 
 
@@ -59,8 +60,8 @@ Add a "Request Type" to the list
 void EveApiScope::addRequestType( QString& id, EveApiRequest* request )
 {
     connect( request,
-        SIGNAL(requestComplete( QString, QDomDocument, QString )),
-        this, SIGNAL(requestComplete( QString, QDomDocument, QString )),
+        SIGNAL(requestComplete( QString, QDomDocument, QString, QDateTime )),
+        this, SIGNAL(requestComplete( QString, QDomDocument, QString, QDateTime )),
         Qt::QueuedConnection );
     connect( request,
         SIGNAL(requestFailed( QString, QString, QString )),

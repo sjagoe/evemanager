@@ -173,7 +173,7 @@ class EveApiRequest: public QObject
         void responseHeaderReceived( QHttpResponseHeader head );
 
     signals:
-        void requestComplete( QString id, QDomDocument result, QString httpResponse );
+        void requestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheExpireTime );
         void requestFailed( QString id, QString error, QString httpResponse );
 };
 

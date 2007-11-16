@@ -61,6 +61,9 @@ class Window: public QWidget
         QLabel* _lblId;
         QLabel* _lblResponse;
 
+        QLabel* _lblCacheTime;
+        QLineEdit* _edtCacheTime;
+
         EveApi* _api;
 
     private slots:
@@ -76,7 +79,7 @@ class Window: public QWidget
         void charBalance();
         void corpBalance();
         void corpMembers();
-        void requestComplete( QString id, QDomDocument result, QString httpResponse );
+        void requestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime );
         void requestFailed( QString id, QString error, QString httpResponse );
 };
 

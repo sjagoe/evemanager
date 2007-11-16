@@ -70,7 +70,7 @@ class EveApi: public QObject
         void connectScope( EveApiScope* scope );
 
     signals:
-        void requestComplete( QString id, QDomDocument result, QString httpResponse );
+        void requestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime );
         void requestFailed( QString id, QString error, QString httpResponse );
 };
 

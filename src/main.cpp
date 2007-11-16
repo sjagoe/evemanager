@@ -23,8 +23,8 @@ Window::Window( QWidget* parent )
     QString dataPath = QString("data");
     this->_api = new EveApi(dataPath);
     connect( this->_api,
-        SIGNAL(requestComplete( QString, QDomDocument, QString )),
-        this, SLOT(requestComplete( QString, QDomDocument, QString )) );
+        SIGNAL(requestComplete( QString, QDomDocument, QString, QDateTime )),
+        this, SLOT(requestComplete( QString, QDomDocument, QString, QDateTime )) );
     connect( this->_api,
         SIGNAL(requestFailed( QString, QString, QString )),
         this, SLOT(requestFailed( QString, QString, QString )) );
@@ -135,12 +135,21 @@ Window::Window( QWidget* parent )
     this->_apiInfo->setLayout(apigrid);
 
     this->_edtResult = new QTextEdit;
+    this->_edtResult->setReadOnly(true);
     this->_edtId = new QLineEdit;
+    this->_edtId->setReadOnly(true);
     this->_edtResponse = new QLineEdit;
+    this->_edtResponse->setReadOnly(true);
 
     this->_lblResult = new QLabel( "Result from API" );
     this->_lblId = new QLabel( "Internal Request ID" );
     this->_lblResponse = new QLabel( "Response from HTTP Server" );
+
+
+    this->_lblCacheTime = new QLabel("Cache Expires (UTC, i.e. EVE Time)");
+    this->_edtCacheTime = new QLineEdit;
+
+    this->_edtCacheTime->setReadOnly(true);
 
     QVBoxLayout* layout = new QVBoxLayout;
     layout->addWidget(this->_apiInfo);
@@ -151,6 +160,8 @@ Window::Window( QWidget* parent )
     layout->addWidget(this->_edtResponse);
     layout->addWidget(this->_lblResult);
     layout->addWidget(this->_edtResult);
+    layout->addWidget(this->_lblCacheTime);
+    layout->addWidget(this->_edtCacheTime);
 
     this->setLayout(layout);
 }
@@ -310,7 +321,7 @@ void Window::corpMembers()
 }
 
 
-void Window::requestComplete( QString id, QDomDocument result, QString httpResponse )
+void Window::requestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime )
 {
 //    QString resultEmpty = " - empty Doc - ";
 //    if (!result.isNull())
@@ -323,6 +334,7 @@ void Window::requestComplete( QString id, QDomDocument result, QString httpRespo
     this->_edtId->setText(id);
     this->_edtResult->setText( result.toString(4) );
     this->_edtResponse->setText( httpResponse );
+    this->_edtCacheTime->setText( cacheTime.toString() );
 }
 
 void Window::requestFailed( QString id, QString error, QString httpResponse )
@@ -336,6 +348,7 @@ void Window::requestFailed( QString id, QString error, QString httpResponse )
     this->_edtId->setText(id);
     this->_edtResult->setText( error );
     this->_edtResponse->setText( httpResponse );
+    this->_edtCacheTime->clear();
 }
 
 int main(int argc, char* argv[])

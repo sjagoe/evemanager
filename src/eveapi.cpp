@@ -78,8 +78,8 @@ connect the signals of each scope member
 void EveApi::connectScope( EveApiScope* scope )
 {
     connect( scope,
-        SIGNAL(requestComplete( QString, QDomDocument, QString )),
-        this, SIGNAL(requestComplete( QString, QDomDocument, QString )) );
+        SIGNAL(requestComplete( QString, QDomDocument, QString, QDateTime )),
+        this, SIGNAL(requestComplete( QString, QDomDocument, QString, QDateTime )) );
     connect( scope,
         SIGNAL(requestFailed( QString, QString, QString )),
         this, SIGNAL(requestFailed( QString, QString, QString )) );

@@ -40,7 +40,7 @@ contains ( TEMPLATE, lib ) {
                src/eveapicorporation.cpp
 }
 
-VERSION = 1.0.2
+VERSION = 1.1.0
 TARGET = EVE_API_Qt
 
 DEPENDPATH += . include src

@@ -9,6 +9,8 @@
 
 #include <QDomDocument>
 
+#include <QDateTime>
+
 class EveApiRequest;
 
 class EveApiScope: public QObject
@@ -76,7 +78,7 @@ class EveApiScope: public QObject
         EveApiRequest* requestType( QString& id ) const;
 
     signals:
-        void requestComplete( QString id, QDomDocument result, QString httpResponse );
+        void requestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime );
         void requestFailed( QString id, QString error, QString httpResponse );
 
 };

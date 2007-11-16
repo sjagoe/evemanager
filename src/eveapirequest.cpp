@@ -107,7 +107,7 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
                 idStr = idStr.append( "-" );
                 idStr = idStr.append( parameters.value( "apiKey" ) );
 
-                emit requestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ) );
+                emit requestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ), cacheTime );
             }
         }
         else
@@ -398,6 +398,8 @@ void EveApiRequest::requestFinished( int id, bool error )
             QDomDocument xmlData;
             xmlData.setContent( data );
 
+            QDateTime cacheTime = getCacheTime( xmlData );
+
 //            std::cout << data.data() << std::endl;
 
             QFile saveFile( thisCachePath );
@@ -408,7 +410,7 @@ void EveApiRequest::requestFinished( int id, bool error )
                 xmlData.save( save, this->_xmlIndent );
                 saveFile.close();
             }
-            emit requestComplete( idStr, xmlData, response );
+            emit requestComplete( idStr, xmlData, response, cacheTime );
         }
     }
     delete buffer;
