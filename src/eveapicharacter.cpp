@@ -2,7 +2,7 @@
 
 #include "eveapicharacterrequest.hh"
 
-#include "eveapiparserwalker.hh"
+#include "eveapiparser.hh"
 
 #include <QList>
 
@@ -72,7 +72,7 @@ fully 'walked' output
 QString EveApiCharacter::walletJournalParsed( QMap<QString, QString>& parameters )
 {
     QString id = this->walletJournalRequestID();
-    this->_requestIdToParserMap.insert( id, this->_parserWalker );
+//    this->_requestIdToParserMap.insert( id, this->_parserWalker );
     QString requestId = this->request( id, parameters, true );
     this->_requestIdToRequestMap.insert( requestId, id );
     this->_requestIdToRequestParametersMap.insert( requestId, parameters );
@@ -88,22 +88,22 @@ void EveApiCharacter::internalRequestComplete( QString requestId,
         QString httpResponse,
         QDateTime cacheTime )
 {
-    EveApiParser* parser = this->_requestIdToParserMap.value( requestId );
-    if (parser)
+//    EveApiParser* parser = this->_requestIdToParserMap.value( requestId );
+//    if (parser)
+//    {
+    QString parserId = this->_requestIdToParserIdMap.value( requestId );
+    if (!parserId.isEmpty())
     {
-        QString parserId = this->_requestIdToParserIdMap.value( requestId );
-        if (!parserId.isEmpty())
-        {
-            //parserId =
-            QString newParserId = parser->addRequest( parserId, result );
-        }
-        else
-        {
-            parserId = parser->addRequest( result );
-            this->_parserIdToRequestIdMap.insert( parserId, requestId );
-            this->_requestIdToParserIdMap.insert( requestId, parserId );
-        }
+        //parserId =
+        QString newParserId = this->_parser->addRequest( parserId, result );
     }
+    else
+    {
+        parserId = this->_parser->addRequest( result );
+        this->_parserIdToRequestIdMap.insert( parserId, requestId );
+        this->_requestIdToParserIdMap.insert( requestId, parserId );
+    }
+//    }
 }
 
 /*!
@@ -111,7 +111,7 @@ Create all parsers
 */
 void EveApiCharacter::createParsers()
 {
-    this->_parserWalker = new EveApiParserWalker;
+    this->_parser = new EveApiParser;
 //    /*!
 //    continue processing a pending request (used internally to tell the
 //    parser thread to begin with a new request)
@@ -219,10 +219,11 @@ void EveApiCharacter::walkerRequestIncomplete( QString parserId,
     if (!requestId.isNull())
     {
         QString req = this->_requestIdToRequestMap.value( requestId );
-        if (!req.isNull())
+        if (req == this->walletJournalRequestID())
         {
             parameters.insert( beforeID.first, beforeID.second );
             QString newRequestId = this->request( req, parameters, true, requestId );
+            emit journalWalkerRequestIncomplete( requestId, processedDoc );
         }
     }
 }
@@ -235,7 +236,7 @@ void EveApiCharacter::walkerRequestComplete( QString parserId,
 {
     QString requestId = this->_parserIdToRequestIdMap.take( parserId );
     this->_requestIdToParserIdMap.remove( requestId );
-    this->_requestIdToParserMap.remove( requestId );
+//    this->_requestIdToParserMap.remove( requestId );
     QString req = this->_requestIdToRequestMap.take( requestId );
     // emit ...
     if (req == this->walletJournalRequestID())

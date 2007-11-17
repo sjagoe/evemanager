@@ -24,6 +24,29 @@ class EveApiParserThread: public QObject
         process a new request
         */
         virtual void processRequest( QString id, QDomDocument doc ) = 0;
+
+        /*!
+        continue processing an old request
+        */
+        void processRequest( QString id,
+                             QDomDocument doc,
+                             EveApiData processedDoc );
+
+    signals:
+        /*!
+        Signal emitted when a document is processed, and the API will provide
+        no further data.
+        */
+        void documentProcessed( QString id,
+                                EveApiData processedDoc );
+
+        /*!
+        Signal emitted if their could be more data from the API, but the current
+        set is fully processed
+        */
+        void incompleteDocument( QString id,
+                                 EveApiData processedDoc,
+                                 QPair<QString, QString> beforeID );
 };
 
 #endif

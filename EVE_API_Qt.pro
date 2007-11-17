@@ -9,18 +9,23 @@
 TEMPLATE = lib
 #TEMPLATE = app
 
+## Set the version number
+VERSION = 1.2.0
+
 ## For testing, uncomment this line:
 #CONFIG += console
 
 ## Disable the ability to use the built in parsers (save on size):
 #DEFINES += EVEAPI_NO_PARSING
 
+# in the app template, only build main, and link with the dynamic library
 contains( TEMPLATE, app ) {
     HEADERS += include/main.hh
     SOURCES += src/main.cpp
     LIBS += -Lbin/release -lEVE_API_Qt
 }
 
+# in the lib template, do not link to QtGui, and compile all sources _except_ main
 contains ( TEMPLATE, lib ) {
     CONFIG += dll
     QT -= gui
@@ -37,19 +42,6 @@ contains ( TEMPLATE, lib ) {
                include/eveapicharacter.hh \
                include/eveapicorporation.hh \
 
-    !contains( DEFINES, EVEAPI_NO_PARSING ) {
-        HEADERS += include/eveapiparser.hh \
-                   include/eveapiparserthread.hh \
-                   \
-                   include/eveapiparserwalker.hh \
-                   include/eveapiparserwalkerthread.hh \
-                   \
-                   include/eveapidatatype.hh \
-                   \
-                   include/eveapidata.hh \
-                   include/eveapidata_walked.hh
-    }
-
     SOURCES += src/eveapi.cpp \
                \
                src/eveapirequest.cpp \
@@ -62,17 +54,27 @@ contains ( TEMPLATE, lib ) {
                src/eveapicharacter.cpp \
                src/eveapicorporation.cpp \
 
+    # if parsing is enabled, include the parsing sources
     !contains( DEFINES, EVEAPI_NO_PARSING ) {
+        HEADERS += include/eveapiparser.hh \
+                   include/eveapiparserthread.hh \
+                   \
+                   include/eveapiparserwalkerthread.hh \
+                   \
+                   include/eveapidatatype.hh \
+                   \
+                   include/eveapidata.hh \
+                   include/eveapidata_walked.hh
+
         SOURCES += src/eveapiparser.cpp \
                    src/eveapiparserthread.cpp \
-                   src/eveapiparserwalker.cpp \
+                   \
                    src/eveapiparserwalkerthread.cpp \
                    \
                    src/eveapidata_walked.cpp
     }
 }
 
-VERSION = 1.2.0
 TARGET = EVE_API_Qt
 
 DEPENDPATH += . include src

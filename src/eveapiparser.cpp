@@ -40,6 +40,31 @@ QString EveApiParser::addRequest( QDomDocument doc )
 }
 
 /*!
+Add a continuation request for journal walking
+
+\return The same identifier as passed in the id parameter
+*/
+QString EveApiParser::addRequest( QString id, QDomDocument doc )
+{
+    this->_requestSemaphore.release();
+    if (this->_incompleteStorage.contains( id ))
+    {
+        QMap<int, QMap<QString, QString> > initial = this->_incompleteStorage.take( id );
+        if (this->_requestSemaphore.available() == 1)
+        {
+            emit processPendingRequest( id, doc, initial );
+        }
+        else
+        {
+            this->_continuationQueue.enqueue( id );
+            this->_continuationStorage.insert( id, qMakePair( initial, doc ) );
+        }
+        return id;
+    }
+    return QString();
+}
+
+/*!
 Allow access to the parser without the ability to modify it
 */
 EveApiParserThread& EveApiParser::parser()

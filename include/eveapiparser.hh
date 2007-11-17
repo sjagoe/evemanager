@@ -15,6 +15,8 @@
 
 #include "eveapiparserthread.hh"
 
+#include "eveapidata.hh"
+
 class EveApiParser: public QThread
 {
         Q_OBJECT
@@ -38,7 +40,7 @@ class EveApiParser: public QThread
 
         \return The same identifier as passed in the id parameter
         */
-        virtual QString addRequest( QString id, QDomDocument doc ) = 0;
+        QString addRequest( QString id, QDomDocument doc );
 
     protected:
         //! Semaphore to keep track of pending requests
@@ -52,6 +54,12 @@ class EveApiParser: public QThread
 
         //! QQueue providing a request queue for continuation requests.
         QQueue<QString> _continuationQueue;
+
+        //! map the IDs in the _continuationQueue to a pair of <processed request, unprocessed request>
+        QMap<QString, QPair<EveApiData, QDomDocument> > _continuationStorage;
+
+        //! map the IDs in the _incompleteQueue to processed requests
+        QMap<QString, EveApiData> _incompleteStorage;
 
         /*!
         Allow access to the parser without the ability to modify it

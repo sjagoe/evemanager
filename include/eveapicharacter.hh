@@ -62,11 +62,11 @@ class EveApiCharacter: public EveApiScope
         void internalRequestComplete( QString requestId, QDomDocument result, QString httpResponse, QDateTime cacheTime );
 
     private:
-        //! Parser for the Journal/Transaction walking
-        EveApiParser* _parserWalker;
+        //! Parser to asynchronously parse XML, and also walk journals, transactions
+        EveApiParser* _parser;
 
-        //! QMap to map the api request ID to a parser
-        QMap<QString, EveApiParser*> _requestIdToParserMap;
+//        //! QMap to map the api request ID to a parser
+//        QMap<QString, EveApiParser*> _requestIdToParserMap;
 
         //! QMap to map the api request ID to a request, which can be used to
         //! determine the request via the parser ID to request ID map
@@ -162,6 +162,12 @@ class EveApiCharacter: public EveApiScope
         notify that a journal walking has been completed
         */
         void journalWalkerRequestComplete( QString requestId,
+                                EveApiDataWalked processedDoc );
+
+        /*!
+        notify that partial data from journal walking is available
+        */
+        void journalWalkerRequestIncomplete( QString requestId,
                                 EveApiDataWalked processedDoc );
 #endif
 };
