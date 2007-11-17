@@ -1,5 +1,6 @@
 #ifndef __EVEAPIPARSERTHREAD_HH__
 #define __EVEAPIPARSERTHREAD_HH__
+#if !defined(EVEAPI_NO_PARSING)
 
 #include <QObject>
 
@@ -25,4 +26,5 @@ class EveApiParserThread: public QObject
         virtual void processRequest( QString id, QDomDocument doc ) = 0;
 };
 
+#endif
 #endif

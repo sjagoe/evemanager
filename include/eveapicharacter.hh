@@ -1,7 +1,16 @@
 #ifndef __EVEAPICHARACTER_HH__
 #define __EVEAPICHARACTER_HH__
 
+#include <QMap>
+#include <QString>
+#include <QPair>
+
 #include "eveapiscope.hh"
+
+#if !defined(EVEAPI_NO_PARSING)
+#include "eveapidata_walked.hh"
+class EveApiParser;
+#endif
 
 class EveApiCharacter: public EveApiScope
 {
@@ -29,12 +38,6 @@ class EveApiCharacter: public EveApiScope
         QString walletJournal( QMap<QString, QString>& parameters );
 
         /*!
-        access the WalletJournal api function, and provide a parse,
-        fully 'walked' output
-        */
-        QString walletJournalParsed( QMap<QString, QString>& parameters );
-
-        /*!
         access the WalletTransactions api function
         */
         QString walletTransactions( QMap<QString, QString>& parameters );
@@ -44,14 +47,60 @@ class EveApiCharacter: public EveApiScope
         */
         QString accountBalance( QMap<QString, QString>& parameters );
 
+#if !defined(EVEAPI_NO_PARSING)
+        /*!
+        access the WalletJournal api function, and provide a parse,
+        fully 'walked' output
+        */
+        QString walletJournalParsed( QMap<QString, QString>& parameters );
+
     protected slots:
         /*!
         This slot is called when an internal request is complete, so that it
         can be parsed
         */
-        void internalRequestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime );
+        void internalRequestComplete( QString requestId, QDomDocument result, QString httpResponse, QDateTime cacheTime );
 
     private:
+        //! Parser for the Journal/Transaction walking
+        EveApiParser* _parserWalker;
+
+        //! QMap to map the api request ID to a parser
+        QMap<QString, EveApiParser*> _requestIdToParserMap;
+
+        //! QMap to map the api request ID to a request, which can be used to
+        //! determine the request via the parser ID to request ID map
+        QMap<QString, QString> _requestIdToRequestMap;
+
+        //! QMap to map the parser ID to an api request ID
+        QMap<QString, QString> _parserIdToRequestIdMap;
+
+        //! QMap to map an api request ID to a parser ID
+        QMap<QString, QString> _requestIdToParserIdMap;
+
+        //! QMap to map request ID to request parameters
+        QMap<QString, QMap<QString, QString> > _requestIdToRequestParametersMap;
+
+        /*!
+        Create all parsers
+        */
+        void createParsers();
+#else
+    private:
+#endif
+        /*!
+        Create request objects
+        */
+        void createRequest( QString& requestId,
+                            QStringList& requiredParams,
+                            QStringList& optionalParams,
+                            QStringList& cacheId );
+
+        /*!
+        create all requests (delegated from the constructor)
+        */
+        void createRequests();
+
         /*!
         return the filename of the Sovereignty.xml request
         */
@@ -92,7 +141,29 @@ class EveApiCharacter: public EveApiScope
             return QString("AccountBalance.xml");
         };
 
-    //private slots:
+#if !defined(EVEAPI_NO_PARSING)
+    private slots:
+        // slots for the walker parser:
+        /*!
+        Receive journal signal that parsing requires more info
+        */
+        void walkerRequestIncomplete( QString parserId,
+                                EveApiDataWalked processedDoc,
+                                QPair<QString, QString> beforeID );
+
+        /*!
+        Receive journal walking signal that the parsing is complete
+        */
+        void walkerRequestComplete( QString parserId,
+                              EveApiDataWalked processedDoc );
+
+    signals:
+        /*!
+        notify that a journal walking has been completed
+        */
+        void journalWalkerRequestComplete( QString requestId,
+                                EveApiDataWalked processedDoc );
+#endif
 };
 
 #endif

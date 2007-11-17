@@ -62,6 +62,11 @@ class EveApi: public QObject
         EveApiCorporation* _corp;
 
         /*!
+        create the scopes, and connect scope-specific signals and slots
+        */
+        void createScopes();
+
+        /*!
         connect the signals of each scope member
         */
         void connectScope( EveApiScope* scope );

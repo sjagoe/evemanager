@@ -1,43 +1,25 @@
 #include "eveapi.hh"
 
+
 /*!
 set up the scopes of the API
 */
-EveApi::EveApi( QString& dataPath, QObject* parent )
-    : QObject( parent )
+EveApi::EveApi( QString& dataPath, QObject* parent ) :
+    QObject( parent ),
+    _hostName("api.eve-online.com"),
+    _dataPath( dataPath ),
+    _xmlIndent(4)
 {
-    //! API Server hostname
-    this->_hostName = "api.eve-online.com";
+//    //! API Server hostname
+//    this->_hostName = "api.eve-online.com";
+//
+//    //! path to the data subdirectory
+//    this->_dataPath = dataPath;
+//
+//    //! amount to indent XML blocks when writing files
+//    this->_xmlIndent = 4;
 
-    //! path to the data subdirectory
-    this->_dataPath = dataPath;
-
-    //! amount to indent XML blocks when writing files
-    this->_xmlIndent = 4;
-
-    // "eve" scope
-    QString scope = "eve";
-    this->_eve = new EveApiEve( this->_hostName, this->_dataPath,
-        this->_xmlIndent, scope );
-    this->connectScope( this->_eve );
-
-    // "map" scope
-    scope = "map";
-    this->_map = new EveApiMap( this->_hostName, this->_dataPath,
-        this->_xmlIndent, scope );
-    this->connectScope( this->_map );
-
-    // "char" scope
-    scope = "char";
-    this->_char = new EveApiCharacter( this->_hostName, this->_dataPath,
-        this->_xmlIndent, scope );
-    this->connectScope( this->_char );
-
-    // "corp" scope
-    scope = "corp";
-    this->_corp = new EveApiCorporation( this->_hostName, this->_dataPath,
-        this->_xmlIndent, scope );
-    this->connectScope( this->_corp );
+    this->createScopes();
 }
 
 /*!
@@ -70,6 +52,36 @@ provide access to aread of the api in the "/corp/" context
 EveApiCorporation& EveApi::corp()
 {
     return (*this->_corp);
+}
+
+/*!
+create the scopes, and connect scope-specific signals and slots
+*/
+void EveApi::createScopes()
+{
+    // "eve" scope
+    QString scope = "eve";
+    this->_eve = new EveApiEve( this->_hostName, this->_dataPath,
+        this->_xmlIndent, scope );
+    this->connectScope( this->_eve );
+
+    // "map" scope
+    scope = "map";
+    this->_map = new EveApiMap( this->_hostName, this->_dataPath,
+        this->_xmlIndent, scope );
+    this->connectScope( this->_map );
+
+    // "char" scope
+    scope = "char";
+    this->_char = new EveApiCharacter( this->_hostName, this->_dataPath,
+        this->_xmlIndent, scope );
+    this->connectScope( this->_char );
+
+    // "corp" scope
+    scope = "corp";
+    this->_corp = new EveApiCorporation( this->_hostName, this->_dataPath,
+        this->_xmlIndent, scope );
+    this->connectScope( this->_corp );
 }
 
 /*!

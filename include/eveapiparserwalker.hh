@@ -1,5 +1,6 @@
 #ifndef __EVEAPIPARSERWALKER_HH__
 #define __EVEAPIPARSERWALKER_HH__
+#if !defined(EVEAPI_NO_PARSING)
 
 #include "eveapiparser.hh"
 
@@ -53,7 +54,8 @@ class EveApiParserWalker: public EveApiParser
 
     signals:
         /*!
-        continue processing a pending request
+        continue processing a pending request (used internally to tell the
+        parser thread to begin with a new request)
         */
         void processPendingRequest( QString id,
                                     QDomDocument doc,
@@ -73,4 +75,5 @@ class EveApiParserWalker: public EveApiParser
                               QMap<int, QMap<QString, QString> > processedDoc );
 };
 
+#endif
 #endif

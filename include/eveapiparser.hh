@@ -1,5 +1,6 @@
 #ifndef __EVEAPIPARSER_HH__
 #define __EVEAPIPARSER_HH__
+#if !defined(EVEAPI_NO_PARSING)
 
 #include <QThread>
 
@@ -92,9 +93,11 @@ class EveApiParser: public QThread
 
     signals:
         /*!
-        process a new request
+        process a new request (used internally to tell the parser thread to
+        begin with a new request)
         */
         void processNewRequest( QString id, QDomDocument doc );
 };
 
+#endif
 #endif

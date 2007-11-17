@@ -70,7 +70,7 @@ void EveApiScope::addRequestType( QString& id, EveApiRequest* request )
 
     connect( request,
         SIGNAL(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
-        this, SIGNAL(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
+        this, SLOT(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
         Qt::QueuedConnection );
 //    connect( request,
 //        SIGNAL(internalRequestFailed( QString, QString, QString )),
@@ -83,7 +83,7 @@ void EveApiScope::addRequestType( QString& id, EveApiRequest* request )
 /*!
 Call a request of the specified type
 */
-QString EveApiScope::request( QString& id, QMap<QString, QString>& parameters, bool internal )
+QString EveApiScope::request( QString& id, QMap<QString, QString>& parameters, bool internal, QString requestId )
 {
     this->_mutex.lock();
     QString host = this->hostName();
@@ -92,7 +92,7 @@ QString EveApiScope::request( QString& id, QMap<QString, QString>& parameters, b
     QString result;
     if (req)
     {
-        result = req->addRequest( host, scopeStr, parameters, internal );
+        result = req->addRequest( host, scopeStr, parameters, internal, requestId );
     }
     this->_mutex.unlock();
     return result;

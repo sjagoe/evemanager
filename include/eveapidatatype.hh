@@ -1,0 +1,18 @@
+#ifndef __EVEAPIDATATYPE_HH__
+#define __EVEAPIDATATYPE_HH__
+#if !defined(EVEAPI_NO_PARSING)
+
+enum ParsedDataType
+{
+    PDT_SKILLTREE,
+    PDT_REFTYPES,
+    PDT_SOVEREIGNTY,
+    PDT_CHARSHEET,
+    PDT_SKILLINTRAINING,
+    PDT_WALKED,
+    PDT_ACCOUNTBALANCE,
+    PDT_MEMBERTRACKING
+};
+
+#endif
+#endif

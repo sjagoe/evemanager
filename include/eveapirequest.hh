@@ -42,7 +42,7 @@ class EveApiRequest: public QObject
         */
         QString addRequest( const QString& host, const QString& scope,
                             QMap<QString, QString>& parameters,
-                                   bool internal );
+                                   bool internal, QString oldId = QString() );
 
 //        /*!
 //        Add an internal request to be handled.
@@ -139,7 +139,7 @@ class EveApiRequest: public QObject
         */
         QString fetchFromApi( const QString& host, const QString& scope,
                               const QMap<QString, QString>& parameters,
-                              bool internal );
+                              bool internal, QString oldId = QString() );
 
         /*!
         Get the time that the cache expires from a QDomDocument

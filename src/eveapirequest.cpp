@@ -46,7 +46,7 @@ Add a request to be handled.
 */
 QString EveApiRequest::addRequest( const QString& host, const QString& scope,
                                    QMap<QString, QString>& parameters,
-                                   bool internal )
+                                   bool internal, QString oldId )
 {
     QString idStr = QString();
 
@@ -92,7 +92,14 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
             else
             {
                 int idi = 0;
-                idStr = this->makeID( scope, idi, parameters );
+                if (oldId.isNull())
+                {
+                    idStr = this->makeID( scope, idi, parameters );
+                }
+                else
+                {
+                    idStr = oldId;
+                }
                 if ( internal )
                 {
                     emit internalRequestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ), cacheTime );
@@ -201,11 +208,11 @@ Fetch from API
 */
 QString EveApiRequest::fetchFromApi( const QString& host, const QString& scope,
                                      const QMap<QString, QString>& parameters,
-                                     bool internal )
+                                     bool internal, QString oldId )
 {
     int id = 0;
 
-    QString idStr = QString();
+    QString idStr = oldId;
 
     QString serverPath = this->path( scope );
 
@@ -227,7 +234,8 @@ QString EveApiRequest::fetchFromApi( const QString& host, const QString& scope,
 
         this->_requests.insert( id, qMakePair( scope, this->requestType() ) );
 
-        idStr = makeID( scope, id, parameters );
+        if (idStr.isNull())
+            idStr = makeID( scope, id, parameters );
 
         this->_id.insert( id, idStr );
 

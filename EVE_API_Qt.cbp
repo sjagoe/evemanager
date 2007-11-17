@@ -56,6 +56,9 @@
 		<Unit filename="include\eveapicharacter.hh" />
 		<Unit filename="include\eveapicharacterrequest.hh" />
 		<Unit filename="include\eveapicorporation.hh" />
+		<Unit filename="include\eveapidata.hh" />
+		<Unit filename="include\eveapidata_walked.hh" />
+		<Unit filename="include\eveapidatatype.hh" />
 		<Unit filename="include\eveapieve.hh" />
 		<Unit filename="include\eveapigeneralrequest.hh" />
 		<Unit filename="include\eveapimap.hh" />
@@ -70,6 +73,7 @@
 		<Unit filename="src\eveapicharacter.cpp" />
 		<Unit filename="src\eveapicharacterrequest.cpp" />
 		<Unit filename="src\eveapicorporation.cpp" />
+		<Unit filename="src\eveapidata_walked.cpp" />
 		<Unit filename="src\eveapieve.cpp" />
 		<Unit filename="src\eveapigeneralrequest.cpp" />
 		<Unit filename="src\eveapimap.cpp" />

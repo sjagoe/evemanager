@@ -12,6 +12,9 @@ TEMPLATE = lib
 ## For testing, uncomment this line:
 #CONFIG += console
 
+## Disable the ability to use the built in parsers (save on size):
+#DEFINES += EVEAPI_NO_PARSING
+
 contains( TEMPLATE, app ) {
     HEADERS += include/main.hh
     SOURCES += src/main.cpp
@@ -23,32 +26,50 @@ contains ( TEMPLATE, lib ) {
     QT -= gui
 
     HEADERS += include/eveapi.hh \
+               \
                include/eveapirequest.hh \
                include/eveapigeneralrequest.hh \
                include/eveapicharacterrequest.hh \
+               \
                include/eveapiscope.hh \
                include/eveapieve.hh \
                include/eveapimap.hh \
                include/eveapicharacter.hh \
                include/eveapicorporation.hh \
-               include/eveapiparser.hh \
-               include/eveapiparserthread.hh \
-               include/eveapiparserwalker.hh \
-               include/eveapiparserwalkerthread.hh
+
+    !contains( DEFINES, EVEAPI_NO_PARSING ) {
+        HEADERS += include/eveapiparser.hh \
+                   include/eveapiparserthread.hh \
+                   \
+                   include/eveapiparserwalker.hh \
+                   include/eveapiparserwalkerthread.hh \
+                   \
+                   include/eveapidatatype.hh \
+                   \
+                   include/eveapidata.hh \
+                   include/eveapidata_walked.hh
+    }
 
     SOURCES += src/eveapi.cpp \
+               \
                src/eveapirequest.cpp \
                src/eveapigeneralrequest.cpp \
                src/eveapicharacterrequest.cpp \
+               \
                src/eveapiscope.cpp \
                src/eveapieve.cpp \
                src/eveapimap.cpp \
                src/eveapicharacter.cpp \
                src/eveapicorporation.cpp \
-               src/eveapiparser.cpp \
-               src/eveapiparserthread.cpp \
-               src/eveapiparserwalker.cpp \
-               src/eveapiparserwalkerthread.cpp
+
+    !contains( DEFINES, EVEAPI_NO_PARSING ) {
+        SOURCES += src/eveapiparser.cpp \
+                   src/eveapiparserthread.cpp \
+                   src/eveapiparserwalker.cpp \
+                   src/eveapiparserwalkerthread.cpp \
+                   \
+                   src/eveapidata_walked.cpp
+    }
 }
 
 VERSION = 1.2.0
