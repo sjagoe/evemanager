@@ -1,9 +1,9 @@
-#include "eveapiwalkerthread.hh"
+#include "eveapiparserthread.hh"
 
 /*!
 call the QObject constructor
 */
-EveApiWalkerThread::EveApiWalkerThread( QObject* parent )
+EveApiParserThread::EveApiParserThread( QObject* parent )
         : QObject( parent )
 {
 
@@ -12,7 +12,7 @@ EveApiWalkerThread::EveApiWalkerThread( QObject* parent )
 /*!
 process a new request
 */
-void EveApiWalkerThread::processRequest( QString id,
+void EveApiParserThread::processRequest( QString id,
         QDomDocument doc )
 {
 
@@ -21,7 +21,7 @@ void EveApiWalkerThread::processRequest( QString id,
 /*!
 continue processing an old request
 */
-void EveApiWalkerThread::processRequest( QString id,
+void EveApiParserThread::processRequest( QString id,
         QDomDocument doc,
         QMap<int, QMap<QString, QString> > processedDoc )
 {
@@ -31,8 +31,8 @@ void EveApiWalkerThread::processRequest( QString id,
 /*!
 Provide the actual XML parsing functionality
 */
-QPair<QString, QString> EveApiWalkerThread::processSegment( QDomDocument doc,
+QPair<QString, QString> EveApiParserThread::processSegment( QDomDocument doc,
         QMap<int, QMap<QString, QString> >& processedDoc )
 {
-
+    return QPair<QString, QString>();
 }

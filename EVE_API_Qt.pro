@@ -28,8 +28,8 @@ contains ( TEMPLATE, lib ) {
                include/eveapimap.hh \
                include/eveapicharacter.hh \
                include/eveapicorporation.hh \
-               include/eveapiwalker.hh \
-               include/eveapiwalkerthread.hh
+               include/eveapiparser.hh \
+               include/eveapiparserthread.hh
 
     SOURCES += src/eveapi.cpp \
                src/eveapirequest.cpp \
@@ -40,8 +40,8 @@ contains ( TEMPLATE, lib ) {
                src/eveapimap.cpp \
                src/eveapicharacter.cpp \
                src/eveapicorporation.cpp \
-               src/eveapiwalker.cpp \
-               src/eveapiwalkerthread.cpp
+               src/eveapiparser.cpp \
+               src/eveapiparserthread.cpp
 }
 
 VERSION = 1.2.0

@@ -1,5 +1,5 @@
-#ifndef __EVEAPIWALKERTHREAD_HH__
-#define __EVEAPIWALKERTHREAD_HH__
+#ifndef __EVEAPIPARSERTHREAD_HH__
+#define __EVEAPIPARSERTHREAD_HH__
 
 #include <QObject>
 
@@ -9,14 +9,14 @@
 #include <QMap>
 #include <QPair>
 
-class EveApiWalkerThread: public QObject
+class EveApiParserThread: public QObject
 {
         Q_OBJECT
     public:
         /*!
         call the QObject constructor
         */
-        EveApiWalkerThread( QObject* parent = 0 );
+        EveApiParserThread( QObject* parent = 0 );
 
     public slots:
         /*!

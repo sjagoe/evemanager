@@ -11,6 +11,8 @@
 
 #include <QDateTime>
 
+#include <QMutex>
+
 class EveApiRequest;
 
 class EveApiScope: public QObject
@@ -57,6 +59,9 @@ class EveApiScope: public QObject
         QString request( QString& id, QMap<QString, QString>& parameters );
 
     private:
+        //! QMutex to sync multiple access to the API
+        QMutex _mutex;
+
         //! The API host server
         QString _hostName;
 
