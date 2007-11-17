@@ -45,10 +45,9 @@ Add a request to be handled.
 \return unique request identifier (used to id a completed request)
 */
 QString EveApiRequest::addRequest( const QString& host, const QString& scope,
-                                   QMap<QString, QString>& parameters )
+                                   QMap<QString, QString>& parameters,
+                                   bool internal )
 {
-//    std::cout << "EveApiRequest::addRequest()" << std::endl;
-
     QString idStr = QString();
 
     QStringList cacheDirs = cachePath( scope, parameters );
@@ -70,17 +69,13 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
     }
     cachePathStr = cachePathStr.append( this->requestType() );
 
-//    std::cout << cachePathStr.toStdString() << std::endl;
-
     QDomDocument cacheDom;
 
     QFile loadFile( cachePathStr );
     if ( loadFile.open( QIODevice::ReadOnly ) )
     {
-//        std::cout << "check file" << std::endl;
         if ( cacheDom.setContent( &loadFile ) )
         {
-//            std::cout << "load xml" << std::endl;
             loadFile.close();
             // file loaded
             QDateTime cacheTime = this->getCacheTime( cacheDom );
@@ -90,47 +85,51 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
             // expired (due to differences in clocks)
             if ( nowUTC.secsTo( cacheTime ) <= -60 )
             {
-//                std::cout << "cache expired, fetch new" << std::endl;
                 // cache invalid, fetch new
                 this->cleanCache( scope, parameters );
-                idStr = this->fetchFromApi( host, scope, parameters );
+                idStr = this->fetchFromApi( host, scope, parameters, internal );
             }
             else
             {
-//                std::cout << "cache valid" << std::endl;
-                // cache valid, return it
-                //idStr = now.toString();
-                //idStr = idStr.append( "::" );
-                //idStr = idStr.append( this->path( scope ) );
                 int idi = 0;
-                idStr = this->makeID( scope, idi );
-                idStr = idStr.append( "-" );
-                idStr = idStr.append( parameters.value( "userID" ) );
-                idStr = idStr.append( "-" );
-                idStr = idStr.append( parameters.value( "characterID" ) );
-                idStr = idStr.append( "-" );
-                idStr = idStr.append( parameters.value( "apiKey" ) );
-
-                emit requestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ), cacheTime );
+                idStr = this->makeID( scope, idi, parameters );
+                if ( internal )
+                {
+                    emit internalRequestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ), cacheTime );
+                }
+                else
+                {
+                    emit requestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ), cacheTime );
+                }
             }
         }
         else
         {
-//            std::cout << "unable to load file, fetch new" << std::endl;
             loadFile.close();
             this->cleanCache( scope, parameters );
             // error (fetch new one?)
-            idStr = this->fetchFromApi( host, scope, parameters );
+            idStr = this->fetchFromApi( host, scope, parameters, internal );
         }
     }
     else
     {
-//        std::cout << "no cache, fetch new" << std::endl;
-        idStr = this->fetchFromApi( host, scope, parameters );
+        idStr = this->fetchFromApi( host, scope, parameters, internal );
     }
 
     return idStr;
 }
+
+// /*!
+//Add an internal request to be handled.
+//
+//\return unique request identifier (used to id a completed request)
+//*/
+//QString EveApiRequest::addInternalRequest( const QString& host,
+//        const QString& scope,
+//        QMap<QString, QString>& parameters )
+//{
+//    this->addRequest( host, scope, parameters, true );
+//}
 
 /*!
 return the server path (URI) to access the requested information
@@ -153,13 +152,19 @@ const QString& EveApiRequest::requestType() const
 /*!
 make a unique string ID
 */
-QString EveApiRequest::makeID( const QString& scope, int& id )
+QString EveApiRequest::makeID( const QString& scope, int& id, const QMap<QString, QString>& parameters )
 {
     QDateTime timeStamp = QDateTime::currentDateTime();
-    QString idStr = timeStamp.toString(QString( "yyyyMMddhhmmsszzz" ));
+    QString idStr = timeStamp.toString( QString( "yyyyMMddhhmmsszzz" ) );
     idStr = idStr.append( "::" );
     idStr = idStr.append( this->path( scope ) );
     idStr = idStr.append( QString( "-%1" ).arg( id ) );
+    idStr = idStr.append( "-" );
+    idStr = idStr.append( parameters.value( "userID" ) );
+    idStr = idStr.append( "-" );
+    idStr = idStr.append( parameters.value( "characterID" ) );
+    idStr = idStr.append( "-" );
+    idStr = idStr.append( parameters.value( "apiKey" ) );
     return idStr;
 }
 
@@ -195,19 +200,14 @@ bool EveApiRequest::validateParamaters( const QMap<QString, QString>& parameters
 Fetch from API
 */
 QString EveApiRequest::fetchFromApi( const QString& host, const QString& scope,
-                                     const QMap<QString, QString>& parameters )
+                                     const QMap<QString, QString>& parameters,
+                                     bool internal )
 {
-//    std::cout << "EveApiRequest::fetchFromApi()" << std::endl;
-//    std::cout << "host: " << host.toStdString() << std::endl;
-//    std::cout << "scope: " << host.toStdString() << std::endl;
-
     int id = 0;
 
     QString idStr = QString();
 
     QString serverPath = this->path( scope );
-
-//    std::cout << "serverPath: " << serverPath.toStdString() << std::endl;
 
     QUrl url( serverPath );
     if ( this->validateParamaters( parameters, url ) )
@@ -227,11 +227,11 @@ QString EveApiRequest::fetchFromApi( const QString& host, const QString& scope,
 
         this->_requests.insert( id, qMakePair( scope, this->requestType() ) );
 
-        idStr = makeID( scope, id );
-
-//        std::cout << "idStr: " << idStr.toStdString() << std::endl;
+        idStr = makeID( scope, id, parameters );
 
         this->_id.insert( id, idStr );
+
+        this->_internalRequest.insert( id, internal );
 
         this->_paramaters.insert( id, parameters );
     }
@@ -333,8 +333,8 @@ void EveApiRequest::cleanCache( const QString& scope,
         if ( fileName.endsWith( this->_requestType ) )
         {
             QString file = cachePathStr;
-            file = file.append("/");
-            file = file.append(fileName);
+            file = file.append( "/" );
+            file = file.append( fileName );
             QFile::remove( file );
         }
     }
@@ -363,12 +363,21 @@ void EveApiRequest::requestFinished( int id, bool error )
     QString response = this->_response.take( id );
     QMap<QString, QString> parameters = this->_paramaters.take( id );
 
+    bool internal = this->_internalRequest.take( id );
+
     QByteArray data = this->_http->readAll();
 
     if ( error )
     {
         QString err = this->_http->errorString();
-        emit requestFailed( idStr, err, response );
+        //if ( internal )
+        //{
+        //    emit internalRequestFailed( idStr, err, response );
+        //}
+        //else
+        //{
+            emit requestFailed( idStr, err, response );
+        //}
     }
     else
     {
@@ -407,8 +416,6 @@ void EveApiRequest::requestFinished( int id, bool error )
 
             QDateTime cacheTime = getCacheTime( xmlData );
 
-//            std::cout << data.data() << std::endl;
-
             QFile saveFile( thisCachePath );
 
             if ( saveFile.open( QIODevice::ReadWrite | QIODevice::Truncate ) )
@@ -417,7 +424,14 @@ void EveApiRequest::requestFinished( int id, bool error )
                 xmlData.save( save, this->_xmlIndent );
                 saveFile.close();
             }
-            emit requestComplete( idStr, xmlData, response, cacheTime );
+            if ( internal )
+            {
+                emit internalRequestComplete( idStr, xmlData, response, cacheTime );
+            }
+            else
+            {
+                emit requestComplete( idStr, xmlData, response, cacheTime );
+            }
         }
     }
     delete buffer;

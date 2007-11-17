@@ -56,7 +56,23 @@ class EveApiScope: public QObject
         /*!
         Call a request of the specified type
         */
-        QString request( QString& id, QMap<QString, QString>& parameters );
+        QString request( QString& id, QMap<QString, QString>& parameters, bool internal = false );
+
+//        /*!
+//        Call a request of the specified type (internal, i.e. use a different
+//        set of signals and slots. This allows the parser to create the api
+//        request isolated from pure xml requests.
+//        */
+//        QString internalRequest( QString& id, QMap<QString, QString>& parameters );
+
+    protected slots:
+        /*!
+        This slot is called when an internal request is complete, so that it
+        can be parsed
+        */
+        virtual void internalRequestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime ) = 0;
+
+        //virtual void internalRequestFailed( QString id, QString error, QString httpResponse ) = =;
 
     private:
         //! QMutex to sync multiple access to the API
@@ -85,7 +101,6 @@ class EveApiScope: public QObject
     signals:
         void requestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime );
         void requestFailed( QString id, QString error, QString httpResponse );
-
 };
 
 #endif

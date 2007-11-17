@@ -17,6 +17,12 @@ class EveApiParserWalker: public EveApiParser
         QString addRequest( QString id, QDomDocument doc );
 
     protected:
+        //! map the IDs in the _continuationQueue to a pair of <processed request, unprocessed request>
+        QMap<QString, QPair<QMap<int, QMap<QString, QString> >, QDomDocument> > _continuationStorage;
+
+        //! map the IDs in the _incompleteQueue to processed requests
+        QMap<QString, QMap<int, QMap<QString, QString> > > _incompleteStorage;
+
         /*!
         Allow the continuation queue to be checked in subclasses that use it
         */

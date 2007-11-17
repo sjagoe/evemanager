@@ -52,12 +52,6 @@ class EveApiParser: public QThread
         //! QQueue providing a request queue for continuation requests.
         QQueue<QString> _continuationQueue;
 
-        //! map the IDs in the _continuationQueue to a pair of <processed request, unprocessed request>
-        QMap<QString, QPair<QMap<int, QMap<QString, QString> >, QDomDocument> > _continuationStorage;
-
-        //! map the IDs in the _incompleteQueue to processed requests
-        QMap<QString, QMap<int, QMap<QString, QString> > > _incompleteStorage;
-
         /*!
         Allow access to the parser without the ability to modify it
         */

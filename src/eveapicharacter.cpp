@@ -130,6 +130,15 @@ QString EveApiCharacter::walletJournal( QMap<QString, QString>& parameters )
 }
 
 /*!
+access the WalletJournal api function, and provide a parse,
+fully 'walked' output
+*/
+QString EveApiCharacter::walletJournalParsed( QMap<QString, QString>& parameters )
+{
+
+}
+
+/*!
 access the WalletTransactions api function
 */
 QString EveApiCharacter::walletTransactions( QMap<QString, QString>& parameters )
@@ -145,4 +154,16 @@ QString EveApiCharacter::accountBalance( QMap<QString, QString>& parameters )
 {
     QString id = this->accountBalanceRequestID();
     return this->request( id, parameters );
+}
+
+/*!
+This slot is called when an internal request is complete, so that it
+can be parsed
+*/
+void EveApiCharacter::internalRequestComplete( QString id,
+        QDomDocument result,
+        QString httpResponse,
+        QDateTime cacheTime )
+{
+
 }

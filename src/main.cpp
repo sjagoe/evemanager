@@ -105,10 +105,10 @@ Window::Window( QWidget* parent )
     this->_lblBeforeRefID = new QLabel( "Before Ref ID (Journal Walking)" );
     this->_lblBeforeTransID = new QLabel( "Before Trans ID (Transaction Walking)" );
 
-    this->_edtUserID = new QLineEdit("695163");
-    this->_edtLimitedApiKey = new QLineEdit("VhNtTIJbptLoberHr0RcYFhmusa8aMllvXrqp8D0udzXFly9Xc3EBSmWoSy3clJ3");
-    this->_edtFullApiKey = new QLineEdit("iQbt9dFt42VVdhdbjtlOzwW41WJLWkgnL4ImZc0GqOLJOiEkv9E3vSrRJjZWzTbG");
-    this->_edtCharacterID = new QLineEdit("767637297");
+    this->_edtUserID = new QLineEdit("1808555");
+    this->_edtLimitedApiKey = new QLineEdit("YszjMtyxOqFqCQdIhtGp9qCsBrBKnvtfOETww78qiuY2hx0NhOI9tSR1hxVTutI5");
+    this->_edtFullApiKey = new QLineEdit("rEQ4q33H7m9my3gGzdjbuuIw8UH597ENsOIj8wI0fsjsiKnHBXAPaGpzBC01tDqq");
+    this->_edtCharacterID = new QLineEdit("1020762298");
     this->_edtAccountID = new QLineEdit("1006");
     this->_edtBeforeRefID = new QLineEdit;
     this->_edtBeforeTransID = new QLineEdit;

@@ -49,9 +49,6 @@ class EveApi: public QObject
         //! amount to indent XML blocks when writing files
         int _xmlIndent;
 
-//    EveApiEve( QString& host, QString& dataPath, int& xmlIndent,
-//            QString& scope, QObject* parent = 0 );
-
         //! "/eve/" scope
         EveApiEve* _eve;
 

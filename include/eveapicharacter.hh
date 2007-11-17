@@ -29,6 +29,12 @@ class EveApiCharacter: public EveApiScope
         QString walletJournal( QMap<QString, QString>& parameters );
 
         /*!
+        access the WalletJournal api function, and provide a parse,
+        fully 'walked' output
+        */
+        QString walletJournalParsed( QMap<QString, QString>& parameters );
+
+        /*!
         access the WalletTransactions api function
         */
         QString walletTransactions( QMap<QString, QString>& parameters );
@@ -37,6 +43,13 @@ class EveApiCharacter: public EveApiScope
         access the AccountBalance api function
         */
         QString accountBalance( QMap<QString, QString>& parameters );
+
+    protected slots:
+        /*!
+        This slot is called when an internal request is complete, so that it
+        can be parsed
+        */
+        void internalRequestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime );
 
     private:
         /*!
@@ -78,6 +91,8 @@ class EveApiCharacter: public EveApiScope
         {
             return QString("AccountBalance.xml");
         };
+
+    //private slots:
 };
 
 #endif

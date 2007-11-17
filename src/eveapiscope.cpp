@@ -68,13 +68,22 @@ void EveApiScope::addRequestType( QString& id, EveApiRequest* request )
         this, SIGNAL(requestFailed( QString, QString, QString )),
         Qt::QueuedConnection );
 
+    connect( request,
+        SIGNAL(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
+        this, SIGNAL(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
+        Qt::QueuedConnection );
+//    connect( request,
+//        SIGNAL(internalRequestFailed( QString, QString, QString )),
+//        this, SIGNAL(internalRequestFailed( QString, QString, QString )),
+//        Qt::QueuedConnection );
+
     this->_apiRequests.insert( id, request );
 }
 
 /*!
-Add a request of the specified type
+Call a request of the specified type
 */
-QString EveApiScope::request( QString& id, QMap<QString, QString>& parameters )
+QString EveApiScope::request( QString& id, QMap<QString, QString>& parameters, bool internal )
 {
     this->_mutex.lock();
     QString host = this->hostName();
@@ -83,11 +92,31 @@ QString EveApiScope::request( QString& id, QMap<QString, QString>& parameters )
     QString result;
     if (req)
     {
-        result = req->addRequest( host, scopeStr, parameters );
+        result = req->addRequest( host, scopeStr, parameters, internal );
     }
     this->_mutex.unlock();
     return result;
 }
+
+// /*!
+//Call a request of the specified type (internal, i.e. use a different
+//set of signals and slots. This allows the parser to create the api
+//request isolated from pure xml requests.
+//*/
+//QString EveApiScope::internalRequest( QString& id, QMap<QString, QString>& parameters )
+//{
+//    this->_mutex.lock();
+//    QString host = this->hostName();
+//    QString scopeStr = this->scope();
+//    EveApiRequest* req = this->requestType( id );
+//    QString result;
+//    if (req)
+//    {
+//        result = req->addInternalRequest( host, scopeStr, parameters );
+//    }
+//    this->_mutex.unlock();
+//    return result;
+//}
 
 /*!
 return a previously added request type
