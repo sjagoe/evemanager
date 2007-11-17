@@ -9,6 +9,9 @@
 TEMPLATE = lib
 #TEMPLATE = app
 
+## For testing, uncomment this line:
+#CONFIG += console
+
 contains( TEMPLATE, app ) {
     HEADERS += include/main.hh
     SOURCES += src/main.cpp
@@ -29,7 +32,9 @@ contains ( TEMPLATE, lib ) {
                include/eveapicharacter.hh \
                include/eveapicorporation.hh \
                include/eveapiparser.hh \
-               include/eveapiparserthread.hh
+               include/eveapiparserthread.hh \
+               include/eveapiparserwalker.hh \
+               include/eveapiparserwalkerthread.hh
 
     SOURCES += src/eveapi.cpp \
                src/eveapirequest.cpp \
@@ -41,7 +46,9 @@ contains ( TEMPLATE, lib ) {
                src/eveapicharacter.cpp \
                src/eveapicorporation.cpp \
                src/eveapiparser.cpp \
-               src/eveapiparserthread.cpp
+               src/eveapiparserthread.cpp \
+               src/eveapiparserwalker.cpp \
+               src/eveapiparserwalkerthread.cpp
 }
 
 VERSION = 1.2.0

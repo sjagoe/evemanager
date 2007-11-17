@@ -12,7 +12,7 @@
 
 #include <QSemaphore>
 
-class EveApiParserThread;
+#include "eveapiparserthread.hh"
 
 class EveApiParser: public QThread
 {
@@ -22,7 +22,7 @@ class EveApiParser: public QThread
         Simply call the QThread constructor. All data initialisation has to
         happen in the run() method as we need an event loop.
         */
-        EveApiParser( EveApiParserThread* parser, QObject* parent = 0 );
+        EveApiParser( EveApiParserThread* newParser, QObject* parent = 0 );
 
         /*!
         Add a new request to the queue to be processed when the current one is
@@ -58,8 +58,10 @@ class EveApiParser: public QThread
         //! map the IDs in the _incompleteQueue to processed requests
         QMap<QString, QMap<int, QMap<QString, QString> > > _incompleteStorage;
 
-        //! The object that provides asynchronous processing of the data
-        EveApiParserThread* _parser;
+        /*!
+        Allow access to the parser without the ability to modify it
+        */
+        EveApiParserThread& parser();
 
         /*!
         Create the dynamic objects in the thread, and execute the event loop.
@@ -71,9 +73,15 @@ class EveApiParser: public QThread
         */
         void checkQueue();
 
+        /*!
+        Allow the continuation queue to be checked in subclasses that use it
+        */
         virtual void checkContinuationQueue() {};
 
     private:
+        //! The object that provides asynchronous processing of the data
+        EveApiParserThread* _parser;
+
         /*!
         Method to be implemented by subclasses to connect signals and slots
         (as the return types from the parser will differ in each case, and
@@ -88,46 +96,11 @@ class EveApiParser: public QThread
         */
         QString makeID();
 
-//    private slots:
-//        /*!
-//        Slot that stores incomplete requests in a incomplete request queue
-//        while the API fetches more data
-//        */
-//        void queueIncompleteRequest( QString id,
-//                                      QMap<int, QMap<QString, QString> > processedDoc,
-//                                      QPair<QString, QString> beforeID );
-//
-//        /*!
-//        clean up after a completed request
-//        */
-//        void completeRequest( QString id,
-//                              QMap<int, QMap<QString, QString> > processedDoc );
-
     signals:
         /*!
         process a new request
         */
         void processNewRequest( QString id, QDomDocument doc );
-
-//        /*!
-//        continue processing a pending request
-//        */
-//        void processPendingRequest( QString id,
-//                                    QDomDocument doc,
-//                                    QMap<int, QMap<QString, QString> > processedDoc );
-//
-//        /*!
-//        notify the waiting object about the incomplete request
-//        */
-//        void incompleteRequest( QString id,
-//                                QMap<int, QMap<QString, QString> > processedDoc,
-//                                QPair<QString, QString> beforeID );
-//
-//        /*!
-//        notify the waiting object about the complete request
-//        */
-//        void completedRequest( QString id,
-//                              QMap<int, QMap<QString, QString> > processedDoc );
 };
 
 #endif

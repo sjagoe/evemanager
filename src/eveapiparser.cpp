@@ -4,18 +4,17 @@
 #include <QMetaType>
 #include <QDateTime>
 
-#include "eveapiparserthread.hh"
 
 /*!
 Simply call the QThread constructor. All data initialisation has to
 happen in the run() method as we need an event loop.
 */
-EveApiParser::EveApiParser( EveApiParserThread* parser, QObject* parent )
+EveApiParser::EveApiParser( EveApiParserThread* newParser, QObject* parent )
         : QThread( parent )
 {
     qRegisterMetaType<QMap<int, QMap<QString, QString> > >( "QMap<int, QMap<QString, QString> >" );
     qRegisterMetaType<QDomDocument>( "QDomDocument" );
-    this->_parser = parser;
+    this->_parser = newParser;
 }
 
 /*!
@@ -40,30 +39,13 @@ QString EveApiParser::addRequest( QDomDocument doc )
     return id;
 }
 
-///*!
-//Add a continuation request for journal walking
-//
-//\return The same identifier as passed in the id parameter
-//*/
-//QString EveApiParser::addRequest( QString id, QDomDocument doc )
-//{
-//    this->_requestSemaphore.release();
-//    if (this->_incompleteStorage.contains( id ))
-//    {
-//        QMap<int, QMap<QString, QString> > initial = this->_incompleteStorage.take( id );
-//        if (this->_requestSemaphore.available() == 1)
-//        {
-//            emit processPendingRequest( id, doc, initial );
-//        }
-//        else
-//        {
-//            this->_continuationQueue.enqueue( id );
-//            this->_continuationStorage.insert( id, qMakePair( initial, doc ) );
-//        }
-//        return id;
-//    }
-//    return QString();
-//}
+/*!
+Allow access to the parser without the ability to modify it
+*/
+EveApiParserThread& EveApiParser::parser()
+{
+    return (*this->_parser);
+}
 
 /*!
 Create the dynamic objects in the thread, and execute the event loop.
@@ -74,23 +56,10 @@ void EveApiParser::run()
     this->_parser->moveToThread(this);
 
     // connect signals and slots
-    // messages from the walker
-    connect( this->_parser,
-             SIGNAL( documentProcessed( QString, QMap<int, QMap<QString, QString> > ) ),
-             this,
-             SLOT( completeRequest( QString, QMap<int, QMap<QString, QString> > ) ) );
-    connect( this->_parser,
-             SIGNAL( incompleteDocument( QString, QMap<int, QMap<QString, QString> >, QPair<QString, QString> ) ),
-             this,
-             SLOT( queueIncompleteRequest( QString, QMap<int, QMap<QString, QString> >, QPair<QString, QString> ) ) );
-
-    // messages to the walker
     connect( this, SIGNAL( processNewRequest( QString, QDomDocument ) ),
              this->_parser, SLOT( processRequest( QString, QDomDocument ) ) );
-    connect( this,
-             SIGNAL( processPendingRequest( QString, QDomDocument, QMap<int, QMap<QString, QString> > ) ),
-             this->_parser,
-             SLOT( processRequest( QString, QDomDocument, QMap<int, QMap<QString, QString> > ) ) );
+    // connect parser-specific signals and slots
+    this->setup();
 
     // start the thread's event loop
     this->exec();
@@ -103,9 +72,6 @@ void EveApiParser::checkQueue()
 {
     if (!this->_continuationQueue.isEmpty())
     {
-//        QString id = this->_continuationQueue.dequeue();
-//        QPair<QMap<int, QMap<QString, QString> >, QDomDocument> req = this->_continuationStorage.take( id );
-//        emit processPendingRequest( id, req.second, req.first );
         this->checkContinuationQueue();
     }
     else if (!this->_requestQueue.isEmpty())
@@ -130,27 +96,4 @@ QString EveApiParser::makeID()
     return id;
 }
 
-///*!
-//Slot that stores incomplete requests in a incomplete request queue
-//while the API fetches more data
-//*/
-//void EveApiParser::queueIncompleteRequest( QString id,
-//        QMap<int, QMap<QString, QString> > processedDoc,
-//        QPair<QString, QString> beforeID )
-//{
-//    this->_requestSemaphore.tryAcquire();
-//    this->_incompleteStorage.insert( id, processedDoc );
-//    this->checkQueue();
-//    emit incompleteRequest( id, processedDoc, beforeID );
-//}
-//
-///*!
-//clean up after a completed request
-//*/
-//void EveApiParser::completeRequest( QString id,
-//                                    QMap<int, QMap<QString, QString> > processedDoc )
-//{
-//    this->_requestSemaphore.tryAcquire();
-//    this->_checkQueue();
-//    emit completedRequest( id, processedDoc );
-//}
+
