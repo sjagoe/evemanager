@@ -4,6 +4,8 @@
 
 #include "eveapiparserthread.hh"
 
+#include "eveapidata_walked.hh"
+
 class EveApiParserWalkerThread: public EveApiParserThread
 {
     Q_OBJECT
@@ -22,14 +24,14 @@ class EveApiParserWalkerThread: public EveApiParserThread
         */
         void processRequest( QString id,
                              QDomDocument doc,
-                             QMap<int, QMap<QString, QString> > processedDoc );
+                             EveApiData processedDoc );
 
     private:
         /*!
         Provide the actual XML parsing functionality
         */
         QPair<QString, QString> processSegment( QDomDocument doc,
-                QMap<int, QMap<QString, QString> >& processedDoc );
+                EveApiDataWalked& processedDoc );
 
 
 };

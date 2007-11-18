@@ -10,6 +10,8 @@
 #include <QMap>
 #include <QPair>
 
+#include "eveapidata.hh"
+
 class EveApiParserThread: public QObject
 {
         Q_OBJECT
@@ -28,9 +30,9 @@ class EveApiParserThread: public QObject
         /*!
         continue processing an old request
         */
-        void processRequest( QString id,
+        virtual void processRequest( QString id,
                              QDomDocument doc,
-                             EveApiData processedDoc );
+                             EveApiData processedDoc ) = 0;
 
     signals:
         /*!

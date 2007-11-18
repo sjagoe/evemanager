@@ -9,6 +9,7 @@
 
 #if !defined(EVEAPI_NO_PARSING)
 #include "eveapidata_walked.hh"
+#include "eveapidatatype.hh"
 class EveApiParser;
 #endif
 
@@ -80,6 +81,10 @@ class EveApiCharacter: public EveApiScope
 
         //! QMap to map request ID to request parameters
         QMap<QString, QMap<QString, QString> > _requestIdToRequestParametersMap;
+
+        //! QMap to map Request (strings) to DataTypes (enum), to determine
+        //! which parser will be used
+        QMap<QString, ParsedDataType> _requestToParsedDataTypeMap;
 
         /*!
         Create all parsers

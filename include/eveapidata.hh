@@ -10,6 +10,7 @@
 class EveApiData
 {
     public:
+        EveApiData(){};
         EveApiData( ParsedDataType thisType ) :
             _type( thisType )
         { };

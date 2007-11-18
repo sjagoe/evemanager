@@ -20,16 +20,16 @@ continue processing an old request
 */
 void EveApiParserWalkerThread::processRequest( QString id,
         QDomDocument doc,
-        QMap<int, QMap<QString, QString> > processedDoc )
+        EveApiData processedDoc )
 {
-
+    //EveApiDataWalked b = (*(EveApiDataWalked*)(&processedDoc));
 }
 
 /*!
 Provide the actual XML parsing functionality
 */
 QPair<QString, QString> EveApiParserWalkerThread::processSegment( QDomDocument doc,
-        QMap<int, QMap<QString, QString> >& processedDoc )
+        EveApiDataWalked& processedDoc )
 {
     return QPair<QString, QString>();
 }

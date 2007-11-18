@@ -92,14 +92,15 @@ void EveApiCharacter::internalRequestComplete( QString requestId,
 //    if (parser)
 //    {
     QString parserId = this->_requestIdToParserIdMap.value( requestId );
+    ParsedDataType parserType = this->_requestToParsedDataTypeMap.value(parserId);
     if (!parserId.isEmpty())
     {
         //parserId =
-        QString newParserId = this->_parser->addRequest( parserId, result );
+        QString newParserId = this->_parser->addRequest( parserType, parserId, result );
     }
     else
     {
-        parserId = this->_parser->addRequest( result );
+        parserId = this->_parser->addRequest( parserType, result );
         this->_parserIdToRequestIdMap.insert( parserId, requestId );
         this->_requestIdToParserIdMap.insert( requestId, parserId );
     }
@@ -111,6 +112,13 @@ Create all parsers
 */
 void EveApiCharacter::createParsers()
 {
+
+    this->_requestToParsedDataTypeMap[this->characterSheetRequestID()] = PDT_CHARSHEET;
+    this->_requestToParsedDataTypeMap[this->skillInTrainingRequestID()] = PDT_SKILLINTRAINING;
+    this->_requestToParsedDataTypeMap[this->walletJournalRequestID()] = PDT_WALKED;
+    this->_requestToParsedDataTypeMap[this->walletTransactionsRequestID()] = PDT_WALKED;
+    this->_requestToParsedDataTypeMap[this->accountBalanceRequestID()] = PDT_ACCOUNTBALANCE;
+
     this->_parser = new EveApiParser;
 //    /*!
 //    continue processing a pending request (used internally to tell the
