@@ -83,7 +83,7 @@ void EveApiScope::addRequestType( QString& id, EveApiRequest* request )
 /*!
 Call a request of the specified type
 */
-QString EveApiScope::request( QString& id, QMap<QString, QString>& parameters, bool internal, QString requestId )
+QString EveApiScope::request( QString& id, QMap<QString, QString>& parameters/*, bool internal, QString requestId */)
 {
     this->_mutex.lock();
     QString host = this->hostName();
@@ -92,7 +92,7 @@ QString EveApiScope::request( QString& id, QMap<QString, QString>& parameters, b
     QString result;
     if (req)
     {
-        result = req->addRequest( host, scopeStr, parameters, internal, requestId );
+        result = req->addRequest( host, scopeStr, parameters/*, internal, requestId */);
     }
     this->_mutex.unlock();
     return result;

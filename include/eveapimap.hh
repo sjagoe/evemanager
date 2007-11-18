@@ -18,12 +18,12 @@ class EveApiMap: public EveApiScope
         */
         QString sovereignty( QMap<QString, QString>& parameters );
 
-    protected slots:
-        /*!
-        This slot is called when an internal request is complete, so that it
-        can be parsed
-        */
-        void internalRequestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime ){};
+//    protected slots:
+//        /*!
+//        This slot is called when an internal request is complete, so that it
+//        can be parsed
+//        */
+//        void internalRequestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime ){};
 
     private:
         /*!

@@ -1,6 +1,5 @@
 #ifndef __EVEAPIDATA_HH__
 #define __EVEAPIDATA_HH__
-#if !defined(EVEAPI_NO_PARSING)
 
 #include <QSharedData>
 #include <QSharedDataPointer>
@@ -24,5 +23,4 @@ class EveApiData
         ParsedDataType _type;
 };
 
-#endif
 #endif

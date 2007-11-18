@@ -45,8 +45,8 @@ Add a request to be handled.
 \return unique request identifier (used to id a completed request)
 */
 QString EveApiRequest::addRequest( const QString& host, const QString& scope,
-                                   QMap<QString, QString>& parameters,
-                                   bool internal, QString oldId )
+                                   QMap<QString, QString>& parameters/*,
+                                   bool internal, QString oldId*/ )
 {
     QString idStr = QString();
 
@@ -87,27 +87,27 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
             {
                 // cache invalid, fetch new
                 this->cleanCache( scope, parameters );
-                idStr = this->fetchFromApi( host, scope, parameters, internal );
+                idStr = this->fetchFromApi( host, scope, parameters/*, internal*/ );
             }
             else
             {
                 int idi = 0;
-                if (oldId.isNull())
-                {
+//                if (oldId.isNull())
+//                {
                     idStr = this->makeID( scope, idi, parameters );
-                }
-                else
-                {
-                    idStr = oldId;
-                }
-                if ( internal )
-                {
-                    emit internalRequestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ), cacheTime );
-                }
-                else
-                {
+//                }
+//                else
+//                {
+//                    idStr = oldId;
+//                }
+//                if ( internal )
+//                {
+//                    emit internalRequestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ), cacheTime );
+//                }
+//                else
+//                {
                     emit requestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ), cacheTime );
-                }
+//                }
             }
         }
         else
@@ -115,12 +115,12 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
             loadFile.close();
             this->cleanCache( scope, parameters );
             // error (fetch new one?)
-            idStr = this->fetchFromApi( host, scope, parameters, internal );
+            idStr = this->fetchFromApi( host, scope, parameters/*, internal */);
         }
     }
     else
     {
-        idStr = this->fetchFromApi( host, scope, parameters, internal );
+        idStr = this->fetchFromApi( host, scope, parameters/*, internal */);
     }
 
     return idStr;
@@ -207,12 +207,13 @@ bool EveApiRequest::validateParamaters( const QMap<QString, QString>& parameters
 Fetch from API
 */
 QString EveApiRequest::fetchFromApi( const QString& host, const QString& scope,
-                                     const QMap<QString, QString>& parameters,
-                                     bool internal, QString oldId )
+                                     const QMap<QString, QString>& parameters/*,
+                                     bool internal, QString oldId*/ )
 {
     int id = 0;
 
-    QString idStr = oldId;
+//    QString idStr = oldId;
+    QString idStr;
 
     QString serverPath = this->path( scope );
 
@@ -239,7 +240,7 @@ QString EveApiRequest::fetchFromApi( const QString& host, const QString& scope,
 
         this->_id.insert( id, idStr );
 
-        this->_internalRequest.insert( id, internal );
+//        this->_internalRequest.insert( id, internal );
 
         this->_paramaters.insert( id, parameters );
     }
@@ -371,7 +372,7 @@ void EveApiRequest::requestFinished( int id, bool error )
     QString response = this->_response.take( id );
     QMap<QString, QString> parameters = this->_paramaters.take( id );
 
-    bool internal = this->_internalRequest.take( id );
+//    bool internal = this->_internalRequest.take( id );
 
     QByteArray data = this->_http->readAll();
 
@@ -432,14 +433,14 @@ void EveApiRequest::requestFinished( int id, bool error )
                 xmlData.save( save, this->_xmlIndent );
                 saveFile.close();
             }
-            if ( internal )
-            {
-                emit internalRequestComplete( idStr, xmlData, response, cacheTime );
-            }
-            else
-            {
+//            if ( internal )
+//            {
+//                emit internalRequestComplete( idStr, xmlData, response, cacheTime );
+//            }
+//            else
+//            {
                 emit requestComplete( idStr, xmlData, response, cacheTime );
-            }
+//            }
         }
     }
     delete buffer;

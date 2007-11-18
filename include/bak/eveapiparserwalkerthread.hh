@@ -1,6 +1,5 @@
 #ifndef __EVEAPIPARSERWALKERTHREAD_HH__
 #define __EVEAPIPARSERWALKERTHREAD_HH__
-#if !defined(EVEAPI_NO_PARSING)
 
 #include "eveapiparserthread.hh"
 
@@ -36,5 +35,4 @@ class EveApiParserWalkerThread: public EveApiParserThread
 
 };
 
-#endif
 #endif

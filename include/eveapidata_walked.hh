@@ -1,6 +1,5 @@
 #ifndef __EVEAPIDATA_WALKED_HH__
 #define __EVEAPIDATA_WALKED_HH__
-#if !defined(EVEAPI_NO_PARSING)
 
 #include <QList>
 #include <QMap>
@@ -33,5 +32,4 @@ class EveApiDataWalked: public EveApiData
         QSharedDataPointer<EveApiDataWalkedData> _data;
 };
 
-#endif
 #endif

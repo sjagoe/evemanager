@@ -1,6 +1,5 @@
 #ifndef __EVEAPIDATATYPE_HH__
 #define __EVEAPIDATATYPE_HH__
-#if !defined(EVEAPI_NO_PARSING)
 
 enum ParsedDataType
 {
@@ -14,5 +13,4 @@ enum ParsedDataType
     PDT_MEMBERTRACKING
 };
 
-#endif
 #endif

@@ -56,7 +56,7 @@ class EveApiScope: public QObject
         /*!
         Call a request of the specified type
         */
-        QString request( QString& id, QMap<QString, QString>& parameters, bool internal = false, QString requestId = QString() );
+        QString request( QString& id, QMap<QString, QString>& parameters/*, bool internal = false, QString requestId = QString()*/ );
 
 //        /*!
 //        Call a request of the specified type (internal, i.e. use a different
@@ -65,16 +65,16 @@ class EveApiScope: public QObject
 //        */
 //        QString internalRequest( QString& id, QMap<QString, QString>& parameters );
 
-#if !defined(EVEAPI_NO_PARSING)
-    protected slots:
-        /*!
-        This slot is called when an internal request is complete, so that it
-        can be parsed
-        */
-        virtual void internalRequestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime ) = 0;
-
-        //virtual void internalRequestFailed( QString id, QString error, QString httpResponse ) = ;
-#endif
+//#if !defined(EVEAPI_NO_PARSING)
+//    protected slots:
+//        /*!
+//        This slot is called when an internal request is complete, so that it
+//        can be parsed
+//        */
+//        virtual void internalRequestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime ) = 0;
+//
+//        //virtual void internalRequestFailed( QString id, QString error, QString httpResponse ) = ;
+//#endif
     private:
         //! QMutex to sync multiple access to the API
         QMutex _mutex;

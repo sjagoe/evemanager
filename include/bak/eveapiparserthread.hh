@@ -1,6 +1,5 @@
 #ifndef __EVEAPIPARSERTHREAD_HH__
 #define __EVEAPIPARSERTHREAD_HH__
-#if !defined(EVEAPI_NO_PARSING)
 
 #include <QObject>
 
@@ -51,5 +50,4 @@ class EveApiParserThread: public QObject
                                  QPair<QString, QString> beforeID );
 };
 
-#endif
 #endif

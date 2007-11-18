@@ -1,6 +1,5 @@
 #ifndef __EVEAPIPARSER_HH__
 #define __EVEAPIPARSER_HH__
-#if !defined(EVEAPI_NO_PARSING)
 
 #include <QThread>
 
@@ -144,5 +143,4 @@ class EveApiParser: public QThread
         void completedRequest( QString id, EveApiData processedDoc );
 };
 
-#endif
 #endif

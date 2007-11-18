@@ -41,8 +41,8 @@ class EveApiRequest: public QObject
         \return unique request identifier (used to id a completed request)
         */
         QString addRequest( const QString& host, const QString& scope,
-                            QMap<QString, QString>& parameters,
-                                   bool internal, QString oldId = QString() );
+                            QMap<QString, QString>& parameters/*,
+                                   bool internal, QString oldId = QString()*/ );
 
 //        /*!
 //        Add an internal request to be handled.
@@ -93,7 +93,7 @@ class EveApiRequest: public QObject
         QHttp* _http;
 
         //! QMap mapping request IDs to buffers
-        QMap<int, QBuffer* > _requestBuffers;
+        QMap<int, QBuffer*> _requestBuffers;
 
         //! QMap mapping IDs to readable requests (QPair<scope, file>)
         QMap<int, QPair<QString, QString> > _requests;
@@ -101,8 +101,8 @@ class EveApiRequest: public QObject
         //! QMap mapping http id to a unique QString ID
         QMap<int, QString> _id;
 
-        //! QMap to store if a request is internal or external
-        QMap<int, bool> _internalRequest;
+//        //! QMap to store if a request is internal or external
+//        QMap<int, bool> _internalRequest;
 
         //! QMap of the request and HTTP response
         QMap<int, QString> _response;
@@ -138,8 +138,8 @@ class EveApiRequest: public QObject
         Fetch from API
         */
         QString fetchFromApi( const QString& host, const QString& scope,
-                              const QMap<QString, QString>& parameters,
-                              bool internal, QString oldId = QString() );
+                              const QMap<QString, QString>& parameters/*,
+                              bool internal, QString oldId = QString()*/ );
 
         /*!
         Get the time that the cache expires from a QDomDocument
@@ -189,7 +189,7 @@ class EveApiRequest: public QObject
         void requestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheExpireTime );
         void requestFailed( QString id, QString error, QString httpResponse );
 
-        void internalRequestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheExpireTime );
+        //void internalRequestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheExpireTime );
         //void internalRequestFailed( QString id, QString error, QString httpResponse );
 };
 
