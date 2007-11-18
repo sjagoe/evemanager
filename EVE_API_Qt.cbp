@@ -62,6 +62,11 @@
 		<Unit filename="include\eveapieve.hh" />
 		<Unit filename="include\eveapigeneralrequest.hh" />
 		<Unit filename="include\eveapimap.hh" />
+		<Unit filename="include\eveapiparser.hh" />
+		<Unit filename="include\eveapiparsercharacter.hh" />
+		<Unit filename="include\eveapiparsercorporation.hh" />
+		<Unit filename="include\eveapiparsereve.hh" />
+		<Unit filename="include\eveapiparsermap.hh" />
 		<Unit filename="include\eveapirequest.hh" />
 		<Unit filename="include\eveapiscope.hh" />
 		<Unit filename="include\main.hh" />
@@ -73,6 +78,11 @@
 		<Unit filename="src\eveapieve.cpp" />
 		<Unit filename="src\eveapigeneralrequest.cpp" />
 		<Unit filename="src\eveapimap.cpp" />
+		<Unit filename="src\eveapiparser.cpp" />
+		<Unit filename="src\eveapiparsercharacter.cpp" />
+		<Unit filename="src\eveapiparsercorporation.cpp" />
+		<Unit filename="src\eveapiparsereve.cpp" />
+		<Unit filename="src\eveapiparsermap.cpp" />
 		<Unit filename="src\eveapirequest.cpp" />
 		<Unit filename="src\eveapiscope.cpp" />
 		<Unit filename="src\main.cpp" />

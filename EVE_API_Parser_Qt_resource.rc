@@ -27,7 +27,7 @@ VS_VERSION_INFO VERSIONINFO
 				VALUE "FileDescription", "\0"
 				VALUE "FileVersion", "1.2.0.0\0"
 				VALUE "LegalCopyright", "\0"
-				VALUE "OriginalFilename", "EVE_API_Parser_Qt.exe\0"
+				VALUE "OriginalFilename", "EVE_API_Parser_Qt1.dll\0"
 				VALUE "ProductName", "EVE_API_Parser_Qt\0"
 			END
 		END

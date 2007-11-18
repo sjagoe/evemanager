@@ -106,6 +106,38 @@ class EveApiCharacter: public EveApiScope
         */
         void createRequests();
 
+
+//#if !defined(EVEAPI_NO_PARSING)
+//    private slots:
+//        // slots for the walker parser:
+//        /*!
+//        Receive journal signal that parsing requires more info
+//        */
+//        void walkerRequestIncomplete( QString parserId,
+//                                EveApiDataWalked processedDoc,
+//                                QPair<QString, QString> beforeID );
+//
+//        /*!
+//        Receive journal walking signal that the parsing is complete
+//        */
+//        void walkerRequestComplete( QString parserId,
+//                              EveApiDataWalked processedDoc );
+//
+//    signals:
+//        /*!
+//        notify that a journal walking has been completed
+//        */
+//        void journalWalkerRequestComplete( QString requestId,
+//                                EveApiDataWalked processedDoc );
+//
+//        /*!
+//        notify that partial data from journal walking is available
+//        */
+//        void journalWalkerRequestIncomplete( QString requestId,
+//                                EveApiDataWalked processedDoc );
+//#endif
+
+    private:
         /*!
         return the filename of the Sovereignty.xml request
         */
@@ -145,36 +177,6 @@ class EveApiCharacter: public EveApiScope
         {
             return QString("AccountBalance.xml");
         };
-
-//#if !defined(EVEAPI_NO_PARSING)
-//    private slots:
-//        // slots for the walker parser:
-//        /*!
-//        Receive journal signal that parsing requires more info
-//        */
-//        void walkerRequestIncomplete( QString parserId,
-//                                EveApiDataWalked processedDoc,
-//                                QPair<QString, QString> beforeID );
-//
-//        /*!
-//        Receive journal walking signal that the parsing is complete
-//        */
-//        void walkerRequestComplete( QString parserId,
-//                              EveApiDataWalked processedDoc );
-//
-//    signals:
-//        /*!
-//        notify that a journal walking has been completed
-//        */
-//        void journalWalkerRequestComplete( QString requestId,
-//                                EveApiDataWalked processedDoc );
-//
-//        /*!
-//        notify that partial data from journal walking is available
-//        */
-//        void journalWalkerRequestIncomplete( QString requestId,
-//                                EveApiDataWalked processedDoc );
-//#endif
 };
 
 #endif

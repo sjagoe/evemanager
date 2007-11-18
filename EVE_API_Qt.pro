@@ -10,7 +10,7 @@
 #           Requires: base
 # base_app: A simple application that provides a GUI to test the base library
 #           Requires: base
-API_BUILD = base
+API_BUILD = parser
 
 ## Set the version number
 VERSION = 1.2.0
@@ -28,20 +28,14 @@ VERSION = 1.2.0
 ## Disable the ability to use the built in parsers (save on size):
 #DEFINES += EVEAPI_NO_PARSING
 
-# in the app template, only build main, and link with the dynamic library
-contains( API_BUILD, base_app ) {
-    TEMPLATE = app
-    HEADERS += include/main.hh
-    SOURCES += src/main.cpp
-    LIBS += -Lbin/release -lEVE_API_Qt
-    TARGET = EVE_API_Qt_base_app
-}
 
-# in the lib template, do not link to QtGui, and compile all sources _except_ main
+
+# if base is selected, build the base api, and do not link to QtGui
 contains ( API_BUILD, base ) {
-    TEMPLATE = lib
-    CONFIG += dll
-    QT -= gui
+    TEMPLATE = lib    # Dynamic library
+    CONFIG += dll     #
+    QT -= gui         # No need for GUI
+    QT += network xml # need Network and XML functionality to fetch the data
     TARGET = EVE_API_Qt
 
     HEADERS += include/eveapi.hh \
@@ -69,17 +63,21 @@ contains ( API_BUILD, base ) {
                src/eveapicorporation.cpp \
 }
 
+# if the parser is selected, build the parser library, link to the api lib, and do not link to QtGui
 contains( API_BUILD, parser ) {
-    TEMPLATE = lib
-    CONFIG += dll
-    QT -= gui
+    TEMPLATE = lib # The parser is a dynamic library
+    CONFIG += dll  #
+    QT -= gui      # does not need any GUI elements
+    QT += xml      # uses the XML Qt elements
     TARGET = EVE_API_Parser_Qt
     LIBS += -Lbin/release -lEVE_API_Qt
 
     HEADERS += include/eveapiparser.hh \
-               include/eveapiparserthread.hh \
                \
-               include/eveapiparserwalkerthread.hh \
+               include/eveapiparsereve.hh \
+               include/eveapiparsermap.hh \
+               include/eveapiparsercharacter.hh \
+               include/eveapiparsercorporation.hh \
                \
                include/eveapidatatype.hh \
                \
@@ -87,17 +85,27 @@ contains( API_BUILD, parser ) {
                include/eveapidata_walked.hh
 
     SOURCES += src/eveapiparser.cpp \
-               src/eveapiparserthread.cpp \
                \
-               src/eveapiparserwalkerthread.cpp \
+               src/eveapiparsereve.cpp \
+               src/eveapiparsermap.cpp \
+               src/eveapiparsercharacter.cpp \
+               src/eveapiparsercorporation.cpp \
                \
                src/eveapidata_walked.cpp
 }
 
+# if the test app is selected, build the EXE and link to the base API
+contains( API_BUILD, base_app ) {
+    TEMPLATE = app
+    QT += xml
+    HEADERS += include/main.hh
+    SOURCES += src/main.cpp
+    LIBS += -Lbin/release -lEVE_API_Qt
+    TARGET = EVE_API_Qt_base_app
+}
+
 DEPENDPATH += . include src
 INCLUDEPATH += . include
-
-QT += network xml
 
 CONFIG += thread
 CONFIG += debug_and_release
