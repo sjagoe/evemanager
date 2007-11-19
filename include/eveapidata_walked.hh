@@ -5,6 +5,9 @@
 #include <QMap>
 #include <QString>
 
+#include <QSharedData>
+#include <QSharedDataPointer>
+
 #include "eveapidata.hh"
 
 class EveApiDataWalkedData: public QSharedData

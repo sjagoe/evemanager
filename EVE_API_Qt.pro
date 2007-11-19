@@ -71,6 +71,7 @@ contains( API_BUILD, parser ) {
     QT += xml      # uses the XML Qt elements
     TARGET = EVE_API_Parser_Qt
     LIBS += -Lbin/release -lEVE_API_Qt
+    VERSION = 0.1.0
 
     HEADERS += include/eveapiparser.hh \
                \
@@ -79,10 +80,15 @@ contains( API_BUILD, parser ) {
                include/eveapiparsercharacter.hh \
                include/eveapiparsercorporation.hh \
                \
+               include/eveapiparserthread.hh \
+               include/eveapiparserthread_balance.hh \
+               \
                include/eveapidatatype.hh \
                \
                include/eveapidata.hh \
-               include/eveapidata_walked.hh
+               include/eveapidatatable.hh \
+               include/eveapidata_walked.hh \
+               include/eveapidata_balance.hh
 
     SOURCES += src/eveapiparser.cpp \
                \
@@ -91,7 +97,13 @@ contains( API_BUILD, parser ) {
                src/eveapiparsercharacter.cpp \
                src/eveapiparsercorporation.cpp \
                \
-               src/eveapidata_walked.cpp
+               src/eveapiparserthread.cpp \
+               src/eveapiparserthread_balance.cpp \
+               \
+               src/eveapidata.cpp \
+               src/eveapidatatable.cpp \
+               src/eveapidata_walked.cpp \
+               src/eveapidata_balance.cpp
 }
 
 # if the test app is selected, build the EXE and link to the base API

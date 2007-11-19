@@ -3,6 +3,7 @@
 
 enum ParsedDataType
 {
+    PDT_NULL,
     PDT_SKILLTREE,
     PDT_REFTYPES,
     PDT_SOVEREIGNTY,

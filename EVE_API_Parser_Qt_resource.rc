@@ -7,8 +7,8 @@
 #endif
 
 VS_VERSION_INFO VERSIONINFO
-	FILEVERSION 1,2,0,0
-	PRODUCTVERSION 1,2,0,0
+	FILEVERSION 0,1,0,0
+	PRODUCTVERSION 0,1,0,0
 	FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
 	FILEFLAGS VS_FF_DEBUG
@@ -25,9 +25,9 @@ VS_VERSION_INFO VERSIONINFO
 			BEGIN
 				VALUE "CompanyName", "\0"
 				VALUE "FileDescription", "\0"
-				VALUE "FileVersion", "1.2.0.0\0"
+				VALUE "FileVersion", "0.1.0.0\0"
 				VALUE "LegalCopyright", "\0"
-				VALUE "OriginalFilename", "EVE_API_Parser_Qt1.dll\0"
+				VALUE "OriginalFilename", "EVE_API_Parser_Qt0.dll\0"
 				VALUE "ProductName", "EVE_API_Parser_Qt\0"
 			END
 		END
