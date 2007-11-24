@@ -6,6 +6,7 @@
 
 #include <QHttp>
 #include <QBuffer>
+#include <QDomDocument>
 
 #include <QFile>
 #include <QDir>
@@ -20,7 +21,7 @@ EveApiRequest::EveApiRequest( const QString& requestType,
                               QObject* parent )
         : QObject( parent )
 {
-    this->_http = new QHttp;
+    this->_http.reset( new QHttp );
     this->_requestType = requestType;
     this->_dataPath = dataPath;
     this->_xmlIndent = xmlIndent;
@@ -29,13 +30,13 @@ EveApiRequest::EveApiRequest( const QString& requestType,
     this->_fileIDParam = fileIDParam;
     this->_currentRequest = 0;
 
-    connect( this->_http, SIGNAL( requestStarted( int ) ),
+    connect( this->_http.get(), SIGNAL( requestStarted( int ) ),
              this, SLOT( requestStarted( int ) ) );
 
-    connect( this->_http, SIGNAL( requestFinished( int, bool ) ),
+    connect( this->_http.get(), SIGNAL( requestFinished( int, bool ) ),
              this, SLOT( requestFinished( int, bool ) ) );
 
-    connect( this->_http, SIGNAL( responseHeaderReceived( QHttpResponseHeader ) ),
+    connect( this->_http.get(), SIGNAL( responseHeaderReceived( QHttpResponseHeader ) ),
              this, SLOT( responseHeaderReceived( QHttpResponseHeader ) ) );
 }
 
@@ -69,12 +70,12 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
     }
     cachePathStr = cachePathStr.append( this->requestType() );
 
-    QDomDocument cacheDom;
+    shared_ptr<QDomDocument> cacheDom( new QDomDocument );
 
     QFile loadFile( cachePathStr );
     if ( loadFile.open( QIODevice::ReadOnly ) )
     {
-        if ( cacheDom.setContent( &loadFile ) )
+        if ( cacheDom->setContent( &loadFile ) )
         {
             loadFile.close();
             // file loaded
@@ -92,22 +93,8 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
             else
             {
                 int idi = 0;
-//                if (oldId.isNull())
-//                {
-                    idStr = this->makeID( scope, idi, parameters );
-//                }
-//                else
-//                {
-//                    idStr = oldId;
-//                }
-//                if ( internal )
-//                {
-//                    emit internalRequestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ), cacheTime );
-//                }
-//                else
-//                {
-                    emit requestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ), cacheTime );
-//                }
+                idStr = this->makeID( scope, idi, parameters );
+                emit requestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ), cacheTime );
             }
         }
         else
@@ -224,12 +211,12 @@ QString EveApiRequest::fetchFromApi( const QString& host, const QString& scope,
         head.setValue( "Host", host );
         head.setValue( "Content-type", "application/x-www-form-urlencoded" );
 
-        QBuffer* data = new QBuffer;
+        shared_ptr<QBuffer> data( new QBuffer );
 
         data->setData( url.encodedQuery() );
 
         this->_http->setHost( host );
-        id = this->_http->request( head, data );
+        id = this->_http->request( head, data.get() );
 
         this->_requestBuffers.insert( id, data );
 
@@ -250,12 +237,13 @@ QString EveApiRequest::fetchFromApi( const QString& host, const QString& scope,
 /*!
 Get the time that the cache expires from a QDomDocument
 */
-QDateTime EveApiRequest::getCacheTime( const QDomDocument& xmlDocument )
+//QDateTime EveApiRequest::getCacheTime( const QDomDocument& xmlDocument )
+QDateTime EveApiRequest::getCacheTime( shared_ptr<QDomDocument> xmlDocument )
 {
     QString currentTimeString;
     QString cachedUntilString;
     QDateTime cachedUntil;
-    QDomElement root = xmlDocument.documentElement();
+    QDomElement root = xmlDocument->documentElement();
     if ( root.tagName() != "eveapi" )
     {
         return QDateTime();
@@ -365,7 +353,7 @@ void EveApiRequest::requestFinished( int id, bool error )
 //    std::cout << "EveApiRequest::requestFinished()" << std::endl;
     this->_currentRequest = 0;
 
-    QBuffer* buffer = this->_requestBuffers.take( id );
+    shared_ptr<QBuffer> buffer = this->_requestBuffers.take( id );
     QPair<QString, QString> request = this->_requests.take( id );
     QString scope = request.first;
     QString idStr = this->_id.take( id );
@@ -420,8 +408,8 @@ void EveApiRequest::requestFinished( int id, bool error )
             }
             thisCachePath = thisCachePath.append( this->requestType() );
 
-            QDomDocument xmlData;
-            xmlData.setContent( data );
+            shared_ptr<QDomDocument> xmlData( new QDomDocument );
+            xmlData->setContent( data );
 
             QDateTime cacheTime = getCacheTime( xmlData );
 
@@ -430,7 +418,7 @@ void EveApiRequest::requestFinished( int id, bool error )
             if ( saveFile.open( QIODevice::ReadWrite | QIODevice::Truncate ) )
             {
                 QTextStream save( &saveFile );
-                xmlData.save( save, this->_xmlIndent );
+                xmlData->save( save, this->_xmlIndent );
                 saveFile.close();
             }
 //            if ( internal )
@@ -443,8 +431,8 @@ void EveApiRequest::requestFinished( int id, bool error )
 //            }
         }
     }
-    delete buffer;
-    buffer = 0;
+    //delete buffer;
+    //buffer = 0;
 }
 
 /*!

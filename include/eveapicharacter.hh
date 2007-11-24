@@ -7,12 +7,6 @@
 
 #include "eveapiscope.hh"
 
-//#if !defined(EVEAPI_NO_PARSING)
-//#include "eveapidata_walked.hh"
-//#include "eveapidatatype.hh"
-//class EveApiParser;
-//#endif
-
 class EveApiCharacter: public EveApiScope
 {
     Q_OBJECT
@@ -48,51 +42,7 @@ class EveApiCharacter: public EveApiScope
         */
         QString accountBalance( QMap<QString, QString>& parameters );
 
-//#if !defined(EVEAPI_NO_PARSING)
-//        /*!
-//        access the WalletJournal api function, and provide a parse,
-//        fully 'walked' output
-//        */
-//        QString walletJournalParsed( QMap<QString, QString>& parameters );
-//
-//    protected slots:
-//        /*!
-//        This slot is called when an internal request is complete, so that it
-//        can be parsed
-//        */
-//        void internalRequestComplete( QString requestId, QDomDocument result, QString httpResponse, QDateTime cacheTime );
-//
-//    private:
-//        //! Parser to asynchronously parse XML, and also walk journals, transactions
-//        EveApiParser* _parser;
-//
-////        //! QMap to map the api request ID to a parser
-////        QMap<QString, EveApiParser*> _requestIdToParserMap;
-//
-//        //! QMap to map the api request ID to a request, which can be used to
-//        //! determine the request via the parser ID to request ID map
-//        QMap<QString, QString> _requestIdToRequestMap;
-//
-//        //! QMap to map the parser ID to an api request ID
-//        QMap<QString, QString> _parserIdToRequestIdMap;
-//
-//        //! QMap to map an api request ID to a parser ID
-//        QMap<QString, QString> _requestIdToParserIdMap;
-//
-//        //! QMap to map request ID to request parameters
-//        QMap<QString, QMap<QString, QString> > _requestIdToRequestParametersMap;
-//
-//        //! QMap to map Request (strings) to DataTypes (enum), to determine
-//        //! which parser will be used
-//        QMap<QString, ParsedDataType> _requestToParsedDataTypeMap;
-//
-//        /*!
-//        Create all parsers
-//        */
-//        void createParsers();
-//#else
     private:
-//#endif
         /*!
         Create request objects
         */
@@ -105,37 +55,6 @@ class EveApiCharacter: public EveApiScope
         create all requests (delegated from the constructor)
         */
         void createRequests();
-
-
-//#if !defined(EVEAPI_NO_PARSING)
-//    private slots:
-//        // slots for the walker parser:
-//        /*!
-//        Receive journal signal that parsing requires more info
-//        */
-//        void walkerRequestIncomplete( QString parserId,
-//                                EveApiDataWalked processedDoc,
-//                                QPair<QString, QString> beforeID );
-//
-//        /*!
-//        Receive journal walking signal that the parsing is complete
-//        */
-//        void walkerRequestComplete( QString parserId,
-//                              EveApiDataWalked processedDoc );
-//
-//    signals:
-//        /*!
-//        notify that a journal walking has been completed
-//        */
-//        void journalWalkerRequestComplete( QString requestId,
-//                                EveApiDataWalked processedDoc );
-//
-//        /*!
-//        notify that partial data from journal walking is available
-//        */
-//        void journalWalkerRequestIncomplete( QString requestId,
-//                                EveApiDataWalked processedDoc );
-//#endif
 
     private:
         /*!

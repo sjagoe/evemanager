@@ -5,10 +5,16 @@
 
 #include <QString>
 
+#include <boost/shared_ptr.hpp>
+
 #include "eveapieve.hh"
 #include "eveapimap.hh"
 #include "eveapicharacter.hh"
 #include "eveapicorporation.hh"
+
+using boost::shared_ptr;
+
+class QDomDocument;
 
 class EveApi: public QObject
 {
@@ -72,7 +78,7 @@ class EveApi: public QObject
         void connectScope( EveApiScope* scope );
 
     signals:
-        void requestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime );
+        void requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime );
         void requestFailed( QString id, QString error, QString httpResponse );
 };
 

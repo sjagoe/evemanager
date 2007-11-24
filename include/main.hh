@@ -3,7 +3,13 @@
 
 #include <QWidget>
 
+#include <boost/shared_ptr.hpp>
+
 #include "eveapi.hh"
+
+using boost::shared_ptr;
+
+class QDomDocument;
 
 class QPushButton;
 class QGroupBox;
@@ -79,7 +85,7 @@ class Window: public QWidget
         void charBalance();
         void corpBalance();
         void corpMembers();
-        void requestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime );
+        void requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime cacheTime );
         void requestFailed( QString id, QString error, QString httpResponse );
 };
 

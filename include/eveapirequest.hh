@@ -8,15 +8,20 @@
 #include <QMap>
 #include <QPair>
 #include <QString>
-#include <QDomDocument>
+//#include <QDomDocument>
 #include <QString>
 #include <QUrl>
 #include <QStringList>
 #include <QDateTime>
 #include <QList>
 
+#include <boost/shared_ptr.hpp>
+
+using boost::shared_ptr;
+
 class QHttp;
 class QBuffer;
+class QDomDocument;
 
 class EveApiRequest: public QObject
 {
@@ -90,10 +95,10 @@ class EveApiRequest: public QObject
         QString _dataPath;
 
         //! HTTP object that performs requests to the EVE API
-        QHttp* _http;
+        shared_ptr<QHttp> _http;
 
         //! QMap mapping request IDs to buffers
-        QMap<int, QBuffer*> _requestBuffers;
+        QMap<int, shared_ptr<QBuffer> > _requestBuffers;
 
         //! QMap mapping IDs to readable requests (QPair<scope, file>)
         QMap<int, QPair<QString, QString> > _requests;
@@ -144,7 +149,8 @@ class EveApiRequest: public QObject
         /*!
         Get the time that the cache expires from a QDomDocument
         */
-        QDateTime getCacheTime( const QDomDocument& xmlDocument );
+        //QDateTime getCacheTime( const QDomDocument& xmlDocument );
+        QDateTime getCacheTime( shared_ptr<QDomDocument> xmlDocument );
 
         /*!
         convert a time specified in the API XML output to a QDateTime
@@ -186,7 +192,7 @@ class EveApiRequest: public QObject
         void responseHeaderReceived( QHttpResponseHeader head );
 
     signals:
-        void requestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheExpireTime );
+        void requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime cacheExpireTime );
         void requestFailed( QString id, QString error, QString httpResponse );
 
         //void internalRequestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheExpireTime );

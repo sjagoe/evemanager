@@ -16,7 +16,7 @@ API_BUILD = parser
 VERSION = 1.2.0
 
 ## For testing, uncomment this line:
-#CONFIG += console
+CONFIG += console
 
 ## Uncomment the second line to build the test app
 ## Comment the second line to build the library
@@ -119,7 +119,10 @@ contains( API_BUILD, base_app ) {
 DEPENDPATH += . include src
 INCLUDEPATH += . include
 
+DEFINES += _REENTRANT
+
 CONFIG += thread
+CONFIG += rtti
 CONFIG += debug_and_release
 CONFIG(debug, debug|release)
 {

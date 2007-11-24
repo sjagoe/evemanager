@@ -4,6 +4,7 @@
 
 #include <Qt>
 #include <QMetaType>
+#include <QDomDocument>
 
 /*!
 create the child classes that provide API functionality
@@ -17,7 +18,7 @@ EveApiScope::EveApiScope( QString& host, QString& dataPath, int& xmlIndent,
     this->_xmlIndent = xmlIndent;
     this->_scope = scope;
 
-    qRegisterMetaType<QDomDocument>("QDomDocument");
+    qRegisterMetaType<shared_ptr<QDomDocument> >("shared_ptr<QDomDocument>");
     qRegisterMetaType<QDateTime>("QDateTime");
 }
 
@@ -60,18 +61,18 @@ Add a "Request Type" to the list
 void EveApiScope::addRequestType( QString& id, EveApiRequest* request )
 {
     connect( request,
-        SIGNAL(requestComplete( QString, QDomDocument, QString, QDateTime )),
-        this, SIGNAL(requestComplete( QString, QDomDocument, QString, QDateTime )),
+        SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime )),
+        this, SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime )),
         Qt::QueuedConnection );
     connect( request,
         SIGNAL(requestFailed( QString, QString, QString )),
         this, SIGNAL(requestFailed( QString, QString, QString )),
         Qt::QueuedConnection );
 
-    connect( request,
-        SIGNAL(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
-        this, SLOT(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
-        Qt::QueuedConnection );
+//    connect( request,
+//        SIGNAL(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
+//        this, SLOT(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
+//        Qt::QueuedConnection );
 //    connect( request,
 //        SIGNAL(internalRequestFailed( QString, QString, QString )),
 //        this, SIGNAL(internalRequestFailed( QString, QString, QString )),

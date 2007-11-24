@@ -17,14 +17,18 @@
 #include <QString>
 #include <QMap>
 
+#include <QDomDocument>
+#include <QDomNode>
+#include <QDomElement>
+
 Window::Window( QWidget* parent )
     : QWidget( parent )
 {
     QString dataPath = QString("data");
     this->_api = new EveApi(dataPath);
     connect( this->_api,
-        SIGNAL(requestComplete( QString, QDomDocument, QString, QDateTime )),
-        this, SLOT(requestComplete( QString, QDomDocument, QString, QDateTime )) );
+        SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime )),
+        this, SLOT(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime )) );
     connect( this->_api,
         SIGNAL(requestFailed( QString, QString, QString )),
         this, SLOT(requestFailed( QString, QString, QString )) );
@@ -321,7 +325,7 @@ void Window::corpMembers()
 }
 
 
-void Window::requestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime )
+void Window::requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime cacheTime )
 {
 //    QString resultEmpty = " - empty Doc - ";
 //    if (!result.isNull())
@@ -332,7 +336,7 @@ void Window::requestComplete( QString id, QDomDocument result, QString httpRespo
 //    resultEmpty = resultEmpty.append( httpResponse );
 //    QMessageBox::information(this, "result", resultEmpty, QMessageBox::Ok);
     this->_edtId->setText(id);
-    this->_edtResult->setText( result.toString(4) );
+    this->_edtResult->setText( result->toString(4) );
     this->_edtResponse->setText( httpResponse );
     this->_edtCacheTime->setText( cacheTime.toString() );
 }
