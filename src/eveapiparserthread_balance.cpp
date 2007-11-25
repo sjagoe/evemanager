@@ -8,6 +8,8 @@
 
 #include <QMap>
 
+#include <QStringList>
+
 #include "eveapidata_balance.hh"
 
 /*!
@@ -75,6 +77,14 @@ void EveApiParserThreadBalance::parseRowSet( QDomNode* rowset,
 {
     if ( rowset->toElement().attribute("name") == QString("accounts") )
     {
+        QDomElement rowSetElement = rowset->toElement();
+        QString key = rowSetElement.attribute("key");
+        QString columns = rowSetElement.attribute("columns");
+        QStringList columnsList = columns.split(",");
+        QString name = rowSetElement.attribute("name");
+        data->setName(name);
+        data->setKey(key);
+        data->setColumns(columnsList);
         QDomNode row = rowset->firstChild();
         while ( !row.isNull() )
         {

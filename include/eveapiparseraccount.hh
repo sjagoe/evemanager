@@ -51,8 +51,8 @@ class EveApiParserAccount: public QThread
         //! Mutex to protect the API should it be used in a threaded environment
         QMutex _apiMutex;
 
-        //! The Char interface of the EVE API
-        shared_ptr<EveApiCharacter> _eveApi;
+        //! The account interface of the EVE API
+        shared_ptr<EveApiAccount> _eveApi;
 
         //! Map request IDs to parsers
         QMap<QString, ParsedDataType> _requestIdToParserMap;
@@ -84,7 +84,7 @@ class EveApiParserAccount: public QThread
         /*!
         Emitted when the AccountBalance parser is complete
         */
-        void charactersComplete( QString parserId, shared_ptr<EveApiDataBalance> parsedData );
+        void charactersComplete( QString parserId, shared_ptr<EveApiDataCharacters> parsedData );
 
         // all signals used internally
         /*!

@@ -27,6 +27,7 @@ class Window: public QWidget
         QPushButton* _accountCharacters;
         QPushButton* _eveSkillTree;
         QPushButton* _eveRefTypes;
+        QPushButton* _eveAllianceList;
         QPushButton* _mapSov;
         QPushButton* _charSheet;
         QPushButton* _charTraining;
@@ -78,6 +79,7 @@ class Window: public QWidget
         void accountCharacters();
         void eveSkillTree();
         void eveRefTypes();
+        void eveAllianceList();
         void mapSov();
         void charSheet();
         void charTraining();

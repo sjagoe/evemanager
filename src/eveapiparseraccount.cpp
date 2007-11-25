@@ -46,15 +46,15 @@ Create and set up the parsers
 */
 void EveApiParserAccount::setupParsers()
 {
-    // AccountBalance Parser
-//    shared_ptr<EveApiParserThread> parser( new EveApiParserThreadBalance );
-//    connect( this, SIGNAL( parseAccountBalance( QString, shared_ptr<QDomDocument> ) ),
-//             parser.get(), SLOT( parse( QString, shared_ptr<QDomDocument> ) ) );
-//    connect( parser.get(), SIGNAL( parsingComplete( QString, shared_ptr<EveApiDataBalance> ) ),
-//             this, SIGNAL( accountBalanceComplete( QString, shared_ptr<EveApiDataBalance> ) ) );
-//    connect( parser.get(), SIGNAL( requestFailed( QString, QString, QString ) ),
-//             this, SIGNAL( requestFailed( QString, QString, QString ) ) );
-//    this->_parsers.insert( PDT_ACCOUNTBALANCE, parser );
+    // Character List Parser
+    shared_ptr<EveApiParserThread> parser( new EveApiParserThreadCharacters );
+    connect( this, SIGNAL( parseCharacters( QString, shared_ptr<QDomDocument> ) ),
+             parser.get(), SLOT( parse( QString, shared_ptr<QDomDocument> ) ) );
+    connect( parser.get(), SIGNAL( parsingComplete( QString, shared_ptr<EveApiDataCharacters> ) ),
+             this, SIGNAL( charactersComplete( QString, shared_ptr<EveApiDataCharacters> ) ) );
+    connect( parser.get(), SIGNAL( requestFailed( QString, QString, QString ) ),
+             this, SIGNAL( requestFailed( QString, QString, QString ) ) );
+    this->_parsers.insert( PDT_CHARACTERLIST, parser );
 }
 
 /*!

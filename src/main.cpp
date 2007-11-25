@@ -36,6 +36,7 @@ Window::Window( QWidget* parent )
     this->_accountCharacters = new QPushButton( "Characters.xml.aspx" );
     this->_eveSkillTree = new QPushButton("SkillTree.xml.aspx");
     this->_eveRefTypes = new QPushButton("RefTypes.xml.aspx");
+    this->_eveAllianceList = new QPushButton("AllianceList.xml.aspx");
     this->_mapSov = new QPushButton("Sovereignty.xml.aspx");
     this->_charSheet = new QPushButton("CharacterSheet.xml.aspx");
     this->_charTraining = new QPushButton("SkillInTraining.xml.aspx");
@@ -50,6 +51,7 @@ Window::Window( QWidget* parent )
     connect( this->_accountCharacters, SIGNAL(clicked()), this, SLOT(accountCharacters()));
     connect( this->_eveSkillTree, SIGNAL(clicked()), this, SLOT(eveSkillTree()));
     connect( this->_eveRefTypes, SIGNAL(clicked()), this, SLOT(eveRefTypes()));
+    connect( this->_eveAllianceList, SIGNAL(clicked()), this, SLOT(eveAllianceList()));
     connect( this->_mapSov, SIGNAL(clicked()), this, SLOT(mapSov()));
     connect( this->_charSheet, SIGNAL(clicked()), this, SLOT(charSheet()));
     connect( this->_charTraining, SIGNAL(clicked()), this, SLOT(charTraining()));
@@ -70,6 +72,7 @@ Window::Window( QWidget* parent )
     QVBoxLayout* inevelayout = new QVBoxLayout;
     inevelayout->addWidget(this->_eveSkillTree);
     inevelayout->addWidget(this->_eveRefTypes);
+    inevelayout->addWidget(this->_eveAllianceList);
     this->_eve->setLayout( inevelayout );
 
     this->_map = new QGroupBox("/map/");
@@ -101,10 +104,10 @@ Window::Window( QWidget* parent )
 
     QGridLayout* buttons = new QGridLayout;
     buttons->addWidget( this->_account, 0, 0 );
-    buttons->addWidget( this->_eve, 1, 0 );
-    buttons->addWidget( this->_map, 2, 0 );
-    buttons->addWidget( this->_char, 0, 1, 3, 1 );
-    buttons->addWidget( this->_corp, 0, 2, 3, 1 );
+    buttons->addWidget( this->_eve, 1, 0, 2, 1 );
+    buttons->addWidget( this->_char, 0, 1, 3, 1);
+    buttons->addWidget( this->_corp, 0, 2, 2, 1);
+    buttons->addWidget( this->_map, 2, 2 );
 
     this->_apiInfo = new QGroupBox("API parameters");
 
@@ -204,6 +207,16 @@ void Window::eveRefTypes()
     params.insert( QString("apiKey"), this->_edtLimitedApiKey->text() );
     //QMessageBox::information(this, "button", "clicked", QMessageBox::Ok);
     QString result = this->_api->eve().refTypes( params );
+    QMessageBox::information(this, "request", result, QMessageBox::Ok);
+}
+
+void Window::eveAllianceList()
+{
+    QMap<QString, QString> params;
+    params.insert( QString("userID"), this->_edtUserID->text() );
+    params.insert( QString("apiKey"), this->_edtLimitedApiKey->text() );
+    //QMessageBox::information(this, "button", "clicked", QMessageBox::Ok);
+    QString result = this->_api->eve().allianceList( params );
     QMessageBox::information(this, "request", result, QMessageBox::Ok);
 }
 

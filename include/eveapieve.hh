@@ -23,6 +23,11 @@ class EveApiEve: public EveApiScope
         */
         QString skillTree( QMap<QString, QString>& parameters );
 
+        /*!
+        access the AllianceList api function
+        */
+        QString allianceList( QMap<QString, QString>& parameters );
+
 //    protected slots:
 //        /*!
 //        This slot is called when an internal request is complete, so that it
@@ -58,6 +63,14 @@ class EveApiEve: public EveApiScope
         static const QString skillTreeRequestID()
         {
             return QString("SkillTree.xml");
+        };
+
+        /*!
+        return the filnename of the AllianceList.xml request
+        */
+        static const QString allianceListRequestID()
+        {
+            return QString("AllianceList.xml");
         };
 };
 

@@ -30,6 +30,15 @@ QString EveApiEve::skillTree( QMap<QString, QString>& parameters )
 }
 
 /*!
+access the AllianceList api function
+*/
+QString EveApiEve::allianceList( QMap<QString, QString>& parameters )
+{
+    QString id = this->allianceListRequestID();
+    return this->request( id, parameters );
+}
+
+/*!
 Create request objects
 */
 void EveApiEve::createRequest( QString& requestId,
@@ -69,5 +78,13 @@ void EveApiEve::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->skillTreeRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // AllianceList request
+    requiredParams.clear();
+    requiredParams << "userID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    requestID = this->allianceListRequestID();
     createRequest( requestID, requiredParams, optionalParams, cacheID );
 }

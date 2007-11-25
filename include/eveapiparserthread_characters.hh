@@ -34,7 +34,7 @@ class EveApiParserThreadCharacters: public EveApiParserThread
         /*!
         parse a single character in the xml
         */
-        void parseCharacter( QDomNode* rowset, shared_ptr<EveApiDataCharacters>& data );
+        void parseRowSet( QDomNode* rowset, shared_ptr<EveApiDataCharacters>& data );
 
     signals:
         /*!

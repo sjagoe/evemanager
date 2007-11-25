@@ -11,7 +11,7 @@ EveApiCorporation::EveApiCorporation( QString& host, QString& dataPath, int& xml
                                       QString& scope, QObject* parent )
         : EveApiScope( host, dataPath, xmlIndent, scope, parent )
 {
-
+    this->createRequests();
 }
 
 /*!

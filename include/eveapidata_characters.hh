@@ -37,9 +37,9 @@ class EveApiDataCharacter
 
     private:
         QString _name;
+        QString _corpName;
         QString _charId;
         QString _corpId;
-        QString _corpName;
 };
 
 class EveApiDataCharacters: public EveApiData
@@ -59,7 +59,7 @@ class EveApiDataCharacters: public EveApiData
         /*!
         get all characters
         */
-        const QList<EveApiDataCharacters>& getCharacters();
+        const QList<EveApiDataCharacter>& getCharacters();
 
     private:
         //! Characters

@@ -4,7 +4,7 @@
 Construct a character
 */
 EveApiDataCharacter::EveApiDataCharacter( QString& name, QString& corpName,
-        QString& charId, QString& charName ) :
+        QString& charId, QString& corpId ) :
         _name( name ),
         _corpName( corpName ),
         _charId( charId ),
@@ -69,7 +69,7 @@ void EveApiDataCharacters::addCharacter( QString& name, QString& corpName,
 /*!
 get all characters
 */
-const QList<EveApiDataCharacters>& EveApiDataCharacters::getCharacters()
+const QList<EveApiDataCharacter>& EveApiDataCharacters::getCharacters()
 {
     return this->_characters;
 }

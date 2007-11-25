@@ -25,11 +25,6 @@ CONFIG += console
 #TEMPLATE = lib
 #TEMPLATE = app
 
-## Disable the ability to use the built in parsers (save on size):
-#DEFINES += EVEAPI_NO_PARSING
-
-
-
 # if base is selected, build the base api, and do not link to QtGui
 contains ( API_BUILD, base ) {
     TEMPLATE = lib    # Dynamic library
