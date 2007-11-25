@@ -66,7 +66,7 @@ void EveApiParserCharacter::apiRequestComplete( QString requestId,
         QDateTime cacheExpireTime )
 {
     ParsedDataType type = this->_requestIdToParserMap.take( requestId );
-    this->_requestIdToExpiryTimeMap.insert( requestId, cacheExpireTime );
+    //this->_requestIdToExpiryTimeMap.insert( requestId, cacheExpireTime );
     switch ( type )
     {
         case PDT_ACCOUNTBALANCE:
@@ -76,7 +76,6 @@ void EveApiParserCharacter::apiRequestComplete( QString requestId,
         }
         default:
         {
-            this->_requestIdToExpiryTimeMap.take( requestId );
             // invalid type for this request mechanism
             break;
         }

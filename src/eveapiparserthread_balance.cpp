@@ -4,10 +4,6 @@
 #include <QDomNode>
 #include <QDomElement>
 
-#include <QStringList>
-#include <QDate>
-#include <QTime>
-
 #include <QDomDocument>
 
 #include <QMap>
@@ -69,31 +65,6 @@ void EveApiParserThreadBalance::doParse( const QString& parserId, const shared_p
     }
 
     emit parsingComplete( parserId, parsedData );
-}
-
-/*!
-getTime
-*/
-QDateTime EveApiParserThreadBalance::apiDateTimeToQDateTime( QString& apiDateTime )
-{
-    QStringList dateAndTime = apiDateTime.split( " " );
-    QStringList dateStrings = dateAndTime.at( 0 ).split( "-" );
-    QStringList timeStrings = dateAndTime.at( 1 ).split( ":" );
-
-    int year = dateStrings.at( 0 ).toInt();
-    int month = dateStrings.at( 1 ).toInt();
-    int day = dateStrings.at( 2 ).toInt();
-
-    int hours = timeStrings.at( 0 ).toInt();
-    int minutes = timeStrings.at( 1 ).toInt();
-    int seconds = timeStrings.at( 2 ).toInt();
-
-    QDate date( year, month, day );
-    QTime time( hours, minutes, seconds );
-
-    QDateTime dateTime( date, time, Qt::UTC );
-
-    return dateTime;
 }
 
 /*!

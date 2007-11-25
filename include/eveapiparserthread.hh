@@ -7,6 +7,7 @@
 #include <QString>
 #include <QQueue>
 #include <QPair>
+#include <QDateTime>
 
 #include <boost/shared_ptr.hpp>
 
@@ -35,6 +36,11 @@ class EveApiParserThread: public QObject
         void parse( QString parserId, shared_ptr<QDomDocument> doc );
 
     protected:
+        /*!
+        getTime
+        */
+        QDateTime apiDateTimeToQDateTime( QString& apiDateTime );
+
         /*!
         Perform the actual parsing of the data, and emit a signal when done.
         The signal must be defined in the subclass

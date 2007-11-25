@@ -30,13 +30,7 @@ class EveApiParserThreadBalance: public EveApiParserThread
         */
         void doParse( const QString& parserId, const shared_ptr<QDomDocument> doc );
 
-    private:
-        /*!
-        getTime
-        */
-        QDateTime apiDateTimeToQDateTime( QString& apiDateTime );
-
-        /*!
+    private:/*!
         parse a "rowset" in the account balance data
         */
         void parseRowSet( QDomNode* rowset, shared_ptr<EveApiDataBalance>& data );

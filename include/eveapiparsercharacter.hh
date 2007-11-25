@@ -57,9 +57,6 @@ class EveApiParserCharacter: public QThread
         //! Map request IDs to parsers
         QMap<QString, ParsedDataType> _requestIdToParserMap;
 
-        //! Store the Cache expiry time while parsing
-        QMap<QString, QDateTime> _requestIdToExpiryTimeMap;
-
         //! Parsers
         QMap<ParsedDataType, shared_ptr<EveApiParserThread> > _parsers;
 
