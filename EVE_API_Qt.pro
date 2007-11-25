@@ -13,7 +13,7 @@
 API_BUILD = parser
 
 ## Set the version number
-VERSION = 1.2.0
+VERSION = 1.3.0
 
 ## For testing, uncomment this line:
 CONFIG += console
@@ -41,26 +41,30 @@ contains ( API_BUILD, base ) {
     HEADERS += include/eveapi.hh \
                \
                include/eveapirequest.hh \
+               include/eveapiaccountrequest.hh \
                include/eveapigeneralrequest.hh \
                include/eveapicharacterrequest.hh \
                \
                include/eveapiscope.hh \
+               include/eveapiaccount.hh \
                include/eveapieve.hh \
                include/eveapimap.hh \
                include/eveapicharacter.hh \
-               include/eveapicorporation.hh \
+               include/eveapicorporation.hh
 
     SOURCES += src/eveapi.cpp \
                \
                src/eveapirequest.cpp \
+               src/eveapiaccountrequest.cpp \
                src/eveapigeneralrequest.cpp \
                src/eveapicharacterrequest.cpp \
                \
                src/eveapiscope.cpp \
+               src/eveapiaccount.cpp \
                src/eveapieve.cpp \
                src/eveapimap.cpp \
                src/eveapicharacter.cpp \
-               src/eveapicorporation.cpp \
+               src/eveapicorporation.cpp
 }
 
 # if the parser is selected, build the parser library, link to the api lib, and do not link to QtGui
@@ -75,33 +79,39 @@ contains( API_BUILD, parser ) {
 
     HEADERS += include/eveapiparser.hh \
                \
+               include/eveapiparseraccount.hh \
                include/eveapiparsereve.hh \
                include/eveapiparsermap.hh \
                include/eveapiparsercharacter.hh \
                include/eveapiparsercorporation.hh \
                \
                include/eveapiparserthread.hh \
+               include/eveapiparserthread_characters.hh \
                include/eveapiparserthread_balance.hh \
                \
                include/eveapidatatype.hh \
                \
                include/eveapidata.hh \
                include/eveapidatatable.hh \
+               include/eveapidata_characters.hh \
                include/eveapidata_walked.hh \
                include/eveapidata_balance.hh
 
     SOURCES += src/eveapiparser.cpp \
                \
+               src/eveapiparseraccount.cpp \
                src/eveapiparsereve.cpp \
                src/eveapiparsermap.cpp \
                src/eveapiparsercharacter.cpp \
                src/eveapiparsercorporation.cpp \
                \
                src/eveapiparserthread.cpp \
+               src/eveapiparserthread_characters.cpp \
                src/eveapiparserthread_balance.cpp \
                \
                src/eveapidata.cpp \
                src/eveapidatatable.cpp \
+               src/eveapidata_characters.cpp \
                src/eveapidata_walked.cpp \
                src/eveapidata_balance.cpp
 }

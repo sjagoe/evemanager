@@ -1,36 +1,35 @@
-#include "eveapimap.hh"
+#include "eveapiaccount.hh"
 
-#include "eveapigeneralrequest.hh"
-#include <QList>
+#include "eveapiaccountrequest.hh"
 
 /*!
 create the child classes that provide API functionality
 */
-EveApiMap::EveApiMap( QString& host, QString& dataPath, int& xmlIndent,
-                      QString& scope, QObject* parent )
-        : EveApiScope( host, dataPath, xmlIndent, scope, parent )
+EveApiAccount::EveApiAccount( QString& host, QString& dataPath, int& xmlIndent,
+    QString& scope, QObject* parent ) :
+        EveApiScope( host, dataPath, xmlIndent, scope, parent )
 {
     this->createRequests();
 }
 
 /*!
-access the Sovereignty api function
+access the Characters api function
 */
-QString EveApiMap::sovereignty( QMap<QString, QString>& parameters )
+QString EveApiAccount::characters( QMap<QString, QString>& parameters )
 {
-    QString id = this->sovereigntyRequestID();
+    QString id = this->charactersRequestID();
     return this->request( id, parameters );
 }
 
 /*!
 Create request objects
 */
-void EveApiMap::createRequest( QString& requestId,
+void EveApiAccount::createRequest( QString& requestId,
                                      QStringList& requiredParams,
                                      QStringList& optionalParams,
                                      QStringList& cacheId )
 {
-    EveApiRequest* newRequest = new EveApiGeneralRequest( requestId,
+    EveApiRequest* newRequest = new EveApiAccountRequest( requestId,
             this->dataPath(),
             this->xmlIndent(),
             requiredParams,
@@ -42,17 +41,17 @@ void EveApiMap::createRequest( QString& requestId,
 /*!
 create all requests (delegated from the constructor)
 */
-void EveApiMap::createRequests()
+void EveApiAccount::createRequests()
 {
     QStringList requiredParams;
     QStringList optionalParams;
     QStringList cacheID;
 
-    // Sovereignty request
+    // Character request
     requiredParams.clear();
     requiredParams << "userID" << "apiKey";
     optionalParams.clear();
     cacheID.clear();
-    QString requestID = this->sovereigntyRequestID();
+    QString requestID = this->charactersRequestID();
     createRequest( requestID, requiredParams, optionalParams, cacheID );
 }

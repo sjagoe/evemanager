@@ -1,7 +1,5 @@
 #include "eveapirequest.hh"
 
-//#include <iostream>
-
 #include <QCoreApplication>
 
 #include <QHttp>

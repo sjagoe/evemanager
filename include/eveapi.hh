@@ -7,6 +7,7 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include "eveapiaccount.hh"
 #include "eveapieve.hh"
 #include "eveapimap.hh"
 #include "eveapicharacter.hh"
@@ -24,6 +25,11 @@ class EveApi: public QObject
         set up the scopes of the API
         */
         EveApi( QString& dataPath, QObject* parent = 0 );
+
+        /*!
+        provide access to areas of the api in the "/account/" context
+        */
+        EveApiAccount& account();
 
         /*!
         provide access to areas of the api in the "/eve/" context
@@ -66,6 +72,8 @@ class EveApi: public QObject
 
         //! "/corp/" scope
         EveApiCorporation* _corp;
+
+        EveApiAccount* _account;
 
         /*!
         create the scopes, and connect scope-specific signals and slots

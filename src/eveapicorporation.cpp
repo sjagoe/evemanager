@@ -11,81 +11,7 @@ EveApiCorporation::EveApiCorporation( QString& host, QString& dataPath, int& xml
                                       QString& scope, QObject* parent )
         : EveApiScope( host, dataPath, xmlIndent, scope, parent )
 {
-    QList<QString> requiredParams;
-    QList<QString> optionalParams;
-    QList<QString> cacheID;
 
-    // AccountBalance request
-    requiredParams.clear();
-    requiredParams.append( "userID" );
-    requiredParams.append( "characterID" );
-    requiredParams.append( "apiKey" );
-    optionalParams.clear();
-    cacheID.clear();
-    QString requestID = this->accountBalanceRequestID();
-    EveApiRequest* newRequest = new EveApiCharacterRequest( requestID,
-            this->dataPath(),
-            this->xmlIndent(),
-            requiredParams,
-            optionalParams,
-            cacheID );
-    this->addRequestType( requestID, newRequest );
-
-    // MemberTracking request
-    requiredParams.clear();
-    requiredParams.append( "userID" );
-    requiredParams.append( "characterID" );
-    requiredParams.append( "apiKey" );
-    optionalParams.clear();
-    cacheID.clear();
-    requestID = this->memberTrackingRequestID();
-    newRequest = new EveApiCharacterRequest( requestID,
-            this->dataPath(),
-            this->xmlIndent(),
-            requiredParams,
-            optionalParams,
-            cacheID );
-    this->addRequestType( requestID, newRequest );
-
-    // WalletJournal request
-    requiredParams.clear();
-    requiredParams.append( "userID" );
-    requiredParams.append( "characterID" );
-    requiredParams.append( "apiKey" );
-    optionalParams.clear();
-    optionalParams.append( "accountKey" );
-    optionalParams.append( "beforeRefID" );
-    cacheID.clear();
-    cacheID.append( "accountKey" );
-    cacheID.append( "beforeRefID" );
-    requestID = this->walletJournalRequestID();
-    newRequest = new EveApiCharacterRequest( requestID,
-            this->dataPath(),
-            this->xmlIndent(),
-            requiredParams,
-            optionalParams,
-            cacheID );
-    this->addRequestType( requestID, newRequest );
-
-    // WalletTransactions request
-    requiredParams.clear();
-    requiredParams.append( "userID" );
-    requiredParams.append( "characterID" );
-    requiredParams.append( "apiKey" );
-    optionalParams.clear();
-    optionalParams.append( "accountKey" );
-    optionalParams.append( "beforeTransID" );
-    cacheID.clear();
-    cacheID.append( "accountKey" );
-    cacheID.append( "beforeTransID" );
-    requestID = this->walletTransactionsRequestID();
-    newRequest = new EveApiCharacterRequest( requestID,
-            this->dataPath(),
-            this->xmlIndent(),
-            requiredParams,
-            optionalParams,
-            cacheID );
-    this->addRequestType( requestID, newRequest );
 }
 
 /*!
@@ -122,4 +48,67 @@ QString EveApiCorporation::memberTracking( QMap<QString, QString>& parameters )
 {
     QString id = this->memberTrackingRequestID();
     return this->request( id, parameters );
+}
+
+/*!
+Create request objects
+*/
+void EveApiCorporation::createRequest( QString& requestId,
+                                     QStringList& requiredParams,
+                                     QStringList& optionalParams,
+                                     QStringList& cacheId )
+{
+    EveApiRequest* newRequest = new EveApiCharacterRequest( requestId,
+            this->dataPath(),
+            this->xmlIndent(),
+            requiredParams,
+            optionalParams,
+            cacheId );
+    this->addRequestType( requestId, newRequest );
+}
+
+/*!
+create all requests (delegated from the constructor)
+*/
+void EveApiCorporation::createRequests()
+{
+    QStringList requiredParams;
+    QStringList optionalParams;
+    QStringList cacheID;
+
+    // AccountBalance request
+    requiredParams.clear();
+    requiredParams << "userID" << "characterID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    QString requestID = this->accountBalanceRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // MemberTracking request
+    requiredParams.clear();
+    requiredParams << "userID" << "characterID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    requestID = this->memberTrackingRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // WalletJournal request
+    requiredParams.clear();
+    requiredParams << "userID" << "characterID" << "apiKey";
+    optionalParams.clear();
+    optionalParams << "accountKey" << "beforeRefID";
+    cacheID.clear();
+    cacheID << "accountKey" << "beforeRefID";
+    requestID = this->walletJournalRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // WalletTransactions request
+    requiredParams.clear();
+    requiredParams << "userID" << "characterID" << "apiKey";
+    optionalParams.clear();
+    optionalParams << "accountKey" << "beforeTransID";
+    cacheID.clear();
+    cacheID << "accountKey" << "beforeTransID";
+    requestID = this->walletTransactionsRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
 }

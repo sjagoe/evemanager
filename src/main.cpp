@@ -33,6 +33,7 @@ Window::Window( QWidget* parent )
         SIGNAL(requestFailed( QString, QString, QString )),
         this, SLOT(requestFailed( QString, QString, QString )) );
 
+    this->_accountCharacters = new QPushButton( "Characters.xml.aspx" );
     this->_eveSkillTree = new QPushButton("SkillTree.xml.aspx");
     this->_eveRefTypes = new QPushButton("RefTypes.xml.aspx");
     this->_mapSov = new QPushButton("Sovereignty.xml.aspx");
@@ -46,6 +47,7 @@ Window::Window( QWidget* parent )
     this->_corpBalance = new QPushButton("AccountBalance.xml.aspx");
     this->_corpMembers = new QPushButton("MemberTracking.xml.aspx");
 
+    connect( this->_accountCharacters, SIGNAL(clicked()), this, SLOT(accountCharacters()));
     connect( this->_eveSkillTree, SIGNAL(clicked()), this, SLOT(eveSkillTree()));
     connect( this->_eveRefTypes, SIGNAL(clicked()), this, SLOT(eveRefTypes()));
     connect( this->_mapSov, SIGNAL(clicked()), this, SLOT(mapSov()));
@@ -59,6 +61,10 @@ Window::Window( QWidget* parent )
     connect( this->_corpBalance, SIGNAL(clicked()), this, SLOT(corpBalance()));
     connect( this->_corpMembers, SIGNAL(clicked()), this, SLOT(corpMembers()));
 
+    this->_account = new QGroupBox( "/account/" );
+    QVBoxLayout* inaccountlayout = new QVBoxLayout;
+    inaccountlayout->addWidget( this->_accountCharacters );
+    this->_account->setLayout( inaccountlayout );
 
     this->_eve = new QGroupBox("/eve/");
     QVBoxLayout* inevelayout = new QVBoxLayout;
@@ -94,7 +100,8 @@ Window::Window( QWidget* parent )
     this->_corp->setLayout( incorplayout );
 
     QGridLayout* buttons = new QGridLayout;
-    buttons->addWidget( this->_eve, 0, 0 );
+    buttons->addWidget( this->_account, 0, 0 );
+    buttons->addWidget( this->_eve, 1, 0 );
     buttons->addWidget( this->_map, 2, 0 );
     buttons->addWidget( this->_char, 0, 1, 3, 1 );
     buttons->addWidget( this->_corp, 0, 2, 3, 1 );
@@ -170,6 +177,15 @@ Window::Window( QWidget* parent )
     this->setLayout(layout);
 }
 
+void Window::accountCharacters()
+{
+    QMap<QString, QString> params;
+    params.insert( QString("userID"), this->_edtUserID->text() );
+    params.insert( QString("apiKey"), this->_edtLimitedApiKey->text() );
+    //QMessageBox::information(this, "button", "clicked", QMessageBox::Ok);
+    QString result = this->_api->account().characters( params );
+    QMessageBox::information(this, "request", result, QMessageBox::Ok);
+}
 
 void Window::eveSkillTree()
 {

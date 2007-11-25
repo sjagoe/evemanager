@@ -24,6 +24,7 @@ class Window: public QWidget
         Window( QWidget* parent = 0 );
 
     private:
+        QPushButton* _accountCharacters;
         QPushButton* _eveSkillTree;
         QPushButton* _eveRefTypes;
         QPushButton* _mapSov;
@@ -37,6 +38,7 @@ class Window: public QWidget
         QPushButton* _corpBalance;
         QPushButton* _corpMembers;
 
+        QGroupBox* _account;
         QGroupBox* _eve;
         QGroupBox* _map;
         QGroupBox* _char;
@@ -73,6 +75,7 @@ class Window: public QWidget
         EveApi* _api;
 
     private slots:
+        void accountCharacters();
         void eveSkillTree();
         void eveRefTypes();
         void mapSov();

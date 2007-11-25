@@ -23,6 +23,14 @@ EveApi::EveApi( QString& dataPath, QObject* parent ) :
 }
 
 /*!
+provide access to areas of the api in the "/account/" context
+*/
+EveApiAccount& EveApi::account()
+{
+    return (*this->_account);
+}
+
+/*!
 provide access to areas of the api in the "/eve/" context
 */
 EveApiEve& EveApi::eve()
@@ -59,8 +67,14 @@ create the scopes, and connect scope-specific signals and slots
 */
 void EveApi::createScopes()
 {
+    // "account" scope
+    QString scope = "account";
+    this->_account = new EveApiAccount( this->_hostName, this->_dataPath,
+        this->_xmlIndent, scope );
+    this->connectScope( this->_account );
+
     // "eve" scope
-    QString scope = "eve";
+    scope = "eve";
     this->_eve = new EveApiEve( this->_hostName, this->_dataPath,
         this->_xmlIndent, scope );
     this->connectScope( this->_eve );

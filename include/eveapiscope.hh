@@ -86,6 +86,19 @@ class EveApiScope: public QObject
         */
         EveApiRequest* requestType( QString& id ) const;
 
+        /*!
+        Create request objects
+        */
+        virtual void createRequest( QString& requestId,
+                            QStringList& requiredParams,
+                            QStringList& optionalParams,
+                            QStringList& cacheId ) = 0;
+
+        /*!
+        create all requests (delegated from the constructor)
+        */
+        virtual void createRequests() = 0;
+
     signals:
         void requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime cacheTime );
         void requestFailed( QString id, QString error, QString httpResponse );

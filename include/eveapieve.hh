@@ -32,6 +32,19 @@ class EveApiEve: public EveApiScope
 
     private:
         /*!
+        Create request objects
+        */
+        void createRequest( QString& requestId,
+                            QStringList& requiredParams,
+                            QStringList& optionalParams,
+                            QStringList& cacheId );
+
+        /*!
+        create all requests (delegated from the constructor)
+        */
+        void createRequests();
+
+        /*!
         return the filename of the RefType.xml request
         */
         static const QString refTypesRequestID()

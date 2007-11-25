@@ -1,7 +1,9 @@
-#include "eveapigeneralrequest.hh"
+#include "eveapiaccountrequest.hh"
 
-
-EveApiGeneralRequest::EveApiGeneralRequest( const QString& requestType,
+/*!
+pass the constructor args to the super-class
+*/
+EveApiAccountRequest::EveApiAccountRequest( const QString& requestType,
         const QString& dataPath,
         const int& xmlIndent,
         const QList<QString>& requiredParams,
@@ -14,12 +16,14 @@ EveApiGeneralRequest::EveApiGeneralRequest( const QString& requestType,
 }
 
 /*!
-return a QStringList of filesystem directories, relative to the data directory, in which to store cache
+return a QStringList of filesystem directories,
+relative to the data directory, in which to store cache
 */
-QStringList EveApiGeneralRequest::cachePath( const QString& scope,
-        const QMap<QString, QString>& /*parameters*/ )
+QStringList EveApiAccountRequest::cachePath( const QString& scope,
+        const QMap<QString, QString>& parameters )
 {
     QStringList dirs;
+    dirs << parameters.value( "userID" );
     dirs << scope;
     return dirs;
 }

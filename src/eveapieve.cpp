@@ -8,39 +8,7 @@ EveApiEve::EveApiEve( QString& host, QString& dataPath, int& xmlIndent,
                       QString& scope, QObject* parent )
         : EveApiScope( host, dataPath, xmlIndent, scope, parent )
 {
-    QList<QString> requiredParams;
-    QList<QString> optionalParams;
-    QList<QString> cacheID;
-
-    // RefTypes request
-    requiredParams.clear();
-    requiredParams.append( "userID" );
-    requiredParams.append( "apiKey" );
-    optionalParams.clear();
-    cacheID.clear();
-    QString requestID = this->refTypesRequestID();
-    EveApiRequest* newRequest = new EveApiGeneralRequest( requestID,
-            this->dataPath(),
-            this->xmlIndent(),
-            requiredParams,
-            optionalParams,
-            cacheID );
-    this->addRequestType( requestID, newRequest );
-
-    // SkillTree request
-    requiredParams.clear();
-    requiredParams.append( "userID" );
-    requiredParams.append( "apiKey" );
-    optionalParams.clear();
-    cacheID.clear();
-    requestID = this->skillTreeRequestID();
-    newRequest = new EveApiGeneralRequest( requestID,
-                                           this->dataPath(),
-                                           this->xmlIndent(),
-                                           requiredParams,
-                                           optionalParams,
-                                           cacheID );
-    this->addRequestType( requestID, newRequest );
+    this->createRequests();
 }
 
 /*!
@@ -61,3 +29,45 @@ QString EveApiEve::skillTree( QMap<QString, QString>& parameters )
     return this->request( id, parameters );
 }
 
+/*!
+Create request objects
+*/
+void EveApiEve::createRequest( QString& requestId,
+                                     QStringList& requiredParams,
+                                     QStringList& optionalParams,
+                                     QStringList& cacheId )
+{
+    EveApiRequest* newRequest = new EveApiGeneralRequest( requestId,
+            this->dataPath(),
+            this->xmlIndent(),
+            requiredParams,
+            optionalParams,
+            cacheId );
+    this->addRequestType( requestId, newRequest );
+}
+
+/*!
+create all requests (delegated from the constructor)
+*/
+void EveApiEve::createRequests()
+{
+    QStringList requiredParams;
+    QStringList optionalParams;
+    QStringList cacheID;
+
+    // RefTypes request
+    requiredParams.clear();
+    requiredParams << "userID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    QString requestID = this->refTypesRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // SkillTree request
+    requiredParams.clear();
+    requiredParams << "userID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    requestID = this->skillTreeRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+}
