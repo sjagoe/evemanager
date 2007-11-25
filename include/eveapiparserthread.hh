@@ -3,12 +3,18 @@
 
 #include <QObject>
 #include <QMutex>
-#include <QDomDocument>
+//#include <QDomDocument>
 #include <QString>
 #include <QQueue>
 #include <QPair>
 
+#include <boost/shared_ptr.hpp>
+
 #include "eveapidatatype.hh"
+
+using boost::shared_ptr;
+
+class QDomDocument;
 
 class EveApiParserThread: public QObject
 {
@@ -26,14 +32,14 @@ class EveApiParserThread: public QObject
         /*!
         Start the parser
         */
-        void parse( const QString& parserId, const QDomDocument& doc );
+        void parse( QString parserId, shared_ptr<QDomDocument> doc );
 
     protected:
         /*!
         Perform the actual parsing of the data, and emit a signal when done.
         The signal must be defined in the subclass
         */
-        virtual void doParse( const QString& parserId, const QDomDocument& doc ) = 0;
+        virtual void doParse( const QString& parserId, shared_ptr<QDomDocument> doc ) = 0;
 
     private:
 //        //! Semaphore telling the number of requests to be parsed (including the current request)
@@ -50,6 +56,8 @@ class EveApiParserThread: public QObject
 //
 //        //! Queue requests until they can be completed
 //        QQueue<QPair<QString, QDomDocument> > _parserQueue;
+    signals:
+        void requestFailed( QString id, QString error, QString httpResponse );
 };
 
 #endif
