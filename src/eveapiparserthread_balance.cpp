@@ -35,6 +35,7 @@ void EveApiParserThreadBalance::doParse( const QString& parserId, const shared_p
 
     if ( root.tagName() != QString( "eveapi" ) )
     {
+        emit requestFailed( parserId, QString("Error parsing the data. Invalid eveapi XML data.") , QString() );
         return;
     }
     else
