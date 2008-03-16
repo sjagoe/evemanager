@@ -44,6 +44,7 @@ contains ( API_BUILD, base ) {
                include/eveapiaccount.hh \
                include/eveapieve.hh \
                include/eveapimap.hh \
+               include/eveapicommon.hh \
                include/eveapicharacter.hh \
                include/eveapicorporation.hh
 
@@ -58,6 +59,7 @@ contains ( API_BUILD, base ) {
                src/eveapiaccount.cpp \
                src/eveapieve.cpp \
                src/eveapimap.cpp \
+               src/eveapicommon.cpp \
                src/eveapicharacter.cpp \
                src/eveapicorporation.cpp
 }
