@@ -129,12 +129,13 @@ DEFINES += _REENTRANT
 CONFIG += thread
 CONFIG += rtti
 CONFIG += debug_and_release
-CONFIG(debug, debug|release)
-{
-    DESTDIR = bin/debug
-} else {
-    DESTDIR = bin/release
-}
+#CONFIG(debug, debug|release)
+#{
+#    DESTDIR = bin/debug
+#} else {
+#    DESTDIR = bin/release
+#}
+DESTDIR = bin/release
 
 # Input
 
