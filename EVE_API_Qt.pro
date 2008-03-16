@@ -10,7 +10,7 @@
 #           Requires: base
 # base_app: A simple application that provides a GUI to test the base library
 #           Requires: base
-API_BUILD = parser
+API_BUILD = base
 
 ## Set the version number
 VERSION = 1.3.0

@@ -62,6 +62,14 @@ class EveApiScope: public QObject
         */
         QString request( QString& id, QMap<QString, QString>& parameters/*, bool internal = false, QString requestId = QString()*/ );
 
+        /*!
+        Create request objects
+        */
+        virtual void createRequest( QString& requestId,
+                            QStringList& requiredParams,
+                            QStringList& optionalParams,
+                            QStringList& cacheId ) = 0;
+
     private:
         //! QMutex to sync multiple access to the API
         QMutex _mutex;
@@ -85,14 +93,6 @@ class EveApiScope: public QObject
         return a previously added request type
         */
         EveApiRequest* requestType( QString& id ) const;
-
-        /*!
-        Create request objects
-        */
-        virtual void createRequest( QString& requestId,
-                            QStringList& requiredParams,
-                            QStringList& optionalParams,
-                            QStringList& cacheId ) = 0;
 
         /*!
         create all requests (delegated from the constructor)

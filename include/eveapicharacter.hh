@@ -1,13 +1,9 @@
 #ifndef __EVEAPICHARACTER_HH__
 #define __EVEAPICHARACTER_HH__
 
-#include <QMap>
-#include <QString>
-#include <QPair>
+#include "eveapicommon.hh"
 
-#include "eveapiscope.hh"
-
-class EveApiCharacter: public EveApiScope
+class EveApiCharacter: public EveApiCommon
 {
     Q_OBJECT
     public:
@@ -27,30 +23,8 @@ class EveApiCharacter: public EveApiScope
         */
         QString skillInTraining( QMap<QString, QString>& parameters );
 
-        /*!
-        access the WalletJournal api function
-        */
-        QString walletJournal( QMap<QString, QString>& parameters );
-
-        /*!
-        access the WalletTransactions api function
-        */
-        QString walletTransactions( QMap<QString, QString>& parameters );
-
-        /*!
-        access the AccountBalance api function
-        */
-        QString accountBalance( QMap<QString, QString>& parameters );
 
     private:
-        /*!
-        Create request objects
-        */
-        void createRequest( QString& requestId,
-                            QStringList& requiredParams,
-                            QStringList& optionalParams,
-                            QStringList& cacheId );
-
         /*!
         create all requests (delegated from the constructor)
         */
@@ -71,30 +45,6 @@ class EveApiCharacter: public EveApiScope
         static const QString skillInTrainingRequestID()
         {
             return QString("SkillInTraining.xml");
-        };
-
-        /*!
-        return the filename of the WalletJournal.xml request
-        */
-        static const QString walletJournalRequestID()
-        {
-            return QString("WalletJournal.xml");
-        };
-
-        /*!
-        return the filename of the WalletTransactions.xml request
-        */
-        static const QString walletTransactionsRequestID()
-        {
-            return QString("WalletTransactions.xml");
-        };
-
-        /*!
-        return the filename of the AccountBalance.xml request
-        */
-        static const QString accountBalanceRequestID()
-        {
-            return QString("AccountBalance.xml");
         };
 };
 
