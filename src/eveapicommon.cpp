@@ -40,6 +40,15 @@ QString EveApiCommon::accountBalance( QMap<QString, QString>& parameters )
 }
 
 /*!
+access the IndustryJobs api function
+*/
+QString EveApiCommon::industryJobs( QMap<QString, QString>& parameters )
+{
+    QString id = this->industryJobsRequestID();
+    return this->request( id, parameters );
+}
+
+/*!
 Create request objects
 */
 void EveApiCommon::createRequest( QString& requestId,
@@ -88,5 +97,13 @@ void EveApiCommon::createCommonRequests()
     cacheID.clear();
     cacheID << "beforeTransID";
     requestID = this->walletTransactionsRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // IndustryJobs request
+    requiredParams.clear();
+    requiredParams << "userID" << "characterID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    requestID = this->industryJobsRequestID();
     createRequest( requestID, requiredParams, optionalParams, cacheID );
 }

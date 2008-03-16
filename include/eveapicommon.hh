@@ -29,6 +29,11 @@ class EveApiCommon: public EveApiScope
         */
         QString accountBalance( QMap<QString, QString>& parameters );
 
+        /*!
+        access the IndustryJobs api function
+        */
+        QString industryJobs( QMap<QString, QString>& parameters );
+
     protected:
         /*!
         Create request objects
@@ -66,6 +71,14 @@ class EveApiCommon: public EveApiScope
         static const QString accountBalanceRequestID()
         {
             return QString("AccountBalance.xml");
+        };
+
+        /*!
+        return thefilename of the IndustryJobs.xml request
+        */
+        static const QString industryJobsRequestID()
+        {
+            return QString("IndustryJobs.xml");
         };
 };
 

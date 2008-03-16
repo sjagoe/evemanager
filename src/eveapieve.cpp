@@ -39,6 +39,15 @@ QString EveApiEve::allianceList( QMap<QString, QString>& parameters )
 }
 
 /*!
+access the ErrorList api function
+*/
+QString EveApiEve::errorList( QMap<QString, QString>& parameters )
+{
+    QString id = this->errorListRequestID();
+    return this->request( id, parameters );
+}
+
+/*!
 Create request objects
 */
 void EveApiEve::createRequest( QString& requestId,
@@ -86,5 +95,13 @@ void EveApiEve::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->allianceListRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // ErrorList request
+    requiredParams.clear();
+    requiredParams << "userID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    requestID = this->errorListRequestID();
     createRequest( requestID, requiredParams, optionalParams, cacheID );
 }

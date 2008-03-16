@@ -28,12 +28,10 @@ class EveApiEve: public EveApiScope
         */
         QString allianceList( QMap<QString, QString>& parameters );
 
-//    protected slots:
-//        /*!
-//        This slot is called when an internal request is complete, so that it
-//        can be parsed
-//        */
-//        void internalRequestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime ){};
+        /*!
+        access the ErrorList api function
+        */
+        QString errorList( QMap<QString, QString>& parameters );
 
     private:
         /*!
@@ -71,6 +69,14 @@ class EveApiEve: public EveApiScope
         static const QString allianceListRequestID()
         {
             return QString("AllianceList.xml");
+        };
+
+        /*!
+        return the filnename of the ErrorList.xml request
+        */
+        static const QString errorListRequestID()
+        {
+            return QString("ErrorList.xml");
         };
 };
 

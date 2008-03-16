@@ -23,6 +23,10 @@ class EveApiCharacter: public EveApiCommon
         */
         QString skillInTraining( QMap<QString, QString>& parameters );
 
+        /*!
+        access the KillLog api function
+        */
+        QString killLog( QMap<QString, QString>& parameters );
 
     private:
         /*!
@@ -46,6 +50,14 @@ class EveApiCharacter: public EveApiCommon
         {
             return QString("SkillInTraining.xml");
         };
+
+        /*!
+        return the filename of the KillLog.xml request
+        */
+        static const QString killLogRequestID()
+        {
+            return QString("KillLog.xml");
+        }
 };
 
 #endif
