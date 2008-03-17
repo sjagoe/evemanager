@@ -49,6 +49,33 @@ QString EveApiCommon::industryJobs( QMap<QString, QString>& parameters )
 }
 
 /*!
+access the AssetList api function
+*/
+QString EveApiCommon::assetList( QMap<QString, QString>& parameters )
+{
+    QString id = this->assetListRequestID();
+    return this->request( id, parameters );
+}
+
+/*!
+access the KillLog api function
+*/
+QString EveApiCommon::killLog( QMap<QString, QString>& parameters )
+{
+    QString id = this->killLogRequestID();
+    return this->request( id, parameters );
+}
+
+/*!
+access the MarketOrders api function
+*/
+QString EveApiCommon::marketOrders( QMap<QString, QString>& parameters )
+{
+    QString id = this->marketOrdersRequestID();
+    return this->request( id, parameters );
+}
+
+/*!
 Create request objects
 */
 void EveApiCommon::createRequest( QString& requestId,
@@ -105,5 +132,31 @@ void EveApiCommon::createCommonRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->industryJobsRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // AssetList request
+    requiredParams.clear();
+    requiredParams << "userID" << "characterID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    requestID = this->assetListRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // KillLog request
+    requiredParams.clear();
+    requiredParams << "userID" << "characterID" << "apiKey";
+    optionalParams.clear();
+    optionalParams << "beforeKillID";
+    cacheID.clear();
+    cacheID << "beforeKillID";
+    requestID = this->killLogRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // MarketOrders request
+    requiredParams.clear();
+    requiredParams << "userID" << "characterID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    requestID = this->killLogRequestID();
     createRequest( requestID, requiredParams, optionalParams, cacheID );
 }

@@ -1,0 +1,167 @@
+* EVE API Functions
+** account
+*** Characters.xml
+Limited Auth
+
+Requires:
+ * userID
+ * apiKey
+
+
+** common
+**** AccountBalance.xml
+Full Auth
+Requires:
+ * userID
+ * apiKey
+ * characterID
+
+
+**** AssetList.xml
+Full Auth
+Requires:
+ * userID
+ * apiKey
+ * characterID
+
+
+**** IndustryJobs.xml
+Full Auth
+Required:
+ * userID
+ * characterID
+ * apiKey
+
+
+**** KillLog.xml
+Full Auth
+Requires:
+Required:
+ * userID
+ * characterID
+ * apiKey
+Optional:
+ * beforeKillID
+
+**** MarketOrders.xml
+Full Auth
+Required:
+ * userID
+ * characterID/corpID ?
+ * apiKey
+
+
+**** WalletJournal.xml
+Full Auth
+Required:
+ * userID
+ * characterID/corpID ?
+ * apiKey
+Optional:
+ * accountKey
+ * beforeRefID
+
+
+**** WalletTransactions.xml
+Full Auth
+Required:
+ * userID
+ * characterID/corpID ?
+ * apiKey
+Optional:
+ * accountKey
+ * beforeTransID
+
+
+** char
+*** CharacterSheet.xml
+Limited Auth
+Required:
+ * userID
+ * apiKey
+
+
+*** SkillInTraining.xml
+Limited Auth
+Required:
+ * userID
+ * characterID
+ * apiKey
+
+
+** corp
+*** CorporationSheet.xml
+No/Limited Auth
+(Required?):
+ * userID
+ * apiKey
+
+
+*** MemberTracking.xml
+Full Auth
+Required:
+ * userID
+ * characterID
+ * apiKey
+
+
+*** StarbaseDetail.xml
+Full Auth
+Required:
+ * userID
+ * characterID
+ * apiKey
+ * version = 2
+ * itemID
+
+
+*** StarbaseList.xml
+Full Auth
+Required:
+ * userID
+ * characterID
+ * apiKey
+ * version = 2
+
+
+** eve
+*** AllianceList.xml
+No Auth
+(limited needed? must check - no auth didn't work for me with v1)
+
+
+*** CharacterID.xml
+No Auth
+
+
+*** ConquerableStationsList.xml
+No Auth
+
+
+*** ErrorList.xml
+No Auth
+
+
+*** RefTypes.xml
+No Auth
+
+
+*** SkillTree.xml
+No Auth
+
+
+** map
+*** Jumps.xml
+No Auth
+
+
+*** Kills.xml
+No Auth
+
+
+*** Sovereignty.xml
+No Auth
+
+
+** Misc (Not EVE API calls)
+CharID to Portrait jpg: http://img.eve.is/serv.asp

@@ -34,6 +34,21 @@ class EveApiCommon: public EveApiScope
         */
         QString industryJobs( QMap<QString, QString>& parameters );
 
+        /*!
+        access the AssetList api function
+        */
+        QString assetList( QMap<QString, QString>& parameters );
+
+        /*!
+        access the KillLog api function
+        */
+        QString killLog( QMap<QString, QString>& parameters );
+
+        /*!
+        access the MarketOrders api function
+        */
+        QString marketOrders( QMap<QString, QString>& parameters );
+
     protected:
         /*!
         Create request objects
@@ -79,6 +94,30 @@ class EveApiCommon: public EveApiScope
         static const QString industryJobsRequestID()
         {
             return QString("IndustryJobs.xml");
+        };
+
+        /*!
+        return thefilename of the AssetList.xml request
+        */
+        static const QString assetListRequestID()
+        {
+            return QString("AssetList.xml");
+        };
+
+        /*!
+        return the filename of the KillLog.xml request
+        */
+        static const QString killLogRequestID()
+        {
+            return QString("KillLog.xml");
+        };
+
+        /*!
+        return the filename of the MarketOrders.xml request
+        */
+        static const QString marketOrdersRequestID()
+        {
+            return QString("MarketOrders.xml");
         };
 };
 

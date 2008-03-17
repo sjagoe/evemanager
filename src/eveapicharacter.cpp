@@ -32,15 +32,6 @@ QString EveApiCharacter::skillInTraining( QMap<QString, QString>& parameters )
 }
 
 /*!
-access the KillLog api function
-*/
-QString EveApiCharacter::killLog( QMap<QString, QString>& parameters )
-{
-    QString id = this->killLogRequestID();
-    return this->request( id, parameters );
-}
-
-/*!
 create all requests (delegated from the constructor)
 */
 void EveApiCharacter::createRequests()
@@ -63,16 +54,6 @@ void EveApiCharacter::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->skillInTrainingRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
-
-    // KillLog request
-    requiredParams.clear();
-    requiredParams << "userID" << "characterID" << "apiKey";
-    optionalParams.clear();
-    optionalParams << "beforeKillID";
-    cacheID.clear();
-    cacheID << "beforeKillID";
-    requestID = this->killLogRequestID();
     createRequest( requestID, requiredParams, optionalParams, cacheID );
 }
 
