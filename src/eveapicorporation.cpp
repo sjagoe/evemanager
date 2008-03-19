@@ -76,7 +76,7 @@ void EveApiCorporation::createRequests()
     requiredParams << "userID" << "characterID" << "apiKey";
     optionalParams.clear();
     cacheID.clear();
-    QString requestID = this->corporationSheetRequestID();
+    requestID = this->corporationSheetRequestID();
     createRequest( requestID, requiredParams, optionalParams, cacheID );
 
     // CorporationSheet request
@@ -84,7 +84,7 @@ void EveApiCorporation::createRequests()
     requiredParams << "userID" << "characterID" << "apiKey" << "version";
     optionalParams.clear();
     cacheID.clear();
-    QString requestID = this->starbaseListRequestID();
+    requestID = this->starbaseListRequestID();
     createRequest( requestID, requiredParams, optionalParams, cacheID );
 
     // CorporationSheet request
@@ -92,6 +92,6 @@ void EveApiCorporation::createRequests()
     requiredParams << "userID" << "characterID" << "apiKey" << "version";
     optionalParams.clear();
     cacheID.clear();
-    QString requestID = this->starbaseDetailRequestID();
+    requestID = this->starbaseDetailRequestID();
     createRequest( requestID, requiredParams, optionalParams, cacheID );
 }

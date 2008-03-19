@@ -48,6 +48,24 @@ QString EveApiEve::errorList( QMap<QString, QString>& parameters )
 }
 
 /*!
+access the CharacterID api function
+*/
+QString EveApiEve::characterID( QMap<QString, QString>& parameters )
+{
+    QString id = this->characterIDRequestID();
+    return this->request( id, parameters );
+}
+
+/*!
+access the ConquerableStationsList api function
+*/
+QString EveApiEve::conquerableStationsList( QMap<QString, QString>& parameters )
+{
+    QString id = this->conquerableStationsListRequestID();
+    return this->request( id, parameters );
+}
+
+/*!
 Create request objects
 */
 void EveApiEve::createRequest( QString& requestId,
@@ -75,7 +93,7 @@ void EveApiEve::createRequests()
 
     // RefTypes request
     requiredParams.clear();
-    requiredParams << "userID" << "apiKey";
+    //requiredParams << "userID" << "apiKey";
     optionalParams.clear();
     cacheID.clear();
     QString requestID = this->refTypesRequestID();
@@ -83,7 +101,7 @@ void EveApiEve::createRequests()
 
     // SkillTree request
     requiredParams.clear();
-    requiredParams << "userID" << "apiKey";
+    //requiredParams << "userID" << "apiKey";
     optionalParams.clear();
     cacheID.clear();
     requestID = this->skillTreeRequestID();
@@ -91,7 +109,7 @@ void EveApiEve::createRequests()
 
     // AllianceList request
     requiredParams.clear();
-    requiredParams << "userID" << "apiKey";
+    //requiredParams << "userID" << "apiKey";
     optionalParams.clear();
     cacheID.clear();
     requestID = this->allianceListRequestID();
@@ -99,9 +117,25 @@ void EveApiEve::createRequests()
 
     // ErrorList request
     requiredParams.clear();
-    requiredParams << "userID" << "apiKey";
+    //requiredParams << "userID" << "apiKey";
     optionalParams.clear();
     cacheID.clear();
     requestID = this->errorListRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // CharacterID request
+    requiredParams.clear();
+    //requiredParams << "userID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    requestID = this->characterIDRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // ConquerableStationsList request
+    requiredParams.clear();
+    //requiredParams << "userID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    requestID = this->conquerableStationsListRequestID();
     createRequest( requestID, requiredParams, optionalParams, cacheID );
 }

@@ -33,6 +33,16 @@ class EveApiEve: public EveApiScope
         */
         QString errorList( QMap<QString, QString>& parameters );
 
+        /*!
+        access the CharacterID api function
+        */
+        QString characterID( QMap<QString, QString>& parameters );
+
+        /*!
+        access the ConquerableStationsList api function
+        */
+        QString conquerableStationsList( QMap<QString, QString>& parameters );
+
     private:
         /*!
         Create request objects
@@ -77,6 +87,22 @@ class EveApiEve: public EveApiScope
         static const QString errorListRequestID()
         {
             return QString("ErrorList.xml");
+        };
+
+        /*!
+        return the filnename of the CharacterID.xml request
+        */
+        static const QString characterIDRequestID()
+        {
+            return QString("CharacterID.xml");
+        };
+
+        /*!
+        return the filnename of the ConquerableStationsList.xml request
+        */
+        static const QString conquerableStationsListRequestID()
+        {
+            return QString("ConquerableStationsList.xml");
         };
 };
 
