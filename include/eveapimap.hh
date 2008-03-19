@@ -18,12 +18,15 @@ class EveApiMap: public EveApiScope
         */
         QString sovereignty( QMap<QString, QString>& parameters );
 
-//    protected slots:
-//        /*!
-//        This slot is called when an internal request is complete, so that it
-//        can be parsed
-//        */
-//        void internalRequestComplete( QString id, QDomDocument result, QString httpResponse, QDateTime cacheTime ){};
+        /*!
+        access the Jumps api function
+        */
+        QString jumps( QMap<QString, QString>& parameters );
+
+        /*!
+        access the Kills api function
+        */
+        QString kills( QMap<QString, QString>& parameters );
 
     private:
         /*!
@@ -45,6 +48,22 @@ class EveApiMap: public EveApiScope
         static const QString sovereigntyRequestID()
         {
             return QString("Sovereignty.xml");
+        };
+
+        /*!
+        return the filename of the Jumps.xml request
+        */
+        static const QString jumpsRequestID()
+        {
+            return QString("Jumps.xml");
+        };
+
+        /*!
+        return the filename of the Kills.xml request
+        */
+        static const QString killsRequestID()
+        {
+            return QString("Kills.xml");
         };
 };
 

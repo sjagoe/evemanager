@@ -151,11 +151,11 @@ No Auth
 
 
 ** map
-*** Jumps.xml
+**** Jumps.xml
 No Auth
 
 
-*** Kills.xml
+**** Kills.xml
 No Auth
 
 

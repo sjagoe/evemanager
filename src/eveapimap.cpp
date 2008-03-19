@@ -23,6 +23,24 @@ QString EveApiMap::sovereignty( QMap<QString, QString>& parameters )
 }
 
 /*!
+access the Jumps api function
+*/
+QString EveApiMap::jumps( QMap<QString, QString>& parameters )
+{
+    QString id = this->jumpsRequestID();
+    return this->request( id, parameters );
+}
+
+/*!
+access the Kills api function
+*/
+QString EveApiMap::kills( QMap<QString, QString>& parameters )
+{
+    QString id = this->killsRequestID();
+    return this->request( id, parameters );
+}
+
+/*!
 Create request objects
 */
 void EveApiMap::createRequest( QString& requestId,
@@ -50,9 +68,25 @@ void EveApiMap::createRequests()
 
     // Sovereignty request
     requiredParams.clear();
-    requiredParams << "userID" << "apiKey";
+    //requiredParams << "userID" << "apiKey";
     optionalParams.clear();
     cacheID.clear();
     QString requestID = this->sovereigntyRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // Jumps request
+    requiredParams.clear();
+    //requiredParams << "userID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    requestID = this->jumpsRequestID();
+    createRequest( requestID, requiredParams, optionalParams, cacheID );
+
+    // Kills request
+    requiredParams.clear();
+    //requiredParams << "userID" << "apiKey";
+    optionalParams.clear();
+    cacheID.clear();
+    requestID = this->killsRequestID();
     createRequest( requestID, requiredParams, optionalParams, cacheID );
 }
