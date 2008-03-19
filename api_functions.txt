@@ -1,6 +1,6 @@
 * EVE API Functions
 ** account
-*** Characters.xml
+**** Characters.xml
 Limited Auth
 
 Requires:
@@ -74,14 +74,14 @@ Optional:
 
 
 ** char
-*** CharacterSheet.xml
+**** CharacterSheet.xml
 Limited Auth
 Required:
  * userID
  * apiKey
 
 
-*** SkillInTraining.xml
+**** SkillInTraining.xml
 Limited Auth
 Required:
  * userID
@@ -90,14 +90,14 @@ Required:
 
 
 ** corp
-*** CorporationSheet.xml
+**** CorporationSheet.xml
 No/Limited Auth
 (Required?):
  * userID
  * apiKey
 
 
-*** MemberTracking.xml
+**** MemberTracking.xml
 Full Auth
 Required:
  * userID
@@ -105,7 +105,7 @@ Required:
  * apiKey
 
 
-*** StarbaseDetail.xml
+**** StarbaseDetail.xml
 Full Auth
 Required:
  * userID
@@ -115,7 +115,7 @@ Required:
  * itemID
 
 
-*** StarbaseList.xml
+**** StarbaseList.xml
 Full Auth
 Required:
  * userID

@@ -18,6 +18,21 @@ class EveApiCorporation: public EveApiCommon
         */
         QString memberTracking( QMap<QString, QString>& parameters );
 
+        /*!
+        access the CorporationSheet api function
+        */
+        QString corporationSheet( QMap<QString, QString>& parameters );
+
+        /*!
+        access the StarbaseList api function
+        */
+        QString starbaseList( QMap<QString, QString>& parameters );
+
+        /*!
+        access the StarbaseDetail api function
+        */
+        QString starbaseDetail( QMap<QString, QString>& parameters );
+
     private:
         /*!
         create all requests (delegated from the constructor)
@@ -30,6 +45,30 @@ class EveApiCorporation: public EveApiCommon
         static const QString memberTrackingRequestID()
         {
             return QString("MemberTracking.xml");
+        }
+
+        /*!
+        return the filename of the CorporationSheet.xml request
+        */
+        static const QString corporationSheetRequestID()
+        {
+            return QString("CorporationSheet.xml");
+        }
+
+        /*!
+        return the filename of the StarbaseList.xml request
+        */
+        static const QString starbaseListRequestID()
+        {
+            return QString("StarbaseList.xml");
+        }
+
+        /*!
+        return the filename of the StarbaseDetail.xml request
+        */
+        static const QString starbaseDetailRequestID()
+        {
+            return QString("StarbaseDetail.xml");
         }
 };
 
