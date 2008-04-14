@@ -4,11 +4,20 @@
 
 #include <QList>
 
-EveApiEve::EveApiEve( QString& host, QString& dataPath, int& xmlIndent,
-                      QString& scope, QObject* parent )
+EveApiEve::EveApiEve( QString& host,
+                      QString& dataPath,
+                      int& xmlIndent,
+                      QString& scope,
+                      const int& proxyType,
+                      const QString & proxyHost,
+                      const quint16 & proxyPort,
+                      const QString & proxyUser,
+                      const QString & proxyPassword,
+                      QObject* parent )
         : EveApiScope( host, dataPath, xmlIndent, scope, parent )
 {
-    this->createRequests();
+    this->createRequests( proxyType, proxyHost, proxyPort, proxyUser,
+                          proxyPassword );
 }
 
 /*!
@@ -69,23 +78,37 @@ QString EveApiEve::conquerableStationsList( QMap<QString, QString>& parameters )
 Create request objects
 */
 void EveApiEve::createRequest( QString& requestId,
-                                     QStringList& requiredParams,
-                                     QStringList& optionalParams,
-                                     QStringList& cacheId )
+                               QStringList& requiredParams,
+                               QStringList& optionalParams,
+                               QStringList& cacheId,
+                               const int& p_type,
+                               const QString& host,
+                               const quint16& port,
+                               const QString & user,
+                               const QString & password )
 {
     EveApiRequest* newRequest = new EveApiGeneralRequest( requestId,
             this->dataPath(),
             this->xmlIndent(),
             requiredParams,
             optionalParams,
-            cacheId );
+            cacheId,
+            p_type,
+            host,
+            port,
+            user,
+            password );
     this->addRequestType( requestId, newRequest );
 }
 
 /*!
 create all requests (delegated from the constructor)
 */
-void EveApiEve::createRequests()
+void EveApiEve::createRequests( const int& proxyType,
+                                const QString & proxyHost,
+                                const quint16 & proxyPort,
+                                const QString & proxyUser,
+                                const QString & proxyPassword )
 {
     QStringList requiredParams;
     QStringList optionalParams;
@@ -97,7 +120,8 @@ void EveApiEve::createRequests()
     optionalParams.clear();
     cacheID.clear();
     QString requestID = this->refTypesRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // SkillTree request
     requiredParams.clear();
@@ -105,7 +129,8 @@ void EveApiEve::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->skillTreeRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // AllianceList request
     requiredParams.clear();
@@ -113,7 +138,8 @@ void EveApiEve::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->allianceListRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // ErrorList request
     requiredParams.clear();
@@ -121,7 +147,8 @@ void EveApiEve::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->errorListRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // CharacterID request
     requiredParams.clear();
@@ -129,7 +156,8 @@ void EveApiEve::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->characterIDRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // ConquerableStationsList request
     requiredParams.clear();
@@ -137,5 +165,6 @@ void EveApiEve::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->conquerableStationsListRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 }

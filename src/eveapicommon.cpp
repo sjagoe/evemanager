@@ -5,11 +5,20 @@
 /*!
 create the child classes that provide API functionality
 */
-EveApiCommon::EveApiCommon( QString& host, QString& dataPath, int& xmlIndent,
-                                  QString& scope, QObject* parent )
+EveApiCommon::EveApiCommon( QString& host,
+                            QString& dataPath,
+                            int& xmlIndent,
+                            QString& scope,
+                            const int& proxyType,
+                            const QString& proxyHost,
+                            const quint16& proxyPort,
+                            const QString & proxyUser,
+                            const QString & proxyPassword,
+                            QObject* parent )
         : EveApiScope( host, dataPath, xmlIndent, scope, parent )
 {
-    this->createCommonRequests();
+    this->createCommonRequests( proxyType, proxyHost, proxyPort, proxyUser,
+                                proxyPassword );
 }
 
 /*!
@@ -79,20 +88,34 @@ QString EveApiCommon::marketOrders( QMap<QString, QString>& parameters )
 Create request objects
 */
 void EveApiCommon::createRequest( QString& requestId,
-                                     QStringList& requiredParams,
-                                     QStringList& optionalParams,
-                                     QStringList& cacheId )
+                                  QStringList& requiredParams,
+                                  QStringList& optionalParams,
+                                  QStringList& cacheId,
+                                  const int& p_type,
+                                  const QString& host,
+                                  const quint16& port,
+                                  const QString & user,
+                                  const QString & password )
 {
     EveApiRequest* newRequest = new EveApiCharacterRequest( requestId,
             this->dataPath(),
             this->xmlIndent(),
             requiredParams,
             optionalParams,
-            cacheId );
+            cacheId,
+            p_type,
+            host,
+            port,
+            user,
+            password );
     this->addRequestType( requestId, newRequest );
 }
 
-void EveApiCommon::createCommonRequests()
+void EveApiCommon::createCommonRequests( const int& proxyType,
+        const QString & proxyHost,
+        const quint16 & proxyPort,
+        const QString & proxyUser,
+        const QString & proxyPassword )
 {
     QStringList requiredParams;
     QStringList optionalParams;
@@ -104,7 +127,8 @@ void EveApiCommon::createCommonRequests()
     optionalParams.clear();
     cacheID.clear();
     QString requestID = this->accountBalanceRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // WalletJournal request
     requiredParams.clear();
@@ -114,7 +138,8 @@ void EveApiCommon::createCommonRequests()
     cacheID.clear();
     cacheID << "beforeRefID";
     requestID = this->walletJournalRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // WalletTransactions request
     requiredParams.clear();
@@ -124,7 +149,8 @@ void EveApiCommon::createCommonRequests()
     cacheID.clear();
     cacheID << "beforeTransID";
     requestID = this->walletTransactionsRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // IndustryJobs request
     requiredParams.clear();
@@ -132,7 +158,8 @@ void EveApiCommon::createCommonRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->industryJobsRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // AssetList request
     requiredParams.clear();
@@ -140,7 +167,8 @@ void EveApiCommon::createCommonRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->assetListRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // KillLog request
     requiredParams.clear();
@@ -150,7 +178,8 @@ void EveApiCommon::createCommonRequests()
     cacheID.clear();
     cacheID << "beforeKillID";
     requestID = this->killLogRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // MarketOrders request
     requiredParams.clear();
@@ -158,5 +187,6 @@ void EveApiCommon::createCommonRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->killLogRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 }

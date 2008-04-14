@@ -19,12 +19,18 @@ class QDomDocument;
 
 class EveApi: public QObject
 {
-    Q_OBJECT
+        Q_OBJECT
     public:
         /*!
         set up the scopes of the API
         */
-        EveApi( QString& dataPath, QObject* parent = 0 );
+        EveApi( QString& dataPath,
+                const int& proxyType = 0,
+                const QString& proxyHost = QString(),
+                const quint16& proxyPort = 0,
+                const QString & proxyUser = QString(),
+                const QString & proxyPassword = QString(),
+                QObject* parent = 0 );
 
         /*!
         provide access to areas of the api in the "/account/" context
@@ -78,7 +84,11 @@ class EveApi: public QObject
         /*!
         create the scopes, and connect scope-specific signals and slots
         */
-        void createScopes();
+        void createScopes( const int& p_type,
+                           const QString& host,
+                           const quint16& port,
+                           const QString & user,
+                           const QString & password );
 
         /*!
         connect the signals of each scope member

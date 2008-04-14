@@ -5,13 +5,21 @@
 
 class EveApiCharacter: public EveApiCommon
 {
-    Q_OBJECT
+        Q_OBJECT
     public:
         /*!
         create the child classes that provide API functionality
         */
-        EveApiCharacter( QString& host, QString& dataPath, int& xmlIndent,
-            QString& scope, QObject* parent = 0 );
+        EveApiCharacter( QString& host,
+                         QString& dataPath,
+                         int& xmlIndent,
+                         QString& scope,
+                         const int& proxyType,
+                         const QString & proxyHost,
+                         const quint16 & proxyPort,
+                         const QString & proxyUser,
+                         const QString & proxyPassword,
+                         QObject* parent = 0 );
 
         /*!
         access the CharacterSheet api function
@@ -27,7 +35,11 @@ class EveApiCharacter: public EveApiCommon
         /*!
         create all requests (delegated from the constructor)
         */
-        void createRequests();
+        void createRequests( const int& proxyType,
+                             const QString & proxyHost,
+                             const quint16 & proxyPort,
+                             const QString & proxyUser,
+                             const QString & proxyPassword );
 
     private:
         /*!
@@ -35,7 +47,7 @@ class EveApiCharacter: public EveApiCommon
         */
         static const QString characterSheetRequestID()
         {
-            return QString("CharacterSheet.xml");
+            return QString( "CharacterSheet.xml" );
         };
 
         /*!
@@ -43,7 +55,7 @@ class EveApiCharacter: public EveApiCommon
         */
         static const QString skillInTrainingRequestID()
         {
-            return QString("SkillInTraining.xml");
+            return QString( "SkillInTraining.xml" );
         };
 };
 

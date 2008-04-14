@@ -6,11 +6,20 @@
 /*!
 create the child classes that provide API functionality
 */
-EveApiMap::EveApiMap( QString& host, QString& dataPath, int& xmlIndent,
-                      QString& scope, QObject* parent )
+EveApiMap::EveApiMap( QString& host,
+                      QString& dataPath,
+                      int& xmlIndent,
+                      QString& scope,
+                      const int& proxyType,
+                      const QString & proxyHost,
+                      const quint16 & proxyPort,
+                      const QString & proxyUser,
+                      const QString & proxyPassword,
+                      QObject* parent )
         : EveApiScope( host, dataPath, xmlIndent, scope, parent )
 {
-    this->createRequests();
+    this->createRequests( proxyType, proxyHost, proxyPort, proxyUser,
+                          proxyPassword );
 }
 
 /*!
@@ -44,23 +53,37 @@ QString EveApiMap::kills( QMap<QString, QString>& parameters )
 Create request objects
 */
 void EveApiMap::createRequest( QString& requestId,
-                                     QStringList& requiredParams,
-                                     QStringList& optionalParams,
-                                     QStringList& cacheId )
+                               QStringList& requiredParams,
+                               QStringList& optionalParams,
+                               QStringList& cacheId,
+                               const int& p_type,
+                               const QString& host,
+                               const quint16& port,
+                               const QString & user,
+                               const QString & password )
 {
     EveApiRequest* newRequest = new EveApiGeneralRequest( requestId,
             this->dataPath(),
             this->xmlIndent(),
             requiredParams,
             optionalParams,
-            cacheId );
+            cacheId,
+            p_type,
+            host,
+            port,
+            user,
+            password );
     this->addRequestType( requestId, newRequest );
 }
 
 /*!
 create all requests (delegated from the constructor)
 */
-void EveApiMap::createRequests()
+void EveApiMap::createRequests( const int& proxyType,
+                                const QString & proxyHost,
+                                const quint16 & proxyPort,
+                                const QString & proxyUser,
+                                const QString & proxyPassword )
 {
     QStringList requiredParams;
     QStringList optionalParams;
@@ -72,7 +95,8 @@ void EveApiMap::createRequests()
     optionalParams.clear();
     cacheID.clear();
     QString requestID = this->sovereigntyRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // Jumps request
     requiredParams.clear();
@@ -80,7 +104,8 @@ void EveApiMap::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->jumpsRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // Kills request
     requiredParams.clear();
@@ -88,5 +113,6 @@ void EveApiMap::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->killsRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 }

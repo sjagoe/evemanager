@@ -13,7 +13,7 @@
 API_BUILD = base
 
 ## Set the version number
-VERSION = 1.3.0
+VERSION = 1.3.1
 
 ## For testing, uncomment this line:
 CONFIG += console

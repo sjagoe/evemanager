@@ -5,13 +5,21 @@
 
 class EveApiCorporation: public EveApiCommon
 {
-    Q_OBJECT
+        Q_OBJECT
     public:
         /*!
         create the child classes that provide API functionality
         */
-        EveApiCorporation( QString& host, QString& dataPath, int& xmlIndent,
-            QString& scope, QObject* parent = 0 );
+        EveApiCorporation( QString& host,
+                           QString& dataPath,
+                           int& xmlIndent,
+                           QString& scope,
+                           const int& proxyType,
+                           const QString & proxyHost,
+                           const quint16 & proxyPort,
+                           const QString & proxyUser,
+                           const QString & proxyPassword,
+                           QObject* parent = 0 );
 
         /*!
         access the MemberTracking api function
@@ -37,14 +45,18 @@ class EveApiCorporation: public EveApiCommon
         /*!
         create all requests (delegated from the constructor)
         */
-        void createRequests();
+        void createRequests( const int& proxyType,
+                             const QString & proxyHost,
+                             const quint16 & proxyPort,
+                             const QString & proxyUser,
+                             const QString & proxyPassword );
 
         /*!
         return the filename of the MemberTracking.xml request
         */
         static const QString memberTrackingRequestID()
         {
-            return QString("MemberTracking.xml");
+            return QString( "MemberTracking.xml" );
         }
 
         /*!
@@ -52,7 +64,7 @@ class EveApiCorporation: public EveApiCommon
         */
         static const QString corporationSheetRequestID()
         {
-            return QString("CorporationSheet.xml");
+            return QString( "CorporationSheet.xml" );
         }
 
         /*!
@@ -60,7 +72,7 @@ class EveApiCorporation: public EveApiCommon
         */
         static const QString starbaseListRequestID()
         {
-            return QString("StarbaseList.xml");
+            return QString( "StarbaseList.xml" );
         }
 
         /*!
@@ -68,7 +80,7 @@ class EveApiCorporation: public EveApiCommon
         */
         static const QString starbaseDetailRequestID()
         {
-            return QString("StarbaseDetail.xml");
+            return QString( "StarbaseDetail.xml" );
         }
 };
 

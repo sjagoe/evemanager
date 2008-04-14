@@ -5,13 +5,21 @@
 
 class EveApiEve: public EveApiScope
 {
-    Q_OBJECT
+        Q_OBJECT
     public:
         /*!
         create the child classes that provide API functionality
         */
-        EveApiEve( QString& host, QString& dataPath, int& xmlIndent,
-            QString& scope, QObject* parent = 0 );
+        EveApiEve( QString& host,
+                   QString& dataPath,
+                   int& xmlIndent,
+                   QString& scope,
+                   const int& proxyType,
+                   const QString & proxyHost,
+                   const quint16 & proxyPort,
+                   const QString & proxyUser,
+                   const QString & proxyPassword,
+                   QObject* parent = 0 );
 
         /*!
         access the RefTypes api function
@@ -50,19 +58,28 @@ class EveApiEve: public EveApiScope
         void createRequest( QString& requestId,
                             QStringList& requiredParams,
                             QStringList& optionalParams,
-                            QStringList& cacheId );
+                            QStringList& cacheId,
+                            const int& p_type,
+                            const QString& host,
+                            const quint16& port,
+                            const QString & user,
+                            const QString & password );
 
         /*!
         create all requests (delegated from the constructor)
         */
-        void createRequests();
+        void createRequests( const int& proxyType,
+                             const QString & proxyHost,
+                             const quint16 & proxyPort,
+                             const QString & proxyUser,
+                             const QString & proxyPassword );
 
         /*!
         return the filename of the RefType.xml request
         */
         static const QString refTypesRequestID()
         {
-            return QString("RefTypes.xml");
+            return QString( "RefTypes.xml" );
         };
 
         /*!
@@ -70,7 +87,7 @@ class EveApiEve: public EveApiScope
         */
         static const QString skillTreeRequestID()
         {
-            return QString("SkillTree.xml");
+            return QString( "SkillTree.xml" );
         };
 
         /*!
@@ -78,7 +95,7 @@ class EveApiEve: public EveApiScope
         */
         static const QString allianceListRequestID()
         {
-            return QString("AllianceList.xml");
+            return QString( "AllianceList.xml" );
         };
 
         /*!
@@ -86,7 +103,7 @@ class EveApiEve: public EveApiScope
         */
         static const QString errorListRequestID()
         {
-            return QString("ErrorList.xml");
+            return QString( "ErrorList.xml" );
         };
 
         /*!
@@ -94,7 +111,7 @@ class EveApiEve: public EveApiScope
         */
         static const QString characterIDRequestID()
         {
-            return QString("CharacterID.xml");
+            return QString( "CharacterID.xml" );
         };
 
         /*!
@@ -102,7 +119,7 @@ class EveApiEve: public EveApiScope
         */
         static const QString conquerableStationsListRequestID()
         {
-            return QString("ConquerableStationsList.xml");
+            return QString( "ConquerableStationsList.xml" );
         };
 };
 

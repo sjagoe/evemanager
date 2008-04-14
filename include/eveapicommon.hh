@@ -11,8 +11,16 @@
 class EveApiCommon: public EveApiScope
 {
     public:
-        EveApiCommon( QString& host, QString& dataPath, int& xmlIndent,
-            QString& scope, QObject* parent = 0 );
+        EveApiCommon( QString& host,
+                      QString& dataPath,
+                      int& xmlIndent,
+                      QString& scope,
+                      const int& proxyType,
+                      const QString& proxyHost,
+                      const quint16& proxyPort,
+                      const QString & proxyUser,
+                      const QString & proxyPassword,
+                      QObject* parent = 0 );
 
         /*!
         access the WalletJournal api function
@@ -56,20 +64,29 @@ class EveApiCommon: public EveApiScope
         void createRequest( QString& requestId,
                             QStringList& requiredParams,
                             QStringList& optionalParams,
-                            QStringList& cacheId );
+                            QStringList& cacheId,
+                            const int& p_type,
+                            const QString& host,
+                            const quint16& port,
+                            const QString & user,
+                            const QString & password );
 
     private:
         /*!
         create all requests (delegated from the constructor)
         */
-        void createCommonRequests();
+        void createCommonRequests( const int& proxyType,
+                                   const QString& proxyHost,
+                                   const quint16& proxyPort,
+                                   const QString & proxyUser,
+                                   const QString & proxyPassword );
 
         /*!
         return the filename of the WalletJournal.xml request
         */
         static const QString walletJournalRequestID()
         {
-            return QString("WalletJournal.xml");
+            return QString( "WalletJournal.xml" );
         };
 
         /*!
@@ -77,7 +94,7 @@ class EveApiCommon: public EveApiScope
         */
         static const QString walletTransactionsRequestID()
         {
-            return QString("WalletTransactions.xml");
+            return QString( "WalletTransactions.xml" );
         };
 
         /*!
@@ -85,7 +102,7 @@ class EveApiCommon: public EveApiScope
         */
         static const QString accountBalanceRequestID()
         {
-            return QString("AccountBalance.xml");
+            return QString( "AccountBalance.xml" );
         };
 
         /*!
@@ -93,7 +110,7 @@ class EveApiCommon: public EveApiScope
         */
         static const QString industryJobsRequestID()
         {
-            return QString("IndustryJobs.xml");
+            return QString( "IndustryJobs.xml" );
         };
 
         /*!
@@ -101,7 +118,7 @@ class EveApiCommon: public EveApiScope
         */
         static const QString assetListRequestID()
         {
-            return QString("AssetList.xml");
+            return QString( "AssetList.xml" );
         };
 
         /*!
@@ -109,7 +126,7 @@ class EveApiCommon: public EveApiScope
         */
         static const QString killLogRequestID()
         {
-            return QString("KillLog.xml");
+            return QString( "KillLog.xml" );
         };
 
         /*!
@@ -117,7 +134,7 @@ class EveApiCommon: public EveApiScope
         */
         static const QString marketOrdersRequestID()
         {
-            return QString("MarketOrders.xml");
+            return QString( "MarketOrders.xml" );
         };
 };
 

@@ -11,10 +11,17 @@ EveApiCorporation::EveApiCorporation( QString& host,
                                       QString& dataPath,
                                       int& xmlIndent,
                                       QString& scope,
+                                      const int& proxyType,
+                                      const QString & proxyHost,
+                                      const quint16 & proxyPort,
+                                      const QString & proxyUser,
+                                      const QString & proxyPassword,
                                       QObject* parent )
-        : EveApiCommon( host, dataPath, xmlIndent, scope, parent )
+        : EveApiCommon( host, dataPath, xmlIndent, scope, proxyType, proxyHost,
+                        proxyPort, proxyUser, proxyPassword, parent )
 {
-    this->createRequests();
+    this->createRequests( proxyType, proxyHost, proxyPort, proxyUser,
+                          proxyPassword );
 }
 
 /*!
@@ -57,7 +64,11 @@ QString EveApiCorporation::starbaseDetail( QMap<QString, QString>& parameters )
 /*!
 create all requests (delegated from the constructor)
 */
-void EveApiCorporation::createRequests()
+void EveApiCorporation::createRequests( const int& proxyType,
+                                        const QString & proxyHost,
+                                        const quint16 & proxyPort,
+                                        const QString & proxyUser,
+                                        const QString & proxyPassword )
 {
     QStringList requiredParams;
     QStringList optionalParams;
@@ -69,7 +80,8 @@ void EveApiCorporation::createRequests()
     optionalParams.clear();
     cacheID.clear();
     QString requestID = this->memberTrackingRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // CorporationSheet request
     requiredParams.clear();
@@ -77,7 +89,8 @@ void EveApiCorporation::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->corporationSheetRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // CorporationSheet request
     requiredParams.clear();
@@ -85,7 +98,8 @@ void EveApiCorporation::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->starbaseListRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // CorporationSheet request
     requiredParams.clear();
@@ -93,5 +107,6 @@ void EveApiCorporation::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->starbaseDetailRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 }

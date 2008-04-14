@@ -21,13 +21,16 @@ class EveApiRequest;
 
 class EveApiScope: public QObject
 {
-    Q_OBJECT
+        Q_OBJECT
     public:
         /*!
         create the child classes that provide API functionality
         */
-        EveApiScope( QString& host, QString& dataPath, int& xmlIndent,
-            QString& scope, QObject* parent = 0 );
+        EveApiScope( QString& host,
+                     QString& dataPath,
+                     int& xmlIndent,
+                     QString& scope,
+                     QObject* parent = 0 );
 
         virtual ~EveApiScope() {};
 
@@ -66,9 +69,14 @@ class EveApiScope: public QObject
         Create request objects
         */
         virtual void createRequest( QString& requestId,
-                            QStringList& requiredParams,
-                            QStringList& optionalParams,
-                            QStringList& cacheId ) = 0;
+                                    QStringList& requiredParams,
+                                    QStringList& optionalParams,
+                                    QStringList& cacheId,
+                                    const int& p_type,
+                                    const QString& host,
+                                    const quint16& port,
+                                    const QString & user,
+                                    const QString & password ) = 0;
 
     private:
         //! QMutex to sync multiple access to the API
@@ -97,7 +105,11 @@ class EveApiScope: public QObject
         /*!
         create all requests (delegated from the constructor)
         */
-        virtual void createRequests() = 0;
+        virtual void createRequests( const int& proxyType,
+                                     const QString & proxyHost,
+                                     const quint16 & proxyPort,
+                                     const QString & proxyUser,
+                                     const QString & proxyPassword ) = 0;
 
     signals:
         void requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime cacheTime );

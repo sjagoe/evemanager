@@ -5,13 +5,21 @@
 
 class EveApiAccount: public EveApiScope
 {
-    Q_OBJECT
+        Q_OBJECT
     public:
         /*!
         create the child classes that provide API functionality
         */
-        EveApiAccount( QString& host, QString& dataPath, int& xmlIndent,
-            QString& scope, QObject* parent = 0 );
+        EveApiAccount( QString& host,
+                       QString& dataPath,
+                       int& xmlIndent,
+                       QString& scope,
+                       const int& proxyType,
+                       const QString & proxyHost,
+                       const quint16 & proxyPort,
+                       const QString & proxyUser,
+                       const QString & proxyPassword,
+                       QObject* parent = 0 );
 
         /*!
         access the Characters api function
@@ -25,19 +33,28 @@ class EveApiAccount: public EveApiScope
         void createRequest( QString& requestId,
                             QStringList& requiredParams,
                             QStringList& optionalParams,
-                            QStringList& cacheId );
+                            QStringList& cacheId,
+                            const int& p_type,
+                            const QString& host,
+                            const quint16& port,
+                            const QString & user,
+                            const QString & password );
 
         /*!
         create all requests (delegated from the constructor)
         */
-        void createRequests();
+        void createRequests( const int& proxyType,
+                             const QString & proxyHost,
+                             const quint16 & proxyPort,
+                             const QString & proxyUser,
+                             const QString & proxyPassword );
 
         /*!
         return the filename of the Characters.xml request
         */
         static const QString charactersRequestID()
         {
-            return QString("Characters.xml");
+            return QString( "Characters.xml" );
         };
 };
 

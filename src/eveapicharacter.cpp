@@ -6,11 +6,21 @@
 /*!
 create the child classes that provide API functionality
 */
-EveApiCharacter::EveApiCharacter( QString& host, QString& dataPath, int& xmlIndent,
-                                  QString& scope, QObject* parent )
-        : EveApiCommon( host, dataPath, xmlIndent, scope, parent )
+EveApiCharacter::EveApiCharacter( QString& host,
+                                  QString& dataPath,
+                                  int& xmlIndent,
+                                  QString& scope,
+                                  const int& proxyType,
+                                  const QString & proxyHost,
+                                  const quint16 & proxyPort,
+                                  const QString & proxyUser,
+                                  const QString & proxyPassword,
+                                  QObject* parent )
+        : EveApiCommon( host, dataPath, xmlIndent, scope, proxyType, proxyHost,
+                        proxyPort, proxyUser, proxyPassword, parent )
 {
-    this->createRequests();
+    this->createRequests( proxyType, proxyHost, proxyPort, proxyUser,
+                          proxyPassword );
 }
 
 /*!
@@ -34,7 +44,11 @@ QString EveApiCharacter::skillInTraining( QMap<QString, QString>& parameters )
 /*!
 create all requests (delegated from the constructor)
 */
-void EveApiCharacter::createRequests()
+void EveApiCharacter::createRequests( const int& proxyType,
+                                      const QString & proxyHost,
+                                      const quint16 & proxyPort,
+                                      const QString & proxyUser,
+                                      const QString & proxyPassword )
 {
     QStringList requiredParams;
     QStringList optionalParams;
@@ -46,7 +60,8 @@ void EveApiCharacter::createRequests()
     optionalParams.clear();
     cacheID.clear();
     QString requestID = this->characterSheetRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 
     // SkillInTraining request
     requiredParams.clear();
@@ -54,6 +69,7 @@ void EveApiCharacter::createRequests()
     optionalParams.clear();
     cacheID.clear();
     requestID = this->skillInTrainingRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 }
 

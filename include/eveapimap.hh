@@ -5,13 +5,21 @@
 
 class EveApiMap: public EveApiScope
 {
-    Q_OBJECT
+        Q_OBJECT
     public:
         /*!
         create the child classes that provide API functionality
         */
-        EveApiMap( QString& host, QString& dataPath, int& xmlIndent,
-            QString& scope, QObject* parent = 0 );
+        EveApiMap( QString& host,
+                   QString& dataPath,
+                   int& xmlIndent,
+                   QString& scope,
+                   const int& proxyType,
+                   const QString & proxyHost,
+                   const quint16 & proxyPort,
+                   const QString & proxyUser,
+                   const QString & proxyPassword,
+                   QObject* parent = 0 );
 
         /*!
         access the Sovereignty api function
@@ -35,19 +43,28 @@ class EveApiMap: public EveApiScope
         void createRequest( QString& requestId,
                             QStringList& requiredParams,
                             QStringList& optionalParams,
-                            QStringList& cacheId );
+                            QStringList& cacheId,
+                            const int& p_type,
+                            const QString& host,
+                            const quint16& port,
+                            const QString & user,
+                            const QString & password );
 
         /*!
         create all requests (delegated from the constructor)
         */
-        void createRequests();
+        void createRequests( const int& proxyType,
+                             const QString & proxyHost,
+                             const quint16 & proxyPort,
+                             const QString & proxyUser,
+                             const QString & proxyPassword );
 
         /*!
         return the filename of the Sovereignty.xml request
         */
         static const QString sovereigntyRequestID()
         {
-            return QString("Sovereignty.xml");
+            return QString( "Sovereignty.xml" );
         };
 
         /*!
@@ -55,7 +72,7 @@ class EveApiMap: public EveApiScope
         */
         static const QString jumpsRequestID()
         {
-            return QString("Jumps.xml");
+            return QString( "Jumps.xml" );
         };
 
         /*!
@@ -63,7 +80,7 @@ class EveApiMap: public EveApiScope
         */
         static const QString killsRequestID()
         {
-            return QString("Kills.xml");
+            return QString( "Kills.xml" );
         };
 };
 

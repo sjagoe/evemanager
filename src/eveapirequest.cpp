@@ -132,12 +132,12 @@ void EveApiRequest::setProxy( const int& p_type,
         QNetworkProxy::ProxyType proxyType = QNetworkProxy::NoProxy;
         switch ( p_type )
         {
-            case 0:
+            case 1:
             {
                 proxyType = QNetworkProxy::HttpProxy;
                 break;
             }
-            case 1:
+            case 2:
             {
                 proxyType = QNetworkProxy::Socks5Proxy;
                 break;

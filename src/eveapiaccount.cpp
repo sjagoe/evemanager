@@ -5,11 +5,20 @@
 /*!
 create the child classes that provide API functionality
 */
-EveApiAccount::EveApiAccount( QString& host, QString& dataPath, int& xmlIndent,
-    QString& scope, QObject* parent ) :
+EveApiAccount::EveApiAccount( QString& host,
+                              QString& dataPath,
+                              int& xmlIndent,
+                              QString& scope,
+                              const int& proxyType,
+                              const QString & proxyHost,
+                              const quint16 & proxyPort,
+                              const QString & proxyUser,
+                              const QString & proxyPassword,
+                              QObject* parent ) :
         EveApiScope( host, dataPath, xmlIndent, scope, parent )
 {
-    this->createRequests();
+    this->createRequests( proxyType, proxyHost, proxyPort, proxyUser,
+                          proxyPassword );
 }
 
 /*!
@@ -25,23 +34,37 @@ QString EveApiAccount::characters( QMap<QString, QString>& parameters )
 Create request objects
 */
 void EveApiAccount::createRequest( QString& requestId,
-                                     QStringList& requiredParams,
-                                     QStringList& optionalParams,
-                                     QStringList& cacheId )
+                                   QStringList& requiredParams,
+                                   QStringList& optionalParams,
+                                   QStringList& cacheId,
+                                   const int& p_type,
+                                   const QString& host,
+                                   const quint16& port,
+                                   const QString & user,
+                                   const QString & password )
 {
     EveApiRequest* newRequest = new EveApiAccountRequest( requestId,
             this->dataPath(),
             this->xmlIndent(),
             requiredParams,
             optionalParams,
-            cacheId );
+            cacheId,
+            p_type,
+            host,
+            port,
+            user,
+            password );
     this->addRequestType( requestId, newRequest );
 }
 
 /*!
 create all requests (delegated from the constructor)
 */
-void EveApiAccount::createRequests()
+void EveApiAccount::createRequests( const int& proxyType,
+                                    const QString & proxyHost,
+                                    const quint16 & proxyPort,
+                                    const QString & proxyUser,
+                                    const QString & proxyPassword )
 {
     QStringList requiredParams;
     QStringList optionalParams;
@@ -53,5 +76,6 @@ void EveApiAccount::createRequests()
     optionalParams.clear();
     cacheID.clear();
     QString requestID = this->charactersRequestID();
-    createRequest( requestID, requiredParams, optionalParams, cacheID );
+    createRequest( requestID, requiredParams, optionalParams, cacheID,
+                   proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 }
