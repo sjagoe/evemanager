@@ -3,6 +3,7 @@
 #include <QCoreApplication>
 
 #include <QHttp>
+#include <QNetworkProxy>
 #include <QBuffer>
 #include <QDomDocument>
 
@@ -16,10 +17,16 @@ EveApiRequest::EveApiRequest( const QString& requestType,
                               const QList<QString>& requiredParams,
                               const QList<QString>& optionalParams,
                               const QList<QString>& fileIDParam,
+                              const int& p_type,
+                              const QString& host,
+                              const quint16& port,
+                              const QString & user,
+                              const QString & password,
                               QObject* parent )
         : QObject( parent )
 {
     this->_http.reset( new QHttp );
+    this->setProxy( p_type, host, port, user, password );
     this->_requestType = requestType;
     this->_dataPath = dataPath;
     this->_xmlIndent = xmlIndent;
@@ -100,15 +107,45 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
             loadFile.close();
             this->cleanCache( scope, parameters );
             // error (fetch new one?)
-            idStr = this->fetchFromApi( host, scope, parameters/*, internal */);
+            idStr = this->fetchFromApi( host, scope, parameters/*, internal */ );
         }
     }
     else
     {
-        idStr = this->fetchFromApi( host, scope, parameters/*, internal */);
+        idStr = this->fetchFromApi( host, scope, parameters/*, internal */ );
     }
 
     return idStr;
+}
+
+/*!
+Set the proxy to use for http requests
+*/
+void EveApiRequest::setProxy( const int& p_type,
+                              const QString & host,
+                              const quint16 & port,
+                              const QString & user,
+                              const QString & password )
+{
+    if ( this->_http )
+    {
+        QNetworkProxy::ProxyType proxyType = QNetworkProxy::NoProxy;
+        switch ( p_type )
+        {
+            case 0:
+            {
+                proxyType = QNetworkProxy::HttpProxy;
+                break;
+            }
+            case 1:
+            {
+                proxyType = QNetworkProxy::Socks5Proxy;
+                break;
+            }
+        }
+        QNetworkProxy proxy( proxyType, host, port, user, password );
+        this->_http->setProxy( proxy );
+    }
 }
 
 // /*!
@@ -220,7 +257,7 @@ QString EveApiRequest::fetchFromApi( const QString& host, const QString& scope,
 
         this->_requests.insert( id, qMakePair( scope, this->requestType() ) );
 
-        if (idStr.isNull())
+        if ( idStr.isNull() )
             idStr = makeID( scope, id, parameters );
 
         this->_id.insert( id, idStr );
@@ -371,7 +408,7 @@ void EveApiRequest::requestFinished( int id, bool error )
         //}
         //else
         //{
-            emit requestFailed( idStr, err, response );
+        emit requestFailed( idStr, err, response );
         //}
     }
     else
@@ -425,7 +462,7 @@ void EveApiRequest::requestFinished( int id, bool error )
 //            }
 //            else
 //            {
-                emit requestComplete( idStr, xmlData, response, cacheTime );
+            emit requestComplete( idStr, xmlData, response, cacheTime );
 //            }
         }
     }

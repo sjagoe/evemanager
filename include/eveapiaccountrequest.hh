@@ -11,12 +11,17 @@ class EveApiAccountRequest: public EveApiRequest
         pass the constructor args to the super-class
         */
         EveApiAccountRequest( const QString& requestType,
-                                const QString& dataPath,
-                                const int& xmlIndent,
-                                const QList<QString>& requiredParams,
-                                const QList<QString>& optionalParams,
-                                const QList<QString>& fileIDParam,
-                                QObject* parent = 0 );
+                              const QString& dataPath,
+                              const int& xmlIndent,
+                              const QList<QString>& requiredParams,
+                              const QList<QString>& optionalParams,
+                              const QList<QString>& fileIDParam,
+                              const int& p_type = 0,
+                              const QString& host = QString(),
+                              const quint16& port = 0,
+                              const QString & user = QString(),
+                              const QString & password = QString(),
+                              QObject* parent = 0 );
 
     private:
         /*!

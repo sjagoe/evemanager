@@ -16,6 +16,11 @@ class EveApiCharacterRequest: public EveApiRequest
                                 const QList<QString>& requiredParams,
                                 const QList<QString>& optionalParams,
                                 const QList<QString>& fileIDParam,
+                                const int& p_type = 0,
+                                const QString& host = QString(),
+                                const quint16& port = 0,
+                                const QString & user = QString(),
+                                const QString & password = QString(),
                                 QObject* parent = 0 );
 
     private:
