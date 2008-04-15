@@ -115,12 +115,64 @@ class %(class_name)s: public %(inherit)s
 
 """, 
         OTHER: """
+#ifndef %(define)s
+#define %(define)s
+
+#include "%(inherit_file)s"
+
+class %(class_name)s: public %(inherit)s
+{
+        Q_OBJECT
+    public:
+        /*!
+        create the child classes that provide API functionality
+        */
+        %(class_name)s( QString& host,
+                       QString& dataPath,
+                       int& xmlIndent,
+                       QString& scope,
+                       const int& proxyType,
+                       const QString & proxyHost,
+                       const quint16 & proxyPort,
+                       const QString & proxyUser,
+                       const QString & proxyPassword,
+                       QObject* parent = 0 );
+
+%(header_access_block)s
+
+    private:
+        /*!
+        Create request objects
+        */
+        void createRequest( QString& requestId,
+                            QStringList& requiredParams,
+                            QStringList& optionalParams,
+                            QStringList& cacheId,
+                            const int& p_type,
+                            const QString& host,
+                            const quint16& port,
+                            const QString & user,
+                            const QString & password );
+
+        /*!
+        create all requests (delegated from the constructor)
+        */
+        void createRequests( const int& proxyType,
+                             const QString & proxyHost,
+                             const quint16 & proxyPort,
+                             const QString & proxyUser,
+                             const QString & proxyPassword );
+%(header_id_block)s
+};
+
+#endif
+
 """},
     SOURCES: {
         COMMON: """
 #include "%(filename)s.hh"
 
-#include "eveapicharacterrequest.hh"
+#include "%(request_type_include)s"
 
 /*!
 create the child classes that provide API functionality
@@ -186,6 +238,75 @@ void %(class_name)s::createCommonRequests( const int& proxyType,
 
 """,
         OTHER: """
+#include "%(filename)s.hh"
+
+#include "%(request_type_include)s"
+
+/*!
+create the child classes that provide API functionality
+*/
+%(class_name)s::%(class_name)s( QString& host,
+                              QString& dataPath,
+                              int& xmlIndent,
+                              QString& scope,
+                              const int& proxyType,
+                              const QString & proxyHost,
+                              const quint16 & proxyPort,
+                              const QString & proxyUser,
+                              const QString & proxyPassword,
+                              QObject* parent ) :
+        %(inherit)s( host, dataPath, xmlIndent, scope, parent )
+{
+    this->createRequests( proxyType, proxyHost, proxyPort, proxyUser,
+                          proxyPassword );
+}
+
+%(source_access_block)s
+
+/*!
+Create request objects
+*/
+void %(class_name)s::createRequest( QString& requestId,
+                                   QStringList& requiredParams,
+                                   QStringList& optionalParams,
+                                   QStringList& cacheId,
+                                   const int& p_type,
+                                   const QString& host,
+                                   const quint16& port,
+                                   const QString & user,
+                                   const QString & password )
+{
+    EveApiRequest* newRequest = new %(request_type)s( requestId,
+            this->dataPath(),
+            this->xmlIndent(),
+            requiredParams,
+            optionalParams,
+            cacheId,
+            p_type,
+            host,
+            port,
+            user,
+            password );
+    this->addRequestType( requestId, newRequest );
+}
+
+/*!
+create all requests (delegated from the constructor)
+*/
+void %(class_name)s::createRequests( const int& proxyType,
+                                    const QString & proxyHost,
+                                    const quint16 & proxyPort,
+                                    const QString & proxyUser,
+                                    const QString & proxyPassword )
+{
+    QStringList requiredParams;
+    QStringList optionalParams;
+    QStringList cacheID;
+    QString requestID;
+
+%(source_setup_block)s
+}
+
 """}}
 
 
@@ -272,8 +393,11 @@ if __name__ == "__main__":
 
         inherit_file = "%s.%s" % (class_value["inherit"].lower(), HEADER_EXT)
         define = "__%s_HH__" % class_value["class_name"].upper()
+        request_type_include = "%s.%s" % (class_value["request_type"].lower(),
+                                          HEADER_EXT)
         class_value["define"] = define
         class_value["inherit_file"] = inherit_file
+        class_value["request_type_include"] = request_type_include
 
         header_id_blocks = ""
         header_access_blocks = ""
