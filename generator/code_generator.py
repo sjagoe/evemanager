@@ -4,34 +4,36 @@ import string
 
 HEADERS = "headers"
 HEADER_EXT = "hh"
+HEADER_DIR = "include"
 SOURCES = "sources"
 SOURCES_EXT = "cpp"
+SOURCES_DIR = "src"
 COMMON = "common"
 OTHER = "other"
 # HEADER_REQUEST_ID_BLOCK_TEMPLATE
-#   1 xml api method
+#   1 api_function api method
 #   2 method name
-#   3 xml api method
+#   3 api_function api method
 HEADER_REQUEST_ID_BLOCK_TEMPLATE = """
         /*!
-        return the filename of the %(xml)s request
+        return the filename of the %(api_function)s request
         */
         static const QString %(method)sRequestID()
         {
-            return QString( "%(xml)s" );
+            return QString( "%(api_function)s" );
         };
 """
 # HEADER_ACCESS_BLOCK_TEMPLATE: 
-#   1 xml api method
+#   1 api_function api method
 #   2 Second param: method name
 HEADER_ACCESS_BLOCK_TEMPLATE = """
         /*!
-        access the %(xml)s api function
+        access the %(api_function)s api function
         */
         QString %(method)s( QMap<QString, QString>& parameters );
 """
 SOURCE_SETUP_BLOCK_TEMPLATE = """
-    // %(xml)s request
+    // %(api_function)s request
     requiredParams.clear();
     %(required)s
     optionalParams.clear();
@@ -45,7 +47,7 @@ SOURCE_SETUP_BLOCK_TEMPLATE = """
 
 SOURCE_ACCESS_BLOCK_TEMPLATE = """
 /*!
-access the %(xml)s api function
+access the %(api_function)s api function
 */
 QString %(class_name)s::%(method)s( QMap<QString, QString>& parameters )
 {
@@ -190,9 +192,6 @@ class Generator(object):
     def __init__(self):
         pass
 
-# templates:
-#            * dictionary of headers and sources
-#            * Each dict value is a dictionary of common or other
 
 
 
@@ -200,14 +199,14 @@ if __name__ == "__main__":
     block_values = {
         "walletJournal": {
             "method": "walletJournal",
-            "xml": "WalletJournal.xml",
+            "api_function": "WalletJournal.xml",
             "required": """requiredParams << "userID" << "characterID" << "apiKey";""",
             "optional": """optionalParams << "beforeRefID";""",
             "cacheID": """cacheID << "beforeRefID";""",
             "class_name": "EveApiCommon"},
         "accountBalance": {
             "method": "accountBalance",
-            "xml": "AccountBalance.xml",
+            "api_function": "AccountBalance.xml",
             "required": """requiredParams << "userID" << "characterID" << "apiKey";""",
             "optional": "",
             "cacheID": "",
@@ -243,8 +242,6 @@ if __name__ == "__main__":
         source_access_block = SOURCE_ACCESS_BLOCK_TEMPLATE % blocks
         source_access_blocks = source_access_blocks + source_access_block
 
-    #print header_id_blocks, header_access_blocks, source_setup_blocks, source_access_blocks
-
     class_values["header_access_block"] = header_access_blocks
     class_values["header_id_block"] = header_id_blocks
     class_values["source_access_block"] = source_access_blocks
@@ -254,4 +251,4 @@ if __name__ == "__main__":
     header = templates[HEADERS][COMMON] % class_values
 
     #print source
-    print header
+    #print header
