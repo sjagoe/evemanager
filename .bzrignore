@@ -6,3 +6,4 @@ debug
 Makefile*
 *.Debug
 *.Release
+*.backup
