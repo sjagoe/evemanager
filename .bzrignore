@@ -7,3 +7,5 @@ Makefile*
 *.Debug
 *.Release
 *.backup
+include/eveapicommon.hh
+src/eveapicommon.cpp

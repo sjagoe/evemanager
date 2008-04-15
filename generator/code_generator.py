@@ -41,7 +41,7 @@ SOURCE_SETUP_BLOCK_TEMPLATE = """
     %(optional)s
     cacheID.clear();
     %(cacheID)s
-    QString requestID = this->%(method)sRequestID();
+    requestID = this->%(method)sRequestID();
     createRequest( requestID, requiredParams, optionalParams, cacheID,
                    proxyType, proxyHost, proxyPort, proxyUser, proxyPassword );
 """
@@ -179,6 +179,7 @@ void %(class_name)s::createCommonRequests( const int& proxyType,
     QStringList requiredParams;
     QStringList optionalParams;
     QStringList cacheID;
+    QString requestID;
 
 %(source_setup_block)s
 }
@@ -280,7 +281,6 @@ if __name__ == "__main__":
         source_access_blocks = ""
 
         for blocks in block_value.itervalues():
-            print blocks
             header_id_block = HEADER_REQUEST_ID_BLOCK_TEMPLATE % blocks
             header_id_blocks = header_id_blocks + header_id_block
 
