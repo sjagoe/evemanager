@@ -11,3 +11,10 @@ include/eveapicommon.hh
 src/eveapicommon.cpp
 include/eveapiaccount.hh
 src/eveapiaccount.cpp
+include/eveapicharacter.hh
+include/eveapicorporation.hh
+include/eveapieve.hh
+src/eveapicharacter.cpp
+src/eveapicorporation.cpp
+src/eveapieve.cpp
+src/eveapimap.cpp

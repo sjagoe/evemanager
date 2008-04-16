@@ -182,6 +182,201 @@
         </method>
       </methods>
     </scope>
+    <scope name="eveapicharacter">
+      <template>
+        other
+      </template>
+      <class_name>
+        EveApiCharacter
+      </class_name>
+      <inherit>
+        EveApiCommon
+      </inherit>
+      <filename>
+        eveapicharacter
+      </filename>
+      <request_type>
+        EveApiCharacterRequest
+      </request_type>
+      <methods>
+        <method name="characterSheet">
+          <api_function>
+            CharacterSheet.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+        <method name="skillInTraining">
+          <api_function>
+            SkillInTraining.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+      </methods>
+    </scope>
+    <scope name="eveapicorporation">
+      <template>
+        other
+      </template>
+      <class_name>
+        EveApiCorporation
+      </class_name>
+      <inherit>
+        EveApiCommon
+      </inherit>
+      <filename>
+        eveapicorporation
+      </filename>
+      <request_type>
+        EveApiCharacterRequest
+      </request_type>
+      <methods>
+        <method name="memberTracking">
+          <api_function>
+            MemberTracking.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+        <method name="corporationSheet">
+          <api_function>
+            CorporationSheet.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+        <method name="starbaseList">
+          <api_function>
+            StarbaseList.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+	    <required>
+              version
+            </required>
+          </params>
+        </method>
+        <method name="starbaseDetail">
+          <api_function>
+            StarbaseDetail.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+	    <required>
+              version
+            </required>
+          </params>
+        </method>
+      </methods>
+    </scope>
+    <scope name="eveapieve">
+      <template>
+        other
+      </template>
+      <class_name>
+        EveApiEve
+      </class_name>
+      <inherit>
+        EveApiScope
+      </inherit>
+      <filename>
+        eveapieve
+      </filename>
+      <request_type>
+        EveApiGeneralRequest
+      </request_type>
+      <methods>
+        <method name="refTypes">
+          <api_function>
+            RefTypes.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="skillTree">
+          <api_function>
+            SkillTree.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="allianceList">
+          <api_function>
+            AllianceList.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="errorList">
+          <api_function>
+            ErrorList.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="characterID">
+          <api_function>
+            CharacterID.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="conquerableStationsList">
+          <api_function>
+            ConquerableStationsList.xml
+          </api_function>
+          <params />
+        </method>
+      </methods>
+    </scope>
   </scopes>
 </eveapi_code_generator>
 

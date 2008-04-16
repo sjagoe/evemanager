@@ -16,7 +16,8 @@ EveApiMap::EveApiMap( QString& host,
                       const QString & proxyUser,
                       const QString & proxyPassword,
                       QObject* parent )
-        : EveApiScope( host, dataPath, xmlIndent, scope, parent )
+        : EveApiScope( host, dataPath, xmlIndent, scope, proxyType, proxyHost,
+                        proxyPort, proxyUser, proxyPassword, parent )
 {
     this->createRequests( proxyType, proxyHost, proxyPort, proxyUser,
                           proxyPassword );
