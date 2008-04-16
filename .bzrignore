@@ -18,3 +18,5 @@ src/eveapicharacter.cpp
 src/eveapicorporation.cpp
 src/eveapieve.cpp
 src/eveapimap.cpp
+src/eveapimap.cpp
+include/eveapimap.hh

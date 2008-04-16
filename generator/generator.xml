@@ -377,6 +377,43 @@
         </method>
       </methods>
     </scope>
+    <scope name="eveapimap">
+      <template>
+        other
+      </template>
+      <class_name>
+        EveApiMap
+      </class_name>
+      <inherit>
+        EveApiScope
+      </inherit>
+      <filename>
+        eveapimap
+      </filename>
+      <request_type>
+        EveApiGeneralRequest
+      </request_type>
+      <methods>
+        <method name="sovereignty">
+          <api_function>
+            Sovereignty.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="jumps">
+          <api_function>
+            Jumps.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="kills">
+          <api_function>
+            Kills.xml
+          </api_function>
+          <params />
+        </method>
+      </methods>
+    </scope>
   </scopes>
 </eveapi_code_generator>
 
