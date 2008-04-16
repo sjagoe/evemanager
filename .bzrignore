@@ -9,3 +9,5 @@ Makefile*
 *.backup
 include/eveapicommon.hh
 src/eveapicommon.cpp
+include/eveapiaccount.hh
+src/eveapiaccount.cpp

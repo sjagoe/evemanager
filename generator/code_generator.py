@@ -422,8 +422,8 @@ if __name__ == "__main__":
         class_value["source_access_block"] = source_access_blocks
         class_value["source_setup_block"] = source_setup_blocks
 
-        source = templates[SOURCES][COMMON] % class_value
-        header = templates[HEADERS][COMMON] % class_value
+        source = templates[SOURCES][class_value["template"]] % class_value
+        header = templates[HEADERS][class_value["template"]] % class_value
         
         header_file = "%s.%s" % (class_value["filename"].lower(), HEADER_EXT)
         source_file = "%s.%s" % (class_value["filename"].lower(), SOURCES_EXT)
