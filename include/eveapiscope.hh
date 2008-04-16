@@ -30,6 +30,11 @@ class EveApiScope: public QObject
                      QString& dataPath,
                      int& xmlIndent,
                      QString& scope,
+                     const int& proxyType,
+                     const QString & proxyHost,
+                     const quint16 & proxyPort,
+                     const QString & proxyUser,
+                     const QString & proxyPassword,
                      QObject* parent = 0 );
 
         virtual ~EveApiScope() {};

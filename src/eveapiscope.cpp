@@ -9,8 +9,16 @@
 /*!
 create the child classes that provide API functionality
 */
-EveApiScope::EveApiScope( QString& host, QString& dataPath, int& xmlIndent,
-    QString& scope, QObject* parent )
+EveApiScope::EveApiScope( QString& host,
+                          QString& dataPath,
+                          int& xmlIndent,
+                          QString& scope,
+                          const int& /*proxyType*/,
+                          const QString & /*proxyHost*/,
+                          const quint16 & /*proxyPort*/,
+                          const QString & /*proxyUser*/,
+                          const QString & /*proxyPassword*/,
+                          QObject* parent )
         : QObject( parent )
 {
     this->_hostName = host;

@@ -186,8 +186,9 @@ create the child classes that provide API functionality
                             const quint16& proxyPort,
                             const QString & proxyUser,
                             const QString & proxyPassword,
-                            QObject* parent )
-        : %(inherit)s( host, dataPath, xmlIndent, scope, parent )
+                            QObject* parent ) :
+        %(inherit)s( host, dataPath, xmlIndent, scope, proxyType, proxyHost,
+                        proxyPort, proxyUser, proxyPassword, parent )
 {
     this->createCommonRequests( proxyType, proxyHost, proxyPort, proxyUser,
                                 proxyPassword );
@@ -240,6 +241,9 @@ void %(class_name)s::createCommonRequests( const int& proxyType,
         OTHER: """
 #include "%(filename)s.hh"
 
+//#include <QList>
+//#include <QStringList>
+
 #include "%(request_type_include)s"
 
 /*!
@@ -255,7 +259,8 @@ create the child classes that provide API functionality
                               const QString & proxyUser,
                               const QString & proxyPassword,
                               QObject* parent ) :
-        %(inherit)s( host, dataPath, xmlIndent, scope, parent )
+        %(inherit)s( host, dataPath, xmlIndent, scope, proxyType, proxyHost,
+                        proxyPort, proxyUser, proxyPassword, parent )
 {
     this->createRequests( proxyType, proxyHost, proxyPort, proxyUser,
                           proxyPassword );
@@ -309,11 +314,6 @@ void %(class_name)s::createRequests( const int& proxyType,
 
 """}}
 
-
-class Generator(object):
-
-    def __init__(self):
-        pass
 
 class Parser(object):
 
@@ -384,13 +384,13 @@ class Parser(object):
 
         return (class_values, block_values)
 
-if __name__ == "__main__":
-    p = Parser()
-    class_values, block_values = p.parse("generator.xml")
 
-    for scope_name, class_value in class_values.iteritems():
-        block_value = block_values[scope_name]
+class Generator(object):
 
+    def __init__(self):
+        pass
+
+    def _generate_fileset(self, scope_name, class_value, block_value):
         inherit_file = "%s.%s" % (class_value["inherit"].lower(), HEADER_EXT)
         define = "__%s_HH__" % class_value["class_name"].upper()
         request_type_include = "%s.%s" % (class_value["request_type"].lower(),
@@ -424,17 +424,42 @@ if __name__ == "__main__":
 
         source = templates[SOURCES][class_value["template"]] % class_value
         header = templates[HEADERS][class_value["template"]] % class_value
-        
+
+        return (source, header)
+
+    def _write_fileset(self, source, header, class_value):
         header_file = "%s.%s" % (class_value["filename"].lower(), HEADER_EXT)
         source_file = "%s.%s" % (class_value["filename"].lower(), SOURCES_EXT)
 
-        header_fh = open(header_file, "w")
+        header_path = os.path.join(HEADER_DIR, header_file)
+        source_path = os.path.join(SOURCES_DIR, source_file)
+
+        header_fh = open(header_path, "w")
         header_fh.write(header)
         header_fh.close()
 
-        source_fh = open(source_file, "w")
+        source_fh = open(source_path, "w")
         source_fh.write(source)
         source_fh.close()
+
+
+    def generate(self, filename):
+        parser = Parser()
+        class_values, block_values = parser.parse(filename)
+
+        for scope_name, class_value in class_values.iteritems():
+            block_value = block_values[scope_name]
+            source, header = self._generate_fileset(scope_name,
+                                                    class_value,
+                                                    block_value)
+            self._write_fileset(source, header, class_value)
+
+
+
+if __name__ == "__main__":
+    generator = Generator()
+    xml_path = os.path.join(os.path.dirname(__file__), "generator.xml")
+    generator.generate(xml_path)
 
 
 #     block_values = {
