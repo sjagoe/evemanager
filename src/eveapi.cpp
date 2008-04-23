@@ -70,6 +70,27 @@ EveApiCorporation& EveApi::corp()
 }
 
 /*!
+  Set the proxy to use for http requests
+*/
+void EveApi::setProxy( const int& proxyType,
+		       const QString& proxyHost,
+		       const quint16& proxyPort,
+		       const QString & proxyUser,
+		       const QString & proxyPassword )
+{
+  this->_eve->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+		       proxyPassword);
+  this->_map->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+		       proxyPassword);
+  this->_char->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+			proxyPassword);
+  this->_corp->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+			proxyPassword);
+  this->_account->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+			   proxyPassword);
+}
+
+/*!
 create the scopes, and connect scope-specific signals and slots
 */
 void EveApi::createScopes( const int& proxyType,

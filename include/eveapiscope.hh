@@ -39,6 +39,16 @@ class EveApiScope: public QObject
 
         virtual ~EveApiScope() {};
 
+    public slots:
+        /*!
+        Set the proxy to use for http requests
+        */
+        void setProxy( const int& proxyType,
+		       const QString& proxyHost,
+		       const quint16& proxyPort,
+		       const QString & proxyUser,
+		       const QString & proxyPassword );
+
     protected:
         /*!
         Get the host of the API server

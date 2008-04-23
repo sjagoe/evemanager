@@ -57,6 +57,16 @@ class EveApi: public QObject
         */
         EveApiCorporation& corp();
 
+    public slots:
+        /*!
+        Set the proxy to use for http requests
+        */
+        void setProxy( const int& proxyType,
+		       const QString& proxyHost,
+		       const quint16& proxyPort,
+		       const QString & proxyUser,
+		       const QString & proxyPassword );
+
     private:
         //! API Server hostname
         QString _hostName;

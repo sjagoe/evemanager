@@ -30,6 +30,22 @@ EveApiScope::EveApiScope( QString& host,
     qRegisterMetaType<QDateTime>("QDateTime");
 }
 
+/*!
+  Set the proxy to use for http requests
+*/
+void EveApiScope::setProxy( const int& proxyType,
+	       const QString& proxyHost,
+	       const quint16& proxyPort,
+	       const QString & proxyUser,
+	       const QString & proxyPassword )
+{
+  EveApiRequest* request;
+  foreach(request, this->_apiRequests)
+    {
+      request->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+			proxyPassword);
+    }
+}
 
 /*!
 Get the host of the API server
