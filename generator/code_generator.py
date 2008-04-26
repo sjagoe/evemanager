@@ -1,3 +1,20 @@
+# Copyright 2008 Simon Jagoe
+#
+# This file is part of EVE_API_Qt.
+#
+# EVE_API_Qt is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# EVE_API_Qt is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
+
 import os.path
 import string
 
@@ -11,10 +28,7 @@ SOURCES_EXT = "cpp"
 SOURCES_DIR = "src"
 COMMON = "common"
 OTHER = "other"
-# HEADER_REQUEST_ID_BLOCK_TEMPLATE
-#   1 api_function api method
-#   2 method name
-#   3 api_function api method
+
 HEADER_REQUEST_ID_BLOCK_TEMPLATE = """
         /*!
         return the filename of the %(api_function)s request
@@ -24,9 +38,7 @@ HEADER_REQUEST_ID_BLOCK_TEMPLATE = """
             return QString( "%(api_function)s" );
         };
 """
-# HEADER_ACCESS_BLOCK_TEMPLATE: 
-#   1 api_function api method
-#   2 Second param: method name
+
 HEADER_ACCESS_BLOCK_TEMPLATE = """
         /*!
         access the %(api_function)s api function
@@ -60,6 +72,25 @@ QString %(class_name)s::%(method)s( QMap<QString, QString>& parameters )
 templates = {
     HEADERS: {
         COMMON: """
+/*
+ * Copyright 2007-2008 Simon Jagoe
+ *
+ * This file is part of EVE_API_Qt.
+ *
+ * EVE_API_Qt is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * EVE_API_Qt is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #ifndef %(define)s
 #define %(define)s
 
@@ -113,8 +144,27 @@ class %(class_name)s: public %(inherit)s
 
 #endif
 
-""", 
+""",
         OTHER: """
+/*
+ * Copyright 2007-2008 Simon Jagoe
+ *
+ * This file is part of EVE_API_Qt.
+ *
+ * EVE_API_Qt is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * EVE_API_Qt is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #ifndef %(define)s
 #define %(define)s
 
@@ -170,6 +220,25 @@ class %(class_name)s: public %(inherit)s
 """},
     SOURCES: {
         COMMON: """
+/*
+ * Copyright 2007-2008 Simon Jagoe
+ *
+ * This file is part of EVE_API_Qt.
+ *
+ * EVE_API_Qt is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * EVE_API_Qt is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "%(filename)s.hh"
 
 #include "%(request_type_include)s"
@@ -239,6 +308,25 @@ void %(class_name)s::createCommonRequests( const int& proxyType,
 
 """,
         OTHER: """
+/*
+ * Copyright 2007-2008 Simon Jagoe
+ *
+ * This file is part of EVE_API_Qt.
+ *
+ * EVE_API_Qt is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * EVE_API_Qt is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "%(filename)s.hh"
 
 //#include <QList>
@@ -335,7 +423,7 @@ class Parser(object):
 
     def _parse_params(self, params, param_base):
         param_string = ""
-        if len(params) > 0:                
+        if len(params) > 0:
             param_string = param_base
             for r in params:
                 param_string = "%s << \"%s\"" % (param_string, r.text.strip())
@@ -460,62 +548,3 @@ if __name__ == "__main__":
     generator = Generator()
     xml_path = os.path.join(os.path.dirname(__file__), "generator.xml")
     generator.generate(xml_path)
-
-
-#     block_values = {
-#         "walletJournal": {
-#             "method": "walletJournal",
-#             "api_function": "WalletJournal.xml",
-#             "required": """requiredParams << "userID" << "characterID" << "apiKey";""",
-#             "optional": """optionalParams << "beforeRefID";""",
-#             "cacheID": """cacheID << "beforeRefID";""",
-#             "class_name": "EveApiCommon"},
-#         "accountBalance": {
-#             "method": "accountBalance",
-#             "api_function": "AccountBalance.xml",
-#             "required": """requiredParams << "userID" << "characterID" << "apiKey";""",
-#             "optional": "",
-#             "cacheID": "",
-#             "class_name": "EveApiCommon"},
-#         }
-#     class_values = {
-#         "class_name": "EveApiCommon",
-#         "inherit": "EveApiScope",
-#         "filename": "eveapicommon",
-#         "request_type": "EveApiCharacterRequest",
-#         }
-
-#     inherit_file = "%s.%s" % (class_values["inherit"].lower(), HEADER_EXT)
-#     define = "__%s_HH__" % class_values["class_name"].upper()
-#     class_values["define"] = define
-#     class_values["inherit_file"] = inherit_file
-
-#     header_id_blocks = ""
-#     header_access_blocks = ""
-#     source_setup_blocks = ""
-#     source_access_blocks = ""
-
-#     for blocks in block_values.itervalues():
-#         header_id_block = HEADER_REQUEST_ID_BLOCK_TEMPLATE % blocks
-#         header_id_blocks = header_id_blocks + header_id_block
-
-#         header_access_block = HEADER_ACCESS_BLOCK_TEMPLATE % blocks
-#         header_access_blocks = header_access_blocks + header_access_block
-
-#         source_setup_block = SOURCE_SETUP_BLOCK_TEMPLATE % blocks
-#         source_setup_blocks = source_setup_blocks + source_setup_block
-
-#         source_access_block = SOURCE_ACCESS_BLOCK_TEMPLATE % blocks
-#         source_access_blocks = source_access_blocks + source_access_block
-
-#     class_values["header_access_block"] = header_access_blocks
-#     class_values["header_id_block"] = header_id_blocks
-#     class_values["source_access_block"] = source_access_blocks
-#     class_values["source_setup_block"] = source_setup_blocks
-
-#     source = templates[SOURCES][COMMON] % class_values
-#     header = templates[HEADERS][COMMON] % class_values
-
-#     #print source
-#     #print header
-
