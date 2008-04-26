@@ -52,6 +52,8 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="EVE_API_Qt.pro" />
+		<Unit filename="generator/code_generator.py" />
+		<Unit filename="generator/generator.xml" />
 		<Unit filename="include/eveapi.hh" />
 		<Unit filename="include/eveapiaccount.hh" />
 		<Unit filename="include/eveapiaccountrequest.hh" />
