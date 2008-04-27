@@ -32,13 +32,6 @@ VERSION = 1.3.1
 ## For testing, uncomment this line:
 CONFIG += console
 
-## Uncomment the second line to build the test app
-## Comment the second line to build the library
-## The first line can be left uncommented in both cases
-## Note that the app requires the lib built as a dll (or .so)
-#TEMPLATE = lib
-#TEMPLATE = app
-
 # if base is selected, build the base api, and do not link to QtGui
 contains ( API_BUILD, base ) {
     TEMPLATE = lib    # Dynamic library
