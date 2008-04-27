@@ -18,6 +18,7 @@
  */
 
 #include "evemanagercharacter.hh"
+#include "evemanagercharactersettings.hh"
 
 #include <QGroupBox>
 #include <QHBoxLayout>
@@ -31,12 +32,28 @@ Create the character widget
 em_gui::EveManagerCharacter::EveManagerCharacter( QWidget* parent ) :
         QWidget( parent )
 {
+    this->setLayout( this->_layoutWidget() );
+}
+
+/*!
+Set up the character widget
+*/
+QLayout* em_gui::EveManagerCharacter::_layoutWidget()
+{
     this->_btnSettings = new QPushButton( tr( "&Settings" ) );
 
     this->_grpCharacter = new QGroupBox( tr( "Character" ) );
     this->_btnSkillTree = new QPushButton( tr( "Skill &Tree" ) );
 
     this->_stackDetails = new QStackedWidget;
+
+    em_gui::EveManagerCharacterSettings* emcs = new EveManagerCharacterSettings;
+    this->_characterDetails.insert( this->_btnSettings, emcs );
+    this->_stackDetails->addWidget( emcs );
+
+    QWidget* nw = new QWidget;
+    this->_characterDetails.insert( this->_btnSkillTree, nw );
+    this->_stackDetails->addWidget( nw );
 
     QVBoxLayout* layoutGrpCharacter = new QVBoxLayout;
     layoutGrpCharacter->addWidget( this->_btnSkillTree );
@@ -53,5 +70,36 @@ em_gui::EveManagerCharacter::EveManagerCharacter( QWidget* parent ) :
     layoutWidget->addLayout( layoutSelectors );
     layoutWidget->addWidget( this->_stackDetails );
 
-    this->setLayout( layoutWidget );
+    this->_connect();
+
+    return layoutWidget;
+}
+
+/*!
+Connect buttons etc
+*/
+void em_gui::EveManagerCharacter::_connect()
+{
+    connect( this->_btnSettings, SIGNAL(clicked()),
+        this, SLOT(on_btnSettings_clicked()));
+    connect( this->_btnSkillTree, SIGNAL(clicked()),
+        this, SLOT(on_btnSkillTree_clicked()));
+}
+
+/*!
+Show the Settings pane
+*/
+void em_gui::EveManagerCharacter::on_btnSettings_clicked()
+{
+    this->_stackDetails->setCurrentWidget(
+        this->_characterDetails.value( this->_btnSettings ) );
+}
+
+/*!
+Show the SkillTree pane
+*/
+void em_gui::EveManagerCharacter::on_btnSkillTree_clicked()
+{
+    this->_stackDetails->setCurrentWidget(
+        this->_characterDetails.value( this->_btnSkillTree ) );
 }

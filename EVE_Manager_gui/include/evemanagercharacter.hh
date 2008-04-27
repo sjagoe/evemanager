@@ -20,10 +20,12 @@
 #ifndef EVEMANAGERCHARACTER_HH_INCLUDED
 #define EVEMANAGERCHARACTER_HH_INCLUDED
 
+#include <QMap>
 #include <QWidget>
 
 class QPushButton;
 class QGroupBox;
+class QLayout;
 class QStackedWidget;
 
 namespace em_gui
@@ -48,6 +50,30 @@ namespace em_gui
 
             //! stack containing all the detailed attributes for a character
             QStackedWidget* _stackDetails;
+
+            //! map buttons to a widget to display in the stack
+            QMap<QPushButton*, QWidget*> _characterDetails;
+
+            /*!
+            Set up the character widget
+            */
+            QLayout* _layoutWidget();
+
+            /*!
+            Connect buttons etc
+            */
+            void _connect();
+
+        private slots:
+            /*!
+            Show the Settings pane
+            */
+            void on_btnSettings_clicked();
+
+            /*!
+            Show the SkillTree pane
+            */
+            void on_btnSkillTree_clicked();
     };
 };
 
