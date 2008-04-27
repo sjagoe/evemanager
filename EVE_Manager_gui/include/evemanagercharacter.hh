@@ -16,3 +16,20 @@
  * You should have received a copy of the GNU General Public License
  * along with <<<<>>>>.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#ifndef EVEMANAGERCHARACTER_HH_INCLUDED
+#define EVEMANAGERCHARACTER_HH_INCLUDED
+
+#include <QWidget>
+
+namespace em_gui
+{
+    class EveManagerCharacter: public QWidget
+    {
+        Q_OBJECT
+        public:
+            EveManagerCharacterWidget( QWidget* parent = 0 );
+    };
+};
+
+#endif // EVEMANAGERCHARACTERWIDGET_HH_INCLUDED

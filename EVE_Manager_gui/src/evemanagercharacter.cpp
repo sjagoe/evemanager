@@ -17,17 +17,4 @@
  * along with <<<<>>>>.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef EVEMANAGERCHARACTERWIDGET_HH_INCLUDED
-#define EVEMANAGERCHARACTERWIDGET_HH_INCLUDED
-
-#include <QWidget>
-
-namespace em_gui
-{
-    class EveManagerCharacterWidget: public QWidget
-    {
-        Q_OBJECT
-    };
-};
-
-#endif // EVEMANAGERCHARACTERWIDGET_HH_INCLUDED
+#include "evemanagercharacter.hh"
