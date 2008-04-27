@@ -14,7 +14,7 @@
 		</MakeCommands>
 		<Build>
 			<Target title="release">
-				<Option output="bin/release/EVE_API_Qt_base_app" prefix_auto="1" extension_auto="1" />
+				<Option output="EVE_API_Qt_base_app.sh" prefix_auto="0" extension_auto="0" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
