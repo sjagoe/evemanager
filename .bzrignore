@@ -1,0 +1,11 @@
+*.~ml
+*/bin
+*/release
+*/debug
+*.layout
+Makefile*
+*/Makefile*
+*.Debug
+*.Release
+*.backup
+TAGS
