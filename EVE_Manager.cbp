@@ -42,9 +42,13 @@
 		<Unit filename="EVE_Manager_controller/include/evemanager.hh" />
 		<Unit filename="EVE_Manager_controller/src/evemanager.cpp" />
 		<Unit filename="EVE_Manager_gui/EVE_Manager_gui.pro" />
+		<Unit filename="EVE_Manager_gui/include/evemanagercharacterwidget.hh" />
 		<Unit filename="EVE_Manager_gui/include/evemanagerwindow.hh" />
+		<Unit filename="EVE_Manager_gui/src/evemanagercharacterwidget.cpp" />
 		<Unit filename="EVE_Manager_gui/src/evemanagerwindow.cpp" />
 		<Unit filename="EVE_Manager_model/EVE_Manager_model.pro" />
+		<Unit filename="EVE_Manager_model/include/evemanagersettings.hh" />
+		<Unit filename="EVE_Manager_model/src/evemanagersettings.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
