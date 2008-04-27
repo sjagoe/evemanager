@@ -17,7 +17,17 @@
  * along with EVE_Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QApplication>
+#include <QObject>
+
+#include "../EVE_Manager_controller/include/evemanager.hh"
+
 int main(int argc, char** argv)
 {
-    return 0;
+    QApplication app( argc, argv );
+
+    em_controller::EveManager eveManager;
+    QObject::connect( &eveManager, SIGNAL(exit()), &app, SLOT(quit()));
+
+    return app.exec();
 }

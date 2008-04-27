@@ -16,3 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with EVE_Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#include "evemanagerwindow.hh"
+
+//#include <QHBoxLayout>
+#include <QMenuBar>
+#include <QPushButton>
+#include <QTabWidget>
+
+/*!
+Create and populate the window.
+*/
+em_gui::EveManagerWindow::EveManagerWindow( QWidget* parent ) :
+        QMainWindow( parent )
+{
+    QMenu* fileMenu = this->menuBar()->addMenu( tr( "&File" ) );
+    QAction* quit = fileMenu->addAction( tr( "&Quit" ), this, SIGNAL( exit() ) );
+    quit->setShortcut( tr( "Ctrl+Q" ) );
+
+    this->_characters = new QTabWidget;
+    this->setCentralWidget( this->_characters );
+}
+

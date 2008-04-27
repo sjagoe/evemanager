@@ -16,3 +16,29 @@
  * You should have received a copy of the GNU General Public License
  * along with EVE_Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#include <QObject>
+
+namespace em_gui
+{
+    class EveManagerWindow;
+};
+
+namespace em_controller
+{
+    class EveManager: public QObject
+    {
+            Q_OBJECT
+        public:
+            /*!
+            Create model and gui
+            */
+            EveManager( QObject* parent = 0 );
+
+        private:
+            em_gui::EveManagerWindow* _eveManagerGui;
+
+        signals:
+            void exit();
+    };
+};

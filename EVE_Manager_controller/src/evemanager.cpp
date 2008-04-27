@@ -16,3 +16,19 @@
  * You should have received a copy of the GNU General Public License
  * along with EVE_Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#include "evemanager.hh"
+#include "../EVE_Manager_gui/include/evemanagerwindow.hh"
+
+#include <QHBoxLayout>
+
+/*!
+Create model and gui
+*/
+em_controller::EveManager::EveManager( QObject* parent ) :
+    QObject( parent )
+{
+    this->_eveManagerGui = new em_gui::EveManagerWindow;
+    connect( this->_eveManagerGui, SIGNAL(exit()), this, SIGNAL(exit()));
+    this->_eveManagerGui->show();
+}

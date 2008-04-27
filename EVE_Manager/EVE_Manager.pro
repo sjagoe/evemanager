@@ -27,11 +27,17 @@ CONFIG(debug, debug|release) {
 
     #controller lib
     LIBS += -L../bin/debug -lEVE_Manager_controller
+    LIBS += -L../bin/debug -lEVE_Manager_model
+    LIBS += -L../bin/debug -lEVE_Manager_gui
+    LIBS += -L../../EVE_API_Qt/bin/debug -lEVE_API_Qt
 } else {
     DESTDIR = ../bin/release
 
     #controller lib
     LIBS += -L../bin/release -lEVE_Manager_controller
+    LIBS += -L../bin/release -lEVE_Manager_model
+    LIBS += -L../bin/release -lEVE_Manager_gui
+    LIBS += -L../../EVE_API_Qt/bin/release -lEVE_API_Qt
 }
 
 # Input

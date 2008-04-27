@@ -16,3 +16,31 @@
  * You should have received a copy of the GNU General Public License
  * along with EVE_Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+#ifndef __EVEMANAGERWINDOW_HH__
+#define __EVEMANAGERWINDOW_HH__
+
+#include <QMainWindow>
+
+class QTabWidget;
+namespace em_gui
+{
+
+    class EveManagerWindow: public QMainWindow
+    {
+            Q_OBJECT
+        public:
+            /*!
+            Create and populate the window.
+            */
+            EveManagerWindow( QWidget* parent = 0 );
+
+        private:
+            QTabWidget* _characters;
+
+        signals:
+            void exit();
+    };
+};
+
+#endif

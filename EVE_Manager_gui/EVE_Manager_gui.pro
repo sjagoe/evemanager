@@ -21,6 +21,7 @@ TARGET = EVE_Manager_gui
 DEPENDPATH += . include src
 INCLUDEPATH += . include
 
+CONFIG += console
 CONFIG += debug_and_release
 CONFIG(debug, debug|release) {
     DESTDIR = ../bin/debug
