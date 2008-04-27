@@ -22,13 +22,32 @@
 
 #include <QWidget>
 
+class QPushButton;
+class QGroupBox;
+class QStackedWidget;
+
 namespace em_gui
 {
     class EveManagerCharacter: public QWidget
     {
         Q_OBJECT
         public:
-            EveManagerCharacterWidget( QWidget* parent = 0 );
+            /*!
+            Create the character widget
+            */
+            EveManagerCharacter( QWidget* parent = 0 );
+
+        private:
+            //! Button to access the "Settings" pane
+            QPushButton* _btnSettings;
+
+            //! Group box containing buttons related to character stuff
+            QGroupBox* _grpCharacter;
+            //! Button to select the character's skill tree
+            QPushButton* _btnSkillTree;
+
+            //! stack containing all the detailed attributes for a character
+            QStackedWidget* _stackDetails;
     };
 };
 

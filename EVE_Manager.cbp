@@ -14,10 +14,11 @@
 		</MakeCommands>
 		<Build>
 			<Target title="release">
-				<Option output="bin/release/EVE_Manager" prefix_auto="1" extension_auto="1" />
+				<Option output="EVE_Manager.sh" prefix_auto="0" extension_auto="0" />
 				<Option object_output="obj/release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-O2" />
 				</Compiler>
@@ -43,8 +44,10 @@
 		<Unit filename="EVE_Manager_controller/src/evemanager.cpp" />
 		<Unit filename="EVE_Manager_gui/EVE_Manager_gui.pro" />
 		<Unit filename="EVE_Manager_gui/include/evemanagercharacter.hh" />
+		<Unit filename="EVE_Manager_gui/include/evemanagercharactersettings.hh" />
 		<Unit filename="EVE_Manager_gui/include/evemanagerwindow.hh" />
 		<Unit filename="EVE_Manager_gui/src/evemanagercharacter.cpp" />
+		<Unit filename="EVE_Manager_gui/src/evemanagercharactersettings.cpp" />
 		<Unit filename="EVE_Manager_gui/src/evemanagerwindow.cpp" />
 		<Unit filename="EVE_Manager_model/EVE_Manager_model.pro" />
 		<Unit filename="EVE_Manager_model/include/evemanagersettings.hh" />

@@ -30,5 +30,9 @@ CONFIG(debug, debug|release) {
 }
 
 # Input
-HEADERS += include/evemanagerwindow.hh
-SOURCES += src/evemanagerwindow.cpp
+HEADERS += include/evemanagerwindow.hh \
+           include/evemanagercharacter.hh \
+           include/evemanagercharactersettings.hh
+SOURCES += src/evemanagerwindow.cpp \
+           src/evemanagercharacter.cpp \
+           src/evemanagercharactersettings.cpp

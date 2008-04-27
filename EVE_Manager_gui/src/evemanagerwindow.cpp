@@ -19,6 +19,8 @@
 
 #include "evemanagerwindow.hh"
 
+#include "evemanagercharacter.hh"
+
 //#include <QHBoxLayout>
 #include <QMenuBar>
 #include <QPushButton>
@@ -31,10 +33,15 @@ em_gui::EveManagerWindow::EveManagerWindow( QWidget* parent ) :
         QMainWindow( parent )
 {
     QMenu* fileMenu = this->menuBar()->addMenu( tr( "&File" ) );
-    QAction* quit = fileMenu->addAction( tr( "&Quit" ), this, SIGNAL( exit() ) );
+    QAction* quit =
+        fileMenu->addAction( tr( "&Quit" ), this, SIGNAL( exit() ) );
     quit->setShortcut( tr( "Ctrl+Q" ) );
 
     this->_characters = new QTabWidget;
+
+    EveManagerCharacter* chara = new EveManagerCharacter;
+    this->_characters->addTab( chara, tr("Character") );
+
     this->setCentralWidget( this->_characters );
 }
 

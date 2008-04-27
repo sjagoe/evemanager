@@ -18,3 +18,40 @@
  */
 
 #include "evemanagercharacter.hh"
+
+#include <QGroupBox>
+#include <QHBoxLayout>
+#include <QPushButton>
+#include <QStackedWidget>
+#include <QVBoxLayout>
+
+/*!
+Create the character widget
+*/
+em_gui::EveManagerCharacter::EveManagerCharacter( QWidget* parent ) :
+        QWidget( parent )
+{
+    this->_btnSettings = new QPushButton( tr( "&Settings" ) );
+
+    this->_grpCharacter = new QGroupBox( tr( "Character" ) );
+    this->_btnSkillTree = new QPushButton( tr( "Skill &Tree" ) );
+
+    this->_stackDetails = new QStackedWidget;
+
+    QVBoxLayout* layoutGrpCharacter = new QVBoxLayout;
+    layoutGrpCharacter->addWidget( this->_btnSkillTree );
+    layoutGrpCharacter->addStretch(1);
+
+    this->_grpCharacter->setLayout( layoutGrpCharacter );
+
+    QVBoxLayout* layoutSelectors = new QVBoxLayout;
+    layoutSelectors->addWidget( this->_btnSettings );
+    layoutSelectors->addWidget( this->_grpCharacter );
+    layoutSelectors->addStretch(2);
+
+    QHBoxLayout* layoutWidget = new QHBoxLayout;
+    layoutWidget->addLayout( layoutSelectors );
+    layoutWidget->addWidget( this->_stackDetails );
+
+    this->setLayout( layoutWidget );
+}
