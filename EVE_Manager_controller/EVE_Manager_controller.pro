@@ -17,21 +17,21 @@
 
 
 TEMPLATE = lib
-TARGET =
+TARGET = EVE_Manager_controller
 DEPENDPATH += . include src
-INCLUDEPATH += .
+INCLUDEPATH += . include
 
 CONFIG += debug_and_release
 CONFIG(debug, debug|release) {
-    DESTDIR = bin/debug
+    DESTDIR = ../bin/debug
 
-    #EVE_API_Qt lib
-    LIBS += -L../../EVE_API_Qt/bin/debug -lEVE_API_Qt
+    LIBS += -L../bin/debug -lEVE_Manager_model
+    LIBS += -L../bin/debug -lEVE_Manager_gui
 } else {
-    DESTDIR = bin/release
+    DESTDIR = ../bin/release
 
-    #EVE_API_Qt lib
-    LIBS += -L../../EVE_API_Qt/bin/release -lEVE_API_Qt
+    LIBS += -L../bin/release -lEVE_Manager_model
+    LIBS += -L../bin/release -lEVE_Manager_gui
 }
 
 # Input

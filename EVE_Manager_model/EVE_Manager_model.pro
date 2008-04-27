@@ -16,7 +16,22 @@
 # along with EVE_Manager.  If not, see <http://www.gnu.org/licenses/>.
 
 
-TEMPLATE = subdirs
+TEMPLATE = lib
+TARGET = EVE_Manager_model
+DEPENDPATH += . include src
+INCLUDEPATH += . include
 
-# Directories
-SUBDIRS += EVE_Manager_model.pro
+CONFIG += debug_and_release
+CONFIG(debug, debug|release) {
+    DESTDIR = ../bin/debug
+
+    LIBS += -L../../EVE_API_Qt/bin/debug -lEVE_API_Qt
+} else {
+    DESTDIR = ../bin/release
+
+    LIBS += -L../../EVE_API_Qt/bin/release -lEVE_API_Qt
+}
+
+# Input
+HEADERS += include/evemanagersettings.hh
+SOURCES += src/evemanagersettings.cpp

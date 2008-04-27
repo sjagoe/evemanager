@@ -23,15 +23,9 @@ INCLUDEPATH += . include
 
 CONFIG += debug_and_release
 CONFIG(debug, debug|release) {
-    DESTDIR = bin/debug
-
-    #EVE_API_Qt lib
-    LIBS += -L../../EVE_API_Qt/bin/debug -lEVE_API_Qt
+    DESTDIR = ../bin/debug
 } else {
-    DESTDIR = bin/release
-
-    #EVE_API_Qt lib
-    LIBS += -L../../EVE_API_Qt/bin/release -lEVE_API_Qt
+    DESTDIR = ../bin/release
 }
 
 # Input
