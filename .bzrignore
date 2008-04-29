@@ -21,3 +21,15 @@ EVE_API_Qt/src/eveapicommon.cpp
 EVE_API_Qt/src/eveapicorporation.cpp
 EVE_API_Qt/src/eveapieve.cpp
 EVE_API_Qt/src/eveapimap.cpp
+EVE_API_Qt/EVE_API/include/eveapiaccount.hh
+EVE_API_Qt/EVE_API/include/eveapicharacter.hh
+EVE_API_Qt/EVE_API/include/eveapicommon.hh
+EVE_API_Qt/EVE_API/include/eveapicorporation.hh
+EVE_API_Qt/EVE_API/include/eveapieve.hh
+EVE_API_Qt/EVE_API/include/eveapimap.hh
+EVE_API_Qt/EVE_API/src/eveapiaccount.cpp
+EVE_API_Qt/EVE_API/src/eveapicharacter.cpp
+EVE_API_Qt/EVE_API/src/eveapicommon.cpp
+EVE_API_Qt/EVE_API/src/eveapicorporation.cpp
+EVE_API_Qt/EVE_API/src/eveapieve.cpp
+EVE_API_Qt/EVE_API/src/eveapimap.cpp
