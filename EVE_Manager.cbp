@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="EVE_Manager" />
+		<Option makefile_is_custom="1" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<MakeCommands>
+			<Build command="$make -f $makefile $target" />
+			<CompileFile command="$make -f $makefile $file" />
+			<Clean command="$make -f $makefile clean" />
+			<DistClean command="$make -f $makefile distclean" />
+		</MakeCommands>
+		<Build>
+			<Target title="debug">
+				<Option output="../bin/EVE_Manager" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<MakeCommands>
+					<Build command="$make -f $makefile $target" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean" />
+				</MakeCommands>
+			</Target>
+			<Target title="release">
+				<Option output="../bin/EVE_Manager" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+				<MakeCommands>
+					<Build command="$make -f $makefile $target" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean" />
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="EVE_API_Qt/EVE_API/EVE_API.pro" />
+		<Unit filename="EVE_API_Qt/EVE_API/EVE_API_Qt_resource.rc" />
+		<Unit filename="EVE_API_Qt/EVE_API/LICENCE" />
+		<Unit filename="EVE_API_Qt/EVE_API/api_functions.txt" />
+		<Unit filename="EVE_API_Qt/EVE_API/design.uml" />
+		<Unit filename="EVE_API_Qt/EVE_API/generator/code_generator.py" />
+		<Unit filename="EVE_API_Qt/EVE_API/generator/generator.xml" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/bak/eveapiparser.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/bak/eveapiparserthread.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/bak/eveapiparserwalkerthread.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/eveapi.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/eveapiaccountrequest.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/eveapicharacterrequest.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/eveapidata.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/eveapidata_balance.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/eveapidata_characters.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/eveapidata_walked.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/eveapidatatable.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/eveapidatatype.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/eveapigeneralrequest.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/eveapirequest.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/include/eveapiscope.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/bak/eveapiparser.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/bak/eveapiparserthread.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/bak/eveapiparserwalkerthread.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/eveapi.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/eveapiaccountrequest.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/eveapicharacterrequest.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/eveapidata.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/eveapidata_balance.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/eveapidata_characters.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/eveapidata_walked.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/eveapidatatable.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/eveapigeneralrequest.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/eveapirequest.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API/src/eveapiscope.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API_Qt.pro" />
+		<Unit filename="EVE_API_Qt/EVE_API_base_app/EVE_API_Qt_base_app.sh" />
+		<Unit filename="EVE_API_Qt/EVE_API_base_app/EVE_API_Qt_base_app_resource.rc" />
+		<Unit filename="EVE_API_Qt/EVE_API_base_app/EVE_API_base_app.pro" />
+		<Unit filename="EVE_API_Qt/EVE_API_base_app/LICENCE" />
+		<Unit filename="EVE_API_Qt/EVE_API_base_app/include/main.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API_base_app/src/main.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/EVE_API_Parser_Qt_resource.rc" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/EVE_API_parser.pro" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/LICENCE" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/include/eveapiparser.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/include/eveapiparseraccount.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/include/eveapiparsercharacter.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/include/eveapiparsercorporation.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/include/eveapiparsereve.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/include/eveapiparsermap.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/include/eveapiparserthread.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/include/eveapiparserthread_balance.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/include/eveapiparserthread_characters.hh" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/src/eveapiparser.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/src/eveapiparseraccount.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/src/eveapiparsercharacter.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/src/eveapiparsercorporation.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/src/eveapiparsereve.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/src/eveapiparsermap.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/src/eveapiparserthread.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/src/eveapiparserthread_balance.cpp" />
+		<Unit filename="EVE_API_Qt/EVE_API_parser/src/eveapiparserthread_characters.cpp" />
+		<Unit filename="EVE_API_Qt/LICENCE" />
+		<Unit filename="EVE_Manager/Design/eve_manager.xmi" />
+		<Unit filename="EVE_Manager/EVE_Manager.layout" />
+		<Unit filename="EVE_Manager/EVE_Manager.pro" />
+		<Unit filename="EVE_Manager/EVE_Manager.sh" />
+		<Unit filename="EVE_Manager/EVE_Manager/EVE_Manager.pro" />
+		<Unit filename="EVE_Manager/EVE_Manager/src/main.cpp" />
+		<Unit filename="EVE_Manager/EVE_Manager_controller/EVE_Manager_controller.pro" />
+		<Unit filename="EVE_Manager/EVE_Manager_controller/include/evemanager.hh" />
+		<Unit filename="EVE_Manager/EVE_Manager_controller/src/evemanager.cpp" />
+		<Unit filename="EVE_Manager/EVE_Manager_gui/EVE_Manager_gui.pro" />
+		<Unit filename="EVE_Manager/EVE_Manager_gui/include/evemanagercharacter.hh" />
+		<Unit filename="EVE_Manager/EVE_Manager_gui/include/evemanagercharactersettings.hh" />
+		<Unit filename="EVE_Manager/EVE_Manager_gui/include/evemanagerwindow.hh" />
+		<Unit filename="EVE_Manager/EVE_Manager_gui/src/evemanagercharacter.cpp" />
+		<Unit filename="EVE_Manager/EVE_Manager_gui/src/evemanagercharactersettings.cpp" />
+		<Unit filename="EVE_Manager/EVE_Manager_gui/src/evemanagerwindow.cpp" />
+		<Unit filename="EVE_Manager/EVE_Manager_model/EVE_Manager_model.pro" />
+		<Unit filename="EVE_Manager/EVE_Manager_model/include/evemanagersettings.hh" />
+		<Unit filename="EVE_Manager/EVE_Manager_model/src/evemanagersettings.cpp" />
+		<Unit filename="EVE_Manager/LICENCE" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
