@@ -4,7 +4,6 @@
 */debug
 *.layout
 Makefile*
-*/Makefile*
 *.Debug
 *.Release
 *.backup

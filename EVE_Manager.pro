@@ -21,4 +21,5 @@ TEMPLATE = subdirs
 CONFIG += ordered
 CONFIG += debug_and_release
 # Directories
-SUBDIRS += EVE_Manager
+SUBDIRS += EVE_API_Qt \
+           EVE_Manager

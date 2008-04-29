@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Copyright 2008 Simon Jagoe -->
+
+<!-- This file is part of EVE_API_Qt. -->
+
+<!-- EVE_API_Qt is free software: you can redistribute it and/or modify -->
+<!-- it under the terms of the GNU General Public License as published by -->
+<!-- the Free Software Foundation, either version 3 of the License, or -->
+<!-- (at your option) any later version. -->
+
+<!-- EVE_API_Qt is distributed in the hope that it will be useful, -->
+<!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+<!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+<!-- GNU General Public License for more details. -->
+
+<!-- You should have received a copy of the GNU General Public License -->
+<!-- along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>. -->
+
+<eveapi_code_generator>
+  <scopes>
+    <scope name="common">
+      <template>
+        common
+      </template>
+      <class_name>
+        EveApiCommon
+      </class_name>
+      <inherit>
+        EveApiScope
+      </inherit>
+      <filename>
+        eveapicommon
+      </filename>
+      <request_type>
+        EveApiCharacterRequest
+      </request_type>
+      <methods>
+        <method name="walletJournal">
+          <api_function>
+            WalletJournal.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+            <optional>
+              beforeRefID
+            </optional>
+            <cacheID>
+              beforeRefID
+            </cacheID>
+          </params>
+        </method>
+        <method name="walletTransactions">
+          <api_function>
+            WalletTransactions.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+            <optional>
+              beforeTransID
+            </optional>
+            <cacheID>
+              beforeTransID
+            </cacheID>
+          </params>
+        </method>
+        <method name="accountBalance">
+          <api_function>
+            AccountBalance.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+        <method name="industryJobs">
+          <api_function>
+            IndustryJobs.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+        <method name="assetList">
+          <api_function>
+            AssetList.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+        <method name="killLog">
+          <api_function>
+            KillLog.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+            <optional>
+              beforeKillID
+            </optional>
+            <cacheID>
+              beforeKillID
+            </cacheID>
+          </params>
+        </method>
+        <method name="marketOrders">
+          <api_function>
+            MarketOrders.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+      </methods>
+    </scope>
+    <scope name="eveapiaccount">
+      <template>
+        other
+      </template>
+      <class_name>
+        EveApiAccount
+      </class_name>
+      <inherit>
+        EveApiScope
+      </inherit>
+      <filename>
+        eveapiaccount
+      </filename>
+      <request_type>
+        EveApiAccountRequest
+      </request_type>
+      <methods>
+        <method name="characters">
+          <api_function>
+            Characters.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+      </methods>
+    </scope>
+    <scope name="eveapicharacter">
+      <template>
+        other
+      </template>
+      <class_name>
+        EveApiCharacter
+      </class_name>
+      <inherit>
+        EveApiCommon
+      </inherit>
+      <filename>
+        eveapicharacter
+      </filename>
+      <request_type>
+        EveApiCharacterRequest
+      </request_type>
+      <methods>
+        <method name="characterSheet">
+          <api_function>
+            CharacterSheet.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+        <method name="skillInTraining">
+          <api_function>
+            SkillInTraining.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+      </methods>
+    </scope>
+    <scope name="eveapicorporation">
+      <template>
+        other
+      </template>
+      <class_name>
+        EveApiCorporation
+      </class_name>
+      <inherit>
+        EveApiCommon
+      </inherit>
+      <filename>
+        eveapicorporation
+      </filename>
+      <request_type>
+        EveApiCharacterRequest
+      </request_type>
+      <methods>
+        <method name="memberTracking">
+          <api_function>
+            MemberTracking.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+        <method name="corporationSheet">
+          <api_function>
+            CorporationSheet.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
+        <method name="starbaseList">
+          <api_function>
+            StarbaseList.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+	    <required>
+              version
+            </required>
+          </params>
+        </method>
+        <method name="starbaseDetail">
+          <api_function>
+            StarbaseDetail.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+	    <required>
+              version
+            </required>
+          </params>
+        </method>
+      </methods>
+    </scope>
+    <scope name="eveapieve">
+      <template>
+        other
+      </template>
+      <class_name>
+        EveApiEve
+      </class_name>
+      <inherit>
+        EveApiScope
+      </inherit>
+      <filename>
+        eveapieve
+      </filename>
+      <request_type>
+        EveApiGeneralRequest
+      </request_type>
+      <methods>
+        <method name="refTypes">
+          <api_function>
+            RefTypes.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="skillTree">
+          <api_function>
+            SkillTree.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="allianceList">
+          <api_function>
+            AllianceList.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="errorList">
+          <api_function>
+            ErrorList.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="characterID">
+          <api_function>
+            CharacterID.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="conquerableStationsList">
+          <api_function>
+            ConquerableStationsList.xml
+          </api_function>
+          <params />
+        </method>
+      </methods>
+    </scope>
+    <scope name="eveapimap">
+      <template>
+        other
+      </template>
+      <class_name>
+        EveApiMap
+      </class_name>
+      <inherit>
+        EveApiScope
+      </inherit>
+      <filename>
+        eveapimap
+      </filename>
+      <request_type>
+        EveApiGeneralRequest
+      </request_type>
+      <methods>
+        <method name="sovereignty">
+          <api_function>
+            Sovereignty.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="jumps">
+          <api_function>
+            Jumps.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="kills">
+          <api_function>
+            Kills.xml
+          </api_function>
+          <params />
+        </method>
+      </methods>
+    </scope>
+  </scopes>
+</eveapi_code_generator>
+
+<!--     <scope name="eveapicharacter"> -->
+<!--       <template> -->
+<!--         other -->
+<!--       </template> -->
+<!--       <class_name> -->
+<!--         EveApiCharacter -->
+<!--       </class_name> -->
+<!--       <inherit> -->
+<!--         EveApiCommon -->
+<!--       </inherit> -->
+<!--       <filename> -->
+<!--         eveapicharacter -->
+<!--       </filename> -->
+<!--       <request_type> -->
+<!--         EveApiCharacterRequest -->
+<!--       </request_type> -->
+<!--       <methods> -->
+<!--         <method name="characters"> -->
+<!--           <api_function> -->
+<!--             Characters.xml -->
+<!--           </api_function> -->
+<!--           <params> -->
+<!--             <required> -->
+<!--               userID -->
+<!--             </required> -->
+<!--             <required> -->
+<!--               apiKey -->
+<!--             </required> -->
+<!--           </params> -->
+<!--         </method> -->
+<!--       </methods> -->
+<!--     </scope> -->
