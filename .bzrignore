@@ -1,7 +1,7 @@
 *.~ml
-*/bin
-*/release
-*/debug
+bin
+release
+debug
 *.layout
 Makefile*
 *.Debug
@@ -9,3 +9,15 @@ Makefile*
 *.backup
 TAGS
 bin
+EVE_API_Qt/include/eveapiaccount.hh
+EVE_API_Qt/include/eveapicharacter.hh
+EVE_API_Qt/include/eveapicommon.hh
+EVE_API_Qt/include/eveapicorporation.hh
+EVE_API_Qt/include/eveapieve.hh
+EVE_API_Qt/include/eveapimap.hh
+EVE_API_Qt/src/eveapiaccount.cpp
+EVE_API_Qt/src/eveapicharacter.cpp
+EVE_API_Qt/src/eveapicommon.cpp
+EVE_API_Qt/src/eveapicorporation.cpp
+EVE_API_Qt/src/eveapieve.cpp
+EVE_API_Qt/src/eveapimap.cpp
