@@ -23,15 +23,18 @@ INCLUDEPATH += . include
 
 CONFIG -= gui
 CONFIG += debug_and_release
-CONFIG(debug, debug|release) {
-    DESTDIR = ../bin/debug
+# CONFIG(debug, debug|release) {
+#     DESTDIR = ../bin/debug
 
-    LIBS += -L../../EVE_API_Qt/bin/debug -lEVE_API_Qt
-} else {
-    DESTDIR = ../bin/release
+#     LIBS += -L../../EVE_API_Qt/bin/debug -lEVE_API_Qt
+# } else {
+#     DESTDIR = ../bin/release
 
-    LIBS += -L../../EVE_API_Qt/bin/release -lEVE_API_Qt
-}
+#     LIBS += -L../../EVE_API_Qt/bin/release -lEVE_API_Qt
+# }
+DESTDIR = ../bin
+
+LIBS += -L../../EVE_API_Qt/bin -lEVE_API_Qt
 
 # Input
 HEADERS += include/evemanagersettings.hh

@@ -22,17 +22,21 @@ DEPENDPATH += . include src
 INCLUDEPATH += . include
 
 CONFIG += debug_and_release
-CONFIG(debug, debug|release) {
-    DESTDIR = ../bin/debug
+# CONFIG(debug, debug|release) {
+#     DESTDIR = ../bin/debug
 
-    LIBS += -L../bin/debug -lEVE_Manager_model
-    LIBS += -L../bin/debug -lEVE_Manager_gui
-} else {
-    DESTDIR = ../bin/release
+#     LIBS += -L../bin/debug -lEVE_Manager_model
+#     LIBS += -L../bin/debug -lEVE_Manager_gui
+# } else {
+#     DESTDIR = ../bin/release
 
-    LIBS += -L../bin/release -lEVE_Manager_model
-    LIBS += -L../bin/release -lEVE_Manager_gui
-}
+#     LIBS += -L../bin/release -lEVE_Manager_model
+#     LIBS += -L../bin/release -lEVE_Manager_gui
+# }
+DESTDIR = ../bin
+
+LIBS += -L../bin -lEVE_Manager_model
+LIBS += -L../bin -lEVE_Manager_gui
 
 # Input
 HEADERS += include/evemanager.hh

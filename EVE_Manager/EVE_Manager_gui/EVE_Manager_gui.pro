@@ -23,11 +23,12 @@ INCLUDEPATH += . include
 
 CONFIG += console
 CONFIG += debug_and_release
-CONFIG(debug, debug|release) {
-    DESTDIR = ../bin/debug
-} else {
-    DESTDIR = ../bin/release
-}
+# CONFIG(debug, debug|release) {
+#     DESTDIR = ../bin/debug
+# } else {
+#     DESTDIR = ../bin/release
+# }
+DESTDIR = ../bin
 
 # Input
 HEADERS += include/evemanagerwindow.hh \

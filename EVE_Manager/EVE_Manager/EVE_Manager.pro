@@ -22,23 +22,31 @@ DEPENDPATH += . src
 INCLUDEPATH += .
 
 CONFIG += debug_and_release
-CONFIG(debug, debug|release) {
-    DESTDIR = ../bin/debug
+# CONFIG(debug, debug|release) {
+#     DESTDIR = ../bin/debug
 
-    #controller lib
-    LIBS += -L../bin/debug -lEVE_Manager_controller
-    LIBS += -L../bin/debug -lEVE_Manager_model
-    LIBS += -L../bin/debug -lEVE_Manager_gui
-    LIBS += -L../../EVE_API_Qt/bin/debug -lEVE_API_Qt
-} else {
-    DESTDIR = ../bin/release
+#     #controller lib
+#     LIBS += -L../bin/debug -lEVE_Manager_controller
+#     LIBS += -L../bin/debug -lEVE_Manager_model
+#     LIBS += -L../bin/debug -lEVE_Manager_gui
+#     LIBS += -L../../EVE_API_Qt/bin/debug -lEVE_API_Qt
+# } else {
+#     DESTDIR = ../bin/release
 
-    #controller lib
-    LIBS += -L../bin/release -lEVE_Manager_controller
-    LIBS += -L../bin/release -lEVE_Manager_model
-    LIBS += -L../bin/release -lEVE_Manager_gui
-    LIBS += -L../../EVE_API_Qt/bin/release -lEVE_API_Qt
-}
+#     #controller lib
+#     LIBS += -L../bin/release -lEVE_Manager_controller
+#     LIBS += -L../bin/release -lEVE_Manager_model
+#     LIBS += -L../bin/release -lEVE_Manager_gui
+#     LIBS += -L../../EVE_API_Qt/bin/release -lEVE_API_Qt
+# }
+
+DESTDIR = ../bin
+
+#controller lib
+LIBS += -L../bin -lEVE_Manager_controller
+LIBS += -L../bin -lEVE_Manager_model
+LIBS += -L../bin -lEVE_Manager_gui
+LIBS += -L../../EVE_API_Qt/bin -lEVE_API_Qt
 
 # Input
 SOURCES += src/main.cpp
