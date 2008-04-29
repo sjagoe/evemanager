@@ -1,0 +1,17 @@
+
+
+Before building EVE Manager (specifically EVE API Qt), some code must be
+generated.
+
+From the base source directory:
+   1 cd EVE_API_Qt/EVE_API
+   2 python generator/code_generator.py
+   3 cd -
+
+Now the modules can be built
+   1 qmake
+   2 make release
+
+And run EVE Manager:
+   1 ./EVE_Manager.sh
+      * This script is simply a wrapper around setting the LD_LIBRARY_PATH
