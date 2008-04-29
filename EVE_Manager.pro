@@ -21,7 +21,4 @@ TEMPLATE = subdirs
 CONFIG += ordered
 CONFIG += debug_and_release
 # Directories
-SUBDIRS += EVE_Manager_gui \
-           EVE_Manager_model \
-           EVE_Manager_controller \
-           EVE_Manager
+SUBDIRS += EVE_Manager
