@@ -105,10 +105,22 @@ namespace em_gui
             /*!
             Settings have been updated
             */
-            void settingsApplied( const QString &userID, const QString &apiKey,
-                                  const bool &apiLevel, const bool &corpLevel );
+            void settingsApplied( const QString &userID,
+                                  const QString &apiKey );
 
+            /*!
+            Changes cancelled, retrieve (original settings)
+            */
             void settingsCanceled();
+
+            /*!
+            A characer has been selected, set the required settings in the
+            model.
+            */
+            void characterSelected( const QString &userID,
+                                    const QString &apiKey,
+                                    const bool &apiLevel,
+                                    const bool &corpLevel );
     };
 };
 
