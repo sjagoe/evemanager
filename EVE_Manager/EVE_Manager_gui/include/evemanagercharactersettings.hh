@@ -64,6 +64,10 @@ namespace em_gui
 	void selectCharacter( const QStringList &characters );
 	
     private:
+	//! Store the value of apiFull
+	bool _apiLevel;
+	//! Store the value of corpFull
+	bool _corpLevel;
 	//! Label for User ID
 	QLabel* _lblUserID;
 	//! User ID field
@@ -119,7 +123,27 @@ namespace em_gui
 	/*!
 	  A characer has been selected
 	*/
-	void characterSelected( const QString &character );
+	void characterSelected( QString character );
+
+	/*!
+	  Set the internal apiLevel value
+	*/
+	void on_radApiLimited_clicked();
+
+	/*!
+	  Set the internal apiLevel value
+	*/
+	void on_radApiFull_clicked();
+
+	/*!
+	  Set the internal corpLevel value
+	*/
+	void on_radCorpLimited_clicked();
+
+	/*!
+	  Set the internal corpLevel value
+	*/
+	void on_radCorpFull_clicked();
 
     signals:
 	/*!
@@ -136,9 +160,9 @@ namespace em_gui
 	/*
 	  Set the character in the model
 	*/
-	void setCharacter( const QString &userID,
-			   const QString &character,
-			   const QString &apiKey,
+	void setCharacter( QString userID,
+			   QString character,
+			   QString apiKey,
 			   const bool &apiLevel,
 			   const bool &corpLevel );
 	

@@ -34,8 +34,9 @@ em_gui::EveManagerWindow::EveManagerWindow( QWidget* parent ) :
 {
     QMenu* fileMenu = this->menuBar()->addMenu( tr( "&File" ) );
     QAction* quit =
-        fileMenu->addAction( tr( "&Quit" ), this, SIGNAL( exit() ) );
-    quit->setShortcut( tr( "Ctrl+Q" ) );
+        fileMenu->addAction( tr( "&Quit", "Quit the application" ),
+			     this, SIGNAL( exit() ) );
+    quit->setShortcut( tr( "Ctrl+Q", "Quit the application" ) );
 
     this->_characters = new QTabWidget;
 

@@ -39,8 +39,10 @@ em_gui::EveManagerCharacterSettings::EveManagerCharacterSettings(
     const QString& apiKey,
     bool apiLevel,
     bool corpLevel,
-    QWidget* parent ) :
-        QWidget( parent )
+    QWidget* parent )
+    : QWidget( parent ),
+      _apiLevel(false),
+      _corpLevel(false)
 {
     this->setLayout( this->_setupWidget() );
     this->update( userID, charID, apiKey, apiLevel, corpLevel );
@@ -187,7 +189,8 @@ Apply settings
 */
 void em_gui::EveManagerCharacterSettings::on_btnApply_clicked()
 {
-
+    emit settingsApplied( this->_edtUserID->text(),
+			  this->_edtApiKey->text());
 }
 
 /*!
@@ -195,13 +198,50 @@ Reset to stored settings
 */
 void em_gui::EveManagerCharacterSettings::on_btnReset_clicked()
 {
-
+    emit settingsCanceled();
 }
 
 /*!
   A characer has been selected
 */
 void em_gui::EveManagerCharacterSettings::characterSelected(
-    const QString &/*character*/ )
+    QString character )
 {
+    emit setCharacter( this->_edtUserID->text(),
+		       character,
+		       this->_edtApiKey->text(),
+		       this->_apiLevel,
+		       this->_corpLevel);
+}
+
+/*!
+  Set the internal apiLevel value
+*/
+void em_gui::EveManagerCharacterSettings::on_radApiLimited_clicked()
+{
+    this->_apiLevel = false;
+}
+
+/*!
+  Set the internal apiLevel value
+*/
+void em_gui::EveManagerCharacterSettings::on_radApiFull_clicked()
+{
+    this->_apiLevel = true;
+}
+
+/*!
+  Set the internal corpLevel value
+*/
+void em_gui::EveManagerCharacterSettings::on_radCorpLimited_clicked()
+{
+    this->_corpLevel = false;
+}
+
+/*!
+  Set the internal corpLevel value
+*/
+void em_gui::EveManagerCharacterSettings::on_radCorpFull_clicked()
+{
+    this->_corpLevel = true;
 }
