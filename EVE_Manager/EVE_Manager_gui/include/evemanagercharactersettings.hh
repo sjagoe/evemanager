@@ -20,6 +20,7 @@
 #ifndef EVEMANAGERCHARACTERSETTINGS_HH_INCLUDED
 #define EVEMANAGERCHARACTERSETTINGS_HH_INCLUDED
 
+#include <QStringList>
 #include <QWidget>
 
 class QButtonGroup;
@@ -31,96 +32,116 @@ class QRadioButton;
 
 namespace em_gui
 {
+    class EveManagerCharacterSelector;
+
     class EveManagerCharacterSettings: public QWidget
     {
-            Q_OBJECT
-        public:
-            /*!
-            Set up the character settings widget
-            */
-            EveManagerCharacterSettings( const QString& userID = QString(),
-                                         const QString& charID = QString(),
-                                         const QString& apiKey = QString(),
-                                         bool apiLevel = false,
-                                         bool corpLevel = false,
-                                         QWidget* parent = 0 );
+	Q_OBJECT;
+    public:
+	/*!
+	  Set up the character settings widget
+	*/
+	EveManagerCharacterSettings( const QString& userID = QString(),
+				     const QString& charID = QString(),
+				     const QString& apiKey = QString(),
+				     bool apiLevel = false,
+				     bool corpLevel = false,
+				     QWidget* parent = 0 );
 
-        public slots:
-            /*!
-            Update the widget
-            */
-            void update( const QString& userID,
-                         const QString& charID,
-                         const QString& apiKey,
-                         bool apiLevel,
-                         bool corpLevel );
+    public slots:
+	/*!
+	  Update the widget
+	*/
+	void update( const QString& userID,
+		     const QString& charID,
+		     const QString& apiKey,
+		     bool apiLevel,
+		     bool corpLevel );
 
-        private:
-            //! Label for User ID
-            QLabel* _lblUserID;
-            //! User ID field
-            QLineEdit* _edtUserID;
-            //! Label for Character ID
-            QLabel* _lblCharacterID;
-            //! Character ID field (read only)
-            QLineEdit* _edtCharacterID;
-            //! Label API Key
-            QLabel* _lblApiKey;
-            //! API Key field
-            QLineEdit* _edtApiKey;
-            //! ButtonGroup containing radio buttons to select API functionality
-            QButtonGroup* _bgrpApiFunctionality;
-            //! Radio Button to select limited API functionality
-            QRadioButton* _radApiLimited;
-            //! Radio Button to select full API functionality
-            QRadioButton* _radApiFull;
-            //! Group to store full API settings
-            QGroupBox* _grpCorporationFunctionality;
-            //! Radio Button to enable Full coprporation setting (requires
-            //! Director status)
-            QRadioButton* _radCorporationFull;
-            //! Radio Button to enable limited Corporation settings (but still
-            //! Full character settings (does not need Director status)
-            QRadioButton* _radCorporationLimited;
-            //! Container for buttons
-            QDialogButtonBox* _btnbox;
+	/*
+	  Select a character
+	 */
+	void selectCharacter( const QStringList &characters );
+	
+    private:
+	//! Label for User ID
+	QLabel* _lblUserID;
+	//! User ID field
+	QLineEdit* _edtUserID;
+	//! Label for Character ID
+	QLabel* _lblCharacterID;
+	//! Character ID field (read only)
+	QLineEdit* _edtCharacterID;
+	//! Label API Key
+	QLabel* _lblApiKey;
+	//! API Key field
+	QLineEdit* _edtApiKey;
+	//! ButtonGroup containing radio buttons to select API functionality
+	QButtonGroup* _bgrpApiFunctionality;
+	//! Radio Button to select limited API functionality
+	QRadioButton* _radApiLimited;
+	//! Radio Button to select full API functionality
+	QRadioButton* _radApiFull;
+	//! Group to store full API settings
+	QGroupBox* _grpCorporationFunctionality;
+	//! Radio Button to enable Full coprporation setting (requires
+	//! Director status)
+	QRadioButton* _radCorporationFull;
+	//! Radio Button to enable limited Corporation settings (but still
+	//! Full character settings (does not need Director status)
+	QRadioButton* _radCorporationLimited;
+	//! Container for buttons
+	QDialogButtonBox* _btnbox;
 
-            /*!
-            Set up the widget layout
-            */
-            QLayout* _setupWidget();
+	em_gui::EveManagerCharacterSelector* _dlgSelector;
 
-        private slots:
-            /*!
-            Apply settings
-            */
-            void on_btnApply_clicked();
+	/*!
+	  Set up the widget layout
+	*/
+	QLayout* _setupWidget();
+			       
+	/*
+	  Connect signals and slots
+	 */
+	void _connectInternals();
+			       
+    private slots:
+	/*!
+	  Apply settings
+	*/
+	void on_btnApply_clicked();
 
-            /*!
-            Reset to stored settings
-            */
-            void on_btnReset_clicked();
+	/*!
+	  Reset to stored settings
+	*/
+	void on_btnReset_clicked();
 
-        signals:
-            /*!
-            Settings have been updated
-            */
-            void settingsApplied( const QString &userID,
-                                  const QString &apiKey );
+	/*!
+	  A characer has been selected
+	*/
+	void characterSelected( const QString &character );
 
-            /*!
-            Changes cancelled, retrieve (original settings)
-            */
-            void settingsCanceled();
+    signals:
+	/*!
+	  Settings have been updated
+	*/
+	void settingsApplied( const QString &userID,
+			      const QString &apiKey );
 
-            /*!
-            A characer has been selected, set the required settings in the
-            model.
-            */
-            void characterSelected( const QString &userID,
-                                    const QString &apiKey,
-                                    const bool &apiLevel,
-                                    const bool &corpLevel );
+	/*!
+	  Changes cancelled, retrieve (original settings)
+	*/
+	void settingsCanceled();
+
+	/*
+	  Set the character in the model
+	*/
+	void setCharacter( const QString &userID,
+			   const QString &character,
+			   const QString &apiKey,
+			   const bool &apiLevel,
+			   const bool &corpLevel );
+	
     };
 };
 

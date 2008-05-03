@@ -33,7 +33,9 @@ DESTDIR = ../bin
 # Input
 HEADERS += include/evemanagerwindow.hh \
            include/evemanagercharacter.hh \
-           include/evemanagercharactersettings.hh
+           include/evemanagercharactersettings.hh \
+           include/evemanagercharacterselector.hh
 SOURCES += src/evemanagerwindow.cpp \
            src/evemanagercharacter.cpp \
-           src/evemanagercharactersettings.cpp
+           src/evemanagercharactersettings.cpp\
+           src/evemanagercharacterselector.cpp

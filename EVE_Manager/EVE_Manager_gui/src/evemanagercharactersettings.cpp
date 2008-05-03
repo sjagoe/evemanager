@@ -18,6 +18,7 @@
  */
 
 #include "evemanagercharactersettings.hh"
+#include "evemanagercharacterselector.hh"
 
 #include <QButtonGroup>
 #include <QDialogButtonBox>
@@ -78,6 +79,16 @@ void em_gui::EveManagerCharacterSettings::update(
         this->_radApiLimited->click();
         this->_grpCorporationFunctionality->setEnabled( false );
     }
+}
+
+/*
+  Select a character
+*/
+void em_gui::EveManagerCharacterSettings::selectCharacter(
+    const QStringList &characters )
+{
+    this->_dlgSelector->setCharacters( characters );
+    this->_dlgSelector->show();
 }
 
 /*!
@@ -150,8 +161,26 @@ QLayout* em_gui::EveManagerCharacterSettings::_setupWidget()
     layoutWidget->addLayout( layoutGrid );
     layoutWidget->addStretch();
 
+    this->_dlgSelector= new em_gui::EveManagerCharacterSelector( this );
+    
     return layoutWidget;
 }
+
+/*
+  Connect signals and slots
+*/
+void em_gui::EveManagerCharacterSettings::_connectInternals()
+{
+    connect( this->_btnbox, SIGNAL( accepted() ),
+	     this, SLOT( on_btnApply_clicked() ) );
+    connect( this->_btnbox, SIGNAL( rejected() ),
+	     this, SLOT( on_btnReset_clicked() ) );
+    connect( this->_dlgSelector, SIGNAL( characterSelected( QString ) ),
+	     this, SLOT( characterSelected( QString ) ) );
+    connect( this->_dlgSelector, SIGNAL( characterCancelled() ),
+	     this, SIGNAL( settingsCanceled() ) );
+}
+
 
 /*!
 Apply settings
@@ -167,4 +196,12 @@ Reset to stored settings
 void em_gui::EveManagerCharacterSettings::on_btnReset_clicked()
 {
 
+}
+
+/*!
+  A characer has been selected
+*/
+void em_gui::EveManagerCharacterSettings::characterSelected(
+    const QString &/*character*/ )
+{
 }
