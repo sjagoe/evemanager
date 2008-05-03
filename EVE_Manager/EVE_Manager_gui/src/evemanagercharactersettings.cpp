@@ -1,25 +1,26 @@
 /*
  * Copyright 2008 Simon Jagoe
  *
- * This file is part of <<<<>>>>.
+ * This file is part of EVE Manager.
  *
- * <<<<>>>> is free software: you can redistribute it and/or modify
+ * EVE Manager is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * <<<<>>>> is distributed in the hope that it will be useful,
+ * EVE Manager is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with <<<<>>>>.  If not, see <http://www.gnu.org/licenses/>.
+ * along with EVE Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "evemanagercharactersettings.hh"
 
 #include <QButtonGroup>
+#include <QDialogButtonBox>
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QHBoxLayout>
@@ -40,35 +41,63 @@ em_gui::EveManagerCharacterSettings::EveManagerCharacterSettings(
     QWidget* parent ) :
         QWidget( parent )
 {
-    this->setLayout(
-        this->_setupWidget( userID, charID, apiKey, apiLevel, corpLevel ) );
+    this->setLayout( this->_setupWidget() );
+    this->update( userID, charID, apiKey, apiLevel, corpLevel );
+}
+
+/*!
+Update the widget
+*/
+void em_gui::EveManagerCharacterSettings::update(
+        const QString& userID,
+        const QString& charID,
+        const QString& apiKey,
+        bool apiLevel,
+        bool corpLevel )
+{
+    this->_edtUserID->setText(userID);
+    this->_edtCharacterID->setText(charID);
+    this->_edtApiKey->setText( apiKey );
+
+    // set checked buttons
+    if ( corpLevel )
+    {
+        this->_radCorporationFull->click();
+    }
+    else
+    {
+        this->_radCorporationLimited->click();
+    }
+    if ( apiLevel )
+    {
+        this->_radApiFull->click();
+        this->_grpCorporationFunctionality->setEnabled( true );
+    }
+    else
+    {
+        this->_radApiLimited->click();
+        this->_grpCorporationFunctionality->setEnabled( false );
+    }
 }
 
 /*!
 Set up the widget layout
 */
-QLayout* em_gui::EveManagerCharacterSettings::_setupWidget(
-    const QString& userID,
-    const QString& charID,
-    const QString& apiKey,
-    bool apiLevel,
-    bool corpLevel )
+QLayout* em_gui::EveManagerCharacterSettings::_setupWidget()
 {
-    // Group to contain all API settings
-    //this->_grpApiSettings = new QGroupBox( tr( "Character's API Settings" ) );
     // Label for User ID
     this->_lblUserID = new QLabel( tr( "User ID" ) );
     // User ID field
-    this->_edtUserID = new QLineEdit( userID );
+    this->_edtUserID = new QLineEdit();
     // Label for Character ID
     this->_lblCharacterID = new QLabel( tr( "Character ID" ) );
     // Character ID field (read only)
-    this->_edtCharacterID = new QLineEdit( charID );
+    this->_edtCharacterID = new QLineEdit();
     this->_edtCharacterID->setReadOnly( true );
     // Label API Key
     this->_lblApiKey = new QLabel( tr( "API Key" ) );
     // API Key field
-    this->_edtApiKey = new QLineEdit( apiKey );
+    this->_edtApiKey = new QLineEdit();
     // ButtonGroup containing radio buttons to select API functionality
     this->_bgrpApiFunctionality = new QButtonGroup;
     // Radio Button to select limited API functionality
@@ -87,6 +116,8 @@ QLayout* em_gui::EveManagerCharacterSettings::_setupWidget(
     // Full character settings (does not need Director status)
     this->_radCorporationLimited = new QRadioButton(
         tr( "Limited Corporation Access" ) );
+    this->_btnbox = new QDialogButtonBox(
+        QDialogButtonBox::Apply | QDialogButtonBox::Reset );
 
     // layouts
 
@@ -113,30 +144,27 @@ QLayout* em_gui::EveManagerCharacterSettings::_setupWidget(
     //layoutGrid->addWidget( this->_bgrpApiFunctionality, 4, 0, 1, 2 );
     layoutGrid->addLayout( layoutApiFunctionality, 4, 0, 1, 2 );
     layoutGrid->addWidget( this->_grpCorporationFunctionality, 5, 0, 1, 2 );
-
-    // set checked buttons
-    if (corpLevel)
-    {
-        this->_radCorporationFull->click();
-    }
-    else
-    {
-        this->_radCorporationLimited->click();
-    }
-    if (apiLevel)
-    {
-        this->_radApiFull->click();
-        this->_grpCorporationFunctionality->setEnabled(true);
-    }
-    else
-    {
-        this->_radApiLimited->click();
-        this->_grpCorporationFunctionality->setEnabled(false);
-    }
+    layoutGrid->addWidget( this->_btnbox, 6, 0, 1, 2 );
 
     QVBoxLayout* layoutWidget = new QVBoxLayout;
-    layoutWidget->addLayout(layoutGrid);
+    layoutWidget->addLayout( layoutGrid );
     layoutWidget->addStretch();
 
     return layoutWidget;
+}
+
+/*!
+Apply settings
+*/
+void em_gui::EveManagerCharacterSettings::on_btnApply_clicked()
+{
+
+}
+
+/*!
+Reset to stored settings
+*/
+void em_gui::EveManagerCharacterSettings::on_btnReset_clicked()
+{
+
 }

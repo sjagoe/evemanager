@@ -1,20 +1,20 @@
 /*
  * Copyright 2008 Simon Jagoe
  *
- * This file is part of <<<<>>>>.
+ * This file is part of EVE Manager.
  *
- * <<<<>>>> is free software: you can redistribute it and/or modify
+ * EVE Manager is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * <<<<>>>> is distributed in the hope that it will be useful,
+ * EVE Manager is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with <<<<>>>>.  If not, see <http://www.gnu.org/licenses/>.
+ * along with EVE Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef EVEMANAGERCHARACTERSETTINGS_HH_INCLUDED
@@ -23,6 +23,7 @@
 #include <QWidget>
 
 class QButtonGroup;
+class QDialogButtonBox;
 class QGroupBox;
 class QLabel;
 class QLineEdit;
@@ -44,9 +45,17 @@ namespace em_gui
                                          bool corpLevel = false,
                                          QWidget* parent = 0 );
 
+        public slots:
+            /*!
+            Update the widget
+            */
+            void update( const QString& userID,
+                         const QString& charID,
+                         const QString& apiKey,
+                         bool apiLevel,
+                         bool corpLevel );
+
         private:
-            // ! Group to contain all API settings
-            //QGroupBox* _grpApiSettings;
             //! Label for User ID
             QLabel* _lblUserID;
             //! User ID field
@@ -73,15 +82,33 @@ namespace em_gui
             //! Radio Button to enable limited Corporation settings (but still
             //! Full character settings (does not need Director status)
             QRadioButton* _radCorporationLimited;
+            //! Container for buttons
+            QDialogButtonBox* _btnbox;
 
             /*!
             Set up the widget layout
             */
-            QLayout* _setupWidget( const QString& userID,
-                                   const QString& charID,
-                                   const QString& apiKey,
-                                   bool apiLevel,
-                                   bool corpLevel );
+            QLayout* _setupWidget();
+
+        private slots:
+            /*!
+            Apply settings
+            */
+            void on_btnApply_clicked();
+
+            /*!
+            Reset to stored settings
+            */
+            void on_btnReset_clicked();
+
+        signals:
+            /*!
+            Settings have been updated
+            */
+            void settingsApplied( const QString &userID, const QString &apiKey,
+                                  const bool &apiLevel, const bool &corpLevel );
+
+            void settingsCanceled();
     };
 };
 
