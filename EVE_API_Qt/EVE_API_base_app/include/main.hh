@@ -48,7 +48,10 @@ class Window: public QWidget
         QPushButton* _eveSkillTree;
         QPushButton* _eveRefTypes;
         QPushButton* _eveAllianceList;
+        QPushButton* _eveFacWarStats;
+        QPushButton* _eveFacWarTopStats;
         QPushButton* _mapSov;
+        QPushButton* _mapFacWarSystems;
         QPushButton* _charSheet;
         QPushButton* _charTraining;
         QPushButton* _charJournal;
@@ -58,6 +61,8 @@ class Window: public QWidget
         QPushButton* _charBalance;
         QPushButton* _corpBalance;
         QPushButton* _corpMembers;
+        QPushButton* _charFacWarStats;
+        QPushButton* _corpFacWarStats;
 
         QGroupBox* _account;
         QGroupBox* _eve;
@@ -101,6 +106,7 @@ class Window: public QWidget
         void eveRefTypes();
         void eveAllianceList();
         void mapSov();
+        void mapFacWarSystems();
         void charSheet();
         void charTraining();
         void charJournal();
@@ -110,6 +116,10 @@ class Window: public QWidget
         void charBalance();
         void corpBalance();
         void corpMembers();
+        void charFacWarStats();
+        void corpFacWarStats();
+        void eveFacWarStats();
+        void eveFacWarTopStats();
         void requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime cacheTime );
         void requestFailed( QString id, QString error, QString httpResponse );
 };
