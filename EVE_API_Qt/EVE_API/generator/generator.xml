@@ -166,6 +166,22 @@
             </required>
           </params>
         </method>
+        <method name="facWarStats">
+          <api_function>
+            FacWarStats.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
       </methods>
     </scope>
     <scope name="eveapiaccount">
@@ -393,6 +409,18 @@
           </api_function>
           <params />
         </method>
+        <method name="facWarStats">
+          <api_function>
+            FacWarStats.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="facWarTopStats">
+          <api_function>
+            FacWarTopStats.xml
+          </api_function>
+          <params />
+        </method>
       </methods>
     </scope>
     <scope name="eveapimap">
@@ -427,6 +455,12 @@
         <method name="kills">
           <api_function>
             Kills.xml
+          </api_function>
+          <params />
+        </method>
+        <method name="facWarSystems">
+          <api_function>
+            FacWarSystems.xml
           </api_function>
           <params />
         </method>

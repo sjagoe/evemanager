@@ -1,0 +1,27 @@
+empyrean age and the eve api
+reported by CCP Elerhino | 2008.07.01 18:07:22 | NEW | Comments
+
+Following the Empyrean Age expansion we’ve made some additions to the API where players can access Factional Warfare information about their characters and corporations. The additions also include top-X lists for characters and corporations, information about factions and solar systems being fought over and who is at war with whom.
+
+The additions are:
+
+    * Character Stats (char/FacWarStats.xml.aspx) - your character’s stats (requires: userID, apiKey and characterID).
+    * Corporation Stats (corp/FacWarStats.xml.aspx) - your corporation’s stats (requires: userID, apiKey and characterID).
+    * General Stats (eve/FacWarStats.xml.aspx) - general Stats for all factions.
+    * Top X lists (eve/FacWarTopStats.xml.aspx) - Top X lists for Victory Points and Kills by day, week and total for characters, corporations and factions. Top 100 for characters, Top 10 for corporations and factions.
+    * Occupancy Data (map/FacWarSystems.xml.aspx) - List of Factional Warfare systems, with owner and current occupier and any contested systems.
+
+Note that even though the Factional Warfare data currently has a caching time of one hour, the data is only calculated on TQ once a day during downtime. The cache time is set to one hour to make sure new data is available in the API as soon as possible without causing load problems.
+
+Official documentation for these additions doesn’t exist just yet. We’re working on documentation for the whole API which will include the new stuff. We’ll be making that available on our own servers soon.
+
+Also included in the latest patch were some bug fixes:
+
+    * Added corp member title roles to API authentication and MemberTracking. The rolesMask and grantableRoles now show roles added by title as well.
+    * Added corp member title roles to API authentication. Roles granted by title now count for accessing API data.
+    * Fixed issues on KillLog. A fatal error which was occurring when Involved Parties was empty and added the missing security status to first attacker.
+    * Fixed issues on CharacterID. Single quote is now usable in search strings which are also no longer case-sensitive.
+    * Fixed the Sovereignty dataTime.
+    * Some general performance and load tweaks.
+
+Also worth mentioning is that we are now starting to define some long term plans for development and support of the API which we will finalize and bring to you at a future date. This includes setting up a test API server against the Singularity test server with reduced cache times but limited capacity for developers to test their code against. More on this as we work out the schedule.
