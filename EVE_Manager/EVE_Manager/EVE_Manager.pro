@@ -46,7 +46,7 @@ DESTDIR = ../bin
 LIBS += -L../bin -lEVE_Manager_controller
 LIBS += -L../bin -lEVE_Manager_model
 LIBS += -L../bin -lEVE_Manager_gui
-LIBS += -L../../EVE_API_Qt/bin -lEVE_API_Qt
+LIBS += -L../../EVE_API_Qt/bin -lEVE_API_Qt1
 
 # Input
 SOURCES += src/main.cpp

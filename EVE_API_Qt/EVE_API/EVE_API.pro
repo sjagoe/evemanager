@@ -17,12 +17,12 @@
 
 
 ## Set the version number
-VERSION = 1.3.1
+VERSION = 1.4.0
 
 ## For testing, uncomment this line:
 CONFIG += console
 
-       
+
 TEMPLATE = lib    # Dynamic library
 CONFIG += dll     #
 QT -= gui         # No need for GUI

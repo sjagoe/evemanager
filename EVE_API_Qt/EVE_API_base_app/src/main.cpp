@@ -449,14 +449,6 @@ void Window::mapFacWarSystems()
 
 void Window::requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime cacheTime )
 {
-//    QString resultEmpty = " - empty Doc - ";
-//    if (!result.isNull())
-//    {
-//        resultEmpty = " - not empty Doc - ";
-//    }
-//    resultEmpty = resultEmpty.prepend( id );
-//    resultEmpty = resultEmpty.append( httpResponse );
-//    QMessageBox::information(this, "result", resultEmpty, QMessageBox::Ok);
     this->_edtId->setText(id);
     this->_edtResult->setText( result->toString(4) );
     this->_edtResponse->setText( httpResponse );
@@ -465,12 +457,6 @@ void Window::requestComplete( QString id, shared_ptr<QDomDocument> result, QStri
 
 void Window::requestFailed( QString id, QString error, QString httpResponse )
 {
-//    QString err = id;
-//    err = err.append(" - ");
-//    err = err.append(error);
-//    err = err.append(" - ");
-//    err = err.append(httpResponse);
-//    QMessageBox::information(this, "result", err, QMessageBox::Ok);
     this->_edtId->setText(id);
     this->_edtResult->setText( error );
     this->_edtResponse->setText( httpResponse );

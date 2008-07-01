@@ -15,12 +15,12 @@
 # You should have received a copy of the GNU General Public License
 # along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION = 1.3.1
+VERSION = 1.4.0
 
 
 TEMPLATE = app
 QT += xml
-LIBS += -L../bin -lEVE_API_Qt
+LIBS += -L../bin -lEVE_API_Qt1
 TARGET = EVE_API_Qt_base_app
 
 DEPENDPATH += . include src
