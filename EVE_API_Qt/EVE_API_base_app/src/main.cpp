@@ -416,9 +416,8 @@ void Window::corpFacWarStats()
 void Window::eveFacWarStats()
 {
     QMap<QString, QString> params;
-//    params.insert( QString("userID"), this->_edtUserID->text() );
-//    params.insert( QString("characterID"), this->_edtCharacterID->text() );
-//    params.insert( QString("apiKey"), this->_edtFullApiKey->text() );
+    params.insert( QString("userID"), this->_edtUserID->text() );
+    params.insert( QString("apiKey"), this->_edtLimitedApiKey->text() );
     //QMessageBox::information(this, "button", "clicked", QMessageBox::Ok);
     QString result = this->_api->eve().facWarStats( params );
     QMessageBox::information(this, "Request sent", result, QMessageBox::Ok);
@@ -427,9 +426,8 @@ void Window::eveFacWarStats()
 void Window::eveFacWarTopStats()
 {
     QMap<QString, QString> params;
-//    params.insert( QString("userID"), this->_edtUserID->text() );
-//    params.insert( QString("characterID"), this->_edtCharacterID->text() );
-//    params.insert( QString("apiKey"), this->_edtFullApiKey->text() );
+    params.insert( QString("userID"), this->_edtUserID->text() );
+    params.insert( QString("apiKey"), this->_edtLimitedApiKey->text() );
     //QMessageBox::information(this, "button", "clicked", QMessageBox::Ok);
     QString result = this->_api->eve().facWarTopStats( params );
     QMessageBox::information(this, "Request sent", result, QMessageBox::Ok);
@@ -438,9 +436,8 @@ void Window::eveFacWarTopStats()
 void Window::mapFacWarSystems()
 {
     QMap<QString, QString> params;
-//    params.insert( QString("userID"), this->_edtUserID->text() );
-//    params.insert( QString("characterID"), this->_edtCharacterID->text() );
-//    params.insert( QString("apiKey"), this->_edtFullApiKey->text() );
+    params.insert( QString("userID"), this->_edtUserID->text() );
+    params.insert( QString("apiKey"), this->_edtLimitedApiKey->text() );
     //QMessageBox::information(this, "button", "clicked", QMessageBox::Ok);
     QString result = this->_api->map().facWarSystems( params );
     QMessageBox::information(this, "Request sent", result, QMessageBox::Ok);

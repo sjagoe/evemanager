@@ -377,49 +377,105 @@
           <api_function>
             RefTypes.xml
           </api_function>
-          <params />
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+	  </params>
         </method>
         <method name="skillTree">
           <api_function>
             SkillTree.xml
           </api_function>
-          <params />
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+	  </params>
         </method>
         <method name="allianceList">
           <api_function>
             AllianceList.xml
           </api_function>
-          <params />
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+	  </params>
         </method>
         <method name="errorList">
           <api_function>
             ErrorList.xml
           </api_function>
-          <params />
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+	  </params>
         </method>
         <method name="characterID">
           <api_function>
             CharacterID.xml
           </api_function>
-          <params />
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+	  </params>
         </method>
         <method name="conquerableStationsList">
           <api_function>
             ConquerableStationsList.xml
           </api_function>
-          <params />
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+	  </params>
         </method>
         <method name="facWarStats">
           <api_function>
             FacWarStats.xml
           </api_function>
-          <params />
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+	  </params>
         </method>
         <method name="facWarTopStats">
           <api_function>
             FacWarTopStats.xml
           </api_function>
-          <params />
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+	  </params>
         </method>
       </methods>
     </scope>
@@ -444,25 +500,53 @@
           <api_function>
             Sovereignty.xml
           </api_function>
-          <params />
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+	  </params>
         </method>
         <method name="jumps">
           <api_function>
             Jumps.xml
           </api_function>
-          <params />
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+	  </params>
         </method>
         <method name="kills">
           <api_function>
             Kills.xml
           </api_function>
-          <params />
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+	  </params>
         </method>
         <method name="facWarSystems">
           <api_function>
             FacWarSystems.xml
           </api_function>
-          <params />
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              apiKey
+            </required>
+	  </params>
         </method>
       </methods>
     </scope>
