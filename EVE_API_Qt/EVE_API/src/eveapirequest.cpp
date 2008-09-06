@@ -28,8 +28,9 @@
 #include <QDomDocument>
 
 #include <QFile>
-#include <QDir>
 #include <QTextStream>
+
+class RetrieveCacheException {};
 
 EveApiRequest::EveApiRequest( const QString& requestType,
                               const QString& dataPath,
@@ -43,7 +44,7 @@ EveApiRequest::EveApiRequest( const QString& requestType,
                               const QString & user,
                               const QString & password,
                               QObject* parent )
-        : QObject( parent )
+    : QObject( parent )
 {
     this->_http.reset( new QHttp );
     this->setProxy( p_type, host, port, user, password );
@@ -66,34 +67,36 @@ EveApiRequest::EveApiRequest( const QString& requestType,
 }
 
 /*!
-Add a request to be handled.
+  Add a request to be handled.
 
-\return unique request identifier (used to id a completed request)
+  \return unique request identifier (used to id a completed request)
 */
-QString EveApiRequest::addRequest( const QString& host, const QString& scope,
-                                   QMap<QString, QString>& parameters/*,
-                                   bool internal, QString oldId*/ )
+QString EveApiRequest::addRequest( const QString& host,
+                                   const QString& scope,
+                                   QMap<QString, QString>& parameters )
 {
     QString idStr = QString();
 
-    QStringList cacheDirs = cachePath( scope, parameters );
+    try
+    {
+        idStr = this->getFromCache( host, scope, parameters );
+    }
+    catch (RetrieveCacheException e)
+    {
+        idStr = this->fetchFromApi( host, scope, parameters );
+    }
 
-    QString cachePathStr( QCoreApplication::applicationDirPath() );
-    cachePathStr = cachePathStr.append( "/" );
-    cachePathStr = cachePathStr.append( this->_dataPath );
-    QString dir;
-    foreach( dir, cacheDirs )
-    {
-        cachePathStr = cachePathStr.append( "/" );
-        cachePathStr = cachePathStr.append( dir );
-    }
-    cachePathStr = cachePathStr.append( "/" );
-    QString cacheID;
-    foreach( cacheID, this->_fileIDParam )
-    {
-        cachePathStr = cachePathStr.append( parameters.value( cacheID ) );
-    }
-    cachePathStr = cachePathStr.append( this->requestType() );
+    return idStr;
+}
+
+/*!
+  Try to get a document from cache, raise if not possible
+*/
+QString EveApiRequest::getFromCache( const QString& host,
+                                     const QString& scope,
+                                     QMap<QString, QString>& parameters )
+{
+    QString cachePathStr = this->buildCachePath( scope, parameters );
 
     shared_ptr<QDomDocument> cacheDom( new QDomDocument );
 
@@ -109,37 +112,28 @@ QString EveApiRequest::addRequest( const QString& host, const QString& scope,
             QDateTime nowUTC = now.toUTC();
             // over by 60 secs, prevent accidental fetch if the cache has not
             // expired (due to differences in clocks)
-            if ( nowUTC.secsTo( cacheTime ) <= -60 )
-            {
-                // cache invalid, fetch new
-                this->cleanCache( scope, parameters );
-                idStr = this->fetchFromApi( host, scope, parameters/*, internal*/ );
-            }
-            else
+            if ( nowUTC.secsTo( cacheTime ) >= -60 )
             {
                 int idi = 0;
-                idStr = this->makeID( scope, idi, parameters );
-                emit requestComplete( idStr, cacheDom, QString( "FROM LOCAL CACHE" ), cacheTime );
+                QString idStr = this->makeID( scope, idi, parameters );
+                emit requestComplete( idStr, cacheDom,
+                                      QString( "FROM LOCAL CACHE" ),
+                                      cacheTime );
+                return idStr;
             }
         }
         else
         {
             loadFile.close();
-            this->cleanCache( scope, parameters );
-            // error (fetch new one?)
-            idStr = this->fetchFromApi( host, scope, parameters/*, internal */ );
         }
     }
-    else
-    {
-        idStr = this->fetchFromApi( host, scope, parameters/*, internal */ );
-    }
-
-    return idStr;
+    this->cleanCache( scope, parameters );
+    throw RetrieveCacheException();
 }
 
+
 /*!
-Set the proxy to use for http requests
+  Set the proxy to use for http requests
 */
 void EveApiRequest::setProxy( const int& p_type,
                               const QString & host,
@@ -152,12 +146,12 @@ void EveApiRequest::setProxy( const int& p_type,
         QNetworkProxy::ProxyType proxyType = QNetworkProxy::NoProxy;
         switch ( p_type )
         {
-            case 1:
+        case 1:
             {
                 proxyType = QNetworkProxy::HttpProxy;
                 break;
             }
-            case 2:
+        case 2:
             {
                 proxyType = QNetworkProxy::Socks5Proxy;
                 break;
@@ -181,7 +175,7 @@ void EveApiRequest::setProxy( const int& p_type,
 //}
 
 /*!
-return the server path (URI) to access the requested information
+  return the server path (URI) to access the requested information
 */
 QString EveApiRequest::path( const QString& scope )
 {
@@ -199,7 +193,7 @@ const QString& EveApiRequest::requestType() const
 }
 
 /*!
-make a unique string ID
+  make a unique string ID
 */
 QString EveApiRequest::makeID( const QString& scope, int& id, const QMap<QString, QString>& parameters )
 {
@@ -217,8 +211,73 @@ QString EveApiRequest::makeID( const QString& scope, int& id, const QMap<QString
     return idStr;
 }
 
+/*! 
+  Return the QDir representing the directory that cache for
+  this request will be stored in. Raises RetrieveCacheException if
+  the directory does not exist and create is not True.
+*/
+QDir EveApiRequest::buildCacheDir( const QString& scope,
+				   const QMap<QString, QString>& parameters,
+				   bool create )
+{
+    QStringList cacheDirs = cachePath( scope, parameters );
+    QDir cachePath( QCoreApplication::applicationDirPath() );
+    if (! cachePath.cd( this->_dataPath ) )
+    {
+        if ( create )
+        {
+            cachePath.mkdir( this->_dataPath );
+            cachePath.cd( this->_dataPath );
+        }
+        else
+        {
+            throw RetrieveCacheException();
+        }
+    }
+    QString dir;
+    foreach( dir, cacheDirs )
+    {
+        if (! cachePath.cd( dir ) )
+        {
+            if ( create )
+            {
+                cachePath.mkdir( dir );
+                cachePath.cd( dir );
+            }
+            else
+            {
+                throw RetrieveCacheException();
+            }
+        }
+    }
+    return cachePath;
+}
+
 /*!
-Check the paramaters
+  Return the absolute path to the cache file to be used to cache
+  the request. Raises RetrieveCacheException if the directory does
+  not exist and create is not True.
+*/
+QString EveApiRequest::buildCachePath( const QString& scope,
+                                       const QMap<QString, QString>& parameters,
+                                       bool create )
+{
+    QDir cachePath = this->buildCacheDir( scope, parameters, create );
+
+    QString cacheFileStr("");
+
+    QString cacheID;
+    foreach( cacheID, this->_fileIDParam )
+    {
+        cacheFileStr = cacheFileStr.append( parameters.value( cacheID ) );
+    }
+    cacheFileStr = cacheFileStr.append( this->requestType() );
+
+    return cachePath.absoluteFilePath(cacheFileStr);
+}
+
+/*!
+  Check the paramaters
 */
 bool EveApiRequest::validateParamaters( const QMap<QString, QString>& parameters, QUrl& url )
 {
@@ -246,11 +305,10 @@ bool EveApiRequest::validateParamaters( const QMap<QString, QString>& parameters
 }
 
 /*!
-Fetch from API
+  Fetch from API
 */
 QString EveApiRequest::fetchFromApi( const QString& host, const QString& scope,
-                                     const QMap<QString, QString>& parameters/*,
-                                     bool internal, QString oldId*/ )
+                                     const QMap<QString, QString>& parameters )
 {
     int id = 0;
 
@@ -290,7 +348,7 @@ QString EveApiRequest::fetchFromApi( const QString& host, const QString& scope,
 }
 
 /*!
-Get the time that the cache expires from a QDomDocument
+  Get the time that the cache expires from a QDomDocument
 */
 //QDateTime EveApiRequest::getCacheTime( const QDomDocument& xmlDocument )
 QDateTime EveApiRequest::getCacheTime( shared_ptr<QDomDocument> xmlDocument )
@@ -322,7 +380,7 @@ QDateTime EveApiRequest::getCacheTime( shared_ptr<QDomDocument> xmlDocument )
 }
 
 /*!
-convert a time specified in the API XML output to a QDateTime
+  convert a time specified in the API XML output to a QDateTime
 */
 QDateTime EveApiRequest::eveApiTimeToQDateTime( QString timeString )
 {
@@ -347,53 +405,44 @@ QDateTime EveApiRequest::eveApiTimeToQDateTime( QString timeString )
 }
 
 /*!
-remove expired cache files (related to the one that has been checked).
+  remove expired cache files (related to the one that has been checked).
 
-This is intended for use with journal/transaction walking, where
-multiple cache files are created. If the journal is requested after
-the cache has expired, then only the first file will be overwritten
-(as the request that created the other files will not be repeated,
-because different beforeRefID numbers will be used) and the others will
-remain, and more may be created (if journal walking is used).
+  This is intended for use with journal/transaction walking, where
+  multiple cache files are created. If the journal is requested after
+  the cache has expired, then only the first file will be overwritten
+  (as the request that created the other files will not be repeated,
+  because different beforeRefID numbers will be used) and the others will
+  remain, and more may be created (if journal walking is used).
 
-This method removes all related cache files when the first expires
-(i.e. when /char/WalletJournal.xml expires, regular expressions are
-used to find all other files in the /char/ scope that end with the text
-"WalletJournal.xml", so that the other cache files are removed as well).
+  This method removes all related cache files when the first expires
+  (i.e. when /char/WalletJournal.xml expires, regular expressions are
+  used to find all other files in the /char/ scope that end with the text
+  "WalletJournal.xml", so that the other cache files are removed as well).
 */
 void EveApiRequest::cleanCache( const QString& scope,
                                 QMap<QString, QString>& parameters )
 {
-    QStringList cacheDirs = cachePath( scope, parameters );
-
-    QString cachePathStr( QCoreApplication::applicationDirPath() );
-    cachePathStr = cachePathStr.append( "/" );
-    cachePathStr = cachePathStr.append( this->_dataPath );
-    QString dir;
-    foreach( dir, cacheDirs )
+    try
     {
-        cachePathStr = cachePathStr.append( "/" );
-        cachePathStr = cachePathStr.append( dir );
-    }
-
-    QDir cacheDir( cachePathStr );
-
-    QStringList files = cacheDir.entryList();
-    QString fileName;
-    foreach( fileName, files )
-    {
-        if ( fileName.endsWith( this->_requestType ) )
+        QDir cacheDir = buildCacheDir( scope, parameters );
+        QStringList files = cacheDir.entryList();
+        QString fileName;
+        foreach( fileName, files )
         {
-            QString file = cachePathStr;
-            file = file.append( "/" );
-            file = file.append( fileName );
-            QFile::remove( file );
+            if ( fileName.endsWith( this->_requestType ) )
+            {
+                QString file = cacheDir.relativeFilePath( fileName );
+                QFile::remove( file );
+            }
         }
+    }
+    catch (RetrieveCacheException e)
+    {
     }
 }
 
 /*!
-signal that a request has begun
+  signal that a request has begun
 */
 void EveApiRequest::requestStarted( int id )
 {
@@ -401,7 +450,7 @@ void EveApiRequest::requestStarted( int id )
 }
 
 /*!
-signal that a request has finished so that the result can be delivered
+  signal that a request has finished so that the result can be delivered
 */
 void EveApiRequest::requestFinished( int id, bool error )
 {
@@ -422,47 +471,14 @@ void EveApiRequest::requestFinished( int id, bool error )
     if ( error )
     {
         QString err = this->_http->errorString();
-        //if ( internal )
-        //{
-        //    emit internalRequestFailed( idStr, err, response );
-        //}
-        //else
-        //{
         emit requestFailed( idStr, err, response );
-        //}
     }
     else
     {
         if ( !scope.isEmpty() )
         {
-            QDir cwd( QCoreApplication::applicationDirPath() );
-            if ( !cwd.exists( this->_dataPath ) )
-            {
-                cwd.mkdir( this->_dataPath );
-            }
-            cwd.cd( this->_dataPath );
-
-            QStringList dirs = this->cachePath( scope, parameters );
-            QString dir;
-            foreach( dir, dirs )
-            {
-                if ( !cwd.exists( dir ) )
-                {
-                    cwd.mkdir( dir );
-                }
-                cwd.cd( dir );
-            }
-
-            QString thisCachePath = cwd.path();
-
-            thisCachePath = thisCachePath.append( "/" );
-            QString cacheID;
-            foreach( cacheID, this->_fileIDParam )
-            {
-                thisCachePath = thisCachePath.append( parameters.value( cacheID ) );
-            }
-            thisCachePath = thisCachePath.append( this->requestType() );
-
+            QString thisCachePath = this->buildCachePath( scope, parameters,
+                                                          true );
             shared_ptr<QDomDocument> xmlData( new QDomDocument );
             xmlData->setContent( data );
 
@@ -476,22 +492,13 @@ void EveApiRequest::requestFinished( int id, bool error )
                 xmlData->save( save, this->_xmlIndent );
                 saveFile.close();
             }
-//            if ( internal )
-//            {
-//                emit internalRequestComplete( idStr, xmlData, response, cacheTime );
-//            }
-//            else
-//            {
             emit requestComplete( idStr, xmlData, response, cacheTime );
-//            }
         }
     }
-    //delete buffer;
-    //buffer = 0;
 }
 
 /*!
-An http response is received
+  An http response is received
 */
 void EveApiRequest::responseHeaderReceived( QHttpResponseHeader head )
 {
