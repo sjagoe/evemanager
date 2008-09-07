@@ -28,7 +28,7 @@ CONFIG += debug_and_release
 # } else {
 #     DESTDIR = ../bin/release
 # }
-DESTDIR = ../bin
+DESTDIR = ../../bin
 
 # Input
 HEADERS += include/evemanagerwindow.hh \

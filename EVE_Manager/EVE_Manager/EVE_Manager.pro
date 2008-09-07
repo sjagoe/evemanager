@@ -40,13 +40,13 @@ CONFIG += debug_and_release
 #     LIBS += -L../../EVE_API_Qt/bin/release -lEVE_API_Qt
 # }
 
-DESTDIR = ../bin
+DESTDIR = ../../bin
 
 #controller lib
-LIBS += -L../bin -lEVE_Manager_controller
-LIBS += -L../bin -lEVE_Manager_model
-LIBS += -L../bin -lEVE_Manager_gui
-LIBS += -L../../EVE_API_Qt/bin -lEVE_API_Qt1
+LIBS += -L../../bin -lEVE_Manager_controller
+LIBS += -L../../bin -lEVE_Manager_model
+LIBS += -L../../bin -lEVE_Manager_gui
+LIBS += -L../../bin -lEVE_API_Qt1
 
 # Input
 SOURCES += src/main.cpp

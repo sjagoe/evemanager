@@ -20,7 +20,7 @@ VERSION = 1.4.0
 
 TEMPLATE = app
 QT += xml
-LIBS += -L../bin -lEVE_API_Qt1
+LIBS += -L../../bin -lEVE_API_Qt1
 TARGET = EVE_API_Qt_base_app
 
 DEPENDPATH += . include src
@@ -37,7 +37,7 @@ CONFIG += debug_and_release
 # } else {
 #     DESTDIR = ../bin/release
 # }
-DESTDIR = ../bin
+DESTDIR = ../../bin
 
 # Input
 

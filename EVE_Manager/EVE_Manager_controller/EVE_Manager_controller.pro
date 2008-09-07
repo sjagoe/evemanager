@@ -33,10 +33,10 @@ CONFIG += debug_and_release
 #     LIBS += -L../bin/release -lEVE_Manager_model
 #     LIBS += -L../bin/release -lEVE_Manager_gui
 # }
-DESTDIR = ../bin
+DESTDIR = ../../bin
 
-LIBS += -L../bin -lEVE_Manager_model
-LIBS += -L../bin -lEVE_Manager_gui
+LIBS += -L../../bin -lEVE_Manager_model
+LIBS += -L../../bin -lEVE_Manager_gui
 
 # Input
 HEADERS += include/evemanager.hh
