@@ -17,8 +17,8 @@
  * along with EVE Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __EVEMANAGERCHARACTERSELECTOR_HH__
-#define __EVEMANAGERCHARACTERSELECTOR_HH__
+#ifndef _em_gui_EVEMANAGERCHARACTERSELECTOR_HH__
+#define _em_gui_EVEMANAGERCHARACTERSELECTOR_HH__
 
 #include <QStringList>
 #include <QWidget>

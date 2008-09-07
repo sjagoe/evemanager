@@ -111,24 +111,30 @@ QLayout* em_gui::EveManagerCharacterSettings::_setupWidget()
     this->_lblApiKey = new QLabel( tr( "API Key" ) );
     // API Key field
     this->_edtApiKey = new QLineEdit();
-    // ButtonGroup containing radio buttons to select API functionality
-    this->_bgrpApiFunctionality = new QButtonGroup;
     // Radio Button to select limited API functionality
     this->_radApiLimited = new QRadioButton(
         tr( "Limited API Functionality" ) );
     // Radio Button to select full API functionality
     this->_radApiFull = new QRadioButton( tr( "Full API Functionality" ) );
+    // ButtonGroup containing radio buttons to select API functionality
+    this->_bgrpApiFunctionality = new QButtonGroup;
+    this->_bgrpApiFunctionality->addButton( this->_radApiLimited );
+    this->_bgrpApiFunctionality->addButton( this->_radApiFull );
     // Group to store full API settings
     this->_grpCorporationFunctionality = new QGroupBox(
         tr( "Corporation Functionality Level" ) );
-    // Radio Button to enable Full coprporation setting (requires
-    // Director status)
-    this->_radCorporationFull = new QRadioButton(
-        tr( "Full Corporation Access (requires Director access)" ) );
     // Radio Button to enable limited Corporation settings (but still
     // Full character settings (does not need Director status)
     this->_radCorporationLimited = new QRadioButton(
         tr( "Limited Corporation Access" ) );
+    // Radio Button to enable Full coprporation setting (requires
+    // Director status)
+    this->_radCorporationFull = new QRadioButton(
+        tr( "Full Corporation Access (requires Director access)" ) );
+    // ButtonGroup containing radio buttons to select Corp Access Level
+    this->_bgrpCorporationFunctionality = new QButtonGroup;
+    this->_bgrpCorporationFunctionality->addButton( this->_radCorporationLimited );
+    this->_bgrpCorporationFunctionality->addButton( this->_radCorporationFull );
     this->_btnbox = new QDialogButtonBox(
         QDialogButtonBox::Apply | QDialogButtonBox::Reset );
 
@@ -137,10 +143,6 @@ QLayout* em_gui::EveManagerCharacterSettings::_setupWidget()
     QHBoxLayout* layoutApiFunctionality = new QHBoxLayout;
     layoutApiFunctionality->addWidget( this->_radApiLimited );
     layoutApiFunctionality->addWidget( this->_radApiFull );
-//    this->_bgrpApiFunctionality->setLayout( layoutApiFunctionality );
-
-//    this->_bgrpApiFunctionality->addButton( this->_radApiLimited );
-//    this->_bgrpApiFunctionality->addButton( this->_radApiFull );
 
     QHBoxLayout* layoutCorpFunctionality = new QHBoxLayout;
     layoutCorpFunctionality->addWidget( this->_radCorporationLimited );
@@ -154,7 +156,6 @@ QLayout* em_gui::EveManagerCharacterSettings::_setupWidget()
     layoutGrid->addWidget( this->_edtCharacterID, 1, 1 );
     layoutGrid->addWidget( this->_lblApiKey, 2, 0, 1, 2 );
     layoutGrid->addWidget( this->_edtApiKey, 3, 0, 1, 2 );
-    //layoutGrid->addWidget( this->_bgrpApiFunctionality, 4, 0, 1, 2 );
     layoutGrid->addLayout( layoutApiFunctionality, 4, 0, 1, 2 );
     layoutGrid->addWidget( this->_grpCorporationFunctionality, 5, 0, 1, 2 );
     layoutGrid->addWidget( this->_btnbox, 6, 0, 1, 2 );
@@ -163,7 +164,7 @@ QLayout* em_gui::EveManagerCharacterSettings::_setupWidget()
     layoutWidget->addLayout( layoutGrid );
     layoutWidget->addStretch();
 
-    this->_dlgSelector= new em_gui::EveManagerCharacterSelector( this );
+    this->_dlgSelector = new em_gui::EveManagerCharacterSelector();
     
     return layoutWidget;
 }

@@ -17,8 +17,8 @@
  * along with EVE Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef EVEMANAGERCHARACTER_HH_INCLUDED
-#define EVEMANAGERCHARACTER_HH_INCLUDED
+#ifndef _em_gui_EVEMANAGERCHARACTER_HH__
+#define _em_gui_EVEMANAGERCHARACTER_HH__
 
 #include <QMap>
 #include <QWidget>

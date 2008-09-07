@@ -17,8 +17,8 @@
  * along with EVE_Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __EVEMANAGERWINDOW_HH__
-#define __EVEMANAGERWINDOW_HH__
+#ifndef _em_gui_EVEMANAGERWINDOW_HH__
+#define _em_gui_EVEMANAGERWINDOW_HH__
 
 #include <QMainWindow>
 

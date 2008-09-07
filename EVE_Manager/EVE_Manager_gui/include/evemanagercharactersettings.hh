@@ -17,8 +17,8 @@
  * along with EVE Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef EVEMANAGERCHARACTERSETTINGS_HH_INCLUDED
-#define EVEMANAGERCHARACTERSETTINGS_HH_INCLUDED
+#ifndef _em_gui_EVEMANAGERCHARACTERSETTINGS_HH__
+#define _em_gui_EVEMANAGERCHARACTERSETTINGS_HH__
 
 #include <QStringList>
 #include <QWidget>
@@ -88,12 +88,14 @@ namespace em_gui
 	QRadioButton* _radApiFull;
 	//! Group to store full API settings
 	QGroupBox* _grpCorporationFunctionality;
-	//! Radio Button to enable Full coprporation setting (requires
-	//! Director status)
-	QRadioButton* _radCorporationFull;
+	//! ButtonGroup containing radio buttons to select Corp Access Level
+	QButtonGroup* _bgrpCorporationFunctionality;
 	//! Radio Button to enable limited Corporation settings (but still
 	//! Full character settings (does not need Director status)
 	QRadioButton* _radCorporationLimited;
+	//! Radio Button to enable Full coprporation setting (requires
+	//! Director status)
+	QRadioButton* _radCorporationFull;
 	//! Container for buttons
 	QDialogButtonBox* _btnbox;
 
