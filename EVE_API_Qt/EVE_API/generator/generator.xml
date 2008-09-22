@@ -182,6 +182,22 @@
             </required>
           </params>
         </method>
+        <method name="standings">
+          <api_function>
+            Standings.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+          </params>
+        </method>
       </methods>
     </scope>
     <scope name="eveapiaccount">
@@ -338,6 +354,101 @@
         <method name="starbaseDetail">
           <api_function>
             StarbaseDetail.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+	    <required>
+              version
+            </required>
+          </params>
+        </method>
+        <method name="titles">
+          <api_function>
+            Titles.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+	    <required>
+              version
+            </required>
+          </params>
+        </method>
+        <method name="memberSecurity">
+          <api_function>
+            MemberSecurity.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+	    <required>
+              version
+            </required>
+          </params>
+        </method>
+        <method name="memberSecurityLog">
+          <api_function>
+            MemberSecurityLog.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+	    <required>
+              version
+            </required>
+          </params>
+        </method>
+        <method name="containerLog">
+          <api_function>
+            ContainerLog.xml
+          </api_function>
+          <params>
+            <required>
+              userID
+            </required>
+            <required>
+              characterID
+            </required>
+            <required>
+              apiKey
+            </required>
+	    <required>
+              version
+            </required>
+          </params>
+        </method>
+        <method name="shareholders">
+          <api_function>
+            Shareholders.xml
           </api_function>
           <params>
             <required>
