@@ -42,41 +42,7 @@ CONFIG += debug_and_release
 # }
 DESTDIR = ../../bin
 
-HEADERS += include/eveapiparser.hh \
-           \
-           include/eveapiparseraccount.hh \
-           include/eveapiparsereve.hh \
-           include/eveapiparsermap.hh \
-           include/eveapiparsercharacter.hh \
-           include/eveapiparsercorporation.hh \
-           \
-           include/eveapiparserthread.hh \
-           include/eveapiparserthread_characters.hh \
-           include/eveapiparserthread_balance.hh \
-           \
-           include/eveapidatatype.hh \
-           \
-           include/eveapidata.hh \
-           include/eveapidatatable.hh \
-           include/eveapidata_characters.hh \
-           include/eveapidata_walked.hh \
-           include/eveapidata_balance.hh
+HEADERS += include/eveapiparser.hh
 
-SOURCES += src/eveapiparser.cpp \
-           \
-           src/eveapiparseraccount.cpp \
-           src/eveapiparsereve.cpp \
-           src/eveapiparsermap.cpp \
-           src/eveapiparsercharacter.cpp \
-           src/eveapiparsercorporation.cpp \
-           \
-           src/eveapiparserthread.cpp \
-           src/eveapiparserthread_characters.cpp \
-           src/eveapiparserthread_balance.cpp \
-           \
-           src/eveapidata.cpp \
-           src/eveapidatatable.cpp \
-           src/eveapidata_characters.cpp \
-           src/eveapidata_walked.cpp \
-           src/eveapidata_balance.cpp
+SOURCES += src/eveapiparser.cpp
 
