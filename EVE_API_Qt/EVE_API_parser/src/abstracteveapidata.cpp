@@ -18,3 +18,82 @@
  * along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "abstracteveapidata.hh"
+
+EveApi::DataItem::DataItem() {};
+
+EveApi::DataItem::DataItem(const QString& data)
+{
+    this->_data = data;
+};
+
+void EveApi::DataItem::set(const QString& data)
+{
+    this->_data = data;
+};
+
+const QString& EveApi::DataItem::get() const
+{
+    return this->_data;
+};
+
+
+EveApi::RowSet::RowSet(const QString& name,
+		       const QString& key,
+		       const QStringList& columns)
+{
+    this->_name = name;
+    this->_key = key;
+    this->_columns = columns;
+};
+
+/*!  Add a row to the table
+ */
+shared_ptr<EveApi::Row<EveApi::RowSet> > EveApi::RowSet::add_row(const QMap<QString, DataItem>& values)
+{
+
+}
+
+QList<shared_ptr<EveApi::Row<EveApi::RowSet> > >::const_iterator EveApi::RowSet::begin() const
+{
+
+}
+
+QList<shared_ptr<EveApi::Row<EveApi::RowSet> > >::const_iterator EveApi::RowSet::end() const
+{
+
+}
+
+const shared_ptr<EveApi::Row<EveApi::RowSet> >& EveApi::RowSet::row(const QString& key) const
+{
+
+}
+
+
+template <class T>
+EveApi::Row<T>::Row(const QMap<QString, EveApi::DataItem>& values)
+{
+    this->_values = values;
+};
+
+template <class T>
+const T& EveApi::Row<T>::get_child() const
+{
+    return this->_child;
+};
+
+template <class T>
+void EveApi::Row<T>::add_child(shared_ptr<T> child)
+{
+
+}
+
+template <class T>
+const EveApi::DataItem& EveApi::Row<T>::operator[](const QString& column) const throw(NoSuchColumn)
+{
+    if (! this->_values.contains(column))
+    {
+	throw NoSuchColumn();
+    }
+    return this->_values.value(column);
+};

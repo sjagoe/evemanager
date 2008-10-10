@@ -18,8 +18,8 @@
  * along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __ABSTRACTEVEAPIDATA_HH__
-#define __ABSTRACTEVEAPIDATA_HH__
+#ifndef _EVEAPI_ABSTRACTEVEAPIDATA_HH_
+#define _EVEAPI_ABSTRACTEVEAPIDATA_HH_
 
 #include <QList>
 #include <QMap>
@@ -35,27 +35,20 @@ namespace EveApi
     class NoSuchColumn {};
 
     /*!  The basic item of data, to abstract the storage and
-      representation away from the larger structures
+      representation away from the larger structures.
+
+      TODO: Needs to be able to determine if the DataItem is null.
      */
     class DataItem
     {
     public:
-	DataItem() {};
+	DataItem();
 
-	DataItem(const QString& data)
-	{
-	    this->_data = data;
-	};
+	DataItem(const QString& data);
 
-	void set(const QString& data)
-	{
-	    this->_data = data;
-	};
+	void set(const QString& data);
 
-	const QString& get() const
-	{
-	    return this->_data;
-	};
+	const QString& get() const;
 
     private:
 	QString _data;
@@ -72,12 +65,7 @@ namespace EveApi
     public:
 	RowSet(const QString& name,
 	       const QString& key,
-	       const QStringList& columns)
-	{
-	    this->_name = name;
-	    this->_key = key;
-	    this->_columns = columns;
-	};
+	       const QStringList& columns);
 
 	/*!  Add a row to the table
 	 */
@@ -111,26 +99,13 @@ namespace EveApi
     class Row
     {
     public:
-	Row(const QMap<QString, DataItem>& values)
-	{
-	    this->_values = values;
-	};
+	Row(const QMap<QString, DataItem>& values);
 
-	const T& get_child() const
-	{
-	    return this->_child;
-	};
+	const T& get_child() const;
 
-	void add_child(shared_ptr<T> child) {};
+	void add_child(shared_ptr<T> child);
 
-	const DataItem& operator[](const QString& column) const
-	{
-	    if (! this->_values.contains(column))
-	    {
-		throw NoSuchColumn();
-	    }
-	    return this->_values.value(column)
-	};
+	const DataItem& operator[](const QString& column) const throw(NoSuchColumn);
 
     private:
 	QMap<QString, DataItem> _values;

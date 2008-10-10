@@ -22,4 +22,5 @@ CONFIG += ordered
 CONFIG += debug_and_release
 # Directories
 SUBDIRS += EVE_API \
+           EVE_API_parser \
            EVE_API_base_app

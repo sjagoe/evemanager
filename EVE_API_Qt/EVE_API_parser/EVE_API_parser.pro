@@ -24,7 +24,7 @@ QT -= gui      # does not need any GUI elements
 QT += xml      # uses the XML Qt elements
 
 TARGET = EVE_API_Parser_Qt
-LIBS += -L../../bin/release -lEVE_API_Qt1
+LIBS += -L../../bin -lEVE_API_Qt1
 
 DEPENDPATH += . include src
 INCLUDEPATH += . include ../EVE_API/include
@@ -42,7 +42,11 @@ CONFIG += debug_and_release
 # }
 DESTDIR = ../../bin
 
-HEADERS += include/eveapiparser.hh
+HEADERS += include/eveapiparser.hh \
+	   include/abstracteveapidata.hh \
+	   include/charactersheetdata.hh
 
-SOURCES += src/eveapiparser.cpp
+SOURCES += src/eveapiparser.cpp \
+	   src/abstracteveapidata.cpp \
+	   src/charactersheetdata.cpp
 
