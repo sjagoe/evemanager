@@ -38,6 +38,10 @@ const QString& EveApi::DataItem::get() const
 };
 
 
+EveApi::RowSet::RowSet()
+{
+};
+
 EveApi::RowSet::RowSet(const QString& name,
 		       const QString& key,
 		       const QStringList& columns)
@@ -67,6 +71,42 @@ QList<shared_ptr<EveApi::Row<EveApi::RowSet> > >::const_iterator EveApi::RowSet:
 const shared_ptr<EveApi::Row<EveApi::RowSet> >& EveApi::RowSet::row(const QString& key) const
 {
 
+}
+
+void EveApi::RowSet::set_name(const QString& name) throw(ImmutableError)
+{
+    if (this->_name.isEmpty())
+    {
+	this->_name = name;
+    }
+    else
+    {
+	throw EveApi::ImmutableError("This RowSet already has a name");
+    }
+}
+
+void EveApi::RowSet::set_key(const QString& key) throw(ImmutableError)
+{
+    if (this->_key.isEmpty())
+    {
+	this->_key = key;
+    }
+    else
+    {
+	throw EveApi::ImmutableError("This RowSet already has a key");
+    }
+}
+
+void EveApi::RowSet::set_columns(const QStringList& columns) throw(ImmutableError)
+{
+    if (this->_columns.isEmpty())
+    {
+	this->_columns = columns;
+    }
+    else
+    {
+	throw EveApi::ImmutableError("This RowSet already has columns");
+    }
 }
 
 

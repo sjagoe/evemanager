@@ -34,6 +34,13 @@ namespace EveApi
 {
     class NoSuchColumn {};
 
+    class ImmutableError : public QString
+    {
+    public:
+	ImmutableError(const char* args) :
+	    QString(args) {};
+    };
+
     /*!  The basic item of data, to abstract the storage and
       representation away from the larger structures.
 
@@ -63,6 +70,8 @@ namespace EveApi
     class RowSet
     {
     public:
+	RowSet();
+
 	RowSet(const QString& name,
 	       const QString& key,
 	       const QStringList& columns);
@@ -76,6 +85,12 @@ namespace EveApi
 	QList<shared_ptr<Row<RowSet> > >::const_iterator end() const;
 
 	const shared_ptr<Row<RowSet> >& row(const QString& key) const;
+
+	void set_name(const QString& name) throw(ImmutableError);
+
+	void set_key(const QString& key) throw(ImmutableError);
+
+	void set_columns(const QStringList& columns) throw(ImmutableError);
 
     private:
 	//! Name of the rowset
