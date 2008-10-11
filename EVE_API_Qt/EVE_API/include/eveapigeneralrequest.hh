@@ -18,37 +18,40 @@
  * along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __EVEAPIGENERALREQUEST_HH__
-#define __EVEAPIGENERALREQUEST_HH__
+#ifndef _EVEAPI_GENERALREQUEST_HH_
+#define _EVEAPI_GENERALREQUEST_HH_
 
 #include "eveapirequest.hh"
 
-class EveApiGeneralRequest: public EveApiRequest
+namespace EveApi
 {
-        Q_OBJECT
+    class GeneralRequest: public Request
+    {
+	Q_OBJECT;
     public:
         /*!
-        pass the constructor args to the super-class
+	  pass the constructor args to the super-class
         */
-        EveApiGeneralRequest( const QString& requestType,
-                              const QString& dataPath,
-                              const int& xmlIndent,
-                              const QList<QString>& requiredParams,
-                              const QList<QString>& optionalParams,
-                              const QList<QString>& fileIDParam,
-                              const int& p_type,
-                              const QString& host,
-                              const quint16& port,
-                              const QString & user,
-                              const QString & password,
-                              QObject* parent = 0 );
+        GeneralRequest( const QString& requestType,
+			const QString& dataPath,
+			const int& xmlIndent,
+			const QList<QString>& requiredParams,
+			const QList<QString>& optionalParams,
+			const QList<QString>& fileIDParam,
+			const int& p_type,
+			const QString& host,
+			const quint16& port,
+			const QString & user,
+			const QString & password,
+			QObject* parent = 0 );
 
     private:
         /*!
-        return a QStringList of filesystem directories, relative to the data directory, in which to store cache
+	  return a QStringList of filesystem directories, relative to the data directory, in which to store cache
         */
         QStringList cachePath( const QString& scope,
                                const QMap<QString, QString>& parameters );
+    };
 };
 
 #endif

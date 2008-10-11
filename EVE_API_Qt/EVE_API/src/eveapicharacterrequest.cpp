@@ -23,7 +23,7 @@
 /*!
 pass the constructor args to the super-class
 */
-EveApiCharacterRequest::EveApiCharacterRequest( const QString& requestType,
+EveApi::CharacterRequest::CharacterRequest( const QString& requestType,
         const QString& dataPath,
         const int& xmlIndent,
         const QList<QString>& requiredParams,
@@ -35,7 +35,7 @@ EveApiCharacterRequest::EveApiCharacterRequest( const QString& requestType,
         const QString & user,
         const QString & password,
         QObject* parent )
-        : EveApiRequest( requestType, dataPath, xmlIndent, requiredParams,
+    : Request( requestType, dataPath, xmlIndent, requiredParams,
                          optionalParams, fileIDParam, p_type, host, port, user,
                          password, parent )
 {
@@ -45,7 +45,7 @@ EveApiCharacterRequest::EveApiCharacterRequest( const QString& requestType,
 // /*!
 //Check the paramaters
 //*/
-//bool EveApiCharacterRequest::validateParamaters( const QMap<QString, QString>& parameters, QUrl& url )
+//bool EveApi::CharacterRequest::validateParamaters( const QMap<QString, QString>& parameters, QUrl& url )
 //{
 //    QString userID = parameters.value( "userID" );
 //    QString charID = parameters.value( "characterID" );
@@ -64,7 +64,7 @@ EveApiCharacterRequest::EveApiCharacterRequest( const QString& requestType,
 return a QStringList of filesystem directories,
 relative to the data directory, in which to store cache
 */
-QStringList EveApiCharacterRequest::cachePath( const QString& scope,
+QStringList EveApi::CharacterRequest::cachePath( const QString& scope,
         const QMap<QString, QString>& parameters )
 {
     QStringList dirs;

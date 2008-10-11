@@ -37,12 +37,14 @@ using boost::shared_ptr;
 
 class QDomDocument;
 
-class EveApi: public QObject
+namespace EveApi
 {
+    class EveApi: public QObject
+    {
         Q_OBJECT
-    public:
+	    public:
         /*!
-        set up the scopes of the API
+	  set up the scopes of the API
         */
         EveApi( QString& dataPath,
                 const int& proxyType = 0,
@@ -53,33 +55,33 @@ class EveApi: public QObject
                 QObject* parent = 0 );
 
         /*!
-        provide access to areas of the api in the "/account/" context
+	  provide access to areas of the api in the "/account/" context
         */
-        EveApiAccount& account();
+	Account& account();
 
         /*!
-        provide access to areas of the api in the "/eve/" context
+	  provide access to areas of the api in the "/eve/" context
         */
-        EveApiEve& eve();
+        Eve& eve();
 
         /*!
-        provide access to areas of the api in the "/map/" context
+	  provide access to areas of the api in the "/map/" context
         */
-        EveApiMap& map();
+        Map& map();
 
         /*!
-        provide access to aread of the api in the "/char/" context
+	  provide access to aread of the api in the "/char/" context
         */
-        EveApiCharacter& character();
+        Character& character();
 
         /*!
-        provide access to aread of the api in the "/corp/" context
+	  provide access to aread of the api in the "/corp/" context
         */
-        EveApiCorporation& corp();
+        Corporation& corp();
 
     public slots:
         /*!
-        Set the proxy to use for http requests
+	  Set the proxy to use for http requests
         */
         void setProxy( const int& proxyType,
 		       const QString& proxyHost,
@@ -98,21 +100,21 @@ class EveApi: public QObject
         int _xmlIndent;
 
         //! "/eve/" scope
-        EveApiEve* _eve;
+        Eve* _eve;
 
         //! "/map/" scope
-        EveApiMap* _map;
+        Map* _map;
 
         //! "/char/" scope
-        EveApiCharacter* _char;
+        Character* _char;
 
         //! "/corp/" scope
-        EveApiCorporation* _corp;
+        Corporation* _corp;
 
-        EveApiAccount* _account;
+        Account* _account;
 
         /*!
-        create the scopes, and connect scope-specific signals and slots
+	  create the scopes, and connect scope-specific signals and slots
         */
         void createScopes( const int& p_type,
                            const QString& host,
@@ -121,13 +123,14 @@ class EveApi: public QObject
                            const QString & password );
 
         /*!
-        connect the signals of each scope member
+	  connect the signals of each scope member
         */
-        void connectScope( EveApiScope* scope );
+        void connectScope( Scope* scope );
 
     signals:
         void requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime );
         void requestFailed( QString id, QString error, QString httpResponse );
+    };
 };
 
 #endif

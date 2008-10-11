@@ -34,6 +34,8 @@ namespace EveApi
 {
     class NoSuchColumn {};
 
+    class NoSuchRow {};
+
     class ImmutableError : public QString
     {
     public:
@@ -78,13 +80,14 @@ namespace EveApi
 
 	/*!  Add a row to the table
 	 */
-	shared_ptr<Row<RowSet> > add_row(const QMap<QString, DataItem>& values);
+	shared_ptr<Row<RowSet> > add_row(const QMap<QString, DataItem>& values)
+	     throw(NoSuchColumn);
 
 	QList<shared_ptr<Row<RowSet> > >::const_iterator begin() const;
 
 	QList<shared_ptr<Row<RowSet> > >::const_iterator end() const;
 
-	const shared_ptr<Row<RowSet> >& row(const QString& key) const;
+	const shared_ptr<Row<RowSet> > row(const QString& key) const;
 
 	void set_name(const QString& name) throw(ImmutableError);
 

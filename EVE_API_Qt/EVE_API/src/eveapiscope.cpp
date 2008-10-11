@@ -27,19 +27,19 @@
 #include <QDomDocument>
 
 /*!
-create the child classes that provide API functionality
+  create the child classes that provide API functionality
 */
-EveApiScope::EveApiScope( QString& host,
-                          QString& dataPath,
-                          int& xmlIndent,
-                          QString& scope,
-                          const int& /*proxyType*/,
-                          const QString & /*proxyHost*/,
-                          const quint16 & /*proxyPort*/,
-                          const QString & /*proxyUser*/,
-                          const QString & /*proxyPassword*/,
-                          QObject* parent )
-        : QObject( parent )
+EveApi::Scope::Scope( QString& host,
+		      QString& dataPath,
+		      int& xmlIndent,
+		      QString& scope,
+		      const int& /*proxyType*/,
+		      const QString & /*proxyHost*/,
+		      const quint16 & /*proxyPort*/,
+		      const QString & /*proxyUser*/,
+		      const QString & /*proxyPassword*/,
+		      QObject* parent )
+    : QObject( parent )
 {
     this->_hostName = host;
     this->_dataPath = dataPath;
@@ -53,87 +53,91 @@ EveApiScope::EveApiScope( QString& host,
 /*!
   Set the proxy to use for http requests
 */
-void EveApiScope::setProxy( const int& proxyType,
-	       const QString& proxyHost,
-	       const quint16& proxyPort,
-	       const QString & proxyUser,
-	       const QString & proxyPassword )
+void EveApi::Scope::setProxy( const int& proxyType,
+			      const QString& proxyHost,
+			      const quint16& proxyPort,
+			      const QString & proxyUser,
+			      const QString & proxyPassword )
 {
-  EveApiRequest* request;
-  foreach(request, this->_apiRequests)
+    EveApi::Request* request;
+    foreach(request, this->_apiRequests)
     {
-      request->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
-			proxyPassword);
+	request->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+			  proxyPassword);
     }
 }
 
 /*!
-Get the host of the API server
+  Get the host of the API server
 */
-const QString& EveApiScope::hostName()
+const QString& EveApi::Scope::hostName()
 {
     return this->_hostName;
 }
 
 /*!
-Get the local data subdir
+  Get the local data subdir
 */
-const QString& EveApiScope::dataPath()
+const QString& EveApi::Scope::dataPath()
 {
     return this->_dataPath;
 }
 
 /*!
-get the XML Indent amount
+  get the XML Indent amount
 */
-const int& EveApiScope::xmlIndent()
+const int& EveApi::Scope::xmlIndent()
 {
     return this->_xmlIndent;
 }
 
 /*!
-get the current scope
+  get the current scope
 */
-const QString& EveApiScope::scope()
+const QString& EveApi::Scope::scope()
 {
     return this->_scope;
 }
 
 /*!
-Add a "Request Type" to the list
+  Add a "Request Type" to the list
 */
-void EveApiScope::addRequestType( QString& id, EveApiRequest* request )
+void EveApi::Scope::addRequestType( QString& id, EveApi::Request* request )
 {
     connect( request,
-        SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime )),
-        this, SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime )),
-        Qt::QueuedConnection );
+	     SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>,
+				     QString, QDateTime )),
+	     this, SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>,
+					   QString, QDateTime )),
+	     Qt::QueuedConnection );
     connect( request,
-        SIGNAL(requestFailed( QString, QString, QString )),
-        this, SIGNAL(requestFailed( QString, QString, QString )),
-        Qt::QueuedConnection );
+	     SIGNAL(requestFailed( QString, QString, QString )),
+	     this, SIGNAL(requestFailed( QString, QString, QString )),
+	     Qt::QueuedConnection );
 
-//    connect( request,
-//        SIGNAL(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
-//        this, SLOT(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
-//        Qt::QueuedConnection );
-//    connect( request,
-//        SIGNAL(internalRequestFailed( QString, QString, QString )),
-//        this, SIGNAL(internalRequestFailed( QString, QString, QString )),
-//        Qt::QueuedConnection );
+    //    connect( request,
+    //        SIGNAL(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
+    //        this, SLOT(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),
+    //        Qt::QueuedConnection );
+    //    connect( request,
+    //        SIGNAL(internalRequestFailed( QString, QString, QString )),
+    //        this, SIGNAL(internalRequestFailed( QString, QString, QString )),
+    //        Qt::QueuedConnection );
 
     this->_apiRequests.insert( id, request );
 }
 
 /*!
-Call a request of the specified type
+  Call a request of the specified type
 */
-QString EveApiScope::request( QString& id, QMap<QString, QString>& parameters/*, bool internal, QString requestId */)
+QString EveApi::Scope::request(
+    QString& id, QMap<QString, QString>& parameters
+    /*, bool internal, QString requestId */)
 {
     this->_mutex.lock();
     QString host = this->hostName();
     QString scopeStr = this->scope();
-    EveApiRequest* req = this->requestType( id );
+    EveApi::Request* req = this->requestType( id );
     QString result;
     if (req)
     {
@@ -148,12 +152,12 @@ QString EveApiScope::request( QString& id, QMap<QString, QString>& parameters/*,
 //set of signals and slots. This allows the parser to create the api
 //request isolated from pure xml requests.
 //*/
-//QString EveApiScope::internalRequest( QString& id, QMap<QString, QString>& parameters )
+//QString EveApi::Scope::internalRequest( QString& id, QMap<QString, QString>& parameters )
 //{
 //    this->_mutex.lock();
 //    QString host = this->hostName();
 //    QString scopeStr = this->scope();
-//    EveApiRequest* req = this->requestType( id );
+//    EveApi::Request* req = this->requestType( id );
 //    QString result;
 //    if (req)
 //    {
@@ -164,9 +168,9 @@ QString EveApiScope::request( QString& id, QMap<QString, QString>& parameters/*,
 //}
 
 /*!
-return a previously added request type
+  return a previously added request type
 */
-EveApiRequest* EveApiScope::requestType( QString& id ) const
+EveApi::Request* EveApi::Scope::requestType( QString& id ) const
 {
     return this->_apiRequests.value( id );
 }

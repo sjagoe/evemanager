@@ -48,7 +48,7 @@ Window::Window( QWidget* parent )
 //    int proxyType = 1;
 //    QString proxyHost = "proxy.localoffice";
 //    quint16 proxyPort = 3128;
-    this->_api = new EveApi(dataPath);//, proxyType, proxyHost, proxyPort);
+    this->_api = new EveApi::EveApi(dataPath);//, proxyType, proxyHost, proxyPort);
     connect( this->_api,
         SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime )),
         this, SLOT(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime )) );

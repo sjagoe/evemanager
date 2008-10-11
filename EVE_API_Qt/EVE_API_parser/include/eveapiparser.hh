@@ -18,8 +18,8 @@
  * along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __EVEAPIPARSER_HH__
-#define __EVEAPIPARSER_HH__
+#ifndef _EVEAPI_PARSER_HH_
+#define _EVEAPI_PARSER_HH_
 
 #include <QObject>
 #include <QString>
@@ -28,9 +28,12 @@
 
 using boost::shared_ptr;
 
-class EveApiParser: public QObject
+namespace EveApi
 {
-
+    class Parser: public QObject
+    {
+	
+    };
 };
 
 #endif

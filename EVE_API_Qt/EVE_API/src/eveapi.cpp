@@ -24,7 +24,7 @@
 /*!
 set up the scopes of the API
 */
-EveApi::EveApi( QString& dataPath,
+EveApi::EveApi::EveApi( QString& dataPath,
                 const int& proxyType,
                 const QString & proxyHost,
                 const quint16 & proxyPort,
@@ -52,7 +52,7 @@ EveApi::EveApi( QString& dataPath,
 /*!
 provide access to areas of the api in the "/account/" context
 */
-EveApiAccount& EveApi::account()
+EveApi::Account& EveApi::EveApi::account()
 {
     return ( *this->_account );
 }
@@ -60,7 +60,7 @@ EveApiAccount& EveApi::account()
 /*!
 provide access to areas of the api in the "/eve/" context
 */
-EveApiEve& EveApi::eve()
+EveApi::Eve& EveApi::EveApi::eve()
 {
     return ( *this->_eve );
 }
@@ -68,7 +68,7 @@ EveApiEve& EveApi::eve()
 /*!
 provide access to areas of the api in the "/map/" context
 */
-EveApiMap& EveApi::map()
+EveApi::Map& EveApi::EveApi::map()
 {
     return ( *this->_map );
 }
@@ -76,7 +76,7 @@ EveApiMap& EveApi::map()
 /*!
 provide access to aread of the api in the "/char/" context
 */
-EveApiCharacter& EveApi::character()
+EveApi::Character& EveApi::EveApi::character()
 {
     return ( *this->_char );
 }
@@ -84,7 +84,7 @@ EveApiCharacter& EveApi::character()
 /*!
 provide access to aread of the api in the "/corp/" context
 */
-EveApiCorporation& EveApi::corp()
+EveApi::Corporation& EveApi::EveApi::corp()
 {
     return ( *this->_corp );
 }
@@ -92,7 +92,7 @@ EveApiCorporation& EveApi::corp()
 /*!
   Set the proxy to use for http requests
 */
-void EveApi::setProxy( const int& proxyType,
+void EveApi::EveApi::setProxy( const int& proxyType,
 		       const QString& proxyHost,
 		       const quint16& proxyPort,
 		       const QString & proxyUser,
@@ -113,7 +113,7 @@ void EveApi::setProxy( const int& proxyType,
 /*!
 create the scopes, and connect scope-specific signals and slots
 */
-void EveApi::createScopes( const int& proxyType,
+void EveApi::EveApi::createScopes( const int& proxyType,
                            const QString & proxyHost,
                            const quint16 & proxyPort,
                            const QString & proxyUser,
@@ -121,7 +121,7 @@ void EveApi::createScopes( const int& proxyType,
 {
     // "account" scope
     QString scope = "account";
-    this->_account = new EveApiAccount( this->_hostName, this->_dataPath,
+    this->_account = new Account( this->_hostName, this->_dataPath,
                                         this->_xmlIndent, scope, proxyType,
                                         proxyHost, proxyPort, proxyUser,
                                         proxyPassword );
@@ -129,7 +129,7 @@ void EveApi::createScopes( const int& proxyType,
 
     // "eve" scope
     scope = "eve";
-    this->_eve = new EveApiEve( this->_hostName, this->_dataPath,
+    this->_eve = new Eve( this->_hostName, this->_dataPath,
                                 this->_xmlIndent, scope, proxyType,
                                 proxyHost, proxyPort, proxyUser,
                                 proxyPassword );
@@ -137,7 +137,7 @@ void EveApi::createScopes( const int& proxyType,
 
     // "map" scope
     scope = "map";
-    this->_map = new EveApiMap( this->_hostName, this->_dataPath,
+    this->_map = new Map( this->_hostName, this->_dataPath,
                                 this->_xmlIndent, scope, proxyType,
                                 proxyHost, proxyPort, proxyUser,
                                 proxyPassword );
@@ -145,7 +145,7 @@ void EveApi::createScopes( const int& proxyType,
 
     // "char" scope
     scope = "char";
-    this->_char = new EveApiCharacter( this->_hostName, this->_dataPath,
+    this->_char = new Character( this->_hostName, this->_dataPath,
                                        this->_xmlIndent, scope, proxyType,
                                        proxyHost, proxyPort, proxyUser,
                                        proxyPassword );
@@ -153,7 +153,7 @@ void EveApi::createScopes( const int& proxyType,
 
     // "corp" scope
     scope = "corp";
-    this->_corp = new EveApiCorporation( this->_hostName, this->_dataPath,
+    this->_corp = new Corporation( this->_hostName, this->_dataPath,
                                          this->_xmlIndent, scope, proxyType,
                                          proxyHost, proxyPort, proxyUser,
                                          proxyPassword );
@@ -163,7 +163,7 @@ void EveApi::createScopes( const int& proxyType,
 /*!
 connect the signals of each scope member
 */
-void EveApi::connectScope( EveApiScope* scope )
+void EveApi::EveApi::connectScope( Scope* scope )
 {
     connect( scope,
              SIGNAL( requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime ) ),

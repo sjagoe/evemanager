@@ -53,24 +53,37 @@ EveApi::RowSet::RowSet(const QString& name,
 
 /*!  Add a row to the table
  */
-shared_ptr<EveApi::Row<EveApi::RowSet> > EveApi::RowSet::add_row(const QMap<QString, DataItem>& values)
+shared_ptr<EveApi::Row<EveApi::RowSet> > EveApi::RowSet::add_row(
+    const QMap<QString, DataItem>& values)
 {
-
+    shared_ptr<Row<RowSet> > row;
+    if (values.contains(this->_key))
+    {
+	DataItem key_ = values.value(this->_key);
+	QString key = key_.get();
+	row.reset(new Row<RowSet>(values));
+	this->_rowsByKey.insert(key, row);
+	this->_rowsInOrder.append(row);
+    }
+    return row;
 }
 
-QList<shared_ptr<EveApi::Row<EveApi::RowSet> > >::const_iterator EveApi::RowSet::begin() const
+QList<shared_ptr<EveApi::Row<EveApi::RowSet> > >::const_iterator
+    EveApi::RowSet::begin() const
 {
-
+    return this->_rowsInOrder.begin();
 }
 
-QList<shared_ptr<EveApi::Row<EveApi::RowSet> > >::const_iterator EveApi::RowSet::end() const
+QList<shared_ptr<EveApi::Row<EveApi::RowSet> > >::const_iterator
+    EveApi::RowSet::end() const
 {
-
+    return this->_rowsInOrder.end();
 }
 
-const shared_ptr<EveApi::Row<EveApi::RowSet> >& EveApi::RowSet::row(const QString& key) const
+const shared_ptr<EveApi::Row<EveApi::RowSet> > EveApi::RowSet::row(
+    const QString& key) const
 {
-
+    return this->_rowsByKey.value(key);
 }
 
 void EveApi::RowSet::set_name(const QString& name) throw(ImmutableError)

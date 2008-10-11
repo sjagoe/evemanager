@@ -62,7 +62,7 @@ SOURCE_ACCESS_BLOCK_TEMPLATE = """
 /*!
 access the %(api_function)s api function
 */
-QString %(class_name)s::%(method)s( QMap<QString, QString>& parameters )
+QString EveApi::%(class_name)s::%(method)s( QMap<QString, QString>& parameters )
 {
     QString id = this->%(method)sRequestID();
     return this->request( id, parameters );
@@ -100,47 +100,48 @@ templates = {
 
 #include "%(inherit_file)s"
 
-
-class %(class_name)s: public %(inherit)s
+namespace EveApi
 {
-    public:
-        %(class_name)s( QString& host,
-                      QString& dataPath,
-                      int& xmlIndent,
-                      QString& scope,
-                      const int& proxyType,
-                      const QString& proxyHost,
-                      const quint16& proxyPort,
-                      const QString & proxyUser,
-                      const QString & proxyPassword,
-                      QObject* parent = 0 );
-%(header_access_block)s
-    protected:
-        /*!
-        Create request objects
-        */
-        void createRequest( QString& requestId,
-                            QStringList& requiredParams,
-                            QStringList& optionalParams,
-                            QStringList& cacheId,
-                            const int& p_type,
-                            const QString& host,
-                            const quint16& port,
-                            const QString & user,
-                            const QString & password );
+    class %(class_name)s: public %(inherit)s
+    {
+        public:
+            %(class_name)s( QString& host,
+                        QString& dataPath,
+                        int& xmlIndent,
+                        QString& scope,
+                        const int& proxyType,
+                        const QString& proxyHost,
+                        const quint16& proxyPort,
+                        const QString & proxyUser,
+                        const QString & proxyPassword,
+                        QObject* parent = 0 );
+    %(header_access_block)s
+        protected:
+            /*!
+            Create request objects
+            */
+            void createRequest( QString& requestId,
+                                QStringList& requiredParams,
+                                QStringList& optionalParams,
+                                QStringList& cacheId,
+                                const int& p_type,
+                                const QString& host,
+                                const quint16& port,
+                                const QString & user,
+                                const QString & password );
 
-    private:
-        /*!
-        create all requests (delegated from the constructor)
-        */
-        void createCommonRequests( const int& proxyType,
-                                   const QString& proxyHost,
-                                   const quint16& proxyPort,
-                                   const QString & proxyUser,
-                                   const QString & proxyPassword );
-%(header_id_block)s
+        private:
+            /*!
+            create all requests (delegated from the constructor)
+            */
+            void createCommonRequests( const int& proxyType,
+                                       const QString& proxyHost,
+                                       const quint16& proxyPort,
+                                       const QString & proxyUser,
+                                       const QString & proxyPassword );
+    %(header_id_block)s
+    };
 };
-
 
 #endif
 
@@ -170,49 +171,52 @@ class %(class_name)s: public %(inherit)s
 
 #include "%(inherit_file)s"
 
-class %(class_name)s: public %(inherit)s
+namespace EveApi
 {
-        Q_OBJECT
-    public:
-        /*!
-        create the child classes that provide API functionality
-        */
-        %(class_name)s( QString& host,
-                       QString& dataPath,
-                       int& xmlIndent,
-                       QString& scope,
-                       const int& proxyType,
-                       const QString & proxyHost,
-                       const quint16 & proxyPort,
-                       const QString & proxyUser,
-                       const QString & proxyPassword,
-                       QObject* parent = 0 );
+    class %(class_name)s: public %(inherit)s
+    {
+            Q_OBJECT
+        public:
+            /*!
+            create the child classes that provide API functionality
+            */
+            %(class_name)s( QString& host,
+                         QString& dataPath,
+                         int& xmlIndent,
+                         QString& scope,
+                         const int& proxyType,
+                         const QString & proxyHost,
+                         const quint16 & proxyPort,
+                         const QString & proxyUser,
+                         const QString & proxyPassword,
+                         QObject* parent = 0 );
 
-%(header_access_block)s
+    %(header_access_block)s
 
-    private:
-        /*!
-        Create request objects
-        */
-        void createRequest( QString& requestId,
-                            QStringList& requiredParams,
-                            QStringList& optionalParams,
-                            QStringList& cacheId,
-                            const int& p_type,
-                            const QString& host,
-                            const quint16& port,
-                            const QString & user,
-                            const QString & password );
+        private:
+            /*!
+            Create request objects
+            */
+            void createRequest( QString& requestId,
+                                QStringList& requiredParams,
+                                QStringList& optionalParams,
+                                QStringList& cacheId,
+                                const int& p_type,
+                                const QString& host,
+                                const quint16& port,
+                                const QString & user,
+                                const QString & password );
 
-        /*!
-        create all requests (delegated from the constructor)
-        */
-        void createRequests( const int& proxyType,
-                             const QString & proxyHost,
-                             const quint16 & proxyPort,
-                             const QString & proxyUser,
-                             const QString & proxyPassword );
-%(header_id_block)s
+            /*!
+            create all requests (delegated from the constructor)
+            */
+            void createRequests( const int& proxyType,
+                                 const QString & proxyHost,
+                                 const quint16 & proxyPort,
+                                 const QString & proxyUser,
+                                 const QString & proxyPassword );
+    %(header_id_block)s
+    };
 };
 
 #endif
@@ -246,7 +250,7 @@ class %(class_name)s: public %(inherit)s
 /*!
 create the child classes that provide API functionality
 */
-%(class_name)s::%(class_name)s( QString& host,
+EveApi::%(class_name)s::%(class_name)s( QString& host,
                             QString& dataPath,
                             int& xmlIndent,
                             QString& scope,
@@ -268,7 +272,7 @@ create the child classes that provide API functionality
 /*!
 Create request objects
 */
-void %(class_name)s::createRequest( QString& requestId,
+void EveApi::%(class_name)s::createRequest( QString& requestId,
                                   QStringList& requiredParams,
                                   QStringList& optionalParams,
                                   QStringList& cacheId,
@@ -278,7 +282,7 @@ void %(class_name)s::createRequest( QString& requestId,
                                   const QString & user,
                                   const QString & password )
 {
-    EveApiRequest* newRequest = new %(request_type)s( requestId,
+    Request* newRequest = new %(request_type)s( requestId,
             this->dataPath(),
             this->xmlIndent(),
             requiredParams,
@@ -292,7 +296,7 @@ void %(class_name)s::createRequest( QString& requestId,
     this->addRequestType( requestId, newRequest );
 }
 
-void %(class_name)s::createCommonRequests( const int& proxyType,
+void EveApi::%(class_name)s::createCommonRequests( const int& proxyType,
         const QString & proxyHost,
         const quint16 & proxyPort,
         const QString & proxyUser,
@@ -337,7 +341,7 @@ void %(class_name)s::createCommonRequests( const int& proxyType,
 /*!
 create the child classes that provide API functionality
 */
-%(class_name)s::%(class_name)s( QString& host,
+EveApi::%(class_name)s::%(class_name)s( QString& host,
                               QString& dataPath,
                               int& xmlIndent,
                               QString& scope,
@@ -359,7 +363,7 @@ create the child classes that provide API functionality
 /*!
 Create request objects
 */
-void %(class_name)s::createRequest( QString& requestId,
+void EveApi::%(class_name)s::createRequest( QString& requestId,
                                    QStringList& requiredParams,
                                    QStringList& optionalParams,
                                    QStringList& cacheId,
@@ -369,7 +373,7 @@ void %(class_name)s::createRequest( QString& requestId,
                                    const QString & user,
                                    const QString & password )
 {
-    EveApiRequest* newRequest = new %(request_type)s( requestId,
+    Request* newRequest = new %(request_type)s( requestId,
             this->dataPath(),
             this->xmlIndent(),
             requiredParams,
@@ -386,7 +390,7 @@ void %(class_name)s::createRequest( QString& requestId,
 /*!
 create all requests (delegated from the constructor)
 */
-void %(class_name)s::createRequests( const int& proxyType,
+void EveApi::%(class_name)s::createRequests( const int& proxyType,
                                     const QString & proxyHost,
                                     const quint16 & proxyPort,
                                     const QString & proxyUser,
@@ -479,10 +483,12 @@ class Generator(object):
         pass
 
     def _generate_fileset(self, scope_name, class_value, block_value):
-        inherit_file = "%s.%s" % (class_value["inherit"].lower(), HEADER_EXT)
-        define = "__%s_HH__" % class_value["class_name"].upper()
-        request_type_include = "%s.%s" % (class_value["request_type"].lower(),
-                                          HEADER_EXT)
+        inherit_file = "eveapi%s.%s" % (class_value["inherit"].lower(),
+                                        HEADER_EXT)
+        define = "_EVEAPI_%s_HH_" % class_value["class_name"].upper()
+        request_type_include = ("eveapi%s.%s"
+                                % (class_value["request_type"].lower(),
+                                   HEADER_EXT))
         class_value["define"] = define
         class_value["inherit_file"] = inherit_file
         class_value["request_type_include"] = request_type_include

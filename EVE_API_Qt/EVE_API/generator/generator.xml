@@ -24,16 +24,16 @@
         common
       </template>
       <class_name>
-        EveApiCommon
+        Common
       </class_name>
       <inherit>
-        EveApiScope
+        Scope
       </inherit>
       <filename>
         eveapicommon
       </filename>
       <request_type>
-        EveApiCharacterRequest
+        CharacterRequest
       </request_type>
       <methods>
         <method name="walletJournal">
@@ -205,16 +205,16 @@
         other
       </template>
       <class_name>
-        EveApiAccount
+        Account
       </class_name>
       <inherit>
-        EveApiScope
+        Scope
       </inherit>
       <filename>
         eveapiaccount
       </filename>
       <request_type>
-        EveApiAccountRequest
+        AccountRequest
       </request_type>
       <methods>
         <method name="characters">
@@ -237,16 +237,16 @@
         other
       </template>
       <class_name>
-        EveApiCharacter
+        Character
       </class_name>
       <inherit>
-        EveApiCommon
+        Common
       </inherit>
       <filename>
         eveapicharacter
       </filename>
       <request_type>
-        EveApiCharacterRequest
+        CharacterRequest
       </request_type>
       <methods>
         <method name="characterSheet">
@@ -288,16 +288,16 @@
         other
       </template>
       <class_name>
-        EveApiCorporation
+        Corporation
       </class_name>
       <inherit>
-        EveApiCommon
+        Common
       </inherit>
       <filename>
         eveapicorporation
       </filename>
       <request_type>
-        EveApiCharacterRequest
+        CharacterRequest
       </request_type>
       <methods>
         <method name="memberTracking">
@@ -472,16 +472,16 @@
         other
       </template>
       <class_name>
-        EveApiEve
+        Eve
       </class_name>
       <inherit>
-        EveApiScope
+        Scope
       </inherit>
       <filename>
         eveapieve
       </filename>
       <request_type>
-        EveApiGeneralRequest
+        GeneralRequest
       </request_type>
       <methods>
         <method name="refTypes">
@@ -595,16 +595,16 @@
         other
       </template>
       <class_name>
-        EveApiMap
+        Map
       </class_name>
       <inherit>
-        EveApiScope
+        Scope
       </inherit>
       <filename>
         eveapimap
       </filename>
       <request_type>
-        EveApiGeneralRequest
+        GeneralRequest
       </request_type>
       <methods>
         <method name="sovereignty">
@@ -669,16 +669,16 @@
 <!--         other -->
 <!--       </template> -->
 <!--       <class_name> -->
-<!--         EveApiCharacter -->
+<!--         Character -->
 <!--       </class_name> -->
 <!--       <inherit> -->
-<!--         EveApiCommon -->
+<!--         Common -->
 <!--       </inherit> -->
 <!--       <filename> -->
 <!--         eveapicharacter -->
 <!--       </filename> -->
 <!--       <request_type> -->
-<!--         EveApiCharacterRequest -->
+<!--         CharacterRequest -->
 <!--       </request_type> -->
 <!--       <methods> -->
 <!--         <method name="characters"> -->
