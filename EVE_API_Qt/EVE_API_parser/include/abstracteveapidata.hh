@@ -80,8 +80,7 @@ namespace EveApi
 
 	/*!  Add a row to the table
 	 */
-	shared_ptr<Row<RowSet> > add_row(const QMap<QString, DataItem>& values)
-	     throw(NoSuchColumn);
+	shared_ptr<Row<RowSet> > add_row(const QMap<QString, DataItem>& values);
 
 	QList<shared_ptr<Row<RowSet> > >::const_iterator begin() const;
 
