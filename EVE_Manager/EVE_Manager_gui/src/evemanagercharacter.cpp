@@ -27,16 +27,16 @@
 #include <QVBoxLayout>
 
 /*!
-Create the character widget
+  Create the character widget
 */
 em_gui::EveManagerCharacter::EveManagerCharacter( QWidget* parent ) :
-        QWidget( parent )
+    QWidget( parent )
 {
     this->setLayout( this->_layoutWidget() );
 }
 
 /*!
-Set up the character widget
+  Set up the character widget
 */
 QLayout* em_gui::EveManagerCharacter::_layoutWidget()
 {
@@ -76,18 +76,18 @@ QLayout* em_gui::EveManagerCharacter::_layoutWidget()
 }
 
 /*!
-Connect buttons etc
+  Connect buttons etc
 */
 void em_gui::EveManagerCharacter::_connect()
 {
     connect( this->_btnSettings, SIGNAL(clicked()),
-        this, SLOT(on_btnSettings_clicked()));
+             this, SLOT(on_btnSettings_clicked()));
     connect( this->_btnSkillTree, SIGNAL(clicked()),
-        this, SLOT(on_btnSkillTree_clicked()));
+             this, SLOT(on_btnSkillTree_clicked()));
 }
 
 /*!
-Show the Settings pane
+  Show the Settings pane
 */
 void em_gui::EveManagerCharacter::on_btnSettings_clicked()
 {
@@ -96,7 +96,7 @@ void em_gui::EveManagerCharacter::on_btnSettings_clicked()
 }
 
 /*!
-Show the SkillTree pane
+  Show the SkillTree pane
 */
 void em_gui::EveManagerCharacter::on_btnSkillTree_clicked()
 {

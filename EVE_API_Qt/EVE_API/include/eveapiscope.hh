@@ -43,67 +43,69 @@ namespace EveApi
 
     class Scope: public QObject
     {
-	Q_OBJECT;
+        Q_OBJECT;
     public:
         /*!
-	  create the child classes that provide API functionality
+          create the child classes that provide API functionality
         */
         Scope( QString& host,
-	       QString& dataPath,
-	       int& xmlIndent,
-	       QString& scope,
-	       const int& proxyType,
-	       const QString & proxyHost,
-	       const quint16 & proxyPort,
-	       const QString & proxyUser,
-	       const QString & proxyPassword,
-	       QObject* parent = 0 );
+               QString& dataPath,
+               int& xmlIndent,
+               QString& scope,
+               const int& proxyType,
+               const QString & proxyHost,
+               const quint16 & proxyPort,
+               const QString & proxyUser,
+               const QString & proxyPassword,
+               QObject* parent = 0 );
 
         virtual ~Scope() {};
 
     public slots:
         /*!
-	  Set the proxy to use for http requests
+          Set the proxy to use for http requests
         */
         void setProxy( const int& proxyType,
-		       const QString& proxyHost,
-		       const quint16& proxyPort,
-		       const QString & proxyUser,
-		       const QString & proxyPassword );
+                       const QString& proxyHost,
+                       const quint16& proxyPort,
+                       const QString & proxyUser,
+                       const QString & proxyPassword );
 
     protected:
         /*!
-	  Get the host of the API server
+          Get the host of the API server
         */
         const QString& hostName();
 
         /*!
-	  Get the local data subdir
+          Get the local data subdir
         */
         const QString& dataPath();
 
         /*!
-	  get the XML Indent amount
+          get the XML Indent amount
         */
         const int& xmlIndent();
 
         /*!
-	  get the current scope
+          get the current scope
         */
         const QString& scope();
 
         /*!
-	  Add a "Request Type" to the list
+          Add a "Request Type" to the list
         */
         void addRequestType( QString& id, Request* request );
 
         /*!
-	  Call a request of the specified type
+          Call a request of the specified type
         */
-        QString request( QString& id, QMap<QString, QString>& parameters/*, bool internal = false, QString requestId = QString()*/ );
+        QString request( QString& id, QMap<QString, QString>& parameters
+                         /*, bool internal = false,
+                           QString requestId = QString()*/ );
 
         /*!
-	  Create request objects
+          Create request objects
         */
         virtual void createRequest( QString& requestId,
                                     QStringList& requiredParams,
@@ -135,12 +137,12 @@ namespace EveApi
         QMap<QString, Request*> _apiRequests;
 
         /*!
-	  return a previously added request type
+          return a previously added request type
         */
         Request* requestType( QString& id ) const;
 
         /*!
-	  create all requests (delegated from the constructor)
+          create all requests (delegated from the constructor)
         */
         virtual void createRequests( const int& proxyType,
                                      const QString & proxyHost,
@@ -149,7 +151,8 @@ namespace EveApi
                                      const QString & proxyPassword ) = 0;
 
     signals:
-        void requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime cacheTime );
+        void requestComplete( QString id, shared_ptr<QDomDocument> result,
+                              QString httpResponse, QDateTime cacheTime );
         void requestFailed( QString id, QString error, QString httpResponse );
     };
 };

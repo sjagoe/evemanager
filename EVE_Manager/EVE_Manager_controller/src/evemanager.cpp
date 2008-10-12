@@ -23,7 +23,7 @@
 #include <QHBoxLayout>
 
 /*!
-Create model and gui
+  Create model and gui
 */
 em_controller::EveManager::EveManager( QObject* parent ) :
     QObject( parent )

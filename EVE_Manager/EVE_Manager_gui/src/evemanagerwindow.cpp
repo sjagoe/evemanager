@@ -27,15 +27,15 @@
 #include <QTabWidget>
 
 /*!
-Create and populate the window.
+  Create and populate the window.
 */
 em_gui::EveManagerWindow::EveManagerWindow( QWidget* parent ) :
-        QMainWindow( parent )
+    QMainWindow( parent )
 {
     QMenu* fileMenu = this->menuBar()->addMenu( tr( "&File" ) );
     QAction* quit =
         fileMenu->addAction( tr( "&Quit", "Quit the application" ),
-			     this, SIGNAL( exit() ) );
+                             this, SIGNAL( exit() ) );
     quit->setShortcut( tr( "Ctrl+Q", "Quit the application" ) );
 
     this->_characters = new QTabWidget;

@@ -28,8 +28,8 @@ namespace EveApi
     class ShareholdersData
     {
     private:
-	RowSet _characters;
-	RowSet _corporations;
+        RowSet _characters;
+        RowSet _corporations;
     };
 };
 

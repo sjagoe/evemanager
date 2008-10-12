@@ -25,9 +25,9 @@ namespace em_model
 {
     class EveManagerCharacterSettings: public QObject
     {
-	Q_OBJECT
-	public:
-	
+        Q_OBJECT;
+    public:
+
     };
 };
 

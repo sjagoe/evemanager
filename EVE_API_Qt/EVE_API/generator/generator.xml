@@ -346,7 +346,7 @@
             <required>
               apiKey
             </required>
-	    <required>
+            <required>
               version
             </required>
           </params>
@@ -365,7 +365,7 @@
             <required>
               apiKey
             </required>
-	    <required>
+            <required>
               version
             </required>
           </params>
@@ -384,7 +384,7 @@
             <required>
               apiKey
             </required>
-	    <required>
+            <required>
               version
             </required>
           </params>
@@ -403,7 +403,7 @@
             <required>
               apiKey
             </required>
-	    <required>
+            <required>
               version
             </required>
           </params>
@@ -422,7 +422,7 @@
             <required>
               apiKey
             </required>
-	    <required>
+            <required>
               version
             </required>
           </params>
@@ -441,7 +441,7 @@
             <required>
               apiKey
             </required>
-	    <required>
+            <required>
               version
             </required>
           </params>
@@ -460,7 +460,7 @@
             <required>
               apiKey
             </required>
-	    <required>
+            <required>
               version
             </required>
           </params>
@@ -495,7 +495,7 @@
             <required>
               apiKey
             </required>
-	  </params>
+          </params>
         </method>
         <method name="skillTree">
           <api_function>
@@ -508,7 +508,7 @@
             <required>
               apiKey
             </required>
-	  </params>
+          </params>
         </method>
         <method name="allianceList">
           <api_function>
@@ -521,7 +521,7 @@
             <required>
               apiKey
             </required>
-	  </params>
+          </params>
         </method>
         <method name="errorList">
           <api_function>
@@ -534,7 +534,7 @@
             <required>
               apiKey
             </required>
-	  </params>
+          </params>
         </method>
         <method name="characterID">
           <api_function>
@@ -547,7 +547,7 @@
             <required>
               apiKey
             </required>
-	  </params>
+          </params>
         </method>
         <method name="conquerableStationsList">
           <api_function>
@@ -560,7 +560,7 @@
             <required>
               apiKey
             </required>
-	  </params>
+          </params>
         </method>
         <method name="facWarStats">
           <api_function>
@@ -573,7 +573,7 @@
             <required>
               apiKey
             </required>
-	  </params>
+          </params>
         </method>
         <method name="facWarTopStats">
           <api_function>
@@ -586,7 +586,7 @@
             <required>
               apiKey
             </required>
-	  </params>
+          </params>
         </method>
       </methods>
     </scope>
@@ -618,7 +618,7 @@
             <required>
               apiKey
             </required>
-	  </params>
+          </params>
         </method>
         <method name="jumps">
           <api_function>
@@ -631,7 +631,7 @@
             <required>
               apiKey
             </required>
-	  </params>
+          </params>
         </method>
         <method name="kills">
           <api_function>
@@ -644,7 +644,7 @@
             <required>
               apiKey
             </required>
-	  </params>
+          </params>
         </method>
         <method name="facWarSystems">
           <api_function>
@@ -657,7 +657,7 @@
             <required>
               apiKey
             </required>
-	  </params>
+          </params>
         </method>
       </methods>
     </scope>

@@ -30,15 +30,15 @@
   create the child classes that provide API functionality
 */
 EveApi::Scope::Scope( QString& host,
-		      QString& dataPath,
-		      int& xmlIndent,
-		      QString& scope,
-		      const int& /*proxyType*/,
-		      const QString & /*proxyHost*/,
-		      const quint16 & /*proxyPort*/,
-		      const QString & /*proxyUser*/,
-		      const QString & /*proxyPassword*/,
-		      QObject* parent )
+                      QString& dataPath,
+                      int& xmlIndent,
+                      QString& scope,
+                      const int& /*proxyType*/,
+                      const QString & /*proxyHost*/,
+                      const quint16 & /*proxyPort*/,
+                      const QString & /*proxyUser*/,
+                      const QString & /*proxyPassword*/,
+                      QObject* parent )
     : QObject( parent )
 {
     this->_hostName = host;
@@ -54,16 +54,16 @@ EveApi::Scope::Scope( QString& host,
   Set the proxy to use for http requests
 */
 void EveApi::Scope::setProxy( const int& proxyType,
-			      const QString& proxyHost,
-			      const quint16& proxyPort,
-			      const QString & proxyUser,
-			      const QString & proxyPassword )
+                              const QString& proxyHost,
+                              const quint16& proxyPort,
+                              const QString & proxyUser,
+                              const QString & proxyPassword )
 {
     EveApi::Request* request;
     foreach(request, this->_apiRequests)
     {
-	request->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
-			  proxyPassword);
+        request->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+                          proxyPassword);
     }
 }
 
@@ -105,15 +105,15 @@ const QString& EveApi::Scope::scope()
 void EveApi::Scope::addRequestType( QString& id, EveApi::Request* request )
 {
     connect( request,
-	     SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>,
-				     QString, QDateTime )),
-	     this, SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>,
-					   QString, QDateTime )),
-	     Qt::QueuedConnection );
+             SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>,
+                                     QString, QDateTime )),
+             this, SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>,
+                                           QString, QDateTime )),
+             Qt::QueuedConnection );
     connect( request,
-	     SIGNAL(requestFailed( QString, QString, QString )),
-	     this, SIGNAL(requestFailed( QString, QString, QString )),
-	     Qt::QueuedConnection );
+             SIGNAL(requestFailed( QString, QString, QString )),
+             this, SIGNAL(requestFailed( QString, QString, QString )),
+             Qt::QueuedConnection );
 
     //    connect( request,
     //        SIGNAL(internalRequestComplete( QString, QDomDocument, QString, QDateTime )),

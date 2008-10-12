@@ -33,17 +33,17 @@
 class RetrieveCacheException {};
 
 EveApi::Request::Request( const QString& requestType,
-			  const QString& dataPath,
-			  const int& xmlIndent,
-			  const QList<QString>& requiredParams,
-			  const QList<QString>& optionalParams,
-			  const QList<QString>& fileIDParam,
-			  const int& p_type,
-			  const QString& host,
-			  const quint16& port,
-			  const QString & user,
-			  const QString & password,
-			  QObject* parent )
+                          const QString& dataPath,
+                          const int& xmlIndent,
+                          const QList<QString>& requiredParams,
+                          const QList<QString>& optionalParams,
+                          const QList<QString>& fileIDParam,
+                          const int& p_type,
+                          const QString& host,
+                          const quint16& port,
+                          const QString & user,
+                          const QString & password,
+                          QObject* parent )
     : QObject( parent )
 {
     this->_http.reset( new QHttp );
@@ -63,7 +63,7 @@ EveApi::Request::Request( const QString& requestType,
              this, SLOT( requestFinished( int, bool ) ) );
 
     connect( this->_http.get(),
-	     SIGNAL( responseHeaderReceived( QHttpResponseHeader ) ),
+             SIGNAL( responseHeaderReceived( QHttpResponseHeader ) ),
              this, SLOT( responseHeaderReceived( QHttpResponseHeader ) ) );
 }
 
@@ -73,8 +73,8 @@ EveApi::Request::Request( const QString& requestType,
   \return unique request identifier (used to id a completed request)
 */
 QString EveApi::Request::addRequest( const QString& host,
-				     const QString& scope,
-				     QMap<QString, QString>& parameters )
+                                     const QString& scope,
+                                     QMap<QString, QString>& parameters )
 {
     QString idStr = QString();
 
@@ -94,8 +94,8 @@ QString EveApi::Request::addRequest( const QString& host,
   Try to get a document from cache, raise if not possible
 */
 QString EveApi::Request::getFromCache( const QString& host,
-				       const QString& scope,
-				       QMap<QString, QString>& parameters )
+                                       const QString& scope,
+                                       QMap<QString, QString>& parameters )
 {
     QString cachePathStr = this->buildCachePath( scope, parameters );
 
@@ -137,10 +137,10 @@ QString EveApi::Request::getFromCache( const QString& host,
   Set the proxy to use for http requests
 */
 void EveApi::Request::setProxy( const int& p_type,
-				const QString & host,
-				const quint16 & port,
-				const QString & user,
-				const QString & password )
+                                const QString & host,
+                                const quint16 & port,
+                                const QString & user,
+                                const QString & password )
 {
     if ( this->_http )
     {
@@ -291,7 +291,7 @@ bool EveApi::Request::validateParamaters(
     foreach( paramID, this->_requiredParamaters )
     {
         QString param = parameters.value( paramID );
-	//        std::cout << paramID.toStdString() << ": " << param.toStdString() << std::endl;
+        //        std::cout << paramID.toStdString() << ": " << param.toStdString() << std::endl;
         if ( param.isNull() )
             return false;
         url.addQueryItem( paramID, param );
@@ -300,7 +300,7 @@ bool EveApi::Request::validateParamaters(
     foreach( paramID, this->_optionalParameters )
     {
         QString param = parameters.value( paramID );
-	//        std::cout << paramID.toStdString() << ": " << param.toStdString() << std::endl;
+        //        std::cout << paramID.toStdString() << ": " << param.toStdString() << std::endl;
         if ( !param.isNull() )
             url.addQueryItem( paramID, param );
     }
@@ -344,7 +344,7 @@ QString EveApi::Request::fetchFromApi(
 
         this->_id.insert( id, idStr );
 
-	//        this->_internalRequest.insert( id, internal );
+        //        this->_internalRequest.insert( id, internal );
 
         this->_paramaters.insert( id, parameters );
     }
@@ -424,7 +424,7 @@ QDateTime EveApi::Request::eveApiTimeToQDateTime( QString timeString )
   "WalletJournal.xml", so that the other cache files are removed as well).
 */
 void EveApi::Request::cleanCache( const QString& scope,
-				  QMap<QString, QString>& parameters )
+                                  QMap<QString, QString>& parameters )
 {
     try
     {

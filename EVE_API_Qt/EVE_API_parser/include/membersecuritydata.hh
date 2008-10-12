@@ -26,15 +26,15 @@ namespace EveApi
     class Member
     {
     private:
-	RowSet _roles;
-	RowSet _grantableRoles;
-	RowSet _rolesAtHQ;
-	RowSet _grantableRolesAtHQ;
-	RowSet _rolesAtBase;
-	RowSet _grantableRolesAtBase;
-	RowSet _rolesAtOther;
-	RowSet _grantableRolesAtOther;
-	RowSet _titles;
+        RowSet _roles;
+        RowSet _grantableRoles;
+        RowSet _rolesAtHQ;
+        RowSet _grantableRolesAtHQ;
+        RowSet _rolesAtBase;
+        RowSet _grantableRolesAtBase;
+        RowSet _rolesAtOther;
+        RowSet _grantableRolesAtOther;
+        RowSet _titles;
     };
 
     class MemberSecurityData

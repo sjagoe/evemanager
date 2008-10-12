@@ -31,7 +31,7 @@
 #include <QVBoxLayout>
 
 /*!
-Set up the character settings widget
+  Set up the character settings widget
 */
 em_gui::EveManagerCharacterSettings::EveManagerCharacterSettings(
     const QString& userID,
@@ -49,14 +49,14 @@ em_gui::EveManagerCharacterSettings::EveManagerCharacterSettings(
 }
 
 /*!
-Update the widget
+  Update the widget
 */
 void em_gui::EveManagerCharacterSettings::update(
-        const QString& userID,
-        const QString& charID,
-        const QString& apiKey,
-        bool apiLevel,
-        bool corpLevel )
+    const QString& userID,
+    const QString& charID,
+    const QString& apiKey,
+    bool apiLevel,
+    bool corpLevel )
 {
     this->_edtUserID->setText(userID);
     this->_edtCharacterID->setText(charID);
@@ -94,7 +94,7 @@ void em_gui::EveManagerCharacterSettings::selectCharacter(
 }
 
 /*!
-Set up the widget layout
+  Set up the widget layout
 */
 QLayout* em_gui::EveManagerCharacterSettings::_setupWidget()
 {
@@ -175,27 +175,27 @@ QLayout* em_gui::EveManagerCharacterSettings::_setupWidget()
 void em_gui::EveManagerCharacterSettings::_connectInternals()
 {
     connect( this->_btnbox, SIGNAL( accepted() ),
-	     this, SLOT( on_btnApply_clicked() ) );
+             this, SLOT( on_btnApply_clicked() ) );
     connect( this->_btnbox, SIGNAL( rejected() ),
-	     this, SLOT( on_btnReset_clicked() ) );
+             this, SLOT( on_btnReset_clicked() ) );
     connect( this->_dlgSelector, SIGNAL( characterSelected( QString ) ),
-	     this, SLOT( characterSelected( QString ) ) );
+             this, SLOT( characterSelected( QString ) ) );
     connect( this->_dlgSelector, SIGNAL( characterCancelled() ),
-	     this, SIGNAL( settingsCanceled() ) );
+             this, SIGNAL( settingsCanceled() ) );
 }
 
 
 /*!
-Apply settings
+  Apply settings
 */
 void em_gui::EveManagerCharacterSettings::on_btnApply_clicked()
 {
     emit settingsApplied( this->_edtUserID->text(),
-			  this->_edtApiKey->text());
+                          this->_edtApiKey->text());
 }
 
 /*!
-Reset to stored settings
+  Reset to stored settings
 */
 void em_gui::EveManagerCharacterSettings::on_btnReset_clicked()
 {
@@ -209,10 +209,10 @@ void em_gui::EveManagerCharacterSettings::characterSelected(
     QString character )
 {
     emit setCharacter( this->_edtUserID->text(),
-		       character,
-		       this->_edtApiKey->text(),
-		       this->_apiLevel,
-		       this->_corpLevel);
+                       character,
+                       this->_edtApiKey->text(),
+                       this->_apiLevel,
+                       this->_corpLevel);
 }
 
 /*!

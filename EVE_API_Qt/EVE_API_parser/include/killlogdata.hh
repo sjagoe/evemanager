@@ -28,21 +28,21 @@ namespace EveApi
     class KillLogVictim
     {
     private:
-	DataItem _characterID;
-	DataItem _characterName;
-	DataItem _corporationID;
-	DataItem _corporationName;
-	DataItem _allianceID;
-	DataItem _damageTaken;
-	DataItem _shipTypeID;
+        DataItem _characterID;
+        DataItem _characterName;
+        DataItem _corporationID;
+        DataItem _corporationName;
+        DataItem _allianceID;
+        DataItem _damageTaken;
+        DataItem _shipTypeID;
     };
 
     class KillLogEntry
     {
     private:
-	KillLogVictim _victim;
-	RowSet _attackers;
-	RowSet _items;
+        KillLogVictim _victim;
+        RowSet _attackers;
+        RowSet _items;
     };
 
     class KillLogData: protected RowSet

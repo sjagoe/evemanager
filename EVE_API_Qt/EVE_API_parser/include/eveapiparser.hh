@@ -32,7 +32,7 @@ namespace EveApi
 {
     class Parser: public QObject
     {
-	
+
     };
 };
 

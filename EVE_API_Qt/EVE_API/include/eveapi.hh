@@ -42,9 +42,9 @@ namespace EveApi
     class EveApi: public QObject
     {
         Q_OBJECT
-	    public:
+            public:
         /*!
-	  set up the scopes of the API
+          set up the scopes of the API
         */
         EveApi( QString& dataPath,
                 const int& proxyType = 0,
@@ -55,39 +55,39 @@ namespace EveApi
                 QObject* parent = 0 );
 
         /*!
-	  provide access to areas of the api in the "/account/" context
+          provide access to areas of the api in the "/account/" context
         */
-	Account& account();
+        Account& account();
 
         /*!
-	  provide access to areas of the api in the "/eve/" context
+          provide access to areas of the api in the "/eve/" context
         */
         Eve& eve();
 
         /*!
-	  provide access to areas of the api in the "/map/" context
+          provide access to areas of the api in the "/map/" context
         */
         Map& map();
 
         /*!
-	  provide access to aread of the api in the "/char/" context
+          provide access to aread of the api in the "/char/" context
         */
         Character& character();
 
         /*!
-	  provide access to aread of the api in the "/corp/" context
+          provide access to aread of the api in the "/corp/" context
         */
         Corporation& corp();
 
     public slots:
         /*!
-	  Set the proxy to use for http requests
+          Set the proxy to use for http requests
         */
         void setProxy( const int& proxyType,
-		       const QString& proxyHost,
-		       const quint16& proxyPort,
-		       const QString & proxyUser,
-		       const QString & proxyPassword );
+                       const QString& proxyHost,
+                       const quint16& proxyPort,
+                       const QString & proxyUser,
+                       const QString & proxyPassword );
 
     private:
         //! API Server hostname
@@ -114,7 +114,7 @@ namespace EveApi
         Account* _account;
 
         /*!
-	  create the scopes, and connect scope-specific signals and slots
+          create the scopes, and connect scope-specific signals and slots
         */
         void createScopes( const int& p_type,
                            const QString& host,
@@ -123,7 +123,7 @@ namespace EveApi
                            const QString & password );
 
         /*!
-	  connect the signals of each scope member
+          connect the signals of each scope member
         */
         void connectScope( Scope* scope );
 

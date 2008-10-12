@@ -28,17 +28,17 @@ namespace em_controller
 {
     class EveManager: public QObject
     {
-            Q_OBJECT
-        public:
-            /*!
-            Create model and gui
-            */
-            EveManager( QObject* parent = 0 );
+        Q_OBJECT;
+    public:
+        /*!
+          Create model and gui
+        */
+        EveManager( QObject* parent = 0 );
 
-        private:
-            em_gui::EveManagerWindow* _eveManagerGui;
+    private:
+        em_gui::EveManagerWindow* _eveManagerGui;
 
-        signals:
-            void exit();
+    signals:
+        void exit();
     };
 };

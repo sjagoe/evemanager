@@ -31,36 +31,36 @@ namespace EveApi
     class LogoData
     {
     private:
-	DataItem _graphicID;
-	DataItem _shape1;
-	DataItem _shape2;
-	DataItem _shape3;
-	DataItem _color1;
-	DataItem _color2;
-	DataItem _color3;
+        DataItem _graphicID;
+        DataItem _shape1;
+        DataItem _shape2;
+        DataItem _shape3;
+        DataItem _color1;
+        DataItem _color2;
+        DataItem _color3;
     };
 
     class CorporationSheetData
     {
     private:
-	DataItem _corporationID;
-	DataItem _corporationName;
-	DataItem _ticker;
-	DataItem _ceoID;
-	DataItem _ceoName;
-	DataItem _stationID;
-	DataItem _stationName;
-	DataItem _description;
-	DataItem _url;
-	DataItem _allianceID;
-	DataItem _allianceName;
-	DataItem _taxRate;
-	DataItem _memberCount;
-	DataItem _memberLimit;
-	DataItem _shares;
-	RowSet _divisions;
-	RowSet _walletDivisions;
-	LogoData _logo;
+        DataItem _corporationID;
+        DataItem _corporationName;
+        DataItem _ticker;
+        DataItem _ceoID;
+        DataItem _ceoName;
+        DataItem _stationID;
+        DataItem _stationName;
+        DataItem _description;
+        DataItem _url;
+        DataItem _allianceID;
+        DataItem _allianceName;
+        DataItem _taxRate;
+        DataItem _memberCount;
+        DataItem _memberLimit;
+        DataItem _shares;
+        RowSet _divisions;
+        RowSet _walletDivisions;
+        LogoData _logo;
     };
 };
 

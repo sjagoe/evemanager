@@ -22,35 +22,35 @@
 
 
 /*!
-set up the scopes of the API
+  set up the scopes of the API
 */
 EveApi::EveApi::EveApi( QString& dataPath,
-                const int& proxyType,
-                const QString & proxyHost,
-                const quint16 & proxyPort,
-                const QString & proxyUser,
-                const QString & proxyPassword,
-                QObject * parent ) :
-        QObject( parent ),
-        _hostName( "api.eve-online.com" ),
-        _dataPath( dataPath ),
-        _xmlIndent( 4 )
+                        const int& proxyType,
+                        const QString & proxyHost,
+                        const quint16 & proxyPort,
+                        const QString & proxyUser,
+                        const QString & proxyPassword,
+                        QObject * parent ) :
+    QObject( parent ),
+    _hostName( "api.eve-online.com" ),
+    _dataPath( dataPath ),
+    _xmlIndent( 4 )
 {
-//    //! API Server hostname
-//    this->_hostName = "api.eve-online.com";
-//
-//    //! path to the data subdirectory
-//    this->_dataPath = dataPath;
-//
-//    //! amount to indent XML blocks when writing files
-//    this->_xmlIndent = 4;
+    //    //! API Server hostname
+    //    this->_hostName = "api.eve-online.com";
+    //
+    //    //! path to the data subdirectory
+    //    this->_dataPath = dataPath;
+    //
+    //    //! amount to indent XML blocks when writing files
+    //    this->_xmlIndent = 4;
 
     this->createScopes( proxyType, proxyHost, proxyPort, proxyUser,
                         proxyPassword );
 }
 
 /*!
-provide access to areas of the api in the "/account/" context
+  provide access to areas of the api in the "/account/" context
 */
 EveApi::Account& EveApi::EveApi::account()
 {
@@ -58,7 +58,7 @@ EveApi::Account& EveApi::EveApi::account()
 }
 
 /*!
-provide access to areas of the api in the "/eve/" context
+  provide access to areas of the api in the "/eve/" context
 */
 EveApi::Eve& EveApi::EveApi::eve()
 {
@@ -66,7 +66,7 @@ EveApi::Eve& EveApi::EveApi::eve()
 }
 
 /*!
-provide access to areas of the api in the "/map/" context
+  provide access to areas of the api in the "/map/" context
 */
 EveApi::Map& EveApi::EveApi::map()
 {
@@ -74,7 +74,7 @@ EveApi::Map& EveApi::EveApi::map()
 }
 
 /*!
-provide access to aread of the api in the "/char/" context
+  provide access to aread of the api in the "/char/" context
 */
 EveApi::Character& EveApi::EveApi::character()
 {
@@ -82,7 +82,7 @@ EveApi::Character& EveApi::EveApi::character()
 }
 
 /*!
-provide access to aread of the api in the "/corp/" context
+  provide access to aread of the api in the "/corp/" context
 */
 EveApi::Corporation& EveApi::EveApi::corp()
 {
@@ -93,81 +93,83 @@ EveApi::Corporation& EveApi::EveApi::corp()
   Set the proxy to use for http requests
 */
 void EveApi::EveApi::setProxy( const int& proxyType,
-		       const QString& proxyHost,
-		       const quint16& proxyPort,
-		       const QString & proxyUser,
-		       const QString & proxyPassword )
+                               const QString& proxyHost,
+                               const quint16& proxyPort,
+                               const QString & proxyUser,
+                               const QString & proxyPassword )
 {
-  this->_eve->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
-		       proxyPassword);
-  this->_map->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
-		       proxyPassword);
-  this->_char->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
-			proxyPassword);
-  this->_corp->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
-			proxyPassword);
-  this->_account->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
-			   proxyPassword);
+    this->_eve->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+                         proxyPassword);
+    this->_map->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+                         proxyPassword);
+    this->_char->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+                          proxyPassword);
+    this->_corp->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+                          proxyPassword);
+    this->_account->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
+                             proxyPassword);
 }
 
 /*!
-create the scopes, and connect scope-specific signals and slots
+  create the scopes, and connect scope-specific signals and slots
 */
 void EveApi::EveApi::createScopes( const int& proxyType,
-                           const QString & proxyHost,
-                           const quint16 & proxyPort,
-                           const QString & proxyUser,
-                           const QString & proxyPassword )
+                                   const QString & proxyHost,
+                                   const quint16 & proxyPort,
+                                   const QString & proxyUser,
+                                   const QString & proxyPassword )
 {
     // "account" scope
     QString scope = "account";
     this->_account = new Account( this->_hostName, this->_dataPath,
-                                        this->_xmlIndent, scope, proxyType,
-                                        proxyHost, proxyPort, proxyUser,
-                                        proxyPassword );
+                                  this->_xmlIndent, scope, proxyType,
+                                  proxyHost, proxyPort, proxyUser,
+                                  proxyPassword );
     this->connectScope( this->_account );
 
     // "eve" scope
     scope = "eve";
     this->_eve = new Eve( this->_hostName, this->_dataPath,
-                                this->_xmlIndent, scope, proxyType,
-                                proxyHost, proxyPort, proxyUser,
-                                proxyPassword );
+                          this->_xmlIndent, scope, proxyType,
+                          proxyHost, proxyPort, proxyUser,
+                          proxyPassword );
     this->connectScope( this->_eve );
 
     // "map" scope
     scope = "map";
     this->_map = new Map( this->_hostName, this->_dataPath,
-                                this->_xmlIndent, scope, proxyType,
-                                proxyHost, proxyPort, proxyUser,
-                                proxyPassword );
+                          this->_xmlIndent, scope, proxyType,
+                          proxyHost, proxyPort, proxyUser,
+                          proxyPassword );
     this->connectScope( this->_map );
 
     // "char" scope
     scope = "char";
     this->_char = new Character( this->_hostName, this->_dataPath,
-                                       this->_xmlIndent, scope, proxyType,
-                                       proxyHost, proxyPort, proxyUser,
-                                       proxyPassword );
+                                 this->_xmlIndent, scope, proxyType,
+                                 proxyHost, proxyPort, proxyUser,
+                                 proxyPassword );
     this->connectScope( this->_char );
 
     // "corp" scope
     scope = "corp";
     this->_corp = new Corporation( this->_hostName, this->_dataPath,
-                                         this->_xmlIndent, scope, proxyType,
-                                         proxyHost, proxyPort, proxyUser,
-                                         proxyPassword );
+                                   this->_xmlIndent, scope, proxyType,
+                                   proxyHost, proxyPort, proxyUser,
+                                   proxyPassword );
     this->connectScope( this->_corp );
 }
 
 /*!
-connect the signals of each scope member
+  connect the signals of each scope member
 */
 void EveApi::EveApi::connectScope( Scope* scope )
 {
     connect( scope,
-             SIGNAL( requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime ) ),
-             this, SIGNAL( requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime ) ) );
+             SIGNAL( requestComplete( QString, shared_ptr<QDomDocument>,
+                                      QString, QDateTime ) ),
+             this, SIGNAL( requestComplete( QString, shared_ptr<QDomDocument>,
+                                            QString, QDateTime ) ) );
     connect( scope,
              SIGNAL( requestFailed( QString, QString, QString ) ),
              this, SIGNAL( requestFailed( QString, QString, QString ) ) );

@@ -28,14 +28,14 @@ namespace EveApi
     class SkillInTrainingData
     {
     private:
-	DataItem _currentTQTime;
-	DataItem _trainingEndTime;
-	DataItem _trainingStartTime;
-	DataItem _trainingTypeId;
-	DataItem _trainingStartSP;
-	DataItem _trainingDestinationSP;
-	DataItem _trainingToLevel;
-	DataItem _skillInTraining;
+        DataItem _currentTQTime;
+        DataItem _trainingEndTime;
+        DataItem _trainingStartTime;
+        DataItem _trainingTypeId;
+        DataItem _trainingStartSP;
+        DataItem _trainingDestinationSP;
+        DataItem _trainingToLevel;
+        DataItem _skillInTraining;
     };
 };
 

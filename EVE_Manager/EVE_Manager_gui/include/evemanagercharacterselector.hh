@@ -30,51 +30,51 @@ namespace em_gui
 {
     class EveManagerCharacterSelector: public QWidget
     {
-	Q_OBJECT;
+        Q_OBJECT;
     public:
-	/*
-	  Create the widget
-	 */
-	EveManagerCharacterSelector(QWidget *parent = 0 );
+        /*
+          Create the widget
+        */
+        EveManagerCharacterSelector(QWidget *parent = 0 );
 
     public slots:
-	/*
-	  Set the characters in the list
-	*/
-	void setCharacters( const QStringList &characters );
+        /*
+          Set the characters in the list
+        */
+        void setCharacters( const QStringList &characters );
 
     private:
-	//! Listbox displaying characters on the account
-	QListWidget *_lstCharacters;
-	//! Buttons to select a character or cancel
-	QDialogButtonBox *_dlgButtons;
+        //! Listbox displaying characters on the account
+        QListWidget *_lstCharacters;
+        //! Buttons to select a character or cancel
+        QDialogButtonBox *_dlgButtons;
 
-	/*!
-	  Create and lay out the widget
-	 */
-	void createWidget();
+        /*!
+          Create and lay out the widget
+        */
+        void createWidget();
 
-	/*
-	  Ok button clicked
-	 */
-	void on_dlgButtons_accept();
+        /*
+          Ok button clicked
+        */
+        void on_dlgButtons_accept();
 
-	/*
-	  Cancel button clicked
-	 */
-	void on_dlgButtons_cancel();
-	
+        /*
+          Cancel button clicked
+        */
+        void on_dlgButtons_cancel();
+
     signals:
-	/*
-	  A character has been selected - notify the application
-	 */
-	void characterSelected( QString character );
+        /*
+          A character has been selected - notify the application
+        */
+        void characterSelected( QString character );
 
-	/*
-	  Operation cancelled
-	 */
-	void characterCancelled();
-	
+        /*
+          Operation cancelled
+        */
+        void characterCancelled();
+
     };
 };
 

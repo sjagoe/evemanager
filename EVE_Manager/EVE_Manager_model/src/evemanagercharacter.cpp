@@ -20,7 +20,7 @@
 #include "evemanagercharacter.hh"
 
 em_model::EveManagerCharacter::EveManagerCharacter( shared_ptr<EveApi>& api,
-						  QObject* parent ):
+                                                    QObject* parent ):
     QObject( parent )
 {
     this->_api = api;

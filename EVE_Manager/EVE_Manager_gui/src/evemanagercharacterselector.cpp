@@ -39,7 +39,7 @@ em_gui::EveManagerCharacterSelector::EveManagerCharacterSelector(
 void em_gui::EveManagerCharacterSelector::setCharacters(
     const QStringList &characters )
 {
-        this->_lstCharacters->addItems( characters );
+    this->_lstCharacters->addItems( characters );
 }
 
 /*!
@@ -48,11 +48,11 @@ void em_gui::EveManagerCharacterSelector::setCharacters(
 void em_gui::EveManagerCharacterSelector::createWidget()
 {
     this->setWindowTitle( tr("Select a Character",
-			     "to add to the application") );
+                             "to add to the application") );
 
     this->_lstCharacters = new QListWidget;
     this->_dlgButtons = new QDialogButtonBox(
-	QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
+        QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
 
     QVBoxLayout *layout = new QVBoxLayout();
     layout->addWidget(this->_lstCharacters);

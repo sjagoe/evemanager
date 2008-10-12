@@ -28,18 +28,18 @@ namespace em_gui
 
     class EveManagerWindow: public QMainWindow
     {
-            Q_OBJECT
-        public:
-            /*!
-            Create and populate the window.
-            */
-            EveManagerWindow( QWidget* parent = 0 );
+        Q_OBJECT;
+    public:
+        /*!
+          Create and populate the window.
+        */
+        EveManagerWindow( QWidget* parent = 0 );
 
-        private:
-            QTabWidget* _characters;
+    private:
+        QTabWidget* _characters;
 
-        signals:
-            void exit();
+    signals:
+        void exit();
     };
 };
 

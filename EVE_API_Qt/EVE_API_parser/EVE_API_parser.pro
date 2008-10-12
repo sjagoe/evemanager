@@ -43,22 +43,22 @@ CONFIG += debug_and_release
 DESTDIR = ../../bin
 
 HEADERS += include/eveapiparser.hh \
-	   include/abstracteveapidata.hh \
-	   include/charactersheetdata.hh \
-	   include/corporationsheetdata.hh \
-	   include/killlogdata.hh \
-	   include/membersecuritydata.hh \
-	   include/shareholdersdata.hh \
-	   include/skillintrainingdata.hh \
-	   include/skilltreedata.hh
+           include/abstracteveapidata.hh \
+           include/charactersheetdata.hh \
+           include/corporationsheetdata.hh \
+           include/killlogdata.hh \
+           include/membersecuritydata.hh \
+           include/shareholdersdata.hh \
+           include/skillintrainingdata.hh \
+           include/skilltreedata.hh
 
 SOURCES += src/eveapiparser.cpp \
-	   src/abstracteveapidata.cpp \
-	   src/charactersheetdata.cpp \
-	   src/corporationsheetdata.cpp \
-	   src/killlogdata.cpp \
-	   src/membersecuritydata.cpp \
-	   src/shareholdersdata.cpp \
-	   src/skillintrainingdata.cpp \
-	   src/skilltreedata.cpp
+           src/abstracteveapidata.cpp \
+           src/charactersheetdata.cpp \
+           src/corporationsheetdata.cpp \
+           src/killlogdata.cpp \
+           src/membersecuritydata.cpp \
+           src/shareholdersdata.cpp \
+           src/skillintrainingdata.cpp \
+           src/skilltreedata.cpp
 

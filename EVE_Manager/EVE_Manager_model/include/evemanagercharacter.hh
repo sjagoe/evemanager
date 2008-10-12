@@ -36,40 +36,40 @@ namespace em_model
 
     class EveManagerCharacter: public QObject
     {
-	Q_OBJECT;
+        Q_OBJECT;
     public:
-	/*!
-	  Create the character and all related model instances
-	 */
-	EveManagerCharacter( shared_ptr<EveApi>& api, QObject* parent=0 );
+        /*!
+          Create the character and all related model instances
+        */
+        EveManagerCharacter( shared_ptr<EveApi>& api, QObject* parent=0 );
 
     public slots:
-// 	/*!
-// 	  Fetch the wallet transactions for this character
-// 	 */
-// 	void walletTransactions( void* beforeTransID );
+        // /*!
+        //   Fetch the wallet transactions for this character
+        //  */
+        // void walletTransactions( void* beforeTransID );
 
-// 	/*!
-// 	  Fetch the wallet journal for this character
-// 	 */
-// 	void walletJournal( void* beforeRefID );
+        // /*!
+        //   Fetch the wallet journal for this character
+        //  */
+        // void walletJournal( void* beforeRefID );
 
-// 	/*!
-// 	  Fetch the skill tree for this character
-// 	 */
-// 	void skillTree();
+        // /*!
+        //   Fetch the skill tree for this character
+        //  */
+        // void skillTree();
 
-	/*!
-	  Fetch the current training skill for this character
-	 */
-	void skillInTraining();
+        /*!
+          Fetch the current training skill for this character
+        */
+        void skillInTraining();
 
     private:
-	//! The EVE_API instance used to get API data
-	shared_ptr<EveApi> _api;
+        //! The EVE_API instance used to get API data
+        shared_ptr<EveApi> _api;
 
-	//! Map requestors to requestIDs
-	QMap<shared_ptr<EveManagerRequestor>, QString> _requestorMap;
+        //! Map requestors to requestIDs
+        QMap<shared_ptr<EveManagerRequestor>, QString> _requestorMap;
     };
 };
 

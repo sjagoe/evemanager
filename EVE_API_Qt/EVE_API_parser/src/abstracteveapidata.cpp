@@ -43,8 +43,8 @@ EveApi::RowSet::RowSet()
 };
 
 EveApi::RowSet::RowSet(const QString& name,
-		       const QString& key,
-		       const QStringList& columns)
+                       const QString& key,
+                       const QStringList& columns)
 {
     this->_name = name;
     this->_key = key;
@@ -59,11 +59,11 @@ shared_ptr<EveApi::Row<EveApi::RowSet> > EveApi::RowSet::add_row(
     shared_ptr<Row<RowSet> > row;
     if (values.contains(this->_key))
     {
-	DataItem key_ = values.value(this->_key);
-	QString key = key_.get();
-	row.reset(new Row<RowSet>(values));
-	this->_rowsByKey.insert(key, row);
-	this->_rowsInOrder.append(row);
+        DataItem key_ = values.value(this->_key);
+        QString key = key_.get();
+        row.reset(new Row<RowSet>(values));
+        this->_rowsByKey.insert(key, row);
+        this->_rowsInOrder.append(row);
     }
     return row;
 }
@@ -90,11 +90,11 @@ void EveApi::RowSet::set_name(const QString& name) throw(ImmutableError)
 {
     if (this->_name.isEmpty())
     {
-	this->_name = name;
+        this->_name = name;
     }
     else
     {
-	throw EveApi::ImmutableError("This RowSet already has a name");
+        throw EveApi::ImmutableError("This RowSet already has a name");
     }
 }
 
@@ -102,11 +102,11 @@ void EveApi::RowSet::set_key(const QString& key) throw(ImmutableError)
 {
     if (this->_key.isEmpty())
     {
-	this->_key = key;
+        this->_key = key;
     }
     else
     {
-	throw EveApi::ImmutableError("This RowSet already has a key");
+        throw EveApi::ImmutableError("This RowSet already has a key");
     }
 }
 
@@ -114,39 +114,39 @@ void EveApi::RowSet::set_columns(const QStringList& columns) throw(ImmutableErro
 {
     if (this->_columns.isEmpty())
     {
-	this->_columns = columns;
+        this->_columns = columns;
     }
     else
     {
-	throw EveApi::ImmutableError("This RowSet already has columns");
+        throw EveApi::ImmutableError("This RowSet already has columns");
     }
 }
 
 
 template <class T>
-EveApi::Row<T>::Row(const QMap<QString, EveApi::DataItem>& values)
+    EveApi::Row<T>::Row(const QMap<QString, EveApi::DataItem>& values)
 {
     this->_values = values;
 };
 
 template <class T>
-const T& EveApi::Row<T>::get_child() const
+    const T& EveApi::Row<T>::get_child() const
 {
     return this->_child;
 };
 
 template <class T>
-void EveApi::Row<T>::add_child(shared_ptr<T> child)
+    void EveApi::Row<T>::add_child(shared_ptr<T> child)
 {
 
 }
 
 template <class T>
-const EveApi::DataItem& EveApi::Row<T>::operator[](const QString& column) const throw(NoSuchColumn)
+    const EveApi::DataItem& EveApi::Row<T>::operator[](const QString& column) const throw(NoSuchColumn)
 {
     if (! this->_values.contains(column))
     {
-	throw NoSuchColumn();
+        throw NoSuchColumn();
     }
     return this->_values.value(column);
 };

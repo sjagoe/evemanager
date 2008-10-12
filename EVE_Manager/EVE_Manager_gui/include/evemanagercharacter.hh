@@ -32,48 +32,48 @@ namespace em_gui
 {
     class EveManagerCharacter: public QWidget
     {
-        Q_OBJECT
-        public:
-            /*!
-            Create the character widget
-            */
-            EveManagerCharacter( QWidget* parent = 0 );
+        Q_OBJECT;
+    public:
+        /*!
+          Create the character widget
+        */
+        EveManagerCharacter( QWidget* parent = 0 );
 
-        private:
-            //! Button to access the "Settings" pane
-            QPushButton* _btnSettings;
+    private:
+        //! Button to access the "Settings" pane
+        QPushButton* _btnSettings;
 
-            //! Group box containing buttons related to character stuff
-            QGroupBox* _grpCharacter;
-            //! Button to select the character's skill tree
-            QPushButton* _btnSkillTree;
+        //! Group box containing buttons related to character stuff
+        QGroupBox* _grpCharacter;
+        //! Button to select the character's skill tree
+        QPushButton* _btnSkillTree;
 
-            //! stack containing all the detailed attributes for a character
-            QStackedWidget* _stackDetails;
+        //! stack containing all the detailed attributes for a character
+        QStackedWidget* _stackDetails;
 
-            //! map buttons to a widget to display in the stack
-            QMap<QPushButton*, QWidget*> _characterDetails;
+        //! map buttons to a widget to display in the stack
+        QMap<QPushButton*, QWidget*> _characterDetails;
 
-            /*!
-            Set up the character widget
-            */
-            QLayout* _layoutWidget();
+        /*!
+          Set up the character widget
+        */
+        QLayout* _layoutWidget();
 
-            /*!
-            Connect buttons etc
-            */
-            void _connect();
+        /*!
+          Connect buttons etc
+        */
+        void _connect();
 
-        private slots:
-            /*!
-            Show the Settings pane
-            */
-            void on_btnSettings_clicked();
+    private slots:
+        /*!
+          Show the Settings pane
+        */
+        void on_btnSettings_clicked();
 
-            /*!
-            Show the SkillTree pane
-            */
-            void on_btnSkillTree_clicked();
+        /*!
+          Show the SkillTree pane
+        */
+        void on_btnSkillTree_clicked();
     };
 };
 
