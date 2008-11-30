@@ -8,10 +8,16 @@ From the base source directory:
    2 python generator/code_generator.py
    3 cd -
 
+The following may not build all libraries as a large portion of the
+software is incomplete.  All that works is the EVE_API_Qt module, and
+a small application intended to verify that fetching data from the
+online API and the internal cache works as intended.  It may be
+necessary to build these modules independently from the rest of the
+application.  I intend to refactor the EVE API Qt module to allow for
+automated testing using the framework built into Qt before continuing
+with development.
+
 Now the modules can be built
    1 qmake
    2 make release
 
-And run EVE Manager:
-   1 ./EVE_Manager.sh
-      * This script is simply a wrapper around setting the LD_LIBRARY_PATH
