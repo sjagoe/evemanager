@@ -41,6 +41,12 @@
 #include <QDomNode>
 #include <QDomElement>
 
+#include "eveapieve.hh"
+#include "eveapiaccount.hh"
+#include "eveapimap.hh"
+#include "eveapicharacter.hh"
+#include "eveapicorporation.hh"
+
 Window::Window( QWidget* parent )
     : QWidget( parent )
 {

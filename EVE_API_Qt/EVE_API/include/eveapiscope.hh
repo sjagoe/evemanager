@@ -148,7 +148,8 @@ namespace EveApi
 
     signals:
         void requestComplete( QString id, shared_ptr<QDomDocument> result,
-                              QString httpResponse, QDateTime cacheTime );
+                              QString httpResponse, QDateTime cacheExpireTime,
+                              QString requestType  );
         void requestFailed( QString id, QString error, QString httpResponse );
     };
 };

@@ -263,7 +263,8 @@ namespace EveApi
         void requestComplete( QString id,
                               shared_ptr<QDomDocument> result,
                               QString httpResponse,
-                              QDateTime cacheExpireTime );
+                              QDateTime cacheExpireTime,
+                              QString requestType  );
 
         void requestFailed( QString id,
                             QString error,

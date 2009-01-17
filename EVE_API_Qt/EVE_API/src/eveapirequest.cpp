@@ -119,7 +119,7 @@ QString EveApi::Request::getFromCache( const QString& host,
                 QString idStr = this->makeID( scope, idi, parameters );
                 emit requestComplete( idStr, cacheDom,
                                       QString( "FROM LOCAL CACHE" ),
-                                      cacheTime );
+                                      cacheTime, this->requestType() );
                 return idStr;
             }
         }
@@ -496,7 +496,8 @@ void EveApi::Request::requestFinished( int id, bool error )
                 xmlData->save( save, this->_xmlIndent );
                 saveFile.close();
             }
-            emit requestComplete( idStr, xmlData, response, cacheTime );
+            emit requestComplete( 
+                idStr, xmlData, response, cacheTime, this->requestType() );
         }
     }
 }
