@@ -20,6 +20,12 @@
 
 #include "eveapi.hh"
 
+#include "eveapiaccount.hh"
+#include "eveapicharacter.hh"
+#include "eveapicorporation.hh"
+#include "eveapieve.hh"
+#include "eveapimap.hh"
+
 
 /*!
   set up the scopes of the API
@@ -121,56 +127,56 @@ void EveApi::EveApi::createScopes( const int& proxyType,
 {
     // "account" scope
     QString scope = "account";
-    this->_account = new Account( this->_hostName, this->_dataPath,
-                                  this->_xmlIndent, scope, proxyType,
-                                  proxyHost, proxyPort, proxyUser,
-                                  proxyPassword );
+    this->_account.reset(new Account( this->_hostName, this->_dataPath,
+                                      this->_xmlIndent, scope, proxyType,
+                                      proxyHost, proxyPort, proxyUser,
+                                      proxyPassword ));
     this->connectScope( this->_account );
 
     // "eve" scope
     scope = "eve";
-    this->_eve = new Eve( this->_hostName, this->_dataPath,
-                          this->_xmlIndent, scope, proxyType,
-                          proxyHost, proxyPort, proxyUser,
-                          proxyPassword );
+    this->_eve.reset(new Eve( this->_hostName, this->_dataPath,
+                              this->_xmlIndent, scope, proxyType,
+                              proxyHost, proxyPort, proxyUser,
+                              proxyPassword ));
     this->connectScope( this->_eve );
 
     // "map" scope
     scope = "map";
-    this->_map = new Map( this->_hostName, this->_dataPath,
-                          this->_xmlIndent, scope, proxyType,
-                          proxyHost, proxyPort, proxyUser,
-                          proxyPassword );
+    this->_map.reset(new Map( this->_hostName, this->_dataPath,
+                              this->_xmlIndent, scope, proxyType,
+                              proxyHost, proxyPort, proxyUser,
+                              proxyPassword ));
     this->connectScope( this->_map );
 
     // "char" scope
     scope = "char";
-    this->_char = new Character( this->_hostName, this->_dataPath,
-                                 this->_xmlIndent, scope, proxyType,
-                                 proxyHost, proxyPort, proxyUser,
-                                 proxyPassword );
+    this->_char.reset(new Character( this->_hostName, this->_dataPath,
+                                     this->_xmlIndent, scope, proxyType,
+                                     proxyHost, proxyPort, proxyUser,
+                                     proxyPassword ));
     this->connectScope( this->_char );
 
     // "corp" scope
     scope = "corp";
-    this->_corp = new Corporation( this->_hostName, this->_dataPath,
-                                   this->_xmlIndent, scope, proxyType,
-                                   proxyHost, proxyPort, proxyUser,
-                                   proxyPassword );
+    this->_corp.reset(new Corporation( this->_hostName, this->_dataPath,
+                                       this->_xmlIndent, scope, proxyType,
+                                       proxyHost, proxyPort, proxyUser,
+                                       proxyPassword ));
     this->connectScope( this->_corp );
 }
 
 /*!
   connect the signals of each scope member
 */
-void EveApi::EveApi::connectScope( Scope* scope )
+void EveApi::EveApi::connectScope( shared_ptr<Scope> scope )
 {
-    connect( scope,
+    connect( scope.get(),
              SIGNAL( requestComplete( QString, shared_ptr<QDomDocument>,
                                       QString, QDateTime ) ),
              this, SIGNAL( requestComplete( QString, shared_ptr<QDomDocument>,
                                             QString, QDateTime ) ) );
-    connect( scope,
+    connect( scope.get(),
              SIGNAL( requestFailed( QString, QString, QString ) ),
              this, SIGNAL( requestFailed( QString, QString, QString ) ) );
 }

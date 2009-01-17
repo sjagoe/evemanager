@@ -59,7 +59,7 @@ void EveApi::Scope::setProxy( const int& proxyType,
                               const QString & proxyUser,
                               const QString & proxyPassword )
 {
-    EveApi::Request* request;
+    shared_ptr<EveApi::Request> request;
     foreach(request, this->_apiRequests)
     {
         request->setProxy(proxyType, proxyHost, proxyPort, proxyUser,
@@ -102,15 +102,16 @@ const QString& EveApi::Scope::scope()
 /*!
   Add a "Request Type" to the list
 */
-void EveApi::Scope::addRequestType( QString& id, EveApi::Request* request )
+void EveApi::Scope::addRequestType( 
+    QString& id, shared_ptr<EveApi::Request> request )
 {
-    connect( request,
+    connect( request.get(),
              SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>,
                                      QString, QDateTime )),
              this, SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>,
                                            QString, QDateTime )),
              Qt::QueuedConnection );
-    connect( request,
+    connect( request.get(),
              SIGNAL(requestFailed( QString, QString, QString )),
              this, SIGNAL(requestFailed( QString, QString, QString )),
              Qt::QueuedConnection );
@@ -137,7 +138,7 @@ QString EveApi::Scope::request(
     this->_mutex.lock();
     QString host = this->hostName();
     QString scopeStr = this->scope();
-    EveApi::Request* req = this->requestType( id );
+    shared_ptr<EveApi::Request> req = this->requestType( id );
     QString result;
     if (req)
     {
@@ -170,7 +171,7 @@ QString EveApi::Scope::request(
 /*!
   return a previously added request type
 */
-EveApi::Request* EveApi::Scope::requestType( QString& id ) const
+shared_ptr<EveApi::Request> EveApi::Scope::requestType( QString& id ) const
 {
     return this->_apiRequests.value( id );
 }

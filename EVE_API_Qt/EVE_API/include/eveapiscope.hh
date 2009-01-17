@@ -22,13 +22,9 @@
 #define _EVEAPI_SCOPE_HH_
 
 #include <QObject>
-
 #include <QMap>
-
 #include <QString>
-
 #include <QDateTime>
-
 #include <QMutex>
 
 #include <boost/shared_ptr.hpp>
@@ -95,7 +91,7 @@ namespace EveApi
         /*!
           Add a "Request Type" to the list
         */
-        void addRequestType( QString& id, Request* request );
+        void addRequestType( QString& id, shared_ptr<Request> request );
 
         /*!
           Call a request of the specified type
@@ -134,12 +130,12 @@ namespace EveApi
         QString _scope;
 
         //! QMap storing each of the possible requests in this scope
-        QMap<QString, Request*> _apiRequests;
+        QMap<QString, shared_ptr<Request> > _apiRequests;
 
         /*!
           return a previously added request type
         */
-        Request* requestType( QString& id ) const;
+        shared_ptr<Request> requestType( QString& id ) const;
 
         /*!
           create all requests (delegated from the constructor)

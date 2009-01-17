@@ -100,6 +100,10 @@ templates = {
 
 #include "%(inherit_file)s"
 
+#include <boost/shared_ptr.hpp>
+
+using boost::shared_ptr;
+
 namespace EveApi
 {
     class %(class_name)s: public %(inherit)s
@@ -170,6 +174,10 @@ namespace EveApi
 #define %(define)s
 
 #include "%(inherit_file)s"
+
+#include <boost/shared_ptr.hpp>
+
+using boost::shared_ptr;
 
 namespace EveApi
 {
@@ -282,7 +290,7 @@ void EveApi::%(class_name)s::createRequest( QString& requestId,
                                   const QString & user,
                                   const QString & password )
 {
-    Request* newRequest = new %(request_type)s( requestId,
+    shared_ptr<Request> newRequest( new %(request_type)s( requestId,
             this->dataPath(),
             this->xmlIndent(),
             requiredParams,
@@ -292,7 +300,7 @@ void EveApi::%(class_name)s::createRequest( QString& requestId,
             host,
             port,
             user,
-            password );
+            password ));
     this->addRequestType( requestId, newRequest );
 }
 
@@ -373,7 +381,7 @@ void EveApi::%(class_name)s::createRequest( QString& requestId,
                                    const QString & user,
                                    const QString & password )
 {
-    Request* newRequest = new %(request_type)s( requestId,
+    shared_ptr<Request> newRequest( new %(request_type)s( requestId,
             this->dataPath(),
             this->xmlIndent(),
             requiredParams,
@@ -383,7 +391,7 @@ void EveApi::%(class_name)s::createRequest( QString& requestId,
             host,
             port,
             user,
-            password );
+            password ));
     this->addRequestType( requestId, newRequest );
 }
 

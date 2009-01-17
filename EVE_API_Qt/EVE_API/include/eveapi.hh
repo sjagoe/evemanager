@@ -21,17 +21,11 @@
 #ifndef __EVEAPI_HH__
 #define __EVEAPI_HH__
 
+#include <QDateTime>
 #include <QObject>
-
 #include <QString>
 
 #include <boost/shared_ptr.hpp>
-
-#include "eveapiaccount.hh"
-#include "eveapieve.hh"
-#include "eveapimap.hh"
-#include "eveapicharacter.hh"
-#include "eveapicorporation.hh"
 
 using boost::shared_ptr;
 
@@ -39,6 +33,14 @@ class QDomDocument;
 
 namespace EveApi
 {
+
+    class Account;
+    class Character;
+    class Corporation;
+    class Eve;
+    class Map;
+    class Scope;
+
     class EveApi: public QObject
     {
         Q_OBJECT
@@ -100,18 +102,18 @@ namespace EveApi
         int _xmlIndent;
 
         //! "/eve/" scope
-        Eve* _eve;
+        shared_ptr<Eve> _eve;
 
         //! "/map/" scope
-        Map* _map;
+        shared_ptr<Map> _map;
 
         //! "/char/" scope
-        Character* _char;
+        shared_ptr<Character> _char;
 
         //! "/corp/" scope
-        Corporation* _corp;
+        shared_ptr<Corporation> _corp;
 
-        Account* _account;
+        shared_ptr<Account> _account;
 
         /*!
           create the scopes, and connect scope-specific signals and slots
@@ -125,10 +127,11 @@ namespace EveApi
         /*!
           connect the signals of each scope member
         */
-        void connectScope( Scope* scope );
+        void connectScope( shared_ptr<Scope> scope );
 
     signals:
-        void requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime );
+        void requestComplete( QString id, shared_ptr<QDomDocument> result,
+                              QString httpResponse, QDateTime cacheTime );
         void requestFailed( QString id, QString error, QString httpResponse );
     };
 };
