@@ -43,8 +43,8 @@ namespace EveApi
 
     class EveApi: public QObject
     {
-        Q_OBJECT
-            public:
+        Q_OBJECT;
+    public:
         /*!
           set up the scopes of the API
         */

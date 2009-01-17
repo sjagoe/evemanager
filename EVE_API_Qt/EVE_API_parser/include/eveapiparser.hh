@@ -24,15 +24,65 @@
 #include <QObject>
 #include <QString>
 
+#include "eveapiaccount.hh"
+#include "eveapicharacter.hh"
+#include "eveapicorporation.hh"
+#include "eveapieve.hh"
+#include "eveapimap.hh"
+
 #include <boost/shared_ptr.hpp>
 
 using boost::shared_ptr;
 
+class QDomDocument;
+
 namespace EveApi
 {
+    class EveApi;
+
     class Parser: public QObject
     {
+        Q_OBJECT;
 
+    public:
+        /*!
+          provide access to areas of the api in the "/account/" context
+        */
+        Account& account();
+
+        /*!
+          provide access to areas of the api in the "/eve/" context
+        */
+        Eve& eve();
+
+        /*!
+          provide access to areas of the api in the "/map/" context
+        */
+        Map& map();
+
+        /*!
+          provide access to aread of the api in the "/char/" context
+        */
+        Character& character();
+
+        /*!
+          provide access to aread of the api in the "/corp/" context
+        */
+        Corporation& corp();
+
+
+    private:
+        QSharedPointer<Api> _api;
+
+    private slots:
+        void parseRequest( QString id, shared_ptr<QDomDocument> result,
+                           QString httpResponse, QDateTime cacheExpireTime,
+                           QString requestType );
+
+    signals:
+        void requestComplete( QString id, shared_ptr<QDomDocument> result,
+                              QString httpResponse, QDateTime cacheExpireTime,
+                              QString requestType );
     };
 };
 
