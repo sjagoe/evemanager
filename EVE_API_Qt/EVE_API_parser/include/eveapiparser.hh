@@ -1,6 +1,6 @@
 
 /*
- * Copyright 2007-2008 Simon Jagoe
+ * Copyright 2007-2009 Simon Jagoe
  *
  * This file is part of EVE_API_Qt.
  *
@@ -22,8 +22,13 @@
 #define _EVEAPI_PARSER_HH_
 
 #include <QObject>
+#include <QSharedPointer>
 #include <QString>
 
+#include "charactersdata.h"
+#include "delegates.h"
+
+#include "eveapi.hh"
 #include "eveapiaccount.hh"
 #include "eveapicharacter.hh"
 #include "eveapicorporation.hh"
@@ -38,13 +43,23 @@ class QDomDocument;
 
 namespace EveApi
 {
-    class EveApi;
 
     class Parser: public QObject
     {
         Q_OBJECT;
 
     public:
+        /*!
+          Construct a new Parser
+        */
+        Parser( QString& dataPath,
+                const int& proxyType = 0,
+                const QString& proxyHost = QString(),
+                const quint16& proxyPort = 0,
+                const QString & proxyUser = QString(),
+                const QString & proxyPassword = QString(),
+                QObject* parent = 0 );
+
         /*!
           provide access to areas of the api in the "/account/" context
         */
@@ -72,15 +87,17 @@ namespace EveApi
 
 
     private:
-        QSharedPointer<Api> _api;
+        //! The API module used to interact with the EVE API
+        QSharedPointer<EveApi> _api;
 
-    private slots:
-        void parseRequest( QString id, shared_ptr<QDomDocument> result,
-                           QString httpResponse, QDateTime cacheExpireTime,
-                           QString requestType );
+        //! Object to delegate parsing to the correct parser
+        QSharedPointer<Delegates> _delegates;
 
     signals:
-        void requestComplete( QString id, shared_ptr<QDomDocument> result,
+        /*!
+          Signal emitted when a character list request has been completed
+         */
+        void requestComplete( QString id, QSharedPointer<CharactersData> data,
                               QString httpResponse, QDateTime cacheExpireTime,
                               QString requestType );
     };

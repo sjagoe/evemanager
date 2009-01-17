@@ -1,4 +1,4 @@
-# Copyright 2007-2008 Simon Jagoe
+# Copyright 2007-2009 Simon Jagoe
 #
 # This file is part of EVE_API_Qt.
 #
@@ -15,50 +15,56 @@
 # You should have received a copy of the GNU General Public License
 # along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
 
+
 VERSION = 0.1.0
-
 TEMPLATE = lib # The parser is a dynamic library
-CONFIG += dll  #
-
-QT -= gui      # does not need any GUI elements
-QT += xml      # uses the XML Qt elements
-
+CONFIG += dll
+QT -= gui # does not need any GUI elements
+QT += xml # uses the XML Qt elements
 TARGET = EVE_API_Parser_Qt
-LIBS += -L../../bin -lEVE_API_Qt1
-
-DEPENDPATH += . include src
-INCLUDEPATH += . include ../EVE_API/include
-
+LIBS += -L../../bin \
+    -lEVE_API_Qt1
+DEPENDPATH += . \
+    include \
+    src
+INCLUDEPATH += . \
+    include \
+    ../EVE_API/include
 DEFINES += _REENTRANT
-
 CONFIG += thread
 CONFIG += rtti
 CONFIG += debug_and_release
+
 # CONFIG(debug, debug|release)
 # {
-#     DESTDIR = ../bin/debug
+# DESTDIR = ../bin/debug
 # } else {
-#     DESTDIR = ../bin/release
+# DESTDIR = ../bin/release
 # }
 DESTDIR = ../../bin
-
 HEADERS += include/eveapiparser.hh \
-           include/abstracteveapidata.hh \
-           include/charactersheetdata.hh \
-           include/corporationsheetdata.hh \
-           include/killlogdata.hh \
-           include/membersecuritydata.hh \
-           include/shareholdersdata.hh \
-           include/skillintrainingdata.hh \
-           include/skilltreedata.hh
-
+    include/abstracteveapidata.hh \
+    include/charactersheetdata.hh \
+    include/corporationsheetdata.hh \
+    include/killlogdata.hh \
+    include/membersecuritydata.hh \
+    include/shareholdersdata.hh \
+    include/skillintrainingdata.hh \
+    include/skilltreedata.hh \
+    include/charactersdata.h \
+    include/delegate.h \
+    include/delegates.h \
+    include/charactersparser.h
 SOURCES += src/eveapiparser.cpp \
-           src/abstracteveapidata.cpp \
-           src/charactersheetdata.cpp \
-           src/corporationsheetdata.cpp \
-           src/killlogdata.cpp \
-           src/membersecuritydata.cpp \
-           src/shareholdersdata.cpp \
-           src/skillintrainingdata.cpp \
-           src/skilltreedata.cpp
-
+    src/abstracteveapidata.cpp \
+    src/charactersheetdata.cpp \
+    src/corporationsheetdata.cpp \
+    src/killlogdata.cpp \
+    src/membersecuritydata.cpp \
+    src/shareholdersdata.cpp \
+    src/skillintrainingdata.cpp \
+    src/skilltreedata.cpp \
+    src/charactersdata.cpp \
+    src/delegate.cpp \
+    src/delegates.cpp \
+    src/charactersparser.cpp

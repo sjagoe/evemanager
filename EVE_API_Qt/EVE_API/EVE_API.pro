@@ -1,4 +1,4 @@
-# Copyright 2007-2008 Simon Jagoe
+# Copyright 2007-2009 Simon Jagoe
 #
 # This file is part of EVE_API_Qt.
 #
@@ -15,64 +15,71 @@
 # You should have received a copy of the GNU General Public License
 # along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
 
-
-## Set the version number
 VERSION = 1.4.0
 
-## For testing, uncomment this line:
+# # For testing, uncomment this line:
 CONFIG += console
-
-
-TEMPLATE = lib    # Dynamic library
-CONFIG += dll     #
-QT -= gui         # No need for GUI
+TEMPLATE = lib # Dynamic library
+CONFIG += dll
+QT -= gui # No need for GUI
 QT += network xml # need Network and XML functionality to fetch the data
+
 TARGET = EVE_API_Qt
 
 DEPENDPATH += . include src
+
 INCLUDEPATH += . include
 
 DEFINES += _REENTRANT
-
 CONFIG += thread
 CONFIG += rtti
 CONFIG += debug_and_release
+
 # CONFIG(debug, debug|release)
 # {
-#     DESTDIR = ../bin/debug
+# DESTDIR = ../bin/debug
 # } else {
-#     DESTDIR = ../bin/release
+# DESTDIR = ../bin/release
 # }
 DESTDIR = ../../bin
 
+QMAKE_EXTRA_TARGETS += generate_code notify_generate
+PRE_TARGETDEPS += .generate
+
+generate_code.target = .generate
+generate_code.depends = notify_generate
+win32 {
+    generate_code.commands = c:\python25\python.exe generator\code_generator.py
+} else {
+    generate_code.commands = python generator/code_generator.py
+}
+
+notify_generate.commands = @echo Generating  API specification code
+
 # Input
-
 HEADERS += include/eveapi.hh \
-           \
-           include/eveapirequest.hh \
-           include/eveapiaccountrequest.hh \
-           include/eveapigeneralrequest.hh \
-           include/eveapicharacterrequest.hh \
-           \
-           include/eveapiscope.hh \
-           include/eveapiaccount.hh \
-           include/eveapieve.hh \
-           include/eveapimap.hh \
-           include/eveapicommon.hh \
-           include/eveapicharacter.hh \
-           include/eveapicorporation.hh
-
+    include/eveapirequest.hh \
+    include/eveapiaccountrequest.hh \
+    include/eveapigeneralrequest.hh \
+    include/eveapicharacterrequest.hh \
+    include/eveapiscope.hh \
+    include/eveapiaccount.hh \
+    include/eveapieve.hh \
+    include/eveapimap.hh \
+    include/eveapicommon.hh \
+    include/eveapicharacter.hh \
+    include/eveapicorporation.hh
 SOURCES += src/eveapi.cpp \
-           \
-           src/eveapirequest.cpp \
-           src/eveapiaccountrequest.cpp \
-           src/eveapigeneralrequest.cpp \
-           src/eveapicharacterrequest.cpp \
-           \
-           src/eveapiscope.cpp \
-           src/eveapiaccount.cpp \
-           src/eveapieve.cpp \
-           src/eveapimap.cpp \
-           src/eveapicommon.cpp \
-           src/eveapicharacter.cpp \
-           src/eveapicorporation.cpp
+    src/eveapirequest.cpp \
+    src/eveapiaccountrequest.cpp \
+    src/eveapigeneralrequest.cpp \
+    src/eveapicharacterrequest.cpp \
+    src/eveapiscope.cpp \
+    src/eveapiaccount.cpp \
+    src/eveapieve.cpp \
+    src/eveapimap.cpp \
+    src/eveapicommon.cpp \
+    src/eveapicharacter.cpp \
+    src/eveapicorporation.cpp
+OTHER_FILES += generator/code_generator.py \
+    generator/generator.xml

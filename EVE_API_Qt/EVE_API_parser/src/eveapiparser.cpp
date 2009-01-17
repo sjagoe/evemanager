@@ -1,6 +1,6 @@
 
 /*
- * Copyright 2007-2008 Simon Jagoe
+ * Copyright 2007-2009 Simon Jagoe
  *
  * This file is part of EVE_API_Qt.
  *
@@ -18,4 +18,56 @@
  * along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "eveapiparser.hh"
+
+#include "eveapi.hh"
+
+EveApi::Parser::Parser( QString& dataPath,
+                        const int& proxyType,
+                        const QString & proxyHost,
+                        const quint16 & proxyPort,
+                        const QString & proxyUser,
+                        const QString & proxyPassword,
+                        QObject * parent ):
+QObject(parent)
+{
+    this->_api = QSharedPointer<EveApi>(
+            new EveApi(dataPath, proxyType, proxyHost, proxyPort, proxyUser, proxyPassword, this));
+    this->_delegates = QSharedPointer<Delegates>(
+            new Delegates());
+    this->connect(this->_api.data(), SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime, QString)),
+                  this->_delegates.data(), SLOT(handleRequest( QString, shared_ptr<QDomDocument>, QString, QDateTime, QString)));
+    this->connect(this->_delegates.data(), SIGNAL(requestComplete(QString,QSharedPointer<CharactersData>,QString,QDateTime)),
+                  this, SIGNAL(requestComplete(QString,QSharedPointer<CharactersData>,QString,QDateTime)));
+}
+
+
+EveApi::Account& EveApi::Parser::account()
+{
+    return this->_api->account();
+}
+
+
+EveApi::Eve& EveApi::Parser::eve()
+{
+    return this->_api->eve();
+}
+
+
+EveApi::Map& EveApi::Parser::map()
+{
+    return this->_api->map();
+}
+
+
+EveApi::Character& EveApi::Parser::character()
+{
+    return this->_api->character();
+}
+
+
+EveApi::Corporation& EveApi::Parser::corp()
+{
+    return this->_api->corp();
+}
 
