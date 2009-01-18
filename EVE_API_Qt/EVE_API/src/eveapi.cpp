@@ -30,7 +30,8 @@
 /*!
   set up the scopes of the API
 */
-EveApi::EveApi::EveApi( QString& dataPath,
+EveApi::EveApi::EveApi( QString& hostName,
+                        QString& dataPath,
                         const int& proxyType,
                         const QString & proxyHost,
                         const quint16 & proxyPort,
@@ -38,7 +39,7 @@ EveApi::EveApi::EveApi( QString& dataPath,
                         const QString & proxyPassword,
                         QObject * parent ) :
     QObject( parent ),
-    _hostName( "api.eve-online.com" ),
+    _hostName( hostName ),
     _dataPath( dataPath ),
     _xmlIndent( 4 )
 {
@@ -173,9 +174,9 @@ void EveApi::EveApi::connectScope( shared_ptr<Scope> scope )
 {
     connect( scope.get(),
              SIGNAL( requestComplete( QString, shared_ptr<QDomDocument>,
-                                      QString, QDateTime ) ),
+                                      QString, QDateTime, QString ) ),
              this, SIGNAL( requestComplete( QString, shared_ptr<QDomDocument>,
-                                            QString, QDateTime ) ) );
+                                            QString, QDateTime, QString ) ) );
     connect( scope.get(),
              SIGNAL( requestFailed( QString, QString, QString ) ),
              this, SIGNAL( requestFailed( QString, QString, QString ) ) );

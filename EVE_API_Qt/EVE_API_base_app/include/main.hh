@@ -120,7 +120,7 @@ private slots:
     void corpFacWarStats();
     void eveFacWarStats();
     void eveFacWarTopStats();
-    void requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime cacheTime );
+    void requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime cacheTime, QString requestType );
     void requestFailed( QString id, QString error, QString httpResponse );
 };
 

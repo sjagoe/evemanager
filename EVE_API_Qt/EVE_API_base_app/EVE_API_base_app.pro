@@ -15,6 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
 
+
 VERSION = 1.4.0
 
 

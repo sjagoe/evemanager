@@ -1,10 +1,8 @@
-#ifndef Q_CC_BOR
-# if defined(UNDER_CE) && UNDER_CE >= 400
+# if defined(UNDER_CE)
 #  include <winbase.h>
 # else
 #  include <winver.h>
 # endif
-#endif
 
 VS_VERSION_INFO VERSIONINFO
 	FILEVERSION 1,4,0,0

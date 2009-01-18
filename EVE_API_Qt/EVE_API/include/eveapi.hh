@@ -48,7 +48,8 @@ namespace EveApi
         /*!
           set up the scopes of the API
         */
-        EveApi( QString& dataPath,
+        EveApi( QString& hostName,
+                QString& dataPath,
                 const int& proxyType = 0,
                 const QString& proxyHost = QString(),
                 const quint16& proxyPort = 0,

@@ -50,14 +50,16 @@
 Window::Window( QWidget* parent )
     : QWidget( parent )
 {
+    QString hostName = QString("api.eve-online.com");
+//    QString hostName = QString("eveapiproxy.appspot.com");
     QString dataPath = QString("data");
 //    int proxyType = 1;
 //    QString proxyHost = "proxy.localoffice";
 //    quint16 proxyPort = 3128;
-    this->_api = new EveApi::EveApi(dataPath);//, proxyType, proxyHost, proxyPort);
+    this->_api = new EveApi::EveApi(hostName, dataPath);//, proxyType, proxyHost, proxyPort);
     connect( this->_api,
-        SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime )),
-        this, SLOT(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime )) );
+        SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime, QString )),
+        this, SLOT(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime, QString )) );
     connect( this->_api,
         SIGNAL(requestFailed( QString, QString, QString )),
         this, SLOT(requestFailed( QString, QString, QString )) );
@@ -450,7 +452,7 @@ void Window::mapFacWarSystems()
 }
 
 
-void Window::requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime cacheTime )
+void Window::requestComplete( QString id, shared_ptr<QDomDocument> result, QString httpResponse, QDateTime cacheTime, QString )
 {
     this->_edtId->setText(id);
     this->_edtResult->setText( result->toString(4) );

@@ -107,9 +107,9 @@ void EveApi::Scope::addRequestType(
 {
     connect( request.get(),
              SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>,
-                                     QString, QDateTime )),
+                                     QString, QDateTime, QString )),
              this, SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>,
-                                           QString, QDateTime )),
+                                           QString, QDateTime, QString )),
              Qt::QueuedConnection );
     connect( request.get(),
              SIGNAL(requestFailed( QString, QString, QString )),
