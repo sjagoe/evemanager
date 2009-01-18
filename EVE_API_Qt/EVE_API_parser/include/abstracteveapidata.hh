@@ -40,7 +40,7 @@ namespace EveApi
     {
     public:
         ImmutableError(const char* args) :
-            QString(args) {};
+                QString(args) {};
     };
 
     /*!  The basic item of data, to abstract the storage and
@@ -63,38 +63,198 @@ namespace EveApi
         QString _data;
     };
 
-    class RowSet;
-    template <class> class Row;
+    //    class RowSet;
+    //    template <class> class Row;
+    //
+    //    /*!  Represent a basic <rowset> element in the xml.  Contains rows
+    //      that can contain other RowSets.
+    //    */
+    //    class RowSet
+    //    {
+    //    public:
+    //        RowSet();
+    //
 
-    /*!  Represent a basic <rowset> element in the xml.  Contains rows
-      that can contain other RowSets.
-    */
-    class RowSet
+    //
+    //        /*!
+    //          Set the name of the rowset
+    //         */
+    //        void set_name(const QString& name) throw(ImmutableError);
+    //
+    //        void set_key(const QString& key) throw(ImmutableError);
+    //
+    //        void set_columns(const QStringList& columns) throw(ImmutableError);
+    //
+    //    private:
+
+    //    };
+    //
+    //    template <class T> class Row
+    //    {
+    //    public:
+    //        Row(const QMap<QString, DataItem>& values);
+    //
+    //        const T& get_child() const;
+    //
+    //        void add_child(shared_ptr<T> child);
+    //
+    //        const DataItem& operator[](const QString& column) const throw(NoSuchColumn);
+    //
+    //    private:
+    //        QMap<QString, DataItem> _values;
+    //
+    //        shared_ptr<T> _child;
+    //    };
+
+    template <class T> class Row;
+    template <class T> class Rowset;
+
+    template <class T> class Row
     {
+    private:
+        template <class U> class InternalRowset: public Rowset<U>
+        {
+        public:
+            InternalRowset(int levels)
+            {
+                this->_row = new Row<T>(levels - 1);
+            }
+        };
+
     public:
-        RowSet();
+        Row(int levels=0)
+        {
+            this->_levels = levels;
+            if (levels > 0)
+            {
+                this->_childRowset = new InternalRowset<T>(levels);
+                this->_childDirect = 0;
+            }
+            else
+            {
+                this->_childRowset = 0;
+                this->_childDirect = new T;
+            }
+        }
 
-        RowSet(const QString& name,
-               const QString& key,
-               const QStringList& columns);
+        ~Row()
+        {
+            if (this->_childRowset)
+            {
+                delete this->_childRowset;
+            }
+            if (this->_childDirect)
+            {
+                delete this->_childDirect;
+            }
+        }
 
-        /*!  Add a row to the table
-         */
-        shared_ptr<Row<RowSet> > add_row(const QMap<QString, DataItem>& values);
+        T* getChild()
+        {
+            return this->_childDirect;
+        }
 
-        QList<shared_ptr<Row<RowSet> > >::const_iterator begin() const;
+        InternalRowset<T>* getChildRowset()
+        {
+            return this->_childRowset;
+        }
 
-        QList<shared_ptr<Row<RowSet> > >::const_iterator end() const;
+        int getLevels()
+        {
+            return this->_levels;
+        }
 
-        const shared_ptr<Row<RowSet> > row(const QString& key) const;
-
-        void set_name(const QString& name) throw(ImmutableError);
-
-        void set_key(const QString& key) throw(ImmutableError);
-
-        void set_columns(const QStringList& columns) throw(ImmutableError);
+        bool hasRowset()
+        {
+            return (this->getLevels() > 0);
+        }
 
     private:
+        //! Number of levels of Rowses nested in this Row
+        int _levels;
+
+        //! Nested Rowset
+        InternalRowset<T>* _childRowset;
+
+        //! Child if no nested Rowset
+        T* _childDirect;
+    };
+
+    template <class T> class Rowset
+    {
+    public:
+        /*!
+          Construct a Rowset with required attributes
+         */
+        Rowset(const QString& name,
+               const QString& key,
+               const QStringList& columns)
+        {
+            this->_name = name;
+            this->_key = key;
+            this->_columns = columns;
+        }
+
+        ~Rowset()
+        {
+        }
+
+        /*!
+          Add a row to the table
+         */
+        Row<T>* add_row(const QMap<QString, DataItem>& values)
+        {
+            Row<T>* row = 0;
+            if (values.contains(this->_key))
+            {
+                DataItem key_ = values.value(this->_key);
+                QString key = key_.get();
+                row = new Row<T>(values);
+                this->_rowsByKey.insert(key, row);
+                this->_rowsInOrder.append(row);
+            }
+            return row;
+        }
+
+//        /*!
+//          Get an iterator at the start of the ordered list of rows
+//         */
+//        QList<Row<T>* >::ConstIterator begin() const
+//        {
+//            return this->_rowsInOrder.begin();
+//        }
+//
+//        /*!
+//          Get an iterator at the end of the ordered list of rows
+//         */
+//        QList<Row<T>* >::ConstIterator end() const
+//        {
+//            return this->_rowsInOrder.end();
+//        }
+
+        QList<Row<T>* >& rowsInOrder()
+        {
+            return this->_rowsInOrder;
+        }
+
+        /*!
+          Get a row by the value of its key
+         */
+        const Row<T>* row(const QString& key) const
+        {
+            return this->_rowsByKey.value(key);
+        }
+
+        /*!
+          Get a row by the value of its key
+         */
+        const Row<T>* operator[](const QString& key) const
+        {
+            return this->_rowsByKey.value(key);
+        }
+
+
+    protected:
         //! Name of the rowset
         QString _name;
 
@@ -106,29 +266,12 @@ namespace EveApi
 
         //! A mapping of table's key element to row.  Assumes keys are
         //! unique
-        QMap<QString, shared_ptr<Row<RowSet> > > _rowsByKey;
+        QMap<QString, Row<T>* > _rowsByKey;
 
         //! All rows in the RowSet, in the order represented in xml
-        QList<shared_ptr<Row<RowSet> > > _rowsInOrder;
+        QList<Row<T>* > _rowsInOrder;
     };
 
-    template <class T>
-        class Row
-    {
-    public:
-        Row(const QMap<QString, DataItem>& values);
-
-        const T& get_child() const;
-
-        void add_child(shared_ptr<T> child);
-
-        const DataItem& operator[](const QString& column) const throw(NoSuchColumn);
-
-    private:
-        QMap<QString, DataItem> _values;
-
-        shared_ptr<T> _child;
-    };
 };
 
 #endif

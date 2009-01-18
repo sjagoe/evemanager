@@ -106,12 +106,12 @@ namespace EveApi
         DataItem _balance;
         AttributeEnhancers _attributeEnhancers;
         Attributes _attributes;
-        RowSet _skills;
-        RowSet _corporationRoles;
-        RowSet _corporationRolesAtHQ;
-        RowSet _corporationRolesAtBase;
-        RowSet _corporationRolesAtOther;
-        RowSet _corporationTitles;
+//        RowSet _skills;
+//        RowSet _corporationRoles;
+//        RowSet _corporationRolesAtHQ;
+//        RowSet _corporationRolesAtBase;
+//        RowSet _corporationRolesAtOther;
+//        RowSet _corporationTitles;
     };
 };
 

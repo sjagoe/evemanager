@@ -20,6 +20,8 @@
 
 #include "charactersparser.h"
 
+#include <QDomDocument>
+
 EveApi::CharactersParser::CharactersParser( QObject* parent ):
         Delegate(parent)
 {

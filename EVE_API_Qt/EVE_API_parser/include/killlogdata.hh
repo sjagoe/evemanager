@@ -41,14 +41,14 @@ namespace EveApi
     {
     private:
         KillLogVictim _victim;
-        RowSet _attackers;
-        RowSet _items;
+//        RowSet _attackers;
+//        RowSet _items;
     };
 
-    class KillLogData: protected RowSet
-    {
-
-    };
+//    class KillLogData: protected RowSet
+//    {
+//
+//    };
 };
 
 #endif
