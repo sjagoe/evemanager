@@ -36,8 +36,8 @@ QObject(parent)
             new EveApi(hostName, dataPath, proxyType, proxyHost, proxyPort, proxyUser, proxyPassword, this));
     this->_delegates = QSharedPointer<Delegates>(
             new Delegates());
-    this->connect(this->_api.data(), SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime, QString)),
-                  this->_delegates.data(), SLOT(handleRequest( QString, shared_ptr<QDomDocument>, QString, QDateTime, QString)));
+    this->connect(this->_api.data(), SIGNAL(requestComplete( QString&, QString&, QString&, QDateTime&, QString&)),
+                  this->_delegates.data(), SLOT(handleRequest( QString&, QString&, QString&, QDateTime&, QString&)));
     this->connect(this->_delegates.data(), SIGNAL(requestComplete(QString,QSharedPointer<CharactersData>,QString,QDateTime)),
                   this, SIGNAL(requestComplete(QString,QSharedPointer<CharactersData>,QString,QDateTime)));
 }

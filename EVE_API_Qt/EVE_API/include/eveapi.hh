@@ -130,10 +130,18 @@ namespace EveApi
         */
         void connectScope( shared_ptr<Scope> scope );
 
-    signals:
+    private slots:
         void requestComplete( QString id, shared_ptr<QDomDocument> result,
                               QString httpResponse, QDateTime cacheExpireTime,
                               QString requestType );
+
+    signals:
+//        void requestComplete( QString id, shared_ptr<QDomDocument> result,
+//                              QString httpResponse, QDateTime cacheExpireTime,
+//                              QString requestType );
+        void requestComplete( QString& id, QString& result,
+                              QString& httpResponse, QDateTime& cacheExpireTime,
+                              QString& requestType );
         void requestFailed( QString id, QString error, QString httpResponse );
     };
 };

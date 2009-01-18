@@ -24,14 +24,13 @@
 #include <QDateTime>
 #include <QObject>
 #include <QSharedPointer>
+#include <QtXmlPatterns>
 
 #include "charactersdata.h"
 
 #include <boost/shared_ptr.hpp>
 
 using boost::shared_ptr;
-
-class QDomDocument;
 
 namespace EveApi
 {
@@ -41,8 +40,17 @@ namespace EveApi
     public:
         Delegate( QObject* parent=0 );
 
-        virtual void parse( QString id, shared_ptr<QDomDocument> data,
-                    QString httpResponse, QDateTime cacheExpireTime ) = 0;
+        virtual void parse( QString& id, QString& data,
+                            QString& httpResponse,
+                            QDateTime& cacheExpireTime ) = 0;
+
+    protected:
+        bool runXQuery( QString& query, QString& data, QXmlResultItems& result );
+
+        QMap<QString, EveApi::DataItem> getRowData( QString& rowsetName, QString& key, QString& keyVal,
+                                                    QString& data, QStringList& columns );
+
+        QDateTime getServerTime(QString& data);
     };
 };
 

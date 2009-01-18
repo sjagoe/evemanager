@@ -266,6 +266,12 @@ namespace EveApi
                               QDateTime cacheExpireTime,
                               QString requestType  );
 
+        void requestComplete( QString& id,
+                              QString& result,
+                              QString& httpResponse,
+                              QDateTime& cacheExpireTime,
+                              QString& requestType  );
+
         void requestFailed( QString id,
                             QString error,
                             QString httpResponse );

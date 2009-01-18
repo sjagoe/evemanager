@@ -31,9 +31,11 @@ EveApi::Delegates::Delegates()
     this->_delegates.insert("Characters.xml", delegate);
 }
 
-void EveApi::Delegates::handleRequest( QString id, shared_ptr<QDomDocument> data,
-                                       QString httpResponse, QDateTime cacheExpireTime,
-                                       QString requestType )
+void EveApi::Delegates::handleRequest( QString& id,
+                                       QString& data,
+                                       QString& httpResponse,
+                                       QDateTime& cacheExpireTime,
+                                       QString& requestType )
 {
     QSharedPointer<Delegate> parser = this->_delegates.value( requestType );
     parser->parse( id, data, httpResponse, cacheExpireTime );

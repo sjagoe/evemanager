@@ -26,21 +26,17 @@
 #include <boost/shared_ptr.hpp>
 
 #include <QDateTime>
-#include <QDomDocument>
 #include <QMetaType>
 #include <QSignalSpy>
 #include <QString>
 
-using boost::shared_ptr;
 using EveApi::CharactersParser;
 using EveApi::CharactersData;
 
-Q_DECLARE_METATYPE(shared_ptr<QDomDocument>);
 Q_DECLARE_METATYPE(QSharedPointer<CharactersData>);
 
 void CharactersParserTest::parse_data()
 {
-    shared_ptr<QDomDocument> xml(new QDomDocument);
     QString xmlData = "";
     xmlData.append("<?xml version='1.0' encoding='UTF-8'?>");
     xmlData.append("<eveapi version=\"1\">");
@@ -57,18 +53,17 @@ void CharactersParserTest::parse_data()
     xmlData.append("  </result>");
     xmlData.append("  <cachedUntil>2007-12-12 12:48:50</cachedUntil>");
     xmlData.append("</eveapi>");
-    xml->setContent(xmlData);
 
     QString id = "Fake ID";
     QString http = "200";
     QDateTime fakeTime;
 
     QTest::addColumn<QString>("id");
-    QTest::addColumn<shared_ptr<QDomDocument> >("xml");
+    QTest::addColumn<QString>("xml");
     QTest::addColumn<QString>("httpResponse");
     QTest::addColumn<QDateTime>("cacheExpireTime");
 
-    QTest::newRow("three characters") << id << xml << http << fakeTime;
+    QTest::newRow("three characters") << id << xmlData << http << fakeTime;
 }
 
 void CharactersParserTest::parse()
@@ -76,7 +71,7 @@ void CharactersParserTest::parse()
     qRegisterMetaType<QSharedPointer<CharactersData> >("QSharedPointer<CharactersData>");
 
     QFETCH(QString, id);
-    QFETCH(shared_ptr<QDomDocument>, xml);
+    QFETCH(QString, xml);
     QFETCH(QString, httpResponse);
     QFETCH(QDateTime, cacheExpireTime);
 

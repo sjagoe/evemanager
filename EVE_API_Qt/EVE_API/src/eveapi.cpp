@@ -20,6 +20,8 @@
 
 #include "eveapi.hh"
 
+#include <QDomDocument>
+
 #include "eveapiaccount.hh"
 #include "eveapicharacter.hh"
 #include "eveapicorporation.hh"
@@ -175,9 +177,23 @@ void EveApi::EveApi::connectScope( shared_ptr<Scope> scope )
     connect( scope.get(),
              SIGNAL( requestComplete( QString, shared_ptr<QDomDocument>,
                                       QString, QDateTime, QString ) ),
-             this, SIGNAL( requestComplete( QString, shared_ptr<QDomDocument>,
+             this, SLOT( requestComplete( QString, shared_ptr<QDomDocument>,
                                             QString, QDateTime, QString ) ) );
+    connect( scope.get(),
+             SIGNAL( requestComplete( QString&, QString&,
+                                      QString&, QDateTime&, QString& ) ),
+             this, SIGNAL( requestComplete( QString&, QString&,
+                                            QString&, QDateTime&, QString& ) ) );
     connect( scope.get(),
              SIGNAL( requestFailed( QString, QString, QString ) ),
              this, SIGNAL( requestFailed( QString, QString, QString ) ) );
+}
+
+void EveApi::EveApi::requestComplete( QString id, shared_ptr<QDomDocument> result,
+                                      QString httpResponse, QDateTime cacheExpireTime,
+                                      QString requestType )
+{
+    QString xmlData = result->toString();
+    emit requestComplete(
+            id, xmlData, httpResponse, cacheExpireTime, requestType );
 }

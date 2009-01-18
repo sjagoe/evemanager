@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
 
-QT += testlib xml
+QT += testlib xmlpatterns
 QT -= gui
 
 

@@ -22,18 +22,20 @@
 #define CHARACTERSPARSER_H
 
 #include <QDateTime>
+#include <QMap>
 #include <QObject>
 #include <QSharedPointer>
 #include <QString>
+#include <QStringList>
+#include <QtXmlPatterns>
 
+#include "abstracteveapidata.hh"
 #include "charactersdata.h"
 #include "delegate.h"
 
 #include <boost/shared_ptr.hpp>
 
 using boost::shared_ptr;
-
-class QDomDocument;
 
 namespace EveApi
 {
@@ -43,8 +45,16 @@ namespace EveApi
     public:
         CharactersParser( QObject* parent=0 );
 
-        virtual void parse( QString id, shared_ptr<QDomDocument> data,
-                    QString httpResponse, QDateTime cacheExpireTime );
+        virtual void parse( QString& id, QString& data,
+                            QString& httpResponse,
+                            QDateTime& cacheExpireTime );
+
+    private:
+        QString getRowsetAttribute(QString& data, const char* attribute);
+
+        QStringList getCharacterIds(QString& data, QString& key);
+
+        int getApiVersion(QString& data);
 
     signals:
         void requestComplete( QString id, QSharedPointer<CharactersData> data,

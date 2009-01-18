@@ -257,7 +257,7 @@ namespace EveApi
         /*!
           Add a row to the table
          */
-        Row<X>* add_row(const QMap<QString, DataItem>& values)
+        Row<X>* addRow(const QMap<QString, DataItem>& values)
         {
             Row<X>* row = 0;
             if (values.contains(this->_key))

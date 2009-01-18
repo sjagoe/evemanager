@@ -39,8 +39,6 @@
 
 using boost::shared_ptr;
 
-class QDomDocument;
-
 namespace EveApi
 {
 

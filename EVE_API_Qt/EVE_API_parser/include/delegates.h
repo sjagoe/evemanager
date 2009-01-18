@@ -34,8 +34,6 @@
 
 using boost::shared_ptr;
 
-class QDomDocument;
-
 namespace EveApi
 {
     /*!
@@ -54,9 +52,11 @@ namespace EveApi
         /*!
           Handle a request for parsing the output of the EVE API.
          */
-        void handleRequest( QString id, shared_ptr<QDomDocument> data,
-                            QString httpResponse, QDateTime cacheExpireTime,
-                            QString requestType );
+        void handleRequest( QString& id,
+                            QString& data,
+                            QString& httpResponse,
+                            QDateTime& cacheExpireTime,
+                            QString& requestType );
 
     private:
         /*!

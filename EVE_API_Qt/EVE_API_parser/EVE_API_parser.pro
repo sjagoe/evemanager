@@ -20,7 +20,7 @@ VERSION = 0.1.0
 TEMPLATE = lib # The parser is a dynamic library
 CONFIG += dll
 QT -= gui # does not need any GUI elements
-QT += xml # uses the XML Qt elements
+QT += xml xmlpatterns # uses the XML Qt elements
 TARGET = EVE_API_Parser_Qt
 LIBS += -L../../bin \
     -lEVE_API_Qt1

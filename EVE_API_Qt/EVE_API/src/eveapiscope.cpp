@@ -114,6 +114,12 @@ void EveApi::Scope::addRequestType(
                                            QString, QDateTime, QString )),
              Qt::QueuedConnection );
     connect( request.get(),
+             SIGNAL(requestComplete( QString&, QString&,
+                                     QString&, QDateTime&, QString& )),
+             this, SIGNAL(requestComplete( QString&, QString&,
+                                           QString&, QDateTime&, QString& )),
+             Qt::QueuedConnection );
+    connect( request.get(),
              SIGNAL(requestFailed( QString, QString, QString )),
              this, SIGNAL(requestFailed( QString, QString, QString )),
              Qt::QueuedConnection );
