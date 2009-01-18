@@ -21,8 +21,10 @@
 #ifndef _EVEAPI_ABSTRACTEVEAPIDATA_HH_
 #define _EVEAPI_ABSTRACTEVEAPIDATA_HH_
 
+#include <QDateTime>
 #include <QList>
 #include <QMap>
+#include <QObject>
 #include <QString>
 #include <QStringList>
 
@@ -63,82 +65,73 @@ namespace EveApi
         QString _data;
     };
 
-    //    class RowSet;
-    //    template <class> class Row;
-    //
-    //    /*!  Represent a basic <rowset> element in the xml.  Contains rows
-    //      that can contain other RowSets.
-    //    */
-    //    class RowSet
-    //    {
-    //    public:
-    //        RowSet();
-    //
+    class AbstractData
+    {
+    public:
+        AbstractData( const int& version,
+                      const QDateTime& currentTime,
+                      const QDateTime& cachedUntil ):
+        _version(version),
+        _currentTime(currentTime),
+        _cachedUntil(cachedUntil)
+        {}
 
-    //
-    //        /*!
-    //          Set the name of the rowset
-    //         */
-    //        void set_name(const QString& name) throw(ImmutableError);
-    //
-    //        void set_key(const QString& key) throw(ImmutableError);
-    //
-    //        void set_columns(const QStringList& columns) throw(ImmutableError);
-    //
-    //    private:
+        const int& getVersion()
+        {
+            return this->_version;
+        }
 
-    //    };
-    //
-    //    template <class T> class Row
-    //    {
-    //    public:
-    //        Row(const QMap<QString, DataItem>& values);
-    //
-    //        const T& get_child() const;
-    //
-    //        void add_child(shared_ptr<T> child);
-    //
-    //        const DataItem& operator[](const QString& column) const throw(NoSuchColumn);
-    //
-    //    private:
-    //        QMap<QString, DataItem> _values;
-    //
-    //        shared_ptr<T> _child;
-    //    };
+        const QDateTime& getServerTime()
+        {
+            return this->_currentTime;
+        }
 
-    template <class T> class Row;
-    template <class T> class Rowset;
+        const QDateTime& getCachedUntilTime()
+        {
+            return this->_cachedUntil;
+        }
 
-    template <class T> class Row
+    private:
+        //! Version of the API where the result is available
+        int _version;
+
+        //! Time on the server when the result was fetched
+        QDateTime _currentTime;
+
+        //! time that the cache expires and new data is available
+        QDateTime _cachedUntil;
+    };
+
+    template <class X> class Row;
+    template <class X> class Rowset;
+
+    template <class X> class Row
     {
     private:
-        template <class U> class InternalRowset: public Rowset<U>
+        template <class Y> class InternalRowset: public Rowset<Y>
         {
         public:
-            InternalRowset(int levels)
-            {
-                this->_row = new Row<T>(levels - 1);
-            }
+            InternalRowset( const QString& name,
+                            const QString& key,
+                            const QStringList& columns,
+                            Row<X>* parent=0):
+            Rowset<Y>(name, key, columns, parent)
+            {}
         };
 
     public:
-        Row(int levels=0)
+        Row(const QMap<QString, DataItem>& values, Rowset<X>* parent=0)
         {
-            this->_levels = levels;
-            if (levels > 0)
-            {
-                this->_childRowset = new InternalRowset<T>(levels);
-                this->_childDirect = 0;
-            }
-            else
-            {
-                this->_childRowset = 0;
-                this->_childDirect = new T;
-            }
+            this->_parent = parent;
+            this->_values = values;
+            this->_childRowset = 0;
+            this->_childDirect = 0;
+            this->_subLevels = 0;
         }
 
         ~Row()
         {
+            this->_parent = 0;
             if (this->_childRowset)
             {
                 delete this->_childRowset;
@@ -149,14 +142,54 @@ namespace EveApi
             }
         }
 
-        T* getChild()
+        const DataItem& operator[](const QString& column) const throw(NoSuchColumn)
+        {
+            if (! this->_values.contains(column))
+            {
+                throw NoSuchColumn();
+            }
+            return this->_values.value(column);
+        }
+
+        X* addChild()
+        {
+            if (this->_childRowset != 0)
+            {
+                this->_childDirect = new X;
+            }
+            return this->getChild();
+        }
+
+        X* getChild()
         {
             return this->_childDirect;
         }
 
-        InternalRowset<T>* getChildRowset()
+        bool hasChild()
         {
-            return this->_childRowset;
+            return (this->_childDirect != 0);
+        }
+
+        Rowset<X>* addChildRowset(const QString& name,
+                                  const QString& key,
+                                  const QStringList& columns)
+        {
+            if (this->_childDirect != 0)
+            {
+                this->_childRowset = new InternalRowset<X>(name, key, columns, this);
+                this->childAdded();
+            }
+            return this->getChildRowset();
+        }
+
+        Rowset<X>* getChildRowset()
+        {
+            return static_cast<Rowset<X>* >(this->_childRowset);
+        }
+
+        bool hasRowset()
+        {
+            return (this->_childRowset != 0);
         }
 
         int getLevels()
@@ -164,52 +197,74 @@ namespace EveApi
             return this->_levels;
         }
 
-        bool hasRowset()
+        void childAdded()
         {
-            return (this->getLevels() > 0);
+            this->_subLevels++;
+            if (this->_parent)
+            {
+                this->_parent->childAdded();
+            }
         }
 
     private:
-        //! Number of levels of Rowses nested in this Row
-        int _levels;
+        //! Number of levels of Rowsets nested in this Row
+        int _subLevels;
+
+        //! Values contained in the row
+        QMap<QString, DataItem> _values;
 
         //! Nested Rowset
-        InternalRowset<T>* _childRowset;
+        InternalRowset<X>* _childRowset;
 
         //! Child if no nested Rowset
-        T* _childDirect;
+        X* _childDirect;
+
+        //! parent rowset
+        Rowset<X>* _parent;
     };
 
-    template <class T> class Rowset
+    template <class X> class Rowset
     {
     public:
         /*!
           Construct a Rowset with required attributes
          */
-        Rowset(const QString& name,
-               const QString& key,
-               const QStringList& columns)
+        Rowset( const QString& name,
+                const QString& key,
+                const QStringList& columns,
+                Row<X>* parent=0)
         {
+            this->_parent = parent;
+            this->_subLevels = 0;
             this->_name = name;
             this->_key = key;
             this->_columns = columns;
         }
 
-        ~Rowset()
+        virtual ~Rowset()
         {
+            this->_parent = 0;
+            QString key;
+            foreach (key, this->_rowsByKey.keys())
+            {
+                Row<X>* row = this->_rowsByKey.take(key);
+                delete row;
+            }
+            this->_rowsByKey.clear();
+            this->_rowsInOrder.clear();
         }
 
         /*!
           Add a row to the table
          */
-        Row<T>* add_row(const QMap<QString, DataItem>& values)
+        Row<X>* add_row(const QMap<QString, DataItem>& values)
         {
-            Row<T>* row = 0;
+            Row<X>* row = 0;
             if (values.contains(this->_key))
             {
                 DataItem key_ = values.value(this->_key);
                 QString key = key_.get();
-                row = new Row<T>(values);
+                row = new Row<X>(values, this);
                 this->_rowsByKey.insert(key, row);
                 this->_rowsInOrder.append(row);
             }
@@ -219,20 +274,20 @@ namespace EveApi
 //        /*!
 //          Get an iterator at the start of the ordered list of rows
 //         */
-//        QList<Row<T>* >::ConstIterator begin() const
+//        QList<Row<X>* >::ConstIterator begin() const
 //        {
 //            return this->_rowsInOrder.begin();
 //        }
-//
+
 //        /*!
 //          Get an iterator at the end of the ordered list of rows
 //         */
-//        QList<Row<T>* >::ConstIterator end() const
+//        QList<Row<X>* >::ConstIterator end() const
 //        {
 //            return this->_rowsInOrder.end();
 //        }
 
-        QList<Row<T>* >& rowsInOrder()
+        QList<Row<X>* >* rowsInOrder()
         {
             return this->_rowsInOrder;
         }
@@ -240,7 +295,7 @@ namespace EveApi
         /*!
           Get a row by the value of its key
          */
-        const Row<T>* row(const QString& key) const
+        const Row<X>* row(const QString& key) const
         {
             return this->_rowsByKey.value(key);
         }
@@ -248,11 +303,19 @@ namespace EveApi
         /*!
           Get a row by the value of its key
          */
-        const Row<T>* operator[](const QString& key) const
+        const Row<X>* operator[](const QString& key) const
         {
             return this->_rowsByKey.value(key);
         }
 
+        void childAdded()
+        {
+            this->_subLevels++;
+            if (this->_parent)
+            {
+                this->_parent->childAdded();
+            }
+        }
 
     protected:
         //! Name of the rowset
@@ -266,12 +329,19 @@ namespace EveApi
 
         //! A mapping of table's key element to row.  Assumes keys are
         //! unique
-        QMap<QString, Row<T>* > _rowsByKey;
+        QMap<QString, Row<X>* > _rowsByKey;
 
         //! All rows in the RowSet, in the order represented in xml
-        QList<Row<T>* > _rowsInOrder;
+        QList<Row<X>* > _rowsInOrder;
+
+        //! Nested sub-levels
+        int _subLevels;
+
+    private:
+        //! parent
+        Row<X>* _parent;
     };
 
-};
+}
 
 #endif

@@ -22,7 +22,8 @@
 
 #include "eveapi.hh"
 
-EveApi::Parser::Parser( QString& dataPath,
+EveApi::Parser::Parser( QString& hostName,
+                        QString& dataPath,
                         const int& proxyType,
                         const QString & proxyHost,
                         const quint16 & proxyPort,
@@ -32,7 +33,7 @@ EveApi::Parser::Parser( QString& dataPath,
 QObject(parent)
 {
     this->_api = QSharedPointer<EveApi>(
-            new EveApi(dataPath, proxyType, proxyHost, proxyPort, proxyUser, proxyPassword, this));
+            new EveApi(hostName, dataPath, proxyType, proxyHost, proxyPort, proxyUser, proxyPassword, this));
     this->_delegates = QSharedPointer<Delegates>(
             new Delegates());
     this->connect(this->_api.data(), SIGNAL(requestComplete( QString, shared_ptr<QDomDocument>, QString, QDateTime, QString)),

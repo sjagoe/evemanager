@@ -52,7 +52,8 @@ namespace EveApi
         /*!
           Construct a new Parser
         */
-        Parser( QString& dataPath,
+        Parser( QString& hostName,
+                QString& dataPath,
                 const int& proxyType = 0,
                 const QString& proxyHost = QString(),
                 const quint16& proxyPort = 0,

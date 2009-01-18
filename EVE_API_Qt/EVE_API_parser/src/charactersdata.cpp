@@ -20,3 +20,12 @@
 
 #include "charactersdata.h"
 
+EveApi::CharactersData::CharactersData( const int& version,
+                                        const QDateTime& currentTime,
+                                        const QDateTime& cachedUntil,
+                                        Rowset<void*>* rowset ):
+AbstractData(version, currentTime, cachedUntil)
+{
+    this->_characters = rowset;
+}
+

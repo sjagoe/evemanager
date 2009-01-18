@@ -39,9 +39,24 @@
 #ifndef CHARACTERSDATA_H
 #define CHARACTERSDATA_H
 
+#include "abstracteveapidata.hh"
+
+#include <QString>
+#include <QStringList>
+
 namespace EveApi
 {
-    class CharactersData {};
+    class CharactersData: public AbstractData
+    {
+    public:
+        CharactersData( const int& version,
+                        const QDateTime& currentTime,
+                        const QDateTime& cachedUntil,
+                        Rowset<void*>* rowset );
+
+    private:
+        Rowset<void*>* _characters;
+    };
 };
 
 #endif // CHARACTERSDATA_H
