@@ -1,24 +1,24 @@
 <!DOCTYPE QtCreatorProject>
 <qtcreator>
  <data>
-  <variable>RunConfiguration0-Arguments</variable>
+  <variable>RunConfiguration0-CommandLineArguments</variable>
   <valuelist type="QVariantList" />
  </data>
  <data>
-  <variable>RunConfiguration0-Executable</variable>
-  <value type="QString" ></value>
+  <variable>RunConfiguration0-ProFile</variable>
+  <value type="QString" >D:/Vista/Users/Simon/Documents/Programs/C++/EVE/API/evemanager/tests/EVE_API_Qt_test/EVE_API_parser_test/EVE_API_parser_test.pro</value>
  </data>
  <data>
   <variable>RunConfiguration0-RunConfiguration.name</variable>
-  <value type="QString" >Custom Executable</value>
+  <value type="QString" >EVE_API_parser_test</value>
  </data>
  <data>
-  <variable>RunConfiguration0-WorkingDirectory</variable>
-  <value type="QString" >$BUILDDIR</value>
+  <variable>RunConfiguration0-UserSetName</variable>
+  <value type="bool" >false</value>
  </data>
  <data>
   <variable>RunConfiguration0-type</variable>
-  <value type="QString" >ProjectExplorer.CustomExecutableRunConfiguration</value>
+  <value type="QString" >Qt4ProjectManager.Qt4RunConfiguration</value>
  </data>
  <data>
   <variable>activeRunConfiguration</variable>
@@ -32,9 +32,17 @@
   <variable>buildConfiguration-Debug</variable>
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
-   <value key="QtVersionId" type="int" >2</value>
+   <value key="QtVersionId" type="int" >0</value>
    <value key="addQDumper" type="" ></value>
-   <value key="buildDirectory" type="QString" >D:\Vista\Users\Simon\Documents\Programs\C++\EVE\API\evemanager\EVE_API_Qt\EVE_API_parser</value>
+   <value key="buildDirectory" type="QString" >D:\Vista\Users\Simon\Documents\Programs\C++\EVE\API\evemanager\tests\EVE_API_Qt_test\EVE_API_parser_test</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildConfiguration-Release</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+   <value key="QtVersionId" type="int" >0</value>
+   <value key="addQDumper" type="" ></value>
   </valuemap>
  </data>
  <data>
@@ -84,15 +92,16 @@
     <value type="QString" >WINDIR=C:\Windows</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
-    <value type="QString" >D:/Vista/Users/Simon/Documents/Programs/C++/EVE/API/evemanager/EVE_API_Qt/EVE_API_parser/EVE_API_parser.pro</value>
+    <value type="QString" >D:/Vista/Users/Simon/Documents/Programs/C++/EVE/API/evemanager/tests/EVE_API_Qt_test/EVE_API_parser_test/EVE_API_parser_test.pro</value>
     <value type="QString" >-spec</value>
     <value type="QString" >win32-g++</value>
     <value type="QString" >-r</value>
+    <value type="QString" >CONFIG+=debug_and_release</value>
    </valuelist>
    <value key="abstractProcess.command" type="QString" >C:/Qt/4.5.0-beta1/bin/qmake.exe</value>
-   <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >D:/Vista/Users/Simon/Documents/Programs/C++/EVE/API/evemanager/EVE_API_Qt/EVE_API_parser</value>
-   <value key="buildConfiguration" type="int" >2</value>
+   <value key="abstractProcess.enabled" type="bool" >false</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >D:/Vista/Users/Simon/Documents/Programs/C++/EVE/API/evemanager/tests/EVE_API_Qt_test/EVE_API_parser_test</value>
+   <value key="buildConfiguration" type="int" >10</value>
   </valuemap>
  </data>
  <data>
@@ -136,11 +145,15 @@
     <value type="QString" >WINDIR=C:\Windows</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
+    <value type="QString" >debug</value>
     <value type="QString" >-w</value>
    </valuelist>
    <value key="abstractProcess.command" type="QString" >C:/mingw/bin/mingw32-make.exe</value>
    <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >D:/Vista/Users/Simon/Documents/Programs/C++/EVE/API/evemanager/EVE_API_Qt/EVE_API_parser</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >D:/Vista/Users/Simon/Documents/Programs/C++/EVE/API/evemanager/tests/EVE_API_Qt_test/EVE_API_parser_test</value>
+   <valuelist key="makeargs" type="QVariantList" >
+    <value type="QString" >debug</value>
+   </valuelist>
   </valuemap>
  </data>
  <data>
@@ -189,13 +202,42 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString" >C:/mingw/bin/mingw32-make.exe</value>
    <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >D:/Vista/Users/Simon/Documents/Programs/C++/EVE/API/evemanager/EVE_API_Qt/EVE_API_parser</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >D:/Vista/Users/Simon/Documents/Programs/C++/EVE/API/evemanager/tests/EVE_API_Qt_test/EVE_API_parser_test</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep1</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+   <value key="buildConfiguration" type="int" >8</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep2</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+   <valuelist key="makeargs" type="QVariantList" >
+    <value type="QString" >release</value>
+   </valuelist>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-cleanstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
   </valuemap>
  </data>
  <data>
   <variable>buildconfigurations</variable>
   <valuelist type="QVariantList" >
    <value type="QString" >Debug</value>
+   <value type="QString" >Release</value>
   </valuelist>
  </data>
  <data>

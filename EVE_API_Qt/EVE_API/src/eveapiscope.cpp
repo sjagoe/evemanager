@@ -26,6 +26,8 @@
 #include <QMetaType>
 #include <QDomDocument>
 
+Q_DECLARE_METATYPE(shared_ptr<QDomDocument>);
+
 /*!
   create the child classes that provide API functionality
 */
@@ -47,7 +49,7 @@ EveApi::Scope::Scope( QString& host,
     this->_scope = scope;
 
     qRegisterMetaType<shared_ptr<QDomDocument> >("shared_ptr<QDomDocument>");
-    qRegisterMetaType<QDateTime>("QDateTime");
+//    qRegisterMetaType<QDateTime>("QDateTime");
 }
 
 /*!

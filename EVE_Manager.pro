@@ -1,4 +1,4 @@
-# Copyright 2008 Simon Jagoe
+# Copyright 2009 Simon Jagoe
 #
 # This file is part of EVE_Manager.
 #
@@ -22,4 +22,5 @@ CONFIG += ordered
 CONFIG += debug_and_release
 # Directories
 SUBDIRS += EVE_API_Qt \
-           EVE_Manager
+           EVE_Manager \
+           tests

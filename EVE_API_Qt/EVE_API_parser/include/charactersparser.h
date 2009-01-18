@@ -24,6 +24,7 @@
 #include <QDateTime>
 #include <QObject>
 #include <QSharedPointer>
+#include <QString>
 
 #include "charactersdata.h"
 #include "delegate.h"

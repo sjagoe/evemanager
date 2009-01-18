@@ -44,26 +44,31 @@ CONFIG += debug_and_release
 DESTDIR = ../../bin
 HEADERS += include/eveapiparser.hh \
     include/abstracteveapidata.hh \
-    include/charactersheetdata.hh \
-    include/corporationsheetdata.hh \
-    include/killlogdata.hh \
-    include/membersecuritydata.hh \
-    include/shareholdersdata.hh \
-    include/skillintrainingdata.hh \
-    include/skilltreedata.hh \
     include/charactersdata.h \
     include/delegate.h \
     include/delegates.h \
     include/charactersparser.h
+
+# DISABLED HEADERS
+#    include/charactersheetdata.hh \
+#    include/corporationsheetdata.hh \
+#    include/killlogdata.hh \
+#    include/membersecuritydata.hh \
+#    include/shareholdersdata.hh \
+#    include/skillintrainingdata.hh \
+#    include/skilltreedata.hh \
+
+# DISABLED SOURCES
+#    src/charactersheetdata.cpp \
+#    src/corporationsheetdata.cpp \
+#    src/killlogdata.cpp \
+#    src/membersecuritydata.cpp \
+#    src/shareholdersdata.cpp \
+#    src/skillintrainingdata.cpp \
+#    src/skilltreedata.cpp \
+
 SOURCES += src/eveapiparser.cpp \
     src/abstracteveapidata.cpp \
-    src/charactersheetdata.cpp \
-    src/corporationsheetdata.cpp \
-    src/killlogdata.cpp \
-    src/membersecuritydata.cpp \
-    src/shareholdersdata.cpp \
-    src/skillintrainingdata.cpp \
-    src/skilltreedata.cpp \
     src/charactersdata.cpp \
     src/delegate.cpp \
     src/delegates.cpp \

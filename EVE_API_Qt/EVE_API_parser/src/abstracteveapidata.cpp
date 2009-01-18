@@ -20,22 +20,22 @@
 
 #include "abstracteveapidata.hh"
 
-EveApi::DataItem::DataItem() {};
+EveApi::DataItem::DataItem() {}
 
 EveApi::DataItem::DataItem(const QString& data)
 {
     this->_data = data;
-};
+}
 
 void EveApi::DataItem::set(const QString& data)
 {
     this->_data = data;
-};
+}
 
 const QString& EveApi::DataItem::get() const
 {
     return this->_data;
-};
+}
 
 
 //EveApi::RowSet::RowSet()

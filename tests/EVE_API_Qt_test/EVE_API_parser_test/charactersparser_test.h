@@ -1,6 +1,6 @@
 
 /*
- * Copyright 2009 Simon Jagoe
+ * Copyright 2007-2008 Simon Jagoe
  *
  * This file is part of EVE_API_Qt.
  *
@@ -18,22 +18,17 @@
  * along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "charactersparser.h"
+#ifndef CHARACTERSPARSER_TEST_H
+#define CHARACTERSPARSER_TEST_H
 
-#include <QDomDocument>
+#include <QtTest/QtTest>
 
-EveApi::CharactersParser::CharactersParser( QObject* parent ):
-        Delegate(parent)
+class CharactersParserTest: public QObject
 {
-}
+    Q_OBJECT;
+private slots:
+    void parse_data();
+    void parse();
+};
 
-void EveApi::CharactersParser::parse(
-        QString id, shared_ptr<QDomDocument> data,
-        QString httpResponse, QDateTime cacheExpireTime )
-{
-    int version = 1;
-    QDateTime currentTime;
-    QSharedPointer<EveApi::CharactersData> foo( new EveApi::CharactersData(
-            version, currentTime, cacheExpireTime, 0) );
-    emit this->requestComplete(id, foo, httpResponse, cacheExpireTime);
-}
+#endif // CHARACTERSPARSER_TEST_H
