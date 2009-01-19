@@ -41,7 +41,6 @@ bool EveApi::Delegate::runXQuery( QString& queryString, QString& data, QXmlResul
     return true;
 }
 
-// TODO: This should take a rowset name rather than a path to the row...
 QMap<QString, EveApi::DataItem> EveApi::Delegate::getRowData(
         QString& rowsetName, QString& key, QString& keyVal, QString& data, QStringList& columns )
 {
@@ -51,19 +50,11 @@ QMap<QString, EveApi::DataItem> EveApi::Delegate::getRowData(
     QString column;
     foreach(column, columns)
     {
-        QXmlResultItems result;
-        QString thisQuery = query.arg(column);
-        if (this->runXQuery(thisQuery, data, result))
+        query = query.arg(column);
+        QVariant value;
+        foreach (value, this->getAtomicValues(query, data))
         {
-            QXmlItem item(result.next());
-            while (!item.isNull())
-            {
-                if (item.isAtomicValue())
-                {
-                    rowValues.insert(column, EveApi::DataItem(item.toAtomicValue().value<QString>()));
-                }
-                item = result.next();
-            }
+            rowValues.insert(column, EveApi::DataItem(value.value<QString>()));
         }
     }
     return rowValues;
@@ -71,9 +62,19 @@ QMap<QString, EveApi::DataItem> EveApi::Delegate::getRowData(
 
 QDateTime EveApi::Delegate::getServerTime(QString& data)
 {
-    QXmlResultItems result;
     QString query = "string(doc($inputDocument)/eveapi/currentTime)";
     QString tempDate;
+    QVariant value = this->getAtomicValue(query, data);
+    if (value.isValid())
+        tempDate = value.value<QString>();
+    QDateTime dateTime = QDateTime::fromString(tempDate, QString("yyyy-MM-dd hh:mm:ss"));
+    return dateTime;
+}
+
+QList<QVariant> EveApi::Delegate::getAtomicValues( QString& query, QString& data )
+{
+    QList<QVariant> values;
+    QXmlResultItems result;
     if (this->runXQuery(query, data, result))
     {
         QXmlItem item(result.next());
@@ -81,11 +82,19 @@ QDateTime EveApi::Delegate::getServerTime(QString& data)
         {
             if (item.isAtomicValue())
             {
-                tempDate = item.toAtomicValue().value<QString>();
+                values << item.toAtomicValue();
             }
             item = result.next();
         }
     }
-    QDateTime dateTime = QDateTime::fromString(tempDate, QString("yyyy-MM-dd hh:mm:ss"));
-    return dateTime;
+    return values;
+}
+
+// TODO: should this assert the length is one?
+QVariant EveApi::Delegate::getAtomicValue( QString& query, QString& data )
+{
+    QList<QVariant> values = this->getAtomicValues(query, data);
+    if (values.length() == 0)
+        return QVariant();
+    return values.takeFirst();
 }

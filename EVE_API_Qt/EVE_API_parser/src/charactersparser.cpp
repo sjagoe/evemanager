@@ -63,56 +63,31 @@ QString EveApi::CharactersParser::getRowsetAttribute(QString& data, const char* 
     QString value;
     QString query = "string(doc($inputDocument)/eveapi/result/rowset/@%1)";
     query = query.arg(attribute);
-
-    QXmlResultItems result;
-    if (this->runXQuery(query, data, result))
-    {
-        QXmlItem item(result.next());
-        value = item.toAtomicValue().value<QString>();
-    }
-
+    QVariant variant = this->getAtomicValue(query, data);
+    if (variant.isValid())
+        value = variant.value<QString>();
     return value;
 }
 
 QStringList EveApi::CharactersParser::getCharacterIds(QString& data, QString& key)
 {
-    QXmlResultItems result;
+    QStringList characters;
     QString query = "for $i in doc($inputDocument)/eveapi/result/rowset/row/@%1 return string($i)";
     query = query.arg(key);
-
-    QStringList characters;
-    if (this->runXQuery(query, data, result))
+    QVariant value;
+    foreach (value, this->getAtomicValues(query, data))
     {
-        QXmlItem item(result.next());
-        while (!item.isNull())
-        {
-            if (item.isAtomicValue())
-            {
-                characters << item.toAtomicValue().value<QString>();
-            }
-            item = result.next();
-        }
+        characters << value.value<QString>();
     }
     return characters;
 }
 
 int EveApi::CharactersParser::getApiVersion(QString& data)
 {
-    QXmlResultItems result;
-    QString query = "string(doc($inputDocument)/eveapi/@version)";
-
     int version;
-    if (this->runXQuery(query, data, result))
-    {
-        QXmlItem item(result.next());
-        while (!item.isNull())
-        {
-            if (item.isAtomicValue())
-            {
-                version = item.toAtomicValue().value<int>();
-            }
-            item = result.next();
-        }
-    }
+    QString query = "string(doc($inputDocument)/eveapi/@version)";
+    QVariant variant = this->getAtomicValue(query, data);
+    if (variant.isValid())
+        version = variant.value<int>();
     return version;
 }

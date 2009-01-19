@@ -51,7 +51,12 @@ namespace EveApi
                                                     QString& data, QStringList& columns );
 
         QDateTime getServerTime(QString& data);
+
+        QList<QVariant> getAtomicValues( QString& query, QString& data );
+
+        QVariant getAtomicValue( QString& query, QString& data );
+
     };
-};
+}
 
 #endif // DELEGATE_H
