@@ -42,7 +42,7 @@ void EveApi::CharactersParser::parse( QString& id, QString& data,
 
     QStringList characters;
     characters = this->getCharacterIds(data, key);
-    QMap<QString, EveApi::DataItem> rowValues;
+    QMap<QString, QString> rowValues;
 
     QString keyVal;
     foreach(keyVal, characters)

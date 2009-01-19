@@ -41,10 +41,10 @@ bool EveApi::Delegate::runXQuery( QString& queryString, QString& data, QXmlResul
     return true;
 }
 
-QMap<QString, EveApi::DataItem> EveApi::Delegate::getRowData(
+QMap<QString, QString> EveApi::Delegate::getRowData(
         QString& rowsetName, QString& key, QString& keyVal, QString& data, QStringList& columns )
 {
-    QMap<QString, EveApi::DataItem> rowValues;
+    QMap<QString, QString> rowValues;
     QString query = "string(doc($inputDocument)//rowset[@name=\"%1\"]/row[@%2=\"%3\"]/@%4)";
     query = query.arg(rowsetName).arg(key).arg(keyVal);
     QString column;
@@ -54,7 +54,7 @@ QMap<QString, EveApi::DataItem> EveApi::Delegate::getRowData(
         QVariant value;
         foreach (value, this->getAtomicValues(fullQuery, data))
         {
-            rowValues.insert(column, EveApi::DataItem(value.value<QString>()));
+            rowValues.insert(column, value.value<QString>());
         }
     }
     return rowValues;

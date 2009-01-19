@@ -29,3 +29,41 @@ AbstractData(version, currentTime, cachedUntil)
     this->_characters = rowset;
 }
 
+EveApi::CharactersData::~CharactersData()
+{
+    if (this->_characters != 0)
+        delete this->_characters;
+}
+
+QMap<QString, QString> EveApi::CharactersData::getCharacterNames()
+{
+    QMap<QString, QString> values;
+    QString keyColumn = this->_characters->getKey();
+    Row<void*>* row;
+    foreach (row, this->_characters->rowsInOrder())
+    {
+        QString key = (*row)[keyColumn];
+        QString column = "name";
+        values.insert(column, (*row)[column]);
+    }
+    return values;
+}
+
+QMap<QString, QMap<QString, QString> > EveApi::CharactersData::getCharacters()
+{
+    QMap<QString, QMap<QString, QString> > values;
+    QString keyColumn = this->_characters->getKey();
+    Row<void*>* row;
+    foreach (row, this->_characters->rowsInOrder())
+    {
+        QString key = (*row)[keyColumn];
+        QMap<QString, QString> characterValues;
+        QString column;
+        foreach (column, this->_characters->getColumns())
+        {
+            characterValues.insert(column, (*row)[column]);
+        }
+        values.insert(key, characterValues);
+    }
+    return values;
+}

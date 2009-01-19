@@ -47,8 +47,8 @@ namespace EveApi
     protected:
         bool runXQuery( QString& query, QString& data, QXmlResultItems& result );
 
-        QMap<QString, EveApi::DataItem> getRowData( QString& rowsetName, QString& key, QString& keyVal,
-                                                    QString& data, QStringList& columns );
+        QMap<QString, QString> getRowData( QString& rowsetName, QString& key, QString& keyVal,
+                                           QString& data, QStringList& columns );
 
         QDateTime getServerTime(QString& data);
 

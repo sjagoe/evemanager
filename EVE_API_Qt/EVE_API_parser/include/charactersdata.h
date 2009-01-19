@@ -41,6 +41,7 @@
 
 #include "abstracteveapidata.hh"
 
+#include <QMap>
 #include <QString>
 #include <QStringList>
 
@@ -53,6 +54,12 @@ namespace EveApi
                         const QDateTime& currentTime,
                         const QDateTime& cachedUntil,
                         Rowset<void*>* rowset );
+
+        ~CharactersData();
+
+        QMap<QString, QString> getCharacterNames();
+
+        QMap<QString, QMap<QString, QString> > getCharacters();
 
     private:
         Rowset<void*>* _characters;

@@ -45,26 +45,6 @@ namespace EveApi
                 QString(args) {};
     };
 
-    /*!  The basic item of data, to abstract the storage and
-      representation away from the larger structures.
-
-      TODO: Needs to be able to determine if the DataItem is null.
-    */
-    class DataItem
-    {
-    public:
-        DataItem();
-
-        DataItem(const QString& data);
-
-        void set(const QString& data);
-
-        const QString& get() const;
-
-    private:
-        QString _data;
-    };
-
     class AbstractData
     {
     public:
@@ -75,6 +55,8 @@ namespace EveApi
         _currentTime(currentTime),
         _cachedUntil(cachedUntil)
         {}
+
+        virtual ~AbstractData() {}
 
         const int& getVersion()
         {
@@ -108,19 +90,9 @@ namespace EveApi
     template <class X> class Row
     {
     private:
-        template <class Y> class InternalRowset: public Rowset<Y>
-        {
-        public:
-            InternalRowset( const QString& name,
-                            const QString& key,
-                            const QStringList& columns,
-                            Row<X>* parent=0):
-            Rowset<Y>(name, key, columns, parent)
-            {}
-        };
 
     public:
-        Row(const QMap<QString, DataItem>& values, Rowset<X>* parent=0)
+        Row(const QMap<QString, QString>& values, Rowset<X>* parent=0)
         {
             this->_parent = parent;
             this->_values = values;
@@ -142,13 +114,13 @@ namespace EveApi
             }
         }
 
-        const DataItem& operator[](const QString& column) const throw(NoSuchColumn)
+        const QString& operator[](const QString& column) throw(NoSuchColumn)
         {
             if (! this->_values.contains(column))
             {
                 throw NoSuchColumn();
             }
-            return this->_values.value(column);
+            return this->_values[column];
         }
 
         X* addChild()
@@ -176,15 +148,15 @@ namespace EveApi
         {
             if (this->_childDirect != 0)
             {
-                this->_childRowset = new InternalRowset<X>(name, key, columns, this);
+                this->_childRowset = new Rowset<X>(name, key, columns, this);
                 this->childAdded();
             }
-            return this->getChildRowset();
+            return this->_childRowset;
         }
 
         Rowset<X>* getChildRowset()
         {
-            return static_cast<Rowset<X>* >(this->_childRowset);
+            return this->_childRowset;
         }
 
         bool hasRowset()
@@ -194,7 +166,7 @@ namespace EveApi
 
         int getLevels()
         {
-            return this->_levels;
+            return this->_subLevels;
         }
 
         void childAdded()
@@ -211,10 +183,10 @@ namespace EveApi
         int _subLevels;
 
         //! Values contained in the row
-        QMap<QString, DataItem> _values;
+        QMap<QString, QString> _values;
 
         //! Nested Rowset
-        InternalRowset<X>* _childRowset;
+        Rowset<X>* _childRowset;
 
         //! Child if no nested Rowset
         X* _childDirect;
@@ -257,13 +229,12 @@ namespace EveApi
         /*!
           Add a row to the table
          */
-        Row<X>* addRow(const QMap<QString, DataItem>& values)
+        Row<X>* addRow(const QMap<QString, QString>& values)
         {
             Row<X>* row = 0;
             if (values.contains(this->_key))
             {
-                DataItem key_ = values.value(this->_key);
-                QString key = key_.get();
+                QString key = values.value(this->_key);
                 row = new Row<X>(values, this);
                 this->_rowsByKey.insert(key, row);
                 this->_rowsInOrder.append(row);
@@ -287,7 +258,7 @@ namespace EveApi
 //            return this->_rowsInOrder.end();
 //        }
 
-        QList<Row<X>* >* rowsInOrder()
+        QList<Row<X>* > rowsInOrder()
         {
             return this->_rowsInOrder;
         }
@@ -315,6 +286,21 @@ namespace EveApi
             {
                 this->_parent->childAdded();
             }
+        }
+
+        const QString& getName()
+        {
+            return this->_name;
+        }
+
+        const QString& getKey()
+        {
+            return this->_key;
+        }
+
+        const QStringList& getColumns()
+        {
+            return this->_columns;
         }
 
     protected:

@@ -26,6 +26,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include <QDateTime>
+#include <QMap>
 #include <QMetaType>
 #include <QSignalSpy>
 #include <QString>
@@ -33,7 +34,10 @@
 using EveApi::CharactersParser;
 using EveApi::CharactersData;
 
+typedef QMap<QString, QMap<QString, QString> > threemap;
+
 Q_DECLARE_METATYPE(QSharedPointer<CharactersData>);
+Q_DECLARE_METATYPE(threemap);
 
 void CharactersParserTest::parse_data()
 {
@@ -58,12 +62,33 @@ void CharactersParserTest::parse_data()
     QString http = "200";
     QDateTime fakeTime;
 
+    QMap<QString, QMap<QString, QString> > expected;
+    QMap<QString, QString> inner;
+    inner.insert(QString("name"), QString("Mary"));
+    inner.insert(QString("characterID"), QString("150267069"));
+    inner.insert(QString("corporationName"), QString("Starbase Anchoring Corp"));
+    inner.insert(QString("corporationID"), QString("150279367"));
+    expected.insert(QString("150267069"), inner);
+    inner.clear();
+    inner.insert(QString("name"), QString("Marcus"));
+    inner.insert(QString("characterID"), QString("150302299"));
+    inner.insert(QString("corporationName"), QString("Marcus Corp"));
+    inner.insert(QString("corporationID"), QString("150333466"));
+    expected.insert(QString("150302299"), inner);
+    inner.clear();
+    inner.insert(QString("name"), QString("Dieinafire"));
+    inner.insert(QString("characterID"), QString("150340823"));
+    inner.insert(QString("corporationName"), QString("Center for Advanced Studies"));
+    inner.insert(QString("corporationID"), QString("1000169"));
+    expected.insert(QString("150340823"), inner);
+
     QTest::addColumn<QString>("id");
     QTest::addColumn<QString>("xml");
     QTest::addColumn<QString>("httpResponse");
     QTest::addColumn<QDateTime>("cacheExpireTime");
+    QTest::addColumn<QMap<QString, QMap<QString, QString> > >("expected");
 
-    QTest::newRow("three characters") << id << xmlData << http << fakeTime;
+    QTest::newRow("three characters") << id << xmlData << http << fakeTime << expected;
 }
 
 void CharactersParserTest::parse()
@@ -74,6 +99,7 @@ void CharactersParserTest::parse()
     QFETCH(QString, xml);
     QFETCH(QString, httpResponse);
     QFETCH(QDateTime, cacheExpireTime);
+    QFETCH(threemap, expected); // QMap<QString, QMap<QString, QString> >
 
     CharactersParser* parser = new CharactersParser();
     QSignalSpy spy(parser, SIGNAL(requestComplete( QString, QSharedPointer<CharactersData>,
@@ -89,6 +115,9 @@ void CharactersParserTest::parse()
 
     QVERIFY(arguments.at(1).canConvert<QSharedPointer<CharactersData> >() == true);
     QSharedPointer<CharactersData> data = arguments.at(1).value<QSharedPointer<CharactersData> >();
+
+    // TODO: Fine grained checking so that the output of the test is meaningful.
+    QCOMPARE(data->getCharacters(), expected);
 
     delete parser;
 }
