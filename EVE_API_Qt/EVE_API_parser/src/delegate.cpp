@@ -50,9 +50,9 @@ QMap<QString, EveApi::DataItem> EveApi::Delegate::getRowData(
     QString column;
     foreach(column, columns)
     {
-        query = query.arg(column);
+        QString fullQuery = query.arg(column);
         QVariant value;
-        foreach (value, this->getAtomicValues(query, data))
+        foreach (value, this->getAtomicValues(fullQuery, data))
         {
             rowValues.insert(column, EveApi::DataItem(value.value<QString>()));
         }
