@@ -24,6 +24,7 @@
 #include <QDateTime>
 #include <QObject>
 #include <QSharedPointer>
+#include <QString>
 #include <QtXmlPatterns>
 
 #include "charactersdata.h"
@@ -47,7 +48,7 @@ namespace EveApi
     protected:
         bool runXQuery( QString& query, QString& data, QXmlResultItems& result );
 
-        QMap<QString, QString> getRowData( QString& rowsetName, QString& key, QString& keyVal,
+        QMap<QString, QString> getRowDataByName( QString& rowsetName, QString& key, QString& keyVal,
                                            QString& data, QStringList& columns );
 
         QDateTime getServerTime(QString& data);
@@ -56,6 +57,7 @@ namespace EveApi
 
         QVariant getAtomicValue( QString& query, QString& data );
 
+        QString getXmlQueryResult( QString& query, QString& data );
     };
 }
 

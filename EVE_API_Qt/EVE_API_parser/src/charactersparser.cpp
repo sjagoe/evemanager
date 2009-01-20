@@ -47,7 +47,7 @@ void EveApi::CharactersParser::parse( QString& id, QString& data,
     QString keyVal;
     foreach(keyVal, characters)
     {
-        rowValues = this->getRowData(name, key, keyVal, data, columns);
+        rowValues = this->getRowDataByName(name, key, keyVal, data, columns);
         rowset->addRow(rowValues);
     }
 

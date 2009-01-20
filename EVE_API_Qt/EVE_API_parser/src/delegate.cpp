@@ -30,18 +30,16 @@ bool EveApi::Delegate::runXQuery( QString& queryString, QString& data, QXmlResul
     QBuffer device;
     device.setData(data.toUtf8());
     device.open(QIODevice::ReadOnly);
-
     QXmlQuery query;
     query.bindVariable("inputDocument", &device);
     query.setQuery(queryString);
-
     if (!query.isValid())
         return false;
     query.evaluateTo(&result);
     return true;
 }
 
-QMap<QString, QString> EveApi::Delegate::getRowData(
+QMap<QString, QString> EveApi::Delegate::getRowDataByName(
         QString& rowsetName, QString& key, QString& keyVal, QString& data, QStringList& columns )
 {
     QMap<QString, QString> rowValues;
@@ -97,4 +95,23 @@ QVariant EveApi::Delegate::getAtomicValue( QString& query, QString& data )
     if (values.length() == 0)
         return QVariant();
     return values.takeFirst();
+}
+
+QString EveApi::Delegate::getXmlQueryResult( QString& queryString, QString& data )
+{
+    QBuffer device;
+    device.setData(data.toUtf8());
+    device.open(QIODevice::ReadOnly);
+    QXmlQuery query;
+    query.bindVariable("inputDocument", &device);
+    query.setQuery(queryString);
+    QBuffer output;
+    output.open(QIODevice::WriteOnly);
+    QXmlSerializer result(query, &output);
+    if (!query.isValid())
+        output.close();
+        return QString();
+    query.evaluateTo(&result);
+    output.close();
+    return QString(output.data());
 }
