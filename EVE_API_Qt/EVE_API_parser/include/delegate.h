@@ -41,23 +41,41 @@ namespace EveApi
     public:
         Delegate( QObject* parent=0 );
 
-        virtual void parse( QString& id, QString& data,
-                            QString& httpResponse,
-                            QDateTime& cacheExpireTime ) = 0;
+        /*!
+          Public interface for parsing a the XML format from the API.
+          It is assumed that the correct parser has been chosen for
+          the data being parsed.
+         */
+        virtual void parse( const QString& id, const QString& data,
+                            const QString& httpResponse,
+                            const QDateTime& cacheExpireTime ) = 0;
 
     protected:
-        bool runXQuery( QString& query, QString& data, QXmlResultItems& result );
+        /*
+          Run an XQuery against some XML in a string.
+         */
+        bool runXQuery( const QString& query, const QString& data, QXmlResultItems& result );
 
-        QMap<QString, QString> getRowDataByName( QString& rowsetName, QString& key, QString& keyVal,
-                                           QString& data, QStringList& columns );
+        /*
+          Helper function to get the values from a row.
 
-        QDateTime getServerTime(QString& data);
+          @arg rowsetName The unique name identifier of the rowset
+          @arg key The name of the key column in the rowset
+          @arg keyVal The value of the key to find the row
+          @arg data The XML data in which to look up the values
+          @arg columns A list of columns in the rowset for which to fetch data.
+         */
+        QMap<QString, QString> getRowDataByName(
+                const QString& rowsetName, const QString& key, const QString& keyVal,
+                const QString& data, const QStringList& columns );
 
-        QList<QVariant> getAtomicValues( QString& query, QString& data );
+        QDateTime getServerTime(const QString& data);
 
-        QVariant getAtomicValue( QString& query, QString& data );
+        QList<QVariant> getAtomicValues( const QString& query, const QString& data );
 
-        QString getXmlQueryResult( QString& query, QString& data );
+        QVariant getAtomicValue( const QString& query, const QString& data );
+
+        QString getXmlQueryResult( const QString& query, const QString& data );
     };
 }
 

@@ -58,8 +58,7 @@ QMap<QString, QMap<QString, QString> > EveApi::CharactersData::getCharacters()
     {
         QString key = (*row)[keyColumn];
         QMap<QString, QString> characterValues;
-        QString column;
-        foreach (column, this->_characters->getColumns())
+        foreach (const QString& column, this->_characters->getColumns())
         {
             characterValues.insert(column, (*row)[column]);
         }

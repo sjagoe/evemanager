@@ -121,5 +121,3 @@ void CharactersParserTest::parse()
 
     delete parser;
 }
-
-QTEST_MAIN(CharactersParserTest)

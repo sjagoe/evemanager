@@ -9,30 +9,24 @@
 # .
 # EVE_API_Qt is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 # .
 # You should have received a copy of the GNU General Public License
-# along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
+# along with EVE_API_Qt. If not, see <http://www.gnu.org/licenses/>.
 # .
-
-QT += testlib xmlpatterns
+QT += testlib \
+    xmlpatterns
 QT -= gui
-
-
 TARGET = EVE_API_Parser_test
 DESTDIR = ../../../bin
-
 LIBS += -L../../../bin \
     -lEVE_API_Parser_Qt0
-
 INCLUDEPATH += . \
     ../../../EVE_API_Qt/EVE_API_Parser/include
-
 CONFIG += console
 CONFIG -= app_bundle
 TEMPLATE = app
-
-SOURCES += charactersparser_test.cpp
-
+SOURCES += charactersparser_test.cpp \
+    main.cpp
 HEADERS += charactersparser_test.h

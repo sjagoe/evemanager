@@ -30,9 +30,9 @@ EveApi::CharactersParser::CharactersParser( QObject* parent ):
 {
 }
 
-void EveApi::CharactersParser::parse( QString& id, QString& data,
-                                      QString& httpResponse,
-                                      QDateTime& cacheExpireTime )
+void EveApi::CharactersParser::parse( const QString& id, const QString& data,
+                                      const QString& httpResponse,
+                                      const QDateTime& cacheExpireTime )
 {
     QString name = this->getRowsetAttribute(data, "name");
     QString key = this->getRowsetAttribute(data, "key");
@@ -44,8 +44,7 @@ void EveApi::CharactersParser::parse( QString& id, QString& data,
     characters = this->getCharacterIds(data, key);
     QMap<QString, QString> rowValues;
 
-    QString keyVal;
-    foreach(keyVal, characters)
+    foreach(const QString& keyVal, characters)
     {
         rowValues = this->getRowDataByName(name, key, keyVal, data, columns);
         rowset->addRow(rowValues);
@@ -58,7 +57,7 @@ void EveApi::CharactersParser::parse( QString& id, QString& data,
     emit this->requestComplete(id, charactersData, httpResponse, cacheExpireTime);
 }
 
-QString EveApi::CharactersParser::getRowsetAttribute(QString& data, const char* attribute)
+QString EveApi::CharactersParser::getRowsetAttribute(const QString& data, const char* attribute)
 {
     QString value;
     QString query = "string(doc($inputDocument)/eveapi/result/rowset/@%1)";
@@ -69,20 +68,19 @@ QString EveApi::CharactersParser::getRowsetAttribute(QString& data, const char* 
     return value;
 }
 
-QStringList EveApi::CharactersParser::getCharacterIds(QString& data, QString& key)
+QStringList EveApi::CharactersParser::getCharacterIds(const QString& data, const QString& key)
 {
     QStringList characters;
     QString query = "for $i in doc($inputDocument)/eveapi/result/rowset/row/@%1 return string($i)";
     query = query.arg(key);
-    QVariant value;
-    foreach (value, this->getAtomicValues(query, data))
+    foreach (const QVariant& value, this->getAtomicValues(query, data))
     {
         characters << value.value<QString>();
     }
     return characters;
 }
 
-int EveApi::CharactersParser::getApiVersion(QString& data)
+int EveApi::CharactersParser::getApiVersion(const QString& data)
 {
     int version;
     QString query = "string(doc($inputDocument)/eveapi/@version)";

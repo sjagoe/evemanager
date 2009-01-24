@@ -25,7 +25,8 @@ EveApi::Delegate::Delegate( QObject* parent ):
 {
 }
 
-bool EveApi::Delegate::runXQuery( QString& queryString, QString& data, QXmlResultItems& result )
+bool EveApi::Delegate::runXQuery(
+        const QString& queryString, const QString& data, QXmlResultItems& result )
 {
     QBuffer device;
     device.setData(data.toUtf8());
@@ -40,17 +41,16 @@ bool EveApi::Delegate::runXQuery( QString& queryString, QString& data, QXmlResul
 }
 
 QMap<QString, QString> EveApi::Delegate::getRowDataByName(
-        QString& rowsetName, QString& key, QString& keyVal, QString& data, QStringList& columns )
+        const QString& rowsetName, const QString& key, const QString& keyVal,
+        const QString& data, const QStringList& columns )
 {
     QMap<QString, QString> rowValues;
     QString query = "string(doc($inputDocument)//rowset[@name=\"%1\"]/row[@%2=\"%3\"]/@%4)";
     query = query.arg(rowsetName).arg(key).arg(keyVal);
-    QString column;
-    foreach(column, columns)
+    foreach(const QString& column, columns)
     {
         QString fullQuery = query.arg(column);
-        QVariant value;
-        foreach (value, this->getAtomicValues(fullQuery, data))
+        foreach (const QVariant& value, this->getAtomicValues(fullQuery, data))
         {
             rowValues.insert(column, value.value<QString>());
         }
@@ -58,7 +58,7 @@ QMap<QString, QString> EveApi::Delegate::getRowDataByName(
     return rowValues;
 }
 
-QDateTime EveApi::Delegate::getServerTime(QString& data)
+QDateTime EveApi::Delegate::getServerTime(const QString& data)
 {
     QString query = "string(doc($inputDocument)/eveapi/currentTime)";
     QString tempDate;
@@ -69,7 +69,7 @@ QDateTime EveApi::Delegate::getServerTime(QString& data)
     return dateTime;
 }
 
-QList<QVariant> EveApi::Delegate::getAtomicValues( QString& query, QString& data )
+QList<QVariant> EveApi::Delegate::getAtomicValues( const QString& query, const QString& data )
 {
     QList<QVariant> values;
     QXmlResultItems result;
@@ -89,7 +89,7 @@ QList<QVariant> EveApi::Delegate::getAtomicValues( QString& query, QString& data
 }
 
 // TODO: should this assert the length is one?
-QVariant EveApi::Delegate::getAtomicValue( QString& query, QString& data )
+QVariant EveApi::Delegate::getAtomicValue( const QString& query, const QString& data )
 {
     QList<QVariant> values = this->getAtomicValues(query, data);
     if (values.length() == 0)
@@ -97,7 +97,7 @@ QVariant EveApi::Delegate::getAtomicValue( QString& query, QString& data )
     return values.takeFirst();
 }
 
-QString EveApi::Delegate::getXmlQueryResult( QString& queryString, QString& data )
+QString EveApi::Delegate::getXmlQueryResult( const QString& queryString, const QString& data )
 {
     QBuffer device;
     device.setData(data.toUtf8());

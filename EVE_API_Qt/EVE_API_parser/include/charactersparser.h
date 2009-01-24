@@ -45,16 +45,16 @@ namespace EveApi
     public:
         CharactersParser( QObject* parent=0 );
 
-        virtual void parse( QString& id, QString& data,
-                            QString& httpResponse,
-                            QDateTime& cacheExpireTime );
+        virtual void parse( const QString& id, const QString& data,
+                            const QString& httpResponse,
+                            const QDateTime& cacheExpireTime );
 
     private:
-        QString getRowsetAttribute(QString& data, const char* attribute);
+        QString getRowsetAttribute(const QString& data, const char* attribute);
 
-        QStringList getCharacterIds(QString& data, QString& key);
+        QStringList getCharacterIds(const QString& data, const QString& key);
 
-        int getApiVersion(QString& data);
+        int getApiVersion(const QString& data);
 
     signals:
         void requestComplete( QString id, QSharedPointer<CharactersData> data,

@@ -216,8 +216,7 @@ namespace EveApi
         virtual ~Rowset()
         {
             this->_parent = 0;
-            QString key;
-            foreach (key, this->_rowsByKey.keys())
+            foreach (const QString& key, this->_rowsByKey.keys())
             {
                 Row<X>* row = this->_rowsByKey.take(key);
                 delete row;
