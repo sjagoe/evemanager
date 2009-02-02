@@ -149,10 +149,86 @@ namespace EveApi
         int _willpower;
     };
 
-    class CharacterSheetData
+    class CharacterSheetData: public AbstractData
     {
     public:
-        CharacterSheetData();
+        /*
+          Create a CharacterSheetData instance representing a charactar at a particular point in time.
+          */
+        CharacterSheetData( const int& version,
+                            const QDateTime& currentTime,
+                            const QDateTime& cachedUntil,
+                            QString& characterID,
+                            QString& name,
+                            QString& bloodline,
+                            QString& gender,
+                            QString& corporationName,
+                            QString& corporationID,
+                            QString& cloneName,
+                            QString& cloneSkillPoints,
+                            QString& balance,
+                            shared_ptr<AttributeEnhancers>& attributeEnhancers,
+                            shared_ptr<Attributes>& baseAttributes );
+
+        /*
+          Get the character's ID
+          */
+        const QString& characterID() const;
+
+        /*
+          Get the character's name
+          */
+        const QString& name() const;
+
+        /*
+          Get the character's bloodline
+          */
+        const QString& bloodline() const;
+
+        /*
+          Get the character's gender
+          */
+        const QString& gender() const;
+
+        /*
+          Get the name of the character's corporation
+          */
+        const QString& corporationName() const;
+
+        /*
+          Get the ID of the character's corporation
+          */
+        const QString& corporationID() const;
+
+        /*
+          Get the name of the character's clone type
+          */
+        const QString& cloneName() const;
+
+        /*
+          Get the number of skill points the clone can carry
+          */
+        const QString& cloneSkillPoints() const;
+
+        /*
+          Get the character's wallet balance
+          */
+        const QString& balance() const;
+
+        /*
+          Get access to the character's attribute enhancers
+          */
+        const shared_ptr<AttributeEnhancers>& attributeEnhancers() const;
+
+        /*
+          Get access to the character's base attributes (i.e. no enhancers or skills)
+          */
+        const shared_ptr<Attributes>& baseAttributes() const;
+
+        /*
+          Get access to the character's attributes with enhancers and skills
+          */
+        const shared_ptr<Attributes>& attributes() const;
 
     private:
         QString _characterID;
@@ -165,6 +241,7 @@ namespace EveApi
         QString _cloneSkillPoints;
         QString _balance;
         shared_ptr<AttributeEnhancers> _attributeEnhancers;
+        shared_ptr<Attributes> _baseAttributes;
         shared_ptr<Attributes> _attributes;
         shared_ptr<Rowset<void*> > _skills;
         shared_ptr<Rowset<void*> > _certificates;

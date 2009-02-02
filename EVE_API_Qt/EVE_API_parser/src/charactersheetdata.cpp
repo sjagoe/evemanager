@@ -145,3 +145,93 @@ const int& EveApi::Attributes::willpower() const
     return this->_willpower;
 }
 
+
+EveApi::CharacterSheetData::CharacterSheetData( const int& version,
+                                                const QDateTime& currentTime,
+                                                const QDateTime& cachedUntil,
+                                                QString& characterID,
+                                                QString& name,
+                                                QString& bloodline,
+                                                QString& gender,
+                                                QString& corporationName,
+                                                QString& corporationID,
+                                                QString& cloneName,
+                                                QString& cloneSkillPoints,
+                                                QString& balance,
+                                                shared_ptr<EveApi::AttributeEnhancers>& attributeEnhancers,
+                                                shared_ptr<EveApi::Attributes>& baseAttributes ):
+AbstractData(version, currentTime, cachedUntil),
+_characterID(characterID),
+_name(name),
+_bloodline(bloodline),
+_gender(gender),
+_corporationName(corporationName),
+_corporationID(corporationID),
+_cloneName(cloneName),
+_cloneSkillPoints(cloneSkillPoints),
+_balance(balance),
+_attributeEnhancers(attributeEnhancers),
+_baseAttributes(baseAttributes)
+{
+}
+
+const QString& EveApi::CharacterSheetData::characterID() const
+{
+    return this->_characterID;
+}
+
+const QString& EveApi::CharacterSheetData::name() const
+{
+    return this->_name;
+}
+
+const QString& EveApi::CharacterSheetData::bloodline() const
+{
+    return this->_bloodline;
+}
+
+const QString& EveApi::CharacterSheetData::gender() const
+{
+    return this->_gender;
+}
+
+const QString& EveApi::CharacterSheetData::corporationName() const
+{
+    return this->_corporationName;
+}
+
+const QString& EveApi::CharacterSheetData::corporationID() const
+{
+    return this->_corporationID;
+}
+
+const QString& EveApi::CharacterSheetData::cloneName() const
+{
+    return this->_cloneName;
+}
+
+const QString& EveApi::CharacterSheetData::cloneSkillPoints() const
+{
+    return this->_cloneSkillPoints;
+}
+
+const QString& EveApi::CharacterSheetData::balance() const
+{
+    return this->_balance;
+}
+
+const shared_ptr<EveApi::AttributeEnhancers>& EveApi::CharacterSheetData::attributeEnhancers() const
+{
+    return this->_attributeEnhancers;
+}
+
+const shared_ptr<EveApi::Attributes>& EveApi::CharacterSheetData::baseAttributes() const
+{
+    return this->_baseAttributes;
+}
+
+const shared_ptr<EveApi::Attributes>& EveApi::CharacterSheetData::attributes() const
+{
+    return this->_attributes;
+}
+
