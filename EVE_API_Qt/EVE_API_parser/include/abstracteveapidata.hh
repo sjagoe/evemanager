@@ -48,6 +48,8 @@ namespace EveApi
     class AbstractData
     {
     public:
+        AbstractData() {}
+
         AbstractData( const int& version,
                       const QDateTime& currentTime,
                       const QDateTime& cachedUntil ):
@@ -58,17 +60,17 @@ namespace EveApi
 
         virtual ~AbstractData() {}
 
-        const int& getVersion()
+        const int& getVersion() const
         {
             return this->_version;
         }
 
-        const QDateTime& getServerTime()
+        const QDateTime& getServerTime() const
         {
             return this->_currentTime;
         }
 
-        const QDateTime& getCachedUntilTime()
+        const QDateTime& getCachedUntilTime() const
         {
             return this->_cachedUntil;
         }

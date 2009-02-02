@@ -30,6 +30,14 @@ _corporationID(corporationID)
 {
 }
 
+EveApi::CharacterData::CharacterData ( const CharacterData& other ):
+_name(other.name()),
+_characterID(other.characterID()),
+_corporationName(other.corporationName()),
+_corporationID(other.corporationID())
+{
+}
+
 const QString& EveApi::CharacterData::name() const
 {
     return this->_name;
@@ -50,6 +58,20 @@ const QString& EveApi::CharacterData::corporationID() const
     return this->_corporationID;
 }
 
+bool EveApi::CharacterData::operator==(const CharacterData& other) const
+{
+    if (this->_name == other.name() && this->_characterID == other.characterID()
+        && this->_corporationName == other.corporationName()
+        && this->_corporationID == other.corporationID())
+        return true;
+    return false;
+}
+
+bool EveApi::CharacterData::operator!=(const CharacterData& other) const
+{
+    return (! ((*this) == other));
+}
+
 
 EveApi::CharactersData::CharactersData( const int& version,
                                         const QDateTime& currentTime,
@@ -58,6 +80,12 @@ EveApi::CharactersData::CharactersData( const int& version,
 AbstractData(version, currentTime, cachedUntil)
 {
     this->_characters = characters;
+}
+
+EveApi::CharactersData::CharactersData( const CharactersData& other ):
+        AbstractData(other.getVersion(), other.getServerTime(), other.getCachedUntilTime())
+{
+    this->_characters = other.characters();
 }
 
 QMap<QString, QString> EveApi::CharactersData::getCharacterNames()
@@ -84,4 +112,19 @@ QMap<QString, QMap<QString, QString> > EveApi::CharactersData::getCharacters()
         values.insert(character.characterID(), innerValues);
     }
     return values;
+}
+
+const QList<EveApi::CharacterData>& EveApi::CharactersData::characters() const
+{
+    return this->_characters;
+}
+
+bool EveApi::CharactersData::operator==(const CharactersData& other) const
+{
+    return this->_characters == other.characters();
+}
+
+bool EveApi::CharactersData::operator!=(const CharactersData& other) const
+{
+    return this->_characters != other.characters();
 }

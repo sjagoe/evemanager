@@ -26,6 +26,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include <QDateTime>
+#include <QList>
 #include <QMap>
 #include <QMetaType>
 #include <QSignalSpy>
@@ -33,11 +34,15 @@
 
 using EveApi::CharactersParser;
 using EveApi::CharactersData;
+using EveApi::CharacterData;
 
-typedef QMap<QString, QMap<QString, QString> > threemap;
+//typedef QMap<QString, QMap<QString, QString> > threemap;
+typedef QList<CharacterData> characterList;
 
 Q_DECLARE_METATYPE(shared_ptr<CharactersData>);
-Q_DECLARE_METATYPE(threemap);
+Q_DECLARE_METATYPE(CharactersData);
+Q_DECLARE_METATYPE(CharacterData);
+Q_DECLARE_METATYPE(characterList);
 
 void CharactersParserTest::parse_data()
 {
@@ -62,31 +67,17 @@ void CharactersParserTest::parse_data()
     QString http = "200";
     QDateTime fakeTime;
 
-    QMap<QString, QMap<QString, QString> > expected;
-    QMap<QString, QString> inner;
-    inner.insert(QString("name"), QString("Mary"));
-    inner.insert(QString("characterID"), QString("150267069"));
-    inner.insert(QString("corporationName"), QString("Starbase Anchoring Corp"));
-    inner.insert(QString("corporationID"), QString("150279367"));
-    expected.insert(QString("150267069"), inner);
-    inner.clear();
-    inner.insert(QString("name"), QString("Marcus"));
-    inner.insert(QString("characterID"), QString("150302299"));
-    inner.insert(QString("corporationName"), QString("Marcus Corp"));
-    inner.insert(QString("corporationID"), QString("150333466"));
-    expected.insert(QString("150302299"), inner);
-    inner.clear();
-    inner.insert(QString("name"), QString("Dieinafire"));
-    inner.insert(QString("characterID"), QString("150340823"));
-    inner.insert(QString("corporationName"), QString("Center for Advanced Studies"));
-    inner.insert(QString("corporationID"), QString("1000169"));
-    expected.insert(QString("150340823"), inner);
+    QList<CharacterData> characters;
+    characters << CharacterData("Mary", "150267069", "Starbase Anchoring Corp", "150279367");
+    characters << CharacterData("Marcus", "150302299", "Marcus Corp", "150333466");
+    characters << CharacterData("Dieinafire", "150340823", "Center for Advanced Studies", "1000169");
+    CharactersData expected(1, fakeTime, fakeTime, characters);
 
     QTest::addColumn<QString>("id");
     QTest::addColumn<QString>("xml");
     QTest::addColumn<QString>("httpResponse");
     QTest::addColumn<QDateTime>("cacheExpireTime");
-    QTest::addColumn<QMap<QString, QMap<QString, QString> > >("expected");
+    QTest::addColumn<CharactersData>("expected");
 
     QTest::newRow("three characters") << id << xmlData << http << fakeTime << expected;
 }
@@ -99,7 +90,7 @@ void CharactersParserTest::parse()
     QFETCH(QString, xml);
     QFETCH(QString, httpResponse);
     QFETCH(QDateTime, cacheExpireTime);
-    QFETCH(threemap, expected); // QMap<QString, QMap<QString, QString> >
+    QFETCH(CharactersData, expected);
 
     CharactersParser* parser = new CharactersParser();
     QSignalSpy spy(parser, SIGNAL(requestComplete( QString, shared_ptr<CharactersData>,
@@ -116,8 +107,145 @@ void CharactersParserTest::parse()
     QVERIFY(arguments.at(1).canConvert<shared_ptr<CharactersData> >() == true);
     shared_ptr<CharactersData> data = arguments.at(1).value<shared_ptr<CharactersData> >();
 
-    // TODO: Fine grained checking so that the output of the test is meaningful.
-    QCOMPARE(data->getCharacters(), expected);
+    QCOMPARE(*data, expected);
 
     delete parser;
+}
+
+void CharactersParserTest::charactersDataEquality_data()
+{
+    QTest::addColumn<int>("version");
+    QTest::addColumn<QDateTime>("date");
+    QTest::addColumn<characterList>("characters");
+    QTest::addColumn<CharactersData>("one");
+    QTest::addColumn<CharactersData>("two");
+
+    int version = 1;
+    QDateTime fakeTime;
+    QList<CharacterData> characters;
+    characters << CharacterData("Mary", "150267069", "Starbase Anchoring Corp", "150279367");
+    characters << CharacterData("Marcus", "150302299", "Marcus Corp", "150333466");
+    characters << CharacterData("Dieinafire", "150340823", "Center for Advanced Studies", "1000169");
+
+    int versionOnly = 1;
+    QDateTime fakeTimeOnly;
+    QList<CharacterData> charactersOnly;
+    charactersOnly << CharacterData("Mary", "150267069", "Starbase Anchoring Corp", "150279367");
+    charactersOnly << CharacterData("Marcus", "150302299", "Marcus Corp", "150333466");
+    charactersOnly << CharacterData("Dieinafire", "150340823", "Center for Advanced Studies", "1000169");
+    CharactersData only(versionOnly, fakeTimeOnly, fakeTimeOnly, charactersOnly);
+
+    QTest::newRow("rowOne") << version << fakeTime << characters << only << only;
+
+    int version1 = 10;
+    QDateTime fakeTime1;
+    fakeTime1.setTime_t(100);
+    QList<CharacterData> characters1;
+    characters1 << CharacterData("Mary", "150267069", "Starbase Anchoring Corp", "150279367");
+    characters1 << CharacterData("Marcus", "150302299", "Marcus Corp", "150333466");
+    characters1 << CharacterData("Dieinafire", "150340823", "Center for Advanced Studies", "1000169");
+    CharactersData one(version1, fakeTime1, fakeTime1, characters1);
+
+    // The version and times are purposefully not checked. The _meaningful_ contents of the server response were the same...
+
+    int version2 = 100;
+    QDateTime fakeTime2;
+    fakeTime2.setTime_t(90000);
+    QList<CharacterData> characters2;
+    characters2 << CharacterData("Mary", "150267069", "Starbase Anchoring Corp", "150279367");
+    characters2 << CharacterData("Marcus", "150302299", "Marcus Corp", "150333466");
+    characters2 << CharacterData("Dieinafire", "150340823", "Center for Advanced Studies", "1000169");
+    CharactersData two(version2, fakeTime2, fakeTime2, characters2);
+
+    QTest::newRow("rowTwo") << version << fakeTime << characters << one << two;
+}
+
+void CharactersParserTest::charactersDataEquality()
+{
+    QFETCH(characterList, characters);
+    QFETCH(CharactersData, one);
+    QFETCH(CharactersData, two);
+
+    QCOMPARE(one, two);
+    QCOMPARE(one.characters(), characters);
+    QCOMPARE(two.characters(), characters);
+    QCOMPARE(one.characters(), two.characters());
+
+    for (int i = 0; i < characters.length(); ++i)
+    {
+        QCOMPARE(one.characters().at(i), characters.at(i));
+        QCOMPARE(two.characters().at(i), characters.at(i));
+        QCOMPARE(one.characters().at(i), two.characters().at(i));
+
+        QCOMPARE(one.characters().at(i).name(), characters.at(i).name());
+        QCOMPARE(two.characters().at(i).name(), characters.at(i).name());
+        QCOMPARE(one.characters().at(i).name(), two.characters().at(i).name());
+        QCOMPARE(one.characters().at(i).characterID(), characters.at(i).characterID());
+        QCOMPARE(two.characters().at(i).characterID(), characters.at(i).characterID());
+        QCOMPARE(one.characters().at(i).characterID(), two.characters().at(i).characterID());
+        QCOMPARE(one.characters().at(i).corporationName(), characters.at(i).corporationName());
+        QCOMPARE(two.characters().at(i).corporationName(), characters.at(i).corporationName());
+        QCOMPARE(one.characters().at(i).corporationName(), two.characters().at(i).corporationName());
+        QCOMPARE(one.characters().at(i).corporationID(), characters.at(i).corporationID());
+        QCOMPARE(two.characters().at(i).corporationID(), characters.at(i).corporationID());
+        QCOMPARE(one.characters().at(i).corporationID(), two.characters().at(i).corporationID());
+    }
+}
+
+void CharactersParserTest::charactersDataInequality_data()
+{
+    QTest::addColumn<CharactersData>("one");
+    QTest::addColumn<CharactersData>("two");
+
+    int version = 1;
+    QDateTime fakeTime;
+    fakeTime.setTime_t(10);
+
+    QList<CharacterData> characters1;
+    characters1 << CharacterData("1name1", "1id1", "1cname1", "1cid1");
+    characters1 << CharacterData("1name2", "1id2", "1cname2", "1cid2");
+    characters1 << CharacterData("1name3", "1id3", "1cname3", "1cid3");
+    CharactersData one(version, fakeTime, fakeTime, characters1);
+
+    QList<CharacterData> characters2;
+    characters2 << CharacterData("2name1", "2id1", "2cname1", "2cid1");
+    characters2 << CharacterData("2name2", "2id2", "2cname2", "2cid2");
+    characters2 << CharacterData("2name3", "2id3", "2cname3", "2cid3");
+    CharactersData two(version, fakeTime, fakeTime, characters2);
+
+    QTest::newRow("DifferentCharacters") << one << two;
+
+
+    QList<CharacterData> characters3;
+    characters1 << CharacterData("1name1", "1id1", "1cname1", "1cid1");
+    characters1 << CharacterData("1name2", "1id2", "1cname2", "1cid2");
+    characters1 << CharacterData("1name3", "1id3", "1cname3", "1cid3");
+    CharactersData three(version, fakeTime, fakeTime, characters1);
+
+    QList<CharacterData> characters4;
+    characters2 << CharacterData("1name1", "1id1", "1cname1", "1cid1");
+    CharactersData four(version, fakeTime, fakeTime, characters2);
+
+    QTest::newRow("MissingCharacters") << three << four;
+}
+
+void CharactersParserTest::charactersDataInequality()
+{
+    QFETCH(CharactersData, one);
+    QFETCH(CharactersData, two);
+
+    QVERIFY(one != two);
+    QVERIFY(one.characters() != two.characters());
+
+    if (one.characters().length() == two.characters().length())
+    {
+        for (int i = 0; i < one.characters().length(); ++i)
+        {
+            QVERIFY(one.characters().at(i) != two.characters().at(i));
+            QVERIFY(one.characters().at(i).name() != two.characters().at(i).name());
+            QVERIFY(one.characters().at(i).characterID() != two.characters().at(i).characterID());
+            QVERIFY(one.characters().at(i).corporationName() != two.characters().at(i).corporationName());
+            QVERIFY(one.characters().at(i).corporationID() != two.characters().at(i).corporationID());
+        }
+    }
 }

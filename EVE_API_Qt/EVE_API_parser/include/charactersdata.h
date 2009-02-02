@@ -55,11 +55,18 @@ namespace EveApi
     class CharacterData
     {
     public:
+        CharacterData() {}
+
         /*
           Create the character
           */
         CharacterData ( const QString& name, const QString& characterID,
                         const QString& corporationName, const QString& corporationID );
+
+        /*
+          Copy a CharacterData object
+          */
+        CharacterData ( const CharacterData& other );
 
         /*
           Get the character's name
@@ -81,6 +88,16 @@ namespace EveApi
           */
         const QString& corporationID() const;
 
+        /*
+          Compare two characters for equality
+          */
+        bool operator==(const CharacterData& other) const;
+
+        /*
+          Compare two characters for inequality
+          */
+        bool operator!=(const CharacterData& other) const;
+
     private:
         QString _name;
         QString _characterID;
@@ -91,14 +108,37 @@ namespace EveApi
     class CharactersData: public AbstractData
     {
     public:
+        CharactersData() {}
+
         CharactersData( const int& version,
                         const QDateTime& currentTime,
                         const QDateTime& cachedUntil,
                         const QList<CharacterData>& characters );
 
+        /*
+          Copy a CharactersData object
+          */
+        CharactersData ( const CharactersData& other );
+
         QMap<QString, QString> getCharacterNames();
 
         QMap<QString, QMap<QString, QString> > getCharacters();
+
+        const QList<CharacterData>& characters() const;
+
+        /*
+          Compare two character lists for equality
+
+          The version and times are purposefully not checked. The _meaningful_ contents of the server response were the same...
+          */
+        bool operator==(const CharactersData& other) const;
+
+        /*
+          Compare two character lists for inequality
+
+          The version and times are purposefully not checked. The _meaningful_ contents of the server response were the same...
+          */
+        bool operator!=(const CharactersData& other) const;
 
     private:
         QList<CharacterData> _characters;

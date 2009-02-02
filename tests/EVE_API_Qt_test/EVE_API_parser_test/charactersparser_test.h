@@ -29,6 +29,10 @@ class CharactersParserTest: public QObject
 private slots:
     void parse_data();
     void parse();
+    void charactersDataEquality_data();
+    void charactersDataEquality();
+    void charactersDataInequality_data();
+    void charactersDataInequality();
 };
 
 #endif // CHARACTERSPARSER_TEST_H
