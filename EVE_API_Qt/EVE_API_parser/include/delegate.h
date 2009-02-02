@@ -75,7 +75,7 @@ namespace EveApi
 
         QVariant getAtomicValue( const QString& query, const QString& data );
 
-        QString getXmlQueryResult( const QString& query, const QString& data );
+        QString runXQuery( const QString& query, const QString& data );
     };
 }
 

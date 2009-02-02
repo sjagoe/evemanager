@@ -97,7 +97,7 @@ QVariant EveApi::Delegate::getAtomicValue( const QString& query, const QString& 
     return values.takeFirst();
 }
 
-QString EveApi::Delegate::getXmlQueryResult( const QString& queryString, const QString& data )
+QString EveApi::Delegate::runXQuery( const QString& queryString, const QString& data )
 {
     QBuffer device;
     device.setData(data.toUtf8());
