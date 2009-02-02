@@ -23,6 +23,7 @@
 #include <QBuffer>
 #include <QByteArray>
 #include <QChar>
+#include <QList>
 #include <QStringList>
 
 EveApi::CharactersParser::CharactersParser( QObject* parent ):
@@ -38,22 +39,24 @@ void EveApi::CharactersParser::parse( const QString& id, const QString& data,
     QString key = this->getRowsetAttribute(data, "key");
     QStringList columns = this->getRowsetAttribute(data, "columns").split(QChar(','));
 
-    shared_ptr<EveApi::Rowset<void*> > rowset( new EveApi::Rowset<void*>(name, key, columns) );
-
-    QStringList characters;
-    characters = this->getCharacterIds(data, key);
+    QStringList characterIDs;
+    characterIDs = this->getCharacterIds(data, key);
     QMap<QString, QString> rowValues;
 
-    foreach(const QString& keyVal, characters)
+    QList<CharacterData> characters;
+
+    foreach(const QString& keyVal, characterIDs)
     {
         rowValues = this->getRowDataByName(name, key, keyVal, data, columns);
-        rowset->addRow(rowValues);
+        characters.append(CharacterData(
+                rowValues.value("name"), rowValues.value("characterID"),
+                rowValues.value("corporationName"), rowValues.value("corporationID")));
     }
 
     int version = this->getApiVersion(data);
     QDateTime currentTime = this->getServerTime(data);
     shared_ptr<EveApi::CharactersData> charactersData( new EveApi::CharactersData(
-            version, currentTime, cacheExpireTime, rowset) );
+            version, currentTime, cacheExpireTime, characters) );
     emit this->requestComplete(id, charactersData, httpResponse, cacheExpireTime);
 }
 

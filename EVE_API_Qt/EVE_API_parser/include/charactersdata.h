@@ -41,6 +41,7 @@
 
 #include "abstracteveapidata.hh"
 
+#include <QList>
 #include <QMap>
 #include <QString>
 #include <QStringList>
@@ -51,20 +52,56 @@ using boost::shared_ptr;
 
 namespace EveApi
 {
+    class CharacterData
+    {
+    public:
+        /*
+          Create the character
+          */
+        CharacterData ( const QString& name, const QString& characterID,
+                        const QString& corporationName, const QString& corporationID );
+
+        /*
+          Get the character's name
+          */
+        const QString& name() const;
+
+        /*
+          Get the character's ID
+          */
+        const QString& characterID() const;
+
+        /*
+          Get the corporation name
+          */
+        const QString& corporationName() const;
+
+        /*
+          Get the corporation ID
+          */
+        const QString& corporationID() const;
+
+    private:
+        QString _name;
+        QString _characterID;
+        QString _corporationName;
+        QString _corporationID;
+    };
+
     class CharactersData: public AbstractData
     {
     public:
         CharactersData( const int& version,
                         const QDateTime& currentTime,
                         const QDateTime& cachedUntil,
-                        shared_ptr<Rowset<void*> > rowset );
+                        const QList<CharacterData>& characters );
 
         QMap<QString, QString> getCharacterNames();
 
         QMap<QString, QMap<QString, QString> > getCharacters();
 
     private:
-        shared_ptr<Rowset<void*> > _characters;
+        QList<CharacterData> _characters;
     };
 }
 

@@ -20,25 +20,52 @@
 
 #include "charactersdata.h"
 
+EveApi::CharacterData::CharacterData ( const QString& name, const QString& characterID,
+                                       const QString& corporationName,
+                                       const QString& corporationID ):
+_name(name),
+_characterID(characterID),
+_corporationName(corporationName),
+_corporationID(corporationID)
+{
+}
+
+const QString& EveApi::CharacterData::name() const
+{
+    return this->_name;
+}
+
+const QString& EveApi::CharacterData::characterID() const
+{
+    return this->_characterID;
+}
+
+const QString& EveApi::CharacterData::corporationName() const
+{
+    return this->_corporationName;
+}
+
+const QString& EveApi::CharacterData::corporationID() const
+{
+    return this->_corporationID;
+}
+
+
 EveApi::CharactersData::CharactersData( const int& version,
                                         const QDateTime& currentTime,
                                         const QDateTime& cachedUntil,
-                                        shared_ptr<Rowset<void*> > rowset ):
+                                        const QList<CharacterData>& characters ):
 AbstractData(version, currentTime, cachedUntil)
 {
-    this->_characters = rowset;
+    this->_characters = characters;
 }
 
 QMap<QString, QString> EveApi::CharactersData::getCharacterNames()
 {
     QMap<QString, QString> values;
-    QString keyColumn = this->_characters->getKey();
-    Row<void*>* row;
-    foreach (row, this->_characters->rowsInOrder())
+    foreach (const CharacterData& character, this->_characters)
     {
-        QString key = (*row)[keyColumn];
-        QString column = "name";
-        values.insert(column, (*row)[column]);
+        values.insert(character.characterID(), character.name());
     }
     return values;
 }
@@ -46,17 +73,15 @@ QMap<QString, QString> EveApi::CharactersData::getCharacterNames()
 QMap<QString, QMap<QString, QString> > EveApi::CharactersData::getCharacters()
 {
     QMap<QString, QMap<QString, QString> > values;
-    QString keyColumn = this->_characters->getKey();
-    Row<void*>* row;
-    foreach (row, this->_characters->rowsInOrder())
+
+    foreach (const CharacterData& character, this->_characters)
     {
-        QString key = (*row)[keyColumn];
-        QMap<QString, QString> characterValues;
-        foreach (const QString& column, this->_characters->getColumns())
-        {
-            characterValues.insert(column, (*row)[column]);
-        }
-        values.insert(key, characterValues);
+        QMap<QString, QString> innerValues;
+        innerValues.insert(QString("name"), character.name());
+        innerValues.insert(QString("characterID"), character.characterID());
+        innerValues.insert(QString("corporationName"), character.corporationName());
+        innerValues.insert(QString("corporationID"), character.corporationID());
+        values.insert(character.characterID(), innerValues);
     }
     return values;
 }
