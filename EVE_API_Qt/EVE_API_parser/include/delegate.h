@@ -23,7 +23,6 @@
 
 #include <QDateTime>
 #include <QObject>
-#include <QSharedPointer>
 #include <QString>
 #include <QtXmlPatterns>
 

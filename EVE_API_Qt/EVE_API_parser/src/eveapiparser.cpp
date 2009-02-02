@@ -32,14 +32,14 @@ EveApi::Parser::Parser( QString& hostName,
                         QObject * parent ):
 QObject(parent)
 {
-    this->_api = QSharedPointer<EveApi>(
+    this->_api = shared_ptr<EveApi>(
             new EveApi(hostName, dataPath, proxyType, proxyHost, proxyPort, proxyUser, proxyPassword, this));
-    this->_delegates = QSharedPointer<Delegates>(
+    this->_delegates = shared_ptr<Delegates>(
             new Delegates());
-    this->connect(this->_api.data(), SIGNAL(requestComplete( QString&, QString&, QString&, QDateTime&, QString&)),
-                  this->_delegates.data(), SLOT(handleRequest( QString&, QString&, QString&, QDateTime&, QString&)));
-    this->connect(this->_delegates.data(), SIGNAL(requestComplete(QString,QSharedPointer<CharactersData>,QString,QDateTime)),
-                  this, SIGNAL(requestComplete(QString,QSharedPointer<CharactersData>,QString,QDateTime)));
+    this->connect(this->_api.get(), SIGNAL(requestComplete( QString&, QString&, QString&, QDateTime&, QString&)),
+                  this->_delegates.get(), SLOT(handleRequest( QString&, QString&, QString&, QDateTime&, QString&)));
+    this->connect(this->_delegates.get(), SIGNAL(requestComplete(QString,shared_ptr<CharactersData>,QString,QDateTime)),
+                  this, SIGNAL(requestComplete(QString,shared_ptr<CharactersData>,QString,QDateTime)));
 }
 
 

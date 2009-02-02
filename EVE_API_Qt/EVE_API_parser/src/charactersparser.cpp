@@ -38,7 +38,7 @@ void EveApi::CharactersParser::parse( const QString& id, const QString& data,
     QString key = this->getRowsetAttribute(data, "key");
     QStringList columns = this->getRowsetAttribute(data, "columns").split(QChar(','));
 
-    EveApi::Rowset<void*>* rowset = new EveApi::Rowset<void*>(name, key, columns);
+    shared_ptr<EveApi::Rowset<void*> > rowset( new EveApi::Rowset<void*>(name, key, columns) );
 
     QStringList characters;
     characters = this->getCharacterIds(data, key);
@@ -52,7 +52,7 @@ void EveApi::CharactersParser::parse( const QString& id, const QString& data,
 
     int version = this->getApiVersion(data);
     QDateTime currentTime = this->getServerTime(data);
-    QSharedPointer<EveApi::CharactersData> charactersData( new EveApi::CharactersData(
+    shared_ptr<EveApi::CharactersData> charactersData( new EveApi::CharactersData(
             version, currentTime, cacheExpireTime, rowset) );
     emit this->requestComplete(id, charactersData, httpResponse, cacheExpireTime);
 }

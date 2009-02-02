@@ -45,6 +45,10 @@
 #include <QString>
 #include <QStringList>
 
+#include <boost/shared_ptr.hpp>
+
+using boost::shared_ptr;
+
 namespace EveApi
 {
     class CharactersData: public AbstractData
@@ -53,17 +57,15 @@ namespace EveApi
         CharactersData( const int& version,
                         const QDateTime& currentTime,
                         const QDateTime& cachedUntil,
-                        Rowset<void*>* rowset );
-
-        ~CharactersData();
+                        shared_ptr<Rowset<void*> > rowset );
 
         QMap<QString, QString> getCharacterNames();
 
         QMap<QString, QMap<QString, QString> > getCharacters();
 
     private:
-        Rowset<void*>* _characters;
+        shared_ptr<Rowset<void*> > _characters;
     };
-};
+}
 
 #endif // CHARACTERSDATA_H

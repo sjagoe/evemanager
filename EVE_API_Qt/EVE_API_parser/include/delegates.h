@@ -24,7 +24,6 @@
 #include <QDateTime>
 #include <QMap>
 #include <QObject>
-#include <QSharedPointer>
 #include <QString>
 
 #include "charactersdata.h"
@@ -62,14 +61,14 @@ namespace EveApi
         /*!
           Map of API functions to delegates that are able to parse the output.
          */
-        QMap<QString, QSharedPointer<Delegate> > _delegates;
+        QMap<QString, shared_ptr<Delegate> > _delegates;
 
     signals:
         /*!
           Signal to pass the parsed data back to the original
           caller. The request is identified by the unique request ID.
          */
-        void requestComplete( QString id, QSharedPointer<CharactersData> data,
+        void requestComplete( QString id, shared_ptr<CharactersData> data,
                               QString httpResponse, QDateTime cacheExpireTime );
     };
 };

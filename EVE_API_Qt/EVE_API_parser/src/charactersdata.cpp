@@ -23,16 +23,10 @@
 EveApi::CharactersData::CharactersData( const int& version,
                                         const QDateTime& currentTime,
                                         const QDateTime& cachedUntil,
-                                        Rowset<void*>* rowset ):
+                                        shared_ptr<Rowset<void*> > rowset ):
 AbstractData(version, currentTime, cachedUntil)
 {
     this->_characters = rowset;
-}
-
-EveApi::CharactersData::~CharactersData()
-{
-    if (this->_characters != 0)
-        delete this->_characters;
 }
 
 QMap<QString, QString> EveApi::CharactersData::getCharacterNames()

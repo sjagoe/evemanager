@@ -36,7 +36,7 @@ using EveApi::CharactersData;
 
 typedef QMap<QString, QMap<QString, QString> > threemap;
 
-Q_DECLARE_METATYPE(QSharedPointer<CharactersData>);
+Q_DECLARE_METATYPE(shared_ptr<CharactersData>);
 Q_DECLARE_METATYPE(threemap);
 
 void CharactersParserTest::parse_data()
@@ -93,7 +93,7 @@ void CharactersParserTest::parse_data()
 
 void CharactersParserTest::parse()
 {
-    qRegisterMetaType<QSharedPointer<CharactersData> >("QSharedPointer<CharactersData>");
+    qRegisterMetaType<shared_ptr<CharactersData> >("shared_ptr<CharactersData>");
 
     QFETCH(QString, id);
     QFETCH(QString, xml);
@@ -102,7 +102,7 @@ void CharactersParserTest::parse()
     QFETCH(threemap, expected); // QMap<QString, QMap<QString, QString> >
 
     CharactersParser* parser = new CharactersParser();
-    QSignalSpy spy(parser, SIGNAL(requestComplete( QString, QSharedPointer<CharactersData>,
+    QSignalSpy spy(parser, SIGNAL(requestComplete( QString, shared_ptr<CharactersData>,
                                                    QString, QDateTime)));
 
     parser->parse(id, xml, httpResponse, cacheExpireTime);
@@ -113,8 +113,8 @@ void CharactersParserTest::parse()
     QVERIFY(arguments.at(2).type() == QVariant::String);
     QVERIFY(arguments.at(3).type() == QVariant::DateTime);
 
-    QVERIFY(arguments.at(1).canConvert<QSharedPointer<CharactersData> >() == true);
-    QSharedPointer<CharactersData> data = arguments.at(1).value<QSharedPointer<CharactersData> >();
+    QVERIFY(arguments.at(1).canConvert<shared_ptr<CharactersData> >() == true);
+    shared_ptr<CharactersData> data = arguments.at(1).value<shared_ptr<CharactersData> >();
 
     // TODO: Fine grained checking so that the output of the test is meaningful.
     QCOMPARE(data->getCharacters(), expected);

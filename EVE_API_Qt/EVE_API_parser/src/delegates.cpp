@@ -25,9 +25,9 @@
 
 EveApi::Delegates::Delegates()
 {
-    QSharedPointer<Delegate> delegate(new CharactersParser(this));
-    this->connect(delegate.data(), SIGNAL(requestComplete(QString,QSharedPointer<CharactersData>,QString,QDateTime)),
-                  this, SIGNAL(requestComplete(QString,QSharedPointer<CharactersData>,QString,QDateTime)));
+    shared_ptr<Delegate> delegate(new CharactersParser(this));
+    this->connect(delegate.get(), SIGNAL(requestComplete(QString,shared_ptr<CharactersData>,QString,QDateTime)),
+                  this, SIGNAL(requestComplete(QString,shared_ptr<CharactersData>,QString,QDateTime)));
     this->_delegates.insert("Characters.xml", delegate);
 }
 
@@ -37,6 +37,6 @@ void EveApi::Delegates::handleRequest( QString& id,
                                        QDateTime& cacheExpireTime,
                                        QString& requestType )
 {
-    QSharedPointer<Delegate> parser = this->_delegates.value( requestType );
+    shared_ptr<Delegate> parser = this->_delegates.value( requestType );
     parser->parse( id, data, httpResponse, cacheExpireTime );
 }

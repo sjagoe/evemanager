@@ -48,10 +48,10 @@ HEADERS += include/eveapiparser.hh \
     include/charactersdata.h \
     include/delegate.h \
     include/delegates.h \
-    include/charactersparser.h
+    include/charactersparser.h \
+    include/charactersheetdata.h
 
 # DISABLED HEADERS
-# include/charactersheetdata.hh \
 # include/corporationsheetdata.hh \
 # include/killlogdata.hh \
 # include/membersecuritydata.hh \
@@ -60,7 +60,6 @@ HEADERS += include/eveapiparser.hh \
 # include/skilltreedata.hh \
 
 # DISABLED SOURCES
-# src/charactersheetdata.cpp \
 # src/corporationsheetdata.cpp \
 # src/killlogdata.cpp \
 # src/membersecuritydata.cpp \
@@ -72,4 +71,5 @@ SOURCES += src/eveapiparser.cpp \
     src/charactersdata.cpp \
     src/delegate.cpp \
     src/delegates.cpp \
-    src/charactersparser.cpp
+    src/charactersparser.cpp \
+    src/charactersheetdata.cpp

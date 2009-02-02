@@ -18,10 +18,7 @@
  * along with EVE_API_Qt.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "charactersheetdata.hh"
-
-EveApi::AttributeEnhancers::AttributeEnhancers()
-{}
+#include "charactersheetdata.h"
 
 EveApi::AttributeEnhancers::AttributeEnhancers(
     QPair<QString, int> intelligence, QPair<QString, int> memory,
@@ -36,121 +33,83 @@ EveApi::AttributeEnhancers::AttributeEnhancers(
 }
 
 
-const QPair<QString, int>& EveApi::AttributeEnhancers::get_intelligence() const
+const QPair<QString, int>& EveApi::AttributeEnhancers::intelligence() const
 {
     return this->_intelligence;
 }
 
-const QPair<QString, int>& EveApi::AttributeEnhancers::get_memory() const
+const QPair<QString, int>& EveApi::AttributeEnhancers::memory() const
 {
     return this->_memory;
 }
 
-const QPair<QString, int>& EveApi::AttributeEnhancers::get_charisma() const
+const QPair<QString, int>& EveApi::AttributeEnhancers::charisma() const
 {
     return this->_charisma;
 }
 
-const QPair<QString, int>& EveApi::AttributeEnhancers::get_perception() const
+const QPair<QString, int>& EveApi::AttributeEnhancers::perception() const
 {
     return this->_perception;
 }
 
-const QPair<QString, int>& EveApi::AttributeEnhancers::get_willpower() const
+const QPair<QString, int>& EveApi::AttributeEnhancers::willpower() const
 {
     return this->_willpower;
 }
 
 
-const int& EveApi::AttributeEnhancers::get_intelligenceValue() const
+const int& EveApi::AttributeEnhancers::intelligenceValue() const
 {
     return this->_intelligence.second;
 }
 
-const int& EveApi::AttributeEnhancers::get_memoryValue() const
+const int& EveApi::AttributeEnhancers::memoryValue() const
 {
     return this->_memory.second;
 }
 
-const int& EveApi::AttributeEnhancers::get_charismaValue() const
+const int& EveApi::AttributeEnhancers::charismaValue() const
 {
     return this->_charisma.second;
 }
 
-const int& EveApi::AttributeEnhancers::get_perceptionValue() const
+const int& EveApi::AttributeEnhancers::perceptionValue() const
 {
     return this->_perception.second;
 }
 
-const int& EveApi::AttributeEnhancers::get_willpowerValue() const
+const int& EveApi::AttributeEnhancers::willpowerValue() const
 {
     return this->_willpower.second;
 }
 
 
-const QString& EveApi::AttributeEnhancers::get_intelligenceName() const
+const QString& EveApi::AttributeEnhancers::intelligenceName() const
 {
     return this->_intelligence.first;
 }
 
-const QString& EveApi::AttributeEnhancers::get_memoryName() const
+const QString& EveApi::AttributeEnhancers::memoryName() const
 {
     return this->_memory.first;
 }
 
-const QString& EveApi::AttributeEnhancers::get_charismaName() const
+const QString& EveApi::AttributeEnhancers::charismaName() const
 {
     return this->_charisma.first;
 }
 
-const QString& EveApi::AttributeEnhancers::get_perceptionName() const
+const QString& EveApi::AttributeEnhancers::perceptionName() const
 {
     return this->_perception.first;
 }
 
-const QString& EveApi::AttributeEnhancers::get_willpowerName() const
+const QString& EveApi::AttributeEnhancers::willpowerName() const
 {
     return this->_willpower.first;
 }
 
-
-void EveApi::AttributeEnhancers::set_intelligence(
-    const QPair<QString, int>& intelligence)
-{
-    this->_intelligence = intelligence;
-}
-
-void EveApi::AttributeEnhancers::set_memory(const QPair<QString, int>& memory)
-{
-    this->_memory = memory;
-}
-
-void EveApi::AttributeEnhancers::set_charisma(
-    const QPair<QString, int>& charisma)
-{
-    this->_charisma = charisma;
-}
-
-void EveApi::AttributeEnhancers::set_perception(
-    const QPair<QString, int>& perception)
-{
-    this->_perception = perception;
-}
-
-void EveApi::AttributeEnhancers::set_willpower(
-    const QPair<QString, int>& willpower)
-{
-    this->_willpower = willpower;
-}
-
-
-EveApi::Attributes::Attributes() :
-    _intelligence(0),
-    _memory(0),
-    _charisma(0),
-    _perception(0),
-    _willpower(0)
-{}
 
 EveApi::Attributes::Attributes(
     int intelligence, int memory, int charisma, int perception, int willpower) :
@@ -161,28 +120,27 @@ EveApi::Attributes::Attributes(
     _willpower(willpower)
 {}
 
-
-const int& EveApi::Attributes::get_intelligence() const
+const int& EveApi::Attributes::intelligence() const
 {
     return this->_intelligence;
 }
 
-const int& EveApi::Attributes::get_memory() const
+const int& EveApi::Attributes::memory() const
 {
     return this->_memory;
 }
 
-const int& EveApi::Attributes::get_charisma() const
+const int& EveApi::Attributes::charisma() const
 {
     return this->_charisma;
 }
 
-const int& EveApi::Attributes::get_perception() const
+const int& EveApi::Attributes::perception() const
 {
     return this->_perception;
 }
 
-const int& EveApi::Attributes::get_willpower() const
+const int& EveApi::Attributes::willpower() const
 {
     return this->_willpower;
 }

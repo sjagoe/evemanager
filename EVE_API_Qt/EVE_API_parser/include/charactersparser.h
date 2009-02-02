@@ -24,7 +24,6 @@
 #include <QDateTime>
 #include <QMap>
 #include <QObject>
-#include <QSharedPointer>
 #include <QString>
 #include <QStringList>
 #include <QtXmlPatterns>
@@ -57,7 +56,7 @@ namespace EveApi
         int getApiVersion(const QString& data);
 
     signals:
-        void requestComplete( QString id, QSharedPointer<CharactersData> data,
+        void requestComplete( QString id, shared_ptr<CharactersData> data,
                               QString httpResponse, QDateTime cacheExpiredTime );
     };
 };

@@ -22,7 +22,6 @@
 #define _EVEAPI_PARSER_HH_
 
 #include <QObject>
-#include <QSharedPointer>
 #include <QString>
 
 #include "charactersdata.h"
@@ -87,16 +86,16 @@ namespace EveApi
 
     private:
         //! The API module used to interact with the EVE API
-        QSharedPointer<EveApi> _api;
+        shared_ptr<EveApi> _api;
 
         //! Object to delegate parsing to the correct parser
-        QSharedPointer<Delegates> _delegates;
+        shared_ptr<Delegates> _delegates;
 
     signals:
         /*!
           Signal emitted when a character list request has been completed
          */
-        void requestComplete( QString id, QSharedPointer<CharactersData> data,
+        void requestComplete( QString id, shared_ptr<CharactersData> data,
                               QString httpResponse, QDateTime cacheExpireTime,
                               QString requestType );
     };
