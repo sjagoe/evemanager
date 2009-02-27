@@ -28,5 +28,7 @@ CONFIG += console
 CONFIG -= app_bundle
 TEMPLATE = app
 SOURCES += charactersparser_test.cpp \
-    main.cpp
-HEADERS += charactersparser_test.h
+    main.cpp \
+    src/charactersheetparser_test.cpp
+HEADERS += charactersparser_test.h \
+    include/charactersheetparser_test.h
