@@ -18,16 +18,16 @@
  */
 
 #include <QApplication>
-#include <QObject>
 
-#include "../EVE_Manager_controller/include/evemanager.hh"
+#include "evemanagerwindow.h"
 
 int main(int argc, char** argv)
 {
     QApplication app( argc, argv );
 
-    em_controller::EveManager eveManager;
-    QObject::connect( &eveManager, SIGNAL(exit()), &app, SLOT(quit()));
+    EveManagerWindow eveManager;
+
+    eveManager.show();
 
     return app.exec();
 }

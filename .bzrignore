@@ -34,3 +34,4 @@ EVE_API_Qt/EVE_API/src/eveapicorporation.cpp
 EVE_API_Qt/EVE_API/src/eveapieve.cpp
 EVE_API_Qt/EVE_API/src/eveapimap.cpp
 semantic.cache
+qtc-gdbmacros
