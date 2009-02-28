@@ -4,7 +4,7 @@
 
 EveManagerWindow::EveManagerWindow()
 {
-    if (!this->loadPlugin())
+    if (!this->_loadPlugin())
     {
         QMessageBox::information(this, "Error", "Could not load the plugin");
     }
@@ -14,7 +14,7 @@ EveManagerWindow::EveManagerWindow()
     }
 }
 
-bool EveManagerWindow::loadPlugin()
+bool EveManagerWindow::_loadPlugin()
 {
     QDir pluginsDir(qApp->applicationDirPath());
     if (!pluginsDir.cd("plugins"))
@@ -25,7 +25,7 @@ bool EveManagerWindow::loadPlugin()
         QPluginLoader pluginLoader(pluginsDir.absoluteFilePath(fileName));
         QObject *plugin = pluginLoader.instance();
         if (plugin) {
-            this->_interface = qobject_cast<MainInterface *>(plugin);
+            this->_interface.reset(qobject_cast<MainInterface *>(plugin));
             if (this->_interface)
                 return true;
         }

@@ -9,18 +9,29 @@
 # .
 # EVE_Manager is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
 # .
 # You should have received a copy of the GNU General Public License
-# along with EVE_Manager.  If not, see <http://www.gnu.org/licenses/>.
+# along with EVE_Manager. If not, see <http://www.gnu.org/licenses/>.
+VERSION = 0.1
 
-
-TEMPLATE = subdirs
-
-CONFIG += ordered
+# # For testing, uncomment this line:
+CONFIG += console
+TEMPLATE = lib # Dynamic library
+CONFIG += plugin
+TARGET = settings
+DEPENDPATH += . \
+    include \
+    src
+INCLUDEPATH += . \
+    include \
+    ../../../EVE_Manager/include \
+    ../../Character/include
+DEFINES += _REENTRANT
+CONFIG += thread
+CONFIG += rtti
 CONFIG += debug_and_release
-# Directories
-SUBDIRS += Character \
-    Character_Plugins
-
+DESTDIR = ../../../../bin/plugins/character
+HEADERS += include/charactersettingsplugin.h
+SOURCES += src/charactersettingsplugin.cpp

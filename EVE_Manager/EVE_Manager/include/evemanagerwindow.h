@@ -5,6 +5,10 @@
 
 #include "maininterface.h"
 
+#include <boost/shared_ptr.hpp>
+
+using boost::shared_ptr;
+
 class EveManagerWindow : public QMainWindow
 {
     Q_OBJECT;
@@ -12,9 +16,9 @@ public:
     EveManagerWindow();
 
 private:
-    bool loadPlugin();
+    bool _loadPlugin();
 
-    MainInterface* _interface;
+    shared_ptr<MainInterface> _interface;
 };
 
 #endif // EVEMANAGERWINDOW_H

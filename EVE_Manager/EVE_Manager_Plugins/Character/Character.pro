@@ -32,5 +32,6 @@ CONFIG += thread
 CONFIG += rtti
 CONFIG += debug_and_release
 DESTDIR = ../../../bin/plugins
-HEADERS += include/characterplugin.h
+HEADERS += include/characterplugin.h \
+    include/characterplugininterface.h
 SOURCES += src/characterplugin.cpp

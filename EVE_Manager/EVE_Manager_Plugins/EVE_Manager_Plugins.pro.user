@@ -33,6 +33,7 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <value key="QtVersionId" type="int" >0</value>
+   <value key="addQDumper" type="" ></value>
    <value key="buildDirectory" type="QString" >D:\Vista\Users\Simon\Documents\Programs\C++\EVE\API\evemanager\EVE_Manager\EVE_Manager_Plugins</value>
   </valuemap>
  </data>
@@ -41,6 +42,7 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
    <value key="QtVersionId" type="int" >0</value>
+   <value key="addQDumper" type="" ></value>
   </valuemap>
  </data>
  <data>
@@ -60,6 +62,7 @@
     <value type="QString" >COMPUTERNAME=SIMON-PC</value>
     <value type="QString" >COMSPEC=C:\Windows\system32\cmd.exe</value>
     <value type="QString" >FP_NO_HOST_CHECK=NO</value>
+    <value type="QString" >GIT_SSH=D:\Program Files\putty\nonbin\plink.exe</value>
     <value type="QString" >GNUWIN32=D:\Program Files\gnuwin32</value>
     <value type="QString" >HELLGATEENV=D:\Games\Hellgate London\</value>
     <value type="QString" >HOME=D:\Vista\Users\Simon</value>
@@ -69,7 +72,7 @@
     <value type="QString" >LOGONSERVER=\\SIMON-PC</value>
     <value type="QString" >NUMBER_OF_PROCESSORS=2</value>
     <value type="QString" >OS=Windows_NT</value>
-    <value type="QString" >PATH=C:\Qt\4.5.0-beta1\bin;C:\Program Files\MiKTeX 2.7\miktex\bin;D:\Program Files\gnuwin32\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Program Files\MATLAB_SV71\bin\win32;C:\Program Files\doxygen\bin;C:\Program Files\Samsung\Samsung PC Studio 3\;C:\Program Files\Common Files\GTK\2.0\bin;C:\Program Files\Bazaar;D:\Program Files\Console2;D:\Program Files\emacs\bin;D:\bin;D:\old D backup\Programs\Programming\cpp\reimp_new\bin;C:\Program Files\MKVtoolnix;D:\Program Files\mplayer;C:\Program Files\GNU\GnuPG;D:\Program Files\putty;C:\Qt\4.5.0-beta1\bin;C:\mingw\bin;C:\Python25</value>
+    <value type="QString" >PATH=C:\Qt\4.5.0-beta1\bin;C:\Program Files\MiKTeX 2.7\miktex\bin;D:\Program Files\gnuwin32\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Program Files\MATLAB_SV71\bin\win32;C:\Program Files\doxygen\bin;C:\Program Files\Samsung\Samsung PC Studio 3\;C:\Program Files\Common Files\GTK\2.0\bin;C:\Program Files\Bazaar;D:\Program Files\Git\cmd;D:\Program Files\Console2;D:\Program Files\emacs\bin;D:\bin;D:\old D backup\Programs\Programming\cpp\reimp_new\bin;C:\Program Files\MKVtoolnix;D:\Program Files\mplayer;C:\Program Files\GNU\GnuPG;D:\Program Files\putty;C:\Qt\4.5.0-beta1\bin;C:\mingw\bin;C:\Python25</value>
     <value type="QString" >PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC</value>
     <value type="QString" >PROCESSOR_ARCHITECTURE=x86</value>
     <value type="QString" >PROCESSOR_IDENTIFIER=x86 Family 6 Model 15 Stepping 6, GenuineIntel</value>
@@ -113,6 +116,7 @@
     <value type="QString" >COMPUTERNAME=SIMON-PC</value>
     <value type="QString" >COMSPEC=C:\Windows\system32\cmd.exe</value>
     <value type="QString" >FP_NO_HOST_CHECK=NO</value>
+    <value type="QString" >GIT_SSH=D:\Program Files\putty\nonbin\plink.exe</value>
     <value type="QString" >GNUWIN32=D:\Program Files\gnuwin32</value>
     <value type="QString" >HELLGATEENV=D:\Games\Hellgate London\</value>
     <value type="QString" >HOME=D:\Vista\Users\Simon</value>
@@ -122,7 +126,7 @@
     <value type="QString" >LOGONSERVER=\\SIMON-PC</value>
     <value type="QString" >NUMBER_OF_PROCESSORS=2</value>
     <value type="QString" >OS=Windows_NT</value>
-    <value type="QString" >PATH=C:\Qt\4.5.0-beta1\bin;C:\Program Files\MiKTeX 2.7\miktex\bin;D:\Program Files\gnuwin32\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Program Files\MATLAB_SV71\bin\win32;C:\Program Files\doxygen\bin;C:\Program Files\Samsung\Samsung PC Studio 3\;C:\Program Files\Common Files\GTK\2.0\bin;C:\Program Files\Bazaar;D:\Program Files\Console2;D:\Program Files\emacs\bin;D:\bin;D:\old D backup\Programs\Programming\cpp\reimp_new\bin;C:\Program Files\MKVtoolnix;D:\Program Files\mplayer;C:\Program Files\GNU\GnuPG;D:\Program Files\putty;C:\Qt\4.5.0-beta1\bin;C:\mingw\bin;C:\Python25</value>
+    <value type="QString" >PATH=C:\Qt\4.5.0-beta1\bin;C:\Program Files\MiKTeX 2.7\miktex\bin;D:\Program Files\gnuwin32\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Program Files\MATLAB_SV71\bin\win32;C:\Program Files\doxygen\bin;C:\Program Files\Samsung\Samsung PC Studio 3\;C:\Program Files\Common Files\GTK\2.0\bin;C:\Program Files\Bazaar;D:\Program Files\Git\cmd;D:\Program Files\Console2;D:\Program Files\emacs\bin;D:\bin;D:\old D backup\Programs\Programming\cpp\reimp_new\bin;C:\Program Files\MKVtoolnix;D:\Program Files\mplayer;C:\Program Files\GNU\GnuPG;D:\Program Files\putty;C:\Qt\4.5.0-beta1\bin;C:\mingw\bin;C:\Python25</value>
     <value type="QString" >PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC</value>
     <value type="QString" >PROCESSOR_ARCHITECTURE=x86</value>
     <value type="QString" >PROCESSOR_IDENTIFIER=x86 Family 6 Model 15 Stepping 6, GenuineIntel</value>
@@ -165,6 +169,7 @@
     <value type="QString" >COMPUTERNAME=SIMON-PC</value>
     <value type="QString" >COMSPEC=C:\Windows\system32\cmd.exe</value>
     <value type="QString" >FP_NO_HOST_CHECK=NO</value>
+    <value type="QString" >GIT_SSH=D:\Program Files\putty\nonbin\plink.exe</value>
     <value type="QString" >GNUWIN32=D:\Program Files\gnuwin32</value>
     <value type="QString" >HELLGATEENV=D:\Games\Hellgate London\</value>
     <value type="QString" >HOME=D:\Vista\Users\Simon</value>
@@ -174,7 +179,7 @@
     <value type="QString" >LOGONSERVER=\\SIMON-PC</value>
     <value type="QString" >NUMBER_OF_PROCESSORS=2</value>
     <value type="QString" >OS=Windows_NT</value>
-    <value type="QString" >PATH=C:\Qt\4.5.0-beta1\bin;C:\Program Files\MiKTeX 2.7\miktex\bin;D:\Program Files\gnuwin32\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Program Files\MATLAB_SV71\bin\win32;C:\Program Files\doxygen\bin;C:\Program Files\Samsung\Samsung PC Studio 3\;C:\Program Files\Common Files\GTK\2.0\bin;C:\Program Files\Bazaar;D:\Program Files\Console2;D:\Program Files\emacs\bin;D:\bin;D:\old D backup\Programs\Programming\cpp\reimp_new\bin;C:\Program Files\MKVtoolnix;D:\Program Files\mplayer;C:\Program Files\GNU\GnuPG;D:\Program Files\putty;C:\Qt\4.5.0-beta1\bin;C:\mingw\bin;C:\Python25</value>
+    <value type="QString" >PATH=C:\Qt\4.5.0-beta1\bin;C:\Program Files\MiKTeX 2.7\miktex\bin;D:\Program Files\gnuwin32\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Program Files\MATLAB_SV71\bin\win32;C:\Program Files\doxygen\bin;C:\Program Files\Samsung\Samsung PC Studio 3\;C:\Program Files\Common Files\GTK\2.0\bin;C:\Program Files\Bazaar;D:\Program Files\Git\cmd;D:\Program Files\Console2;D:\Program Files\emacs\bin;D:\bin;D:\old D backup\Programs\Programming\cpp\reimp_new\bin;C:\Program Files\MKVtoolnix;D:\Program Files\mplayer;C:\Program Files\GNU\GnuPG;D:\Program Files\putty;C:\Qt\4.5.0-beta1\bin;C:\mingw\bin;C:\Python25</value>
     <value type="QString" >PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC</value>
     <value type="QString" >PROCESSOR_ARCHITECTURE=x86</value>
     <value type="QString" >PROCESSOR_IDENTIFIER=x86 Family 6 Model 15 Stepping 6, GenuineIntel</value>
