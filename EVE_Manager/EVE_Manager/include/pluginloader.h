@@ -2,6 +2,7 @@
 #define PLUGINLOADER_H
 
 #include <QtCore>
+#include <QDir>
 #include <QList>
 #include <QString>
 #include <QStringList>

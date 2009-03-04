@@ -1,12 +1,11 @@
 #include "include/ordersplugin.h"
 
-#include <QtGui>
+#include <QtPlugin>
+#include <QList>
+#include <QStringList>
 
 #include "orderswidget.h"
 #include "tablemodel.h"
-
-#include <QList>
-#include <QStringList>
 
 OrdersPlugin::OrdersPlugin()
 {

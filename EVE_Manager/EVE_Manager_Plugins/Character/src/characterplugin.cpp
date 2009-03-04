@@ -1,6 +1,6 @@
 #include "include/characterplugin.h"
 
-#include <QtGui>
+#include <QtPlugin>
 
 #include "pluginloader.h"
 

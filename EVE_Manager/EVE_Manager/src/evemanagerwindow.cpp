@@ -1,6 +1,6 @@
-#include <QtGui>
-
 #include "include/evemanagerwindow.h"
+
+#include <QMessageBox>
 
 #include "pluginloader.h"
 

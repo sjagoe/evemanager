@@ -72,7 +72,7 @@
     <value type="QString" >LOGONSERVER=\\SIMON-PC</value>
     <value type="QString" >NUMBER_OF_PROCESSORS=2</value>
     <value type="QString" >OS=Windows_NT</value>
-    <value type="QString" >PATH=C:\Qt\4.5.0-beta1\bin;C:\Program Files\MiKTeX 2.7\miktex\bin;D:\Program Files\gnuwin32\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Program Files\MATLAB_SV71\bin\win32;C:\Program Files\doxygen\bin;C:\Program Files\Samsung\Samsung PC Studio 3\;C:\Program Files\Common Files\GTK\2.0\bin;C:\Program Files\Bazaar;D:\Program Files\Git\cmd;D:\Program Files\Console2;D:\Program Files\emacs\bin;D:\bin;D:\old D backup\Programs\Programming\cpp\reimp_new\bin;C:\Program Files\MKVtoolnix;D:\Program Files\mplayer;C:\Program Files\GNU\GnuPG;D:\Program Files\putty;C:\Qt\4.5.0-beta1\bin;C:\mingw\bin;C:\Python25</value>
+    <value type="QString" >PATH=c:\Qt\2009.01\qt\bin;C:\Program Files\MiKTeX 2.7\miktex\bin;D:\Program Files\gnuwin32\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Program Files\MATLAB_SV71\bin\win32;C:\Program Files\doxygen\bin;C:\Program Files\Samsung\Samsung PC Studio 3\;C:\Program Files\Common Files\GTK\2.0\bin;C:\Program Files\Bazaar;D:\Program Files\Git\cmd;D:\Program Files\Console2;D:\Program Files\emacs\bin;D:\bin;D:\old D backup\Programs\Programming\cpp\reimp_new\bin;C:\Program Files\MKVtoolnix;D:\Program Files\mplayer;C:\Program Files\GNU\GnuPG;D:\Program Files\putty;C:\Qt\4.5.0-beta1\bin;C:\mingw\bin;C:\Python25</value>
     <value type="QString" >PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC</value>
     <value type="QString" >PROCESSOR_ARCHITECTURE=x86</value>
     <value type="QString" >PROCESSOR_IDENTIFIER=x86 Family 6 Model 15 Stepping 6, GenuineIntel</value>
@@ -81,7 +81,7 @@
     <value type="QString" >PROGRAMDATA=C:\ProgramData</value>
     <value type="QString" >PROGRAMFILES=C:\Program Files</value>
     <value type="QString" >PUBLIC=C:\Users\Public</value>
-    <value type="QString" >QTDIR=C:/Qt/4.5.0-beta1</value>
+    <value type="QString" >QTDIR=c:/Qt/2009.01/qt</value>
     <value type="QString" >SESSIONNAME=Console</value>
     <value type="QString" >SYSTEMDRIVE=C:</value>
     <value type="QString" >SYSTEMROOT=C:\Windows</value>
@@ -99,7 +99,7 @@
     <value type="QString" >-r</value>
     <value type="QString" >CONFIG+=debug_and_release</value>
    </valuelist>
-   <value key="abstractProcess.command" type="QString" >C:/Qt/4.5.0-beta1/bin/qmake.exe</value>
+   <value key="abstractProcess.command" type="QString" >C:/Qt/2009.01/qt/bin/qmake.exe</value>
    <value key="abstractProcess.enabled" type="bool" >false</value>
    <value key="abstractProcess.workingDirectory" type="QString" >D:/Vista/Users/Simon/Documents/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager</value>
    <value key="buildConfiguration" type="int" >10</value>
@@ -126,7 +126,7 @@
     <value type="QString" >LOGONSERVER=\\SIMON-PC</value>
     <value type="QString" >NUMBER_OF_PROCESSORS=2</value>
     <value type="QString" >OS=Windows_NT</value>
-    <value type="QString" >PATH=C:\Qt\4.5.0-beta1\bin;C:\Program Files\MiKTeX 2.7\miktex\bin;D:\Program Files\gnuwin32\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Program Files\MATLAB_SV71\bin\win32;C:\Program Files\doxygen\bin;C:\Program Files\Samsung\Samsung PC Studio 3\;C:\Program Files\Common Files\GTK\2.0\bin;C:\Program Files\Bazaar;D:\Program Files\Git\cmd;D:\Program Files\Console2;D:\Program Files\emacs\bin;D:\bin;D:\old D backup\Programs\Programming\cpp\reimp_new\bin;C:\Program Files\MKVtoolnix;D:\Program Files\mplayer;C:\Program Files\GNU\GnuPG;D:\Program Files\putty;C:\Qt\4.5.0-beta1\bin;C:\mingw\bin;C:\Python25</value>
+    <value type="QString" >PATH=c:\Qt\2009.01\qt\bin;C:\Program Files\MiKTeX 2.7\miktex\bin;D:\Program Files\gnuwin32\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Program Files\MATLAB_SV71\bin\win32;C:\Program Files\doxygen\bin;C:\Program Files\Samsung\Samsung PC Studio 3\;C:\Program Files\Common Files\GTK\2.0\bin;C:\Program Files\Bazaar;D:\Program Files\Git\cmd;D:\Program Files\Console2;D:\Program Files\emacs\bin;D:\bin;D:\old D backup\Programs\Programming\cpp\reimp_new\bin;C:\Program Files\MKVtoolnix;D:\Program Files\mplayer;C:\Program Files\GNU\GnuPG;D:\Program Files\putty;C:\Qt\4.5.0-beta1\bin;C:\mingw\bin;C:\Python25</value>
     <value type="QString" >PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC</value>
     <value type="QString" >PROCESSOR_ARCHITECTURE=x86</value>
     <value type="QString" >PROCESSOR_IDENTIFIER=x86 Family 6 Model 15 Stepping 6, GenuineIntel</value>
@@ -135,7 +135,7 @@
     <value type="QString" >PROGRAMDATA=C:\ProgramData</value>
     <value type="QString" >PROGRAMFILES=C:\Program Files</value>
     <value type="QString" >PUBLIC=C:\Users\Public</value>
-    <value type="QString" >QTDIR=C:/Qt/4.5.0-beta1</value>
+    <value type="QString" >QTDIR=c:/Qt/2009.01/qt</value>
     <value type="QString" >SESSIONNAME=Console</value>
     <value type="QString" >SYSTEMDRIVE=C:</value>
     <value type="QString" >SYSTEMROOT=C:\Windows</value>

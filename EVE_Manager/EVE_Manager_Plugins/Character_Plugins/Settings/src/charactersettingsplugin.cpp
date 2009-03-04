@@ -1,6 +1,6 @@
 #include "include/charactersettingsplugin.h"
 
-#include <QtGui>
+#include <QtPlugin>
 
 CharacterSettingsPlugin::CharacterSettingsPlugin()
 {

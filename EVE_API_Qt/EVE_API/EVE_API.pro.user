@@ -32,7 +32,7 @@
   <variable>buildConfiguration-Debug</variable>
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
-   <value key="QtVersionId" type="int" >2</value>
+   <value key="QtVersionId" type="int" >0</value>
    <value key="addQDumper" type="" ></value>
    <value key="buildDirectory" type="QString" >D:\Vista\Users\Simon\Documents\Programs\C++\EVE\API\evemanager\EVE_API_Qt\EVE_API</value>
   </valuemap>
