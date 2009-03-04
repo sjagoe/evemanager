@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'orders.ui'
 **
-** Created: Sun 1. Mar 23:52:39 2009
-**      by: Qt User Interface Compiler version 4.5.0-beta1
+** Created: Wed 4. Mar 21:12:58 2009
+**      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/

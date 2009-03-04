@@ -20,10 +20,15 @@ class CharacterPlugin : public QObject, MainInterface
 public:
     CharacterPlugin();
 
+    virtual void initialise();
+
     virtual QWidget* getWidget();
 
+    virtual void setPluginPath(const QStringList& pluginPath);
+
 private:
-    bool _loadPlugins();
+
+    QStringList _pluginPath;
 
     QTabWidget* _tabWidget;
 

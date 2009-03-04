@@ -15,6 +15,7 @@ public:
     CharacterSettingsPlugin();
     virtual QWidget* getWidget();
     virtual const QString& getLabel() const;
+    virtual void initialise() {}
 
 private:
     QPushButton* _widget;

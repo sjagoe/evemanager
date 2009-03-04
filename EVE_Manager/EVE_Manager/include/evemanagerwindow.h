@@ -16,7 +16,6 @@ public:
     EveManagerWindow();
 
 private:
-    bool _loadPlugin();
 
     shared_ptr<MainInterface> _interface;
 };

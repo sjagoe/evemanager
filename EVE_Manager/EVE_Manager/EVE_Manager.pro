@@ -14,7 +14,8 @@ TEMPLATE = app
 TARGET = 
 DEPENDPATH += . \
     src
-INCLUDEPATH += . include
+INCLUDEPATH += . \
+    include
 CONFIG += debug_and_release
 
 # CONFIG(debug, debug|release) {
@@ -47,4 +48,5 @@ DESTDIR = ../../bin
 SOURCES += src/main.cpp \
     src/evemanagerwindow.cpp
 HEADERS += include/evemanagerwindow.h \
-    include/maininterface.h
+    include/maininterface.h \
+    include/pluginloader.h
