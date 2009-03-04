@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'orders.ui'
 **
-** Created: Wed 4. Mar 21:12:58 2009
+** Created: Wed 4. Mar 22:26:23 2009
 **      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -16,6 +16,7 @@
 #include <QtGui/QButtonGroup>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
+#include <QtGui/QSplitter>
 #include <QtGui/QTableView>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
@@ -25,9 +26,14 @@ QT_BEGIN_NAMESPACE
 class Ui_OrdersWidget
 {
 public:
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *verticalLayout_3;
+    QSplitter *splitter;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout_2;
     QLabel *lblSellOrders;
     QTableView *tblSellOrders;
+    QWidget *widget1;
+    QVBoxLayout *verticalLayout;
     QLabel *lblBuyOrders;
     QTableView *tblBuyOrders;
 
@@ -35,28 +41,46 @@ public:
     {
         if (OrdersWidget->objectName().isEmpty())
             OrdersWidget->setObjectName(QString::fromUtf8("OrdersWidget"));
-        OrdersWidget->resize(571, 573);
-        verticalLayout = new QVBoxLayout(OrdersWidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        lblSellOrders = new QLabel(OrdersWidget);
+        OrdersWidget->resize(584, 681);
+        verticalLayout_3 = new QVBoxLayout(OrdersWidget);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        splitter = new QSplitter(OrdersWidget);
+        splitter->setObjectName(QString::fromUtf8("splitter"));
+        splitter->setOrientation(Qt::Vertical);
+        widget = new QWidget(splitter);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        verticalLayout_2 = new QVBoxLayout(widget);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        lblSellOrders = new QLabel(widget);
         lblSellOrders->setObjectName(QString::fromUtf8("lblSellOrders"));
 
-        verticalLayout->addWidget(lblSellOrders);
+        verticalLayout_2->addWidget(lblSellOrders);
 
-        tblSellOrders = new QTableView(OrdersWidget);
+        tblSellOrders = new QTableView(widget);
         tblSellOrders->setObjectName(QString::fromUtf8("tblSellOrders"));
 
-        verticalLayout->addWidget(tblSellOrders);
+        verticalLayout_2->addWidget(tblSellOrders);
 
-        lblBuyOrders = new QLabel(OrdersWidget);
+        splitter->addWidget(widget);
+        widget1 = new QWidget(splitter);
+        widget1->setObjectName(QString::fromUtf8("widget1"));
+        verticalLayout = new QVBoxLayout(widget1);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        lblBuyOrders = new QLabel(widget1);
         lblBuyOrders->setObjectName(QString::fromUtf8("lblBuyOrders"));
 
         verticalLayout->addWidget(lblBuyOrders);
 
-        tblBuyOrders = new QTableView(OrdersWidget);
+        tblBuyOrders = new QTableView(widget1);
         tblBuyOrders->setObjectName(QString::fromUtf8("tblBuyOrders"));
 
         verticalLayout->addWidget(tblBuyOrders);
+
+        splitter->addWidget(widget1);
+
+        verticalLayout_3->addWidget(splitter);
 
 
         retranslateUi(OrdersWidget);

@@ -6,33 +6,48 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>571</width>
-    <height>573</height>
+    <width>584</width>
+    <height>681</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
-    <widget class="QLabel" name="lblSellOrders">
-     <property name="text">
-      <string>Sell Orders</string>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
+     <widget class="QWidget" name="">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="lblSellOrders">
+         <property name="text">
+          <string>Sell Orders</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableView" name="tblSellOrders"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="lblBuyOrders">
+         <property name="text">
+          <string>Buy Orders</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTableView" name="tblBuyOrders"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
-   </item>
-   <item>
-    <widget class="QTableView" name="tblSellOrders"/>
-   </item>
-   <item>
-    <widget class="QLabel" name="lblBuyOrders">
-     <property name="text">
-      <string>Buy Orders</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QTableView" name="tblBuyOrders"/>
    </item>
   </layout>
  </widget>
