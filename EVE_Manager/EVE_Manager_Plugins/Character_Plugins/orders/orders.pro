@@ -20,6 +20,7 @@ VERSION = 0.1
 CONFIG += console
 TEMPLATE = lib # Dynamic library
 CONFIG += plugin
+QT += xmlpatterns
 TARGET = orders
 DEPENDPATH += . \
     include \
@@ -35,8 +36,10 @@ CONFIG += debug_and_release
 DESTDIR = ../../../../bin/plugins/character
 HEADERS += include/ordersplugin.h \
     include/orderswidget.h \
-    include/tablemodel.h
+    include/tablemodel.h \
+    include/ordersparser.h
 SOURCES += src/ordersplugin.cpp \
     src/orderswidget.cpp \
-    src/tablemodel.cpp
+    src/tablemodel.cpp \
+    src/ordersparser.cpp
 FORMS += orders.ui

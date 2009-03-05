@@ -49,4 +49,5 @@ SOURCES += src/main.cpp \
     src/evemanagerwindow.cpp
 HEADERS += include/evemanagerwindow.h \
     include/maininterface.h \
-    include/pluginloader.h
+    include/pluginloader.h \
+    include/parseriface.h

@@ -18,31 +18,11 @@
  * along with EVE_Manager.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CHARACTERSETTINGSPLUGIN_H
-#define CHARACTERSETTINGSPLUGIN_H
+#ifndef PARSERIFACE_H
+#define PARSERIFACE_H
 
-#include <QObject>
-#include <QPushButton>
-#include <QString>
-
-#include "characterplugininterface.h"
-
-class CharacterSettingsPlugin : public QObject, CharacterPluginInterface
+class ParserIFace
 {
-    Q_OBJECT;
-    Q_INTERFACES(CharacterPluginInterface);
-public:
-    CharacterSettingsPlugin();
-    virtual QWidget* getWidget();
-    virtual const QString& getLabel() const;
-    virtual void initialise() {}
-
-    virtual void update(QString& result,
-                        QString& requestType) {}
-
-private:
-    QPushButton* _widget;
-    QString _label;
 };
 
-#endif // CHARACTERSETTINGSPLUGIN_H
+#endif // PARSERIFACE_H
