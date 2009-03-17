@@ -28,6 +28,7 @@
 #include <QList>
 #include <QMap>
 #include <QString>
+#include <QStringList>
 
 #include <boost/shared_ptr.hpp>
 
@@ -35,7 +36,23 @@ using boost::shared_ptr;
 
 class OrdersData
 {
+public:
+    OrdersData();
 
+    OrdersData(const QStringList& header);
+
+    void addSellOrder(const QStringList& order);
+
+    void addBuyOrder(const QStringList& order);
+
+    const QList<QStringList>& getSellOrders() const;
+
+    const QList<QStringList>& getBuyOrders() const;
+
+private:
+    QStringList _header;
+    QList<QStringList> _sellOrders;
+    QList<QStringList> _buyOrders;
 };
 
 class OrdersParser
@@ -60,9 +77,9 @@ protected:
           @arg data The XML data in which to look up the values
           @arg columns A list of columns in the rowset for which to fetch data.
      */
-    QMap<QString, QString> getRowDataByName(
-            const QString& rowsetName, const QString& key, const QString& keyVal,
-            const QString& data, const QStringList& columns );
+//    QMap<QString, QString> getRowDataByName(
+//            const QString& rowsetName, const QString& key, const QString& keyVal,
+//            const QString& data, const QStringList& columns );
 
     QDateTime getServerTime(const QString& data);
 

@@ -22,6 +22,35 @@
 
 // Shamelessly copied form EVE_API_Parser
 
+OrdersData::OrdersData()
+{
+}
+
+OrdersData::OrdersData(const QStringList& header)
+{
+    this->_header = header;
+}
+
+void OrdersData::addSellOrder(const QStringList& order)
+{
+    this->_sellOrders.append(order);
+}
+
+void OrdersData::addBuyOrder(const QStringList& order)
+{
+    this->_buyOrders.append(order);
+}
+
+const QList<QStringList>& OrdersData::getSellOrders() const
+{
+    return this->_sellOrders;
+}
+
+const QList<QStringList>& OrdersData::getBuyOrders() const
+{
+    return this->_buyOrders;
+}
+
 //<eveapi version="2">
 //  <currentTime>2008-02-04 13:28:18</currentTime>
 //  <result>
@@ -46,6 +75,13 @@
 
 shared_ptr<OrdersData> OrdersParser::parse(const QString& data)
 {
+    QStringList header;
+    QString query = "";
+    foreach (const QVariant& variant, this->getAtomicValues(query, data))
+    {
+        header << variant.toString();
+    }
+    shared_ptr<OrdersData> orders(new OrdersData(header));
 }
 
 bool OrdersParser::runXQuery(
@@ -63,23 +99,23 @@ bool OrdersParser::runXQuery(
     return true;
 }
 
-QMap<QString, QString> OrdersParser::getRowDataByName(
-        const QString& rowsetName, const QString& key, const QString& keyVal,
-        const QString& data, const QStringList& columns )
-{
-    QMap<QString, QString> rowValues;
-    QString query = "string(doc($inputDocument)//rowset[@name=\"%1\"]/row[@%2=\"%3\"]/@%4)";
-    query = query.arg(rowsetName).arg(key).arg(keyVal);
-    foreach(const QString& column, columns)
-    {
-        QString fullQuery = query.arg(column);
-        foreach (const QVariant& value, this->getAtomicValues(fullQuery, data))
-        {
-            rowValues.insert(column, value.value<QString>());
-        }
-    }
-    return rowValues;
-}
+//QMap<QString, QString> OrdersParser::getRowDataByName(
+//        const QString& rowsetName, const QString& key, const QString& keyVal,
+//        const QString& data, const QStringList& columns )
+//{
+//    QMap<QString, QString> rowValues;
+//    QString query = "string(doc($inputDocument)//rowset[@name=\"%1\"]/row[@%2=\"%3\"]/@%4)";
+//    query = query.arg(rowsetName).arg(key).arg(keyVal);
+//    foreach(const QString& column, columns)
+//    {
+//        QString fullQuery = query.arg(column);
+//        foreach (const QVariant& value, this->getAtomicValues(fullQuery, data))
+//        {
+//            rowValues.insert(column, value.value<QString>());
+//        }
+//    }
+//    return rowValues;
+//}
 
 QDateTime OrdersParser::getServerTime(const QString& data)
 {

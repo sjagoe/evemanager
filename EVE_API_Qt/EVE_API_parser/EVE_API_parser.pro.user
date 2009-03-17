@@ -34,7 +34,7 @@
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <value key="QtVersionId" type="int" >2</value>
    <value key="addQDumper" type="" ></value>
-   <value key="buildDirectory" type="QString" >D:\Vista\Users\Simon\Documents\Programs\C++\EVE\API\evemanager\EVE_API_Qt\EVE_API_parser</value>
+   <value key="buildDirectory" type="QString" >/home/sjagoe/Documents/personal/Programs/C++/EVE/API/evemanager/EVE_API_Qt/EVE_API_parser</value>
   </valuemap>
  </data>
  <data>
