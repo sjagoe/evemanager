@@ -67,27 +67,14 @@ protected:
           Run an XQuery against some XML in a string.
      */
     bool runXQuery( const QString& query, const QString& data, QXmlResultItems& result );
-
-    /*
-          Helper function to get the values from a row.
-
-          @arg rowsetName The unique name identifier of the rowset
-          @arg key The name of the key column in the rowset
-          @arg keyVal The value of the key to find the row
-          @arg data The XML data in which to look up the values
-          @arg columns A list of columns in the rowset for which to fetch data.
-     */
-//    QMap<QString, QString> getRowDataByName(
-//            const QString& rowsetName, const QString& key, const QString& keyVal,
-//            const QString& data, const QStringList& columns );
-
-    QDateTime getServerTime(const QString& data);
+    bool runXQuery( const QString& query, const QString& data, QStringList& result );
+    bool runXQuery( const QString& query, const QString& data, QString& result );
 
     QList<QVariant> getAtomicValues( const QString& query, const QString& data );
 
     QVariant getAtomicValue( const QString& query, const QString& data );
 
-    QString runXQuery( const QString& query, const QString& data );
+    QDateTime getServerTime(const QString& data);
 };
 
 #endif // ORDERSPARSER_H

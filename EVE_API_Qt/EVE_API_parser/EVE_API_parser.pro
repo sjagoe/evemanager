@@ -23,8 +23,12 @@ QT -= gui # does not need any GUI elements
 QT += xml \
     xmlpatterns # uses the XML Qt elements
 TARGET = EVE_API_Parser_Qt
-LIBS += -L../../bin \
-    -lEVE_API_Qt1
+LIBS += -L../../bin
+win32 {
+    LIBS += -lEVE_API_Qt1
+} else {
+    LIBS += -lEVE_API_Qt
+}
 DEPENDPATH += . \
     include \
     src

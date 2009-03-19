@@ -20,6 +20,8 @@
 
 #include "include/ordersparser.h"
 
+#include <QChar>
+
 // Shamelessly copied form EVE_API_Parser
 
 OrdersData::OrdersData()
@@ -75,13 +77,78 @@ const QList<QStringList>& OrdersData::getBuyOrders() const
 
 shared_ptr<OrdersData> OrdersParser::parse(const QString& data)
 {
-    QStringList header;
-    QString query = "";
-    foreach (const QVariant& variant, this->getAtomicValues(query, data))
+    QString query = "string(doc($inputDocument)//rowset[@name=\"orders\"]/@key)";
+    QString key = this->getAtomicValue(query, data).toString();
+
+    query.clear();
+    query = "string(doc($inputDocument)//rowset[@name=\"orders\"]/@columns)";
+    QStringList columns = this->getAtomicValue(query, data).toString().split(QChar(','));
+
+    shared_ptr<OrdersData> result( new OrdersData(columns) );
+
+    query.clear();
+    query.append("for $i in doc($inputDocument)//row\n");
+    query.append("return\n");
+    query.append(QString("string($i/@%1)\n").arg(key));
+
+    QStringList ids;
+    if (!this->runXQuery(query, data, ids))
+        return shared_ptr<OrdersData>();
+
+    query.clear();
+    query.append("declare function local:getrows() as element()+\n");
+    query.append("{\n");
+    query.append("  for $i in doc($inputDocument)//row\n");
+    query.append("  return\n");
+    query.append(QString("  <row %1=\"{string($i/@%1)}\">\n").arg(key));
+    foreach(const QString column, columns)
     {
-        header << variant.toString();
+        query.append(QString("    <%1>{string($i/@%1)}</%1>\n").arg(column));
     }
-    shared_ptr<OrdersData> orders(new OrdersData(header));
+    query.append("  </row>\n");
+    query.append("};\n");
+    query.append("\n");
+    query.append("<toplevel>\n");
+    query.append("  {\n");
+    query.append("    local:getrows()\n");
+    query.append("  }\n");
+    query.append("</toplevel>\n");
+
+    QString intermediate;
+    if (!this->runXQuery(query, data, intermediate))
+        return shared_ptr<OrdersData>();
+
+    foreach(const QString& id, ids)
+    {
+        query.clear();
+        query.append(QString("doc($inputDocument)//row[@orderID=\"%1\"]\n").arg(id));
+        QString rowText;
+        if (!this->runXQuery(query, intermediate, rowText))
+            return shared_ptr<OrdersData>();
+
+        QStringList row;
+        query.clear();
+        query.append(QString("for $i in doc($inputDocument)//row/*\n"));
+        query.append("return\n");
+        query.append("string($i)\n");
+        if (this->runXQuery(query, rowText, row))
+        {
+            result->addSellOrder(row); // TODO: Separate buys and sells
+        }
+    }
+    return result;
+}
+
+
+QDateTime OrdersParser::getServerTime(const QString& data)
+{
+    QString query = "string(doc($inputDocument)/eveapi/currentTime)";
+    QString tempDate;
+    QVariant value = this->getAtomicValue(query, data);
+    if (value.isValid())
+        tempDate = value.value<QString>();
+    QDateTime dateTime = QDateTime::fromString(tempDate, QString("yyyy-MM-dd hh:mm:ss"));
+    return dateTime;
 }
 
 bool OrdersParser::runXQuery(
@@ -99,33 +166,31 @@ bool OrdersParser::runXQuery(
     return true;
 }
 
-//QMap<QString, QString> OrdersParser::getRowDataByName(
-//        const QString& rowsetName, const QString& key, const QString& keyVal,
-//        const QString& data, const QStringList& columns )
-//{
-//    QMap<QString, QString> rowValues;
-//    QString query = "string(doc($inputDocument)//rowset[@name=\"%1\"]/row[@%2=\"%3\"]/@%4)";
-//    query = query.arg(rowsetName).arg(key).arg(keyVal);
-//    foreach(const QString& column, columns)
-//    {
-//        QString fullQuery = query.arg(column);
-//        foreach (const QVariant& value, this->getAtomicValues(fullQuery, data))
-//        {
-//            rowValues.insert(column, value.value<QString>());
-//        }
-//    }
-//    return rowValues;
-//}
-
-QDateTime OrdersParser::getServerTime(const QString& data)
+bool OrdersParser::runXQuery(
+        const QString& queryString, const QString& data, QStringList& result )
 {
-    QString query = "string(doc($inputDocument)/eveapi/currentTime)";
-    QString tempDate;
-    QVariant value = this->getAtomicValue(query, data);
-    if (value.isValid())
-        tempDate = value.value<QString>();
-    QDateTime dateTime = QDateTime::fromString(tempDate, QString("yyyy-MM-dd hh:mm:ss"));
-    return dateTime;
+    QBuffer device;
+    device.setData(data.toUtf8());
+    device.open(QIODevice::ReadOnly);
+    QXmlQuery query;
+    query.bindVariable("inputDocument", &device);
+    query.setQuery(queryString);
+    if (!query.isValid())
+        return false;
+    return query.evaluateTo(&result);
+}
+
+bool OrdersParser::runXQuery( const QString& queryString, const QString& data, QString& result )
+{
+    QBuffer device;
+    device.setData(data.toUtf8());
+    device.open(QIODevice::ReadOnly);
+    QXmlQuery query;
+    query.bindVariable("inputDocument", &device);
+    query.setQuery(queryString);
+    if (!query.isValid())
+        return false;
+    return query.evaluateTo(&result);
 }
 
 QList<QVariant> OrdersParser::getAtomicValues( const QString& query, const QString& data )
@@ -154,23 +219,4 @@ QVariant OrdersParser::getAtomicValue( const QString& query, const QString& data
     if (values.length() == 0)
         return QVariant();
     return values.takeFirst();
-}
-
-QString OrdersParser::runXQuery( const QString& queryString, const QString& data )
-{
-    QBuffer device;
-    device.setData(data.toUtf8());
-    device.open(QIODevice::ReadOnly);
-    QXmlQuery query;
-    query.bindVariable("inputDocument", &device);
-    query.setQuery(queryString);
-    QBuffer output;
-    output.open(QIODevice::WriteOnly);
-    QXmlSerializer result(query, &output);
-    if (!query.isValid())
-        output.close();
-        return QString();
-    query.evaluateTo(&result);
-    output.close();
-    return QString(output.data());
 }

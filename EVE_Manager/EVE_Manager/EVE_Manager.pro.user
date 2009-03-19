@@ -34,7 +34,7 @@
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <value key="QtVersionId" type="int" >0</value>
    <value key="addQDumper" type="" ></value>
-   <value key="buildDirectory" type="QString" >/home/sjagoe/Documents/personal/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager</value>
+   <value key="buildDirectory" type="QString" >/home/simon/Documents/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager</value>
   </valuemap>
  </data>
  <data>
@@ -56,43 +56,40 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-FjA67w0AxW,guid=aa5b9a61dc0f115803eb50c749bf6a3e</value>
-    <value type="QString" >DESKTOP_SESSION=kde</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-AIq43me4dH,guid=e7d6f8cc5e4e69b936c9a14249c297a2</value>
+    <value type="QString" >DESKTOP_SESSION=default</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0</value>
     <value type="QString" >DM_CONTROL=/var/run/xdmctl</value>
-    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-XmWxVk/S.gpg-agent:4766:1</value>
-    <value type="QString" >GS_LIB=/home/sjagoe/.fonts</value>
-    <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/sjagoe/.gtkrc-2.0:/home/sjagoe/.gtkrc-2.0-kde4:/home/sjagoe/.kde/share/config/gtkrc-2.0</value>
-    <value type="QString" >GTK_MODULES=canberra-gtk-module</value>
-    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/sjagoe/.gtkrc::/home/sjagoe/.kde/share/config/gtkrc</value>
-    <value type="QString" >HOME=/home/sjagoe</value>
+    <value type="QString" >GS_LIB=/home/simon/.fonts</value>
+    <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/simon/.gtkrc-2.0:/home/simon/.gtkrc-2.0-kde4:/home/simon/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/simon/.gtkrc::/home/simon/.kde/share/config/gtkrc</value>
+    <value type="QString" >HOME=/home/simon</value>
     <value type="QString" >KDE_FULL_SESSION=true</value>
     <value type="QString" >KDE_MULTIHEAD=false</value>
     <value type="QString" >KDE_SESSION_UID=</value>
     <value type="QString" >KDE_SESSION_VERSION=4</value>
     <value type="QString" >LANG=en_GB.UTF-8</value>
     <value type="QString" >LANGUAGE=</value>
-    <value type="QString" >LOGNAME=sjagoe</value>
-    <value type="QString" >MESA_NO_ASM=1</value>
-    <value type="QString" >PATH=/usr/bin:/home/sjagoe/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
-    <value type="QString" >PWD=/home/sjagoe</value>
+    <value type="QString" >LOGNAME=simon</value>
+    <value type="QString" >PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
+    <value type="QString" >PWD=/home/simon/Documents</value>
     <value type="QString" >QTDIR=/usr</value>
-    <value type="QString" >QT_PLUGIN_PATH=/home/sjagoe/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
-    <value type="QString" >SESSION_MANAGER=local/azriphale:/tmp/.ICE-unix/4868</value>
+    <value type="QString" >QT_PLUGIN_PATH=/home/simon/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString" >SESSION_MANAGER=local/azriphale:/tmp/.ICE-unix/4037</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=0</value>
-    <value type="QString" >SSH_AGENT_PID=4765</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-CuiSIk4643/agent.4643</value>
-    <value type="QString" >USER=sjagoe</value>
+    <value type="QString" >SSH_AGENT_PID=3935</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-NwFANg3808/agent.3808</value>
+    <value type="QString" >USER=simon</value>
     <value type="QString" >WINDOWPATH=7</value>
     <value type="QString" >XCURSOR_THEME=oxy-white</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
-    <value type="QString" >XDG_SESSION_COOKIE=51b2c8dd5048998cc444578148f71ba0-1237281340.885023-1883299733</value>
+    <value type="QString" >XDG_SESSION_COOKIE=e4a82c80143a7182a74fe77f49c02eed-1237489568.995292-119242388</value>
     <value type="QString" >XDM_MANAGED=method=classic</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
-    <value type="QString" >/home/sjagoe/Documents/personal/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager/EVE_Manager.pro</value>
+    <value type="QString" >/home/simon/Documents/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager/EVE_Manager.pro</value>
     <value type="QString" >-spec</value>
     <value type="QString" >/usr/share/qt4/mkspecs/linux-g++</value>
     <value type="QString" >-r</value>
@@ -101,7 +98,7 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/qmake-qt4</value>
    <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/sjagoe/Documents/personal/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/simon/Documents/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager</value>
    <value key="buildConfiguration" type="int" >10</value>
   </valuemap>
  </data>
@@ -110,39 +107,36 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-FjA67w0AxW,guid=aa5b9a61dc0f115803eb50c749bf6a3e</value>
-    <value type="QString" >DESKTOP_SESSION=kde</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-AIq43me4dH,guid=e7d6f8cc5e4e69b936c9a14249c297a2</value>
+    <value type="QString" >DESKTOP_SESSION=default</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0</value>
     <value type="QString" >DM_CONTROL=/var/run/xdmctl</value>
-    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-XmWxVk/S.gpg-agent:4766:1</value>
-    <value type="QString" >GS_LIB=/home/sjagoe/.fonts</value>
-    <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/sjagoe/.gtkrc-2.0:/home/sjagoe/.gtkrc-2.0-kde4:/home/sjagoe/.kde/share/config/gtkrc-2.0</value>
-    <value type="QString" >GTK_MODULES=canberra-gtk-module</value>
-    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/sjagoe/.gtkrc::/home/sjagoe/.kde/share/config/gtkrc</value>
-    <value type="QString" >HOME=/home/sjagoe</value>
+    <value type="QString" >GS_LIB=/home/simon/.fonts</value>
+    <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/simon/.gtkrc-2.0:/home/simon/.gtkrc-2.0-kde4:/home/simon/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/simon/.gtkrc::/home/simon/.kde/share/config/gtkrc</value>
+    <value type="QString" >HOME=/home/simon</value>
     <value type="QString" >KDE_FULL_SESSION=true</value>
     <value type="QString" >KDE_MULTIHEAD=false</value>
     <value type="QString" >KDE_SESSION_UID=</value>
     <value type="QString" >KDE_SESSION_VERSION=4</value>
     <value type="QString" >LANG=en_GB.UTF-8</value>
     <value type="QString" >LANGUAGE=</value>
-    <value type="QString" >LOGNAME=sjagoe</value>
-    <value type="QString" >MESA_NO_ASM=1</value>
-    <value type="QString" >PATH=/usr/bin:/home/sjagoe/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
-    <value type="QString" >PWD=/home/sjagoe</value>
+    <value type="QString" >LOGNAME=simon</value>
+    <value type="QString" >PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
+    <value type="QString" >PWD=/home/simon/Documents</value>
     <value type="QString" >QTDIR=/usr</value>
-    <value type="QString" >QT_PLUGIN_PATH=/home/sjagoe/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
-    <value type="QString" >SESSION_MANAGER=local/azriphale:/tmp/.ICE-unix/4868</value>
+    <value type="QString" >QT_PLUGIN_PATH=/home/simon/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString" >SESSION_MANAGER=local/azriphale:/tmp/.ICE-unix/4037</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=0</value>
-    <value type="QString" >SSH_AGENT_PID=4765</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-CuiSIk4643/agent.4643</value>
-    <value type="QString" >USER=sjagoe</value>
+    <value type="QString" >SSH_AGENT_PID=3935</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-NwFANg3808/agent.3808</value>
+    <value type="QString" >USER=simon</value>
     <value type="QString" >WINDOWPATH=7</value>
     <value type="QString" >XCURSOR_THEME=oxy-white</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
-    <value type="QString" >XDG_SESSION_COOKIE=51b2c8dd5048998cc444578148f71ba0-1237281340.885023-1883299733</value>
+    <value type="QString" >XDG_SESSION_COOKIE=e4a82c80143a7182a74fe77f49c02eed-1237489568.995292-119242388</value>
     <value type="QString" >XDM_MANAGED=method=classic</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
@@ -151,7 +145,7 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
    <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/sjagoe/Documents/personal/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/simon/Documents/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager</value>
    <valuelist key="makeargs" type="QVariantList" >
     <value type="QString" >debug</value>
    </valuelist>
