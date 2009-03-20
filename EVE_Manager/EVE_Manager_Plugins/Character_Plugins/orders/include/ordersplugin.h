@@ -26,6 +26,8 @@
 
 #include "characterplugininterface.h"
 
+#include "ordersparser.h"
+
 #include <boost/shared_ptr.hpp>
 
 using boost::shared_ptr;
@@ -49,6 +51,7 @@ public:
 
 private:
     OrdersWidget* _widget;
+    OrdersParser _parser;
 
     QString _label;
 

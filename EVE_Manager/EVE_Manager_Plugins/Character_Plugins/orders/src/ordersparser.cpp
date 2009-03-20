@@ -31,16 +31,28 @@ OrdersData::OrdersData()
 OrdersData::OrdersData(const QStringList& header)
 {
     this->_header = header;
+    this->_bidIndex = header.indexOf("bid");
+    this->_stateIndex = header.indexOf("orderState");
 }
 
-void OrdersData::addSellOrder(const QStringList& order)
+void OrdersData::addRow(const QStringList& order)
 {
-    this->_sellOrders.append(order);
+    if (order.at(this->_stateIndex) == "0")
+    {
+        if (order.at(this->_bidIndex) == "0")
+        {
+            this->_sellOrders.append(order);
+        }
+        else if (order.at(this->_bidIndex) == "1")
+        {
+            this->_buyOrders.append(order);
+        }
+    }
 }
 
-void OrdersData::addBuyOrder(const QStringList& order)
+const QStringList& OrdersData::getHeader() const
 {
-    this->_buyOrders.append(order);
+    return this->_header;
 }
 
 const QList<QStringList>& OrdersData::getSellOrders() const
@@ -133,7 +145,7 @@ shared_ptr<OrdersData> OrdersParser::parse(const QString& data)
         query.append("string($i)\n");
         if (this->runXQuery(query, rowText, row))
         {
-            result->addSellOrder(row); // TODO: Separate buys and sells
+            result->addRow(row);
         }
     }
     return result;

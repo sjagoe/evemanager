@@ -41,18 +41,21 @@ public:
 
     OrdersData(const QStringList& header);
 
-    void addSellOrder(const QStringList& order);
-
-    void addBuyOrder(const QStringList& order);
+    void addRow(const QStringList& order);
 
     const QList<QStringList>& getSellOrders() const;
 
     const QList<QStringList>& getBuyOrders() const;
 
+    const QStringList& getHeader() const;
+
 private:
     QStringList _header;
     QList<QStringList> _sellOrders;
     QList<QStringList> _buyOrders;
+    int _bidIndex;
+    int _stateIndex;
+//    int _accountIndex;
 };
 
 class OrdersParser

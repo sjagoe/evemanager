@@ -29,40 +29,34 @@
 
 OrdersPlugin::OrdersPlugin()
 {
+    QString tempdata = "";
+    tempdata.append("<eveapi version=\"2\">");
+    tempdata.append(" <currentTime>2008-02-04 13:28:18</currentTime>");
+    tempdata.append(" <result>");
+    tempdata.append("   <rowset name=\"orders\" key=\"orderID\"");
+    tempdata.append("           columns=\"orderID,charID,stationID,volEntered,volRemaining,minVolume,orderState,typeID,range,accountKey,duration,escrow,price,bid,issued\">");
+    tempdata.append("     <row orderID=\"639356913\" charID=\"118406849\" stationID=\"60008494\" volEntered=\"25\"");
+    tempdata.append("          volRemaining=\"18\" minVolume=\"1\" orderState=\"0\" typeID=\"26082\" range=\"32767\"");
+    tempdata.append("          accountKey=\"1000\" duration=\"3\" escrow=\"0.00\" price=\"3398000.00\" bid=\"0\"");
+    tempdata.append("          issued=\"2008-02-03 13:54:11\"/>");
+    tempdata.append("     <row orderID=\"639477821\" charID=\"118406849\" stationID=\"60004357\" volEntered=\"25\"");
+    tempdata.append("          volRemaining=\"24\" minVolume=\"1\" orderState=\"0\" typeID=\"26082\" range=\"32767\"");
+    tempdata.append("          accountKey=\"1000\" duration=\"3\" escrow=\"0.00\" price=\"3200000.00\" bid=\"0\"");
+    tempdata.append("          issued=\"2008-02-02 16:39:25\"/>");
+    tempdata.append("     <row orderID=\"639587440\" charID=\"118406849\" stationID=\"60003760\" volEntered=\"25\"");
+    tempdata.append("          volRemaining=\"4\" minVolume=\"1\" orderState=\"0\" typeID=\"26082\" range=\"32767\"");
+    tempdata.append("          accountKey=\"1000\" duration=\"1\" escrow=\"0.00\" price=\"3399999.98\" bid=\"1\"");
+    tempdata.append("          issued=\"2008-02-03 22:35:54\"/>");
+    tempdata.append("   </rowset>");
+    tempdata.append(" </result>");
+    tempdata.append(" <cachedUntil>2008-02-04 14:28:18</cachedUntil>");
+    tempdata.append("</eveapi>");
+    shared_ptr<OrdersData> orders = this->_parser.parse(tempdata);
+
     this->_widget = new OrdersWidget;
     this->_label = "Market Orders";
-    int columns = 6;
-    int rows = 100;
-    QStringList header;
-    QString base = "Column %1";
-    for (int i = 1; i <= columns; ++i)
-    {
-        header << base.arg(i);
-    }
-    QList<QStringList> data;
-    base = "sell: row %1 col %2";
-    for (int i = 1; i <= rows; ++i)
-    {
-        QStringList item;
-        for (int j = 1; j <= columns; ++j)
-        {
-            item << base.arg(i).arg(j);
-        }
-        data.append(item);
-    }
-    this->_mdlSellOrders.reset(new TableModel(header, data));
-    data.clear();
-    base = "buy: row %1 col %2";
-    for (int i = 1; i <= rows; ++i)
-    {
-        QStringList item;
-        for (int j = 1; j <= columns; ++j)
-        {
-            item << base.arg(i).arg(j);
-        }
-        data.append(item);
-    }
-    this->_mdlBuyOrders.reset(new TableModel(header, data));
+    this->_mdlSellOrders.reset(new TableModel(orders->getHeader(), orders->getSellOrders()));
+    this->_mdlBuyOrders.reset(new TableModel(orders->getHeader(), orders->getBuyOrders()));
     this->_widget->setModels(this->_mdlSellOrders, this->_mdlBuyOrders);
 }
 
