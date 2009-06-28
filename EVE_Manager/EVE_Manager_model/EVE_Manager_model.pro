@@ -34,7 +34,12 @@ CONFIG += debug_and_release
 # }
 DESTDIR = ../../bin
 
-LIBS += -L../../bin -lEVE_API_Qt1
+!win32 {
+    LIBS += -L../../bin -lEVE_API_Qt
+}
+win32 {
+    LIBS += -L../../bin -lEVE_API_Qt1
+}
 
 # Input
 HEADERS += include/evemanagersettings.hh

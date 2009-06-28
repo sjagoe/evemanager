@@ -21,7 +21,12 @@ VERSION = 1.4.0
 
 TEMPLATE = app
 QT += xml
-LIBS += -L../../bin -lEVE_API_Qt1
+!win32 {
+    LIBS += -L../../bin -lEVE_API_Qt
+}
+win32 {
+    LIBS += -L../../bin -lEVE_API_Qt1
+}
 TARGET = EVE_API_Qt_base_app
 
 DEPENDPATH += . include src
