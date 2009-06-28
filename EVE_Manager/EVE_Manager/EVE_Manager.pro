@@ -18,6 +18,7 @@ INCLUDEPATH += . \
     include
 CONFIG += debug_and_release
 
+CONFIG += plugin
 # CONFIG(debug, debug|release) {
 # DESTDIR = ../bin/debug
 # #controller lib

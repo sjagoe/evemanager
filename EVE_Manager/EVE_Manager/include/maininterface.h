@@ -22,6 +22,7 @@
 #define MAININTERFACE_H
 
 #include <QDateTime>
+#include <QtPlugin>
 #include <QString>
 
 class QWidget;
@@ -34,11 +35,8 @@ public:
     virtual QWidget* getWidget() = 0;
     virtual void setPluginPath(const QStringList& pluginPath) {}
 
-    virtual void update(QString& id,
-                        QString& result,
-                        QString& httpResponse,
-                        QDateTime& cacheExpireTime,
-                        QString& requestType) {}
+    virtual void update(QString& result,
+                        QString& requestType) = 0;
 };
 
 Q_DECLARE_INTERFACE(MainInterface, "com.EveManager.Plugin.MainInterface/0.1");

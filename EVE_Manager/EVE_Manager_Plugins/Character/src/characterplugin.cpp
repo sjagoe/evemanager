@@ -49,11 +49,7 @@ void CharacterPlugin::setPluginPath(const QStringList& pluginPath)
     this->_pluginPath << "character";
 }
 
-void CharacterPlugin::update(QString& id,
-            QString& result,
-            QString& httpResponse,
-            QDateTime& cacheExpireTime,
-            QString& requestType)
+void CharacterPlugin::update(QString& result, QString& requestType)
 {
     foreach(shared_ptr<CharacterPluginInterface> plugin, this->_plugins)
     {

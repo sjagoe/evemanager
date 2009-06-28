@@ -21,6 +21,7 @@ TEMPLATE = subdirs
 CONFIG += ordered
 CONFIG += debug_and_release
 # Directories
-SUBDIRS += Character \
+SUBDIRS += RootPlugin \
+    Character \
     Character_Plugins
 

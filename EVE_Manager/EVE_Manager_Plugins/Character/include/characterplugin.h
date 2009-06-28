@@ -46,10 +46,7 @@ public:
 
     virtual void setPluginPath(const QStringList& pluginPath);
 
-    virtual void update(QString& id,
-                        QString& result,
-                        QString& httpResponse,
-                        QDateTime& cacheExpireTime,
+    virtual void update(QString& result,
                         QString& requestType);
 
 private:
@@ -60,9 +57,6 @@ private:
 
     QList<shared_ptr<CharacterPluginInterface> > _plugins;
 
-signals:
-    void propogateUpdate(QString& result,
-                         QString& requestType);
 };
 
 #endif // CHARACTERPLUGIN_H

@@ -27,9 +27,6 @@ class CharacterPluginInterface: public MainInterface
 {
 public:
     virtual const QString& getLabel() const = 0;
-
-    virtual void update(QString& result,
-                        QString& requestType) = 0;
 };
 
 Q_DECLARE_INTERFACE(CharacterPluginInterface, "com.EveManager.Plugin.CharacterPluginInterface/0.1");

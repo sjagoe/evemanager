@@ -34,7 +34,7 @@
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <value key="QtVersionId" type="int" >0</value>
    <value key="addQDumper" type="" ></value>
-   <value key="buildDirectory" type="QString" >/home/sjagoe/Documents/personal/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager</value>
+   <value key="buildDirectory" type="QString" >/home/simon/Documents/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager</value>
   </valuemap>
  </data>
  <data>
@@ -56,13 +56,15 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-AIq43me4dH,guid=e7d6f8cc5e4e69b936c9a14249c297a2</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-ivQChLdzLy,guid=f0ed786d2d3102a8edd648ee49e9861e</value>
     <value type="QString" >DESKTOP_SESSION=default</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0</value>
     <value type="QString" >DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-5mKEBz/S.gpg-agent:4045:1</value>
     <value type="QString" >GS_LIB=/home/simon/.fonts</value>
     <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/simon/.gtkrc-2.0:/home/simon/.gtkrc-2.0-kde4:/home/simon/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString" >GTK_MODULES=canberra-gtk-module</value>
     <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/simon/.gtkrc::/home/simon/.kde/share/config/gtkrc</value>
     <value type="QString" >HOME=/home/simon</value>
     <value type="QString" >KDE_FULL_SESSION=true</value>
@@ -72,20 +74,20 @@
     <value type="QString" >LANG=en_GB.UTF-8</value>
     <value type="QString" >LANGUAGE=</value>
     <value type="QString" >LOGNAME=simon</value>
-    <value type="QString" >PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
-    <value type="QString" >PWD=/home/simon/Documents</value>
+    <value type="QString" >PATH=/usr/bin:/home/simon/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
+    <value type="QString" >PWD=/home/simon</value>
     <value type="QString" >QTDIR=/usr</value>
     <value type="QString" >QT_PLUGIN_PATH=/home/simon/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
-    <value type="QString" >SESSION_MANAGER=local/azriphale:/tmp/.ICE-unix/4037</value>
+    <value type="QString" >SESSION_MANAGER=local/azriphale:/tmp/.ICE-unix/4142</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=0</value>
-    <value type="QString" >SSH_AGENT_PID=3935</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-NwFANg3808/agent.3808</value>
+    <value type="QString" >SSH_AGENT_PID=4044</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-sbzpzy3995/agent.3995</value>
     <value type="QString" >USER=simon</value>
     <value type="QString" >WINDOWPATH=7</value>
     <value type="QString" >XCURSOR_THEME=oxy-white</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
-    <value type="QString" >XDG_SESSION_COOKIE=e4a82c80143a7182a74fe77f49c02eed-1237489568.995292-119242388</value>
+    <value type="QString" >XDG_SESSION_COOKIE=e4a82c80143a7182a74fe77f49c02eed-1240040989.214725-1492627244</value>
     <value type="QString" >XDM_MANAGED=method=classic</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
@@ -97,7 +99,7 @@
     <value type="QString" >CONFIG+=debug</value>
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/qmake-qt4</value>
-   <value key="abstractProcess.enabled" type="bool" >true</value>
+   <value key="abstractProcess.enabled" type="bool" >false</value>
    <value key="abstractProcess.workingDirectory" type="QString" >/home/simon/Documents/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager</value>
    <value key="buildConfiguration" type="int" >10</value>
   </valuemap>
@@ -107,13 +109,15 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-AIq43me4dH,guid=e7d6f8cc5e4e69b936c9a14249c297a2</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-ivQChLdzLy,guid=f0ed786d2d3102a8edd648ee49e9861e</value>
     <value type="QString" >DESKTOP_SESSION=default</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0</value>
     <value type="QString" >DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-5mKEBz/S.gpg-agent:4045:1</value>
     <value type="QString" >GS_LIB=/home/simon/.fonts</value>
     <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/simon/.gtkrc-2.0:/home/simon/.gtkrc-2.0-kde4:/home/simon/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString" >GTK_MODULES=canberra-gtk-module</value>
     <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/simon/.gtkrc::/home/simon/.kde/share/config/gtkrc</value>
     <value type="QString" >HOME=/home/simon</value>
     <value type="QString" >KDE_FULL_SESSION=true</value>
@@ -123,20 +127,20 @@
     <value type="QString" >LANG=en_GB.UTF-8</value>
     <value type="QString" >LANGUAGE=</value>
     <value type="QString" >LOGNAME=simon</value>
-    <value type="QString" >PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
-    <value type="QString" >PWD=/home/simon/Documents</value>
+    <value type="QString" >PATH=/usr/bin:/home/simon/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
+    <value type="QString" >PWD=/home/simon</value>
     <value type="QString" >QTDIR=/usr</value>
     <value type="QString" >QT_PLUGIN_PATH=/home/simon/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
-    <value type="QString" >SESSION_MANAGER=local/azriphale:/tmp/.ICE-unix/4037</value>
+    <value type="QString" >SESSION_MANAGER=local/azriphale:/tmp/.ICE-unix/4142</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=0</value>
-    <value type="QString" >SSH_AGENT_PID=3935</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-NwFANg3808/agent.3808</value>
+    <value type="QString" >SSH_AGENT_PID=4044</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-sbzpzy3995/agent.3995</value>
     <value type="QString" >USER=simon</value>
     <value type="QString" >WINDOWPATH=7</value>
     <value type="QString" >XCURSOR_THEME=oxy-white</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
-    <value type="QString" >XDG_SESSION_COOKIE=e4a82c80143a7182a74fe77f49c02eed-1237489568.995292-119242388</value>
+    <value type="QString" >XDG_SESSION_COOKIE=e4a82c80143a7182a74fe77f49c02eed-1240040989.214725-1492627244</value>
     <value type="QString" >XDM_MANAGED=method=classic</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
@@ -156,48 +160,47 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >ALLUSERSPROFILE=C:\ProgramData</value>
-    <value type="QString" >APPDATA=C:\Users\Simon\AppData\Roaming</value>
-    <value type="QString" >COMMONPROGRAMFILES=C:\Program Files\Common Files</value>
-    <value type="QString" >COMPUTERNAME=SIMON-PC</value>
-    <value type="QString" >COMSPEC=C:\Windows\system32\cmd.exe</value>
-    <value type="QString" >FP_NO_HOST_CHECK=NO</value>
-    <value type="QString" >GNUWIN32=D:\Program Files\gnuwin32</value>
-    <value type="QString" >HELLGATEENV=D:\Games\Hellgate London\</value>
-    <value type="QString" >HOME=D:\Vista\Users\Simon</value>
-    <value type="QString" >HOMEDRIVE=C:</value>
-    <value type="QString" >HOMEPATH=\Users\Simon</value>
-    <value type="QString" >LOCALAPPDATA=C:\Users\Simon\AppData\Local</value>
-    <value type="QString" >LOGONSERVER=\\SIMON-PC</value>
-    <value type="QString" >NUMBER_OF_PROCESSORS=2</value>
-    <value type="QString" >OS=Windows_NT</value>
-    <value type="QString" >PATH=C:\Qt\4.5.0-beta1\bin;C:\Program Files\MiKTeX 2.7\miktex\bin;D:\Program Files\gnuwin32\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32\wbem;C:\Program Files\MATLAB_SV71\bin\win32;C:\Program Files\doxygen\bin;C:\Program Files\Samsung\Samsung PC Studio 3\;C:\Program Files\Common Files\GTK\2.0\bin;C:\Program Files\Bazaar;D:\Program Files\Console2;D:\Program Files\emacs\bin;D:\bin;D:\old D backup\Programs\Programming\cpp\reimp_new\bin;C:\Program Files\MKVtoolnix;D:\Program Files\mplayer;C:\Program Files\GNU\GnuPG;D:\Program Files\putty;C:\Qt\4.5.0-beta1\bin;C:\mingw\bin;C:\Python25</value>
-    <value type="QString" >PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC</value>
-    <value type="QString" >PROCESSOR_ARCHITECTURE=x86</value>
-    <value type="QString" >PROCESSOR_IDENTIFIER=x86 Family 6 Model 15 Stepping 6, GenuineIntel</value>
-    <value type="QString" >PROCESSOR_LEVEL=6</value>
-    <value type="QString" >PROCESSOR_REVISION=0f06</value>
-    <value type="QString" >PROGRAMDATA=C:\ProgramData</value>
-    <value type="QString" >PROGRAMFILES=C:\Program Files</value>
-    <value type="QString" >PUBLIC=C:\Users\Public</value>
-    <value type="QString" >QTDIR=C:/Qt/4.5.0-beta1</value>
-    <value type="QString" >SESSIONNAME=Console</value>
-    <value type="QString" >SYSTEMDRIVE=C:</value>
-    <value type="QString" >SYSTEMROOT=C:\Windows</value>
-    <value type="QString" >TEMP=C:\Users\Simon\AppData\Local\Temp</value>
-    <value type="QString" >TMP=C:\Users\Simon\AppData\Local\Temp</value>
-    <value type="QString" >USERDOMAIN=Simon-PC</value>
-    <value type="QString" >USERNAME=Simon</value>
-    <value type="QString" >USERPROFILE=C:\Users\Simon</value>
-    <value type="QString" >WINDIR=C:\Windows</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-ivQChLdzLy,guid=f0ed786d2d3102a8edd648ee49e9861e</value>
+    <value type="QString" >DESKTOP_SESSION=default</value>
+    <value type="QString" >DESKTOP_STARTUP_ID=</value>
+    <value type="QString" >DISPLAY=:0</value>
+    <value type="QString" >DM_CONTROL=/var/run/xdmctl</value>
+    <value type="QString" >GPG_AGENT_INFO=/tmp/gpg-5mKEBz/S.gpg-agent:4045:1</value>
+    <value type="QString" >GS_LIB=/home/simon/.fonts</value>
+    <value type="QString" >GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:/home/simon/.gtkrc-2.0:/home/simon/.gtkrc-2.0-kde4:/home/simon/.kde/share/config/gtkrc-2.0</value>
+    <value type="QString" >GTK_MODULES=canberra-gtk-module</value>
+    <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/simon/.gtkrc::/home/simon/.kde/share/config/gtkrc</value>
+    <value type="QString" >HOME=/home/simon</value>
+    <value type="QString" >KDE_FULL_SESSION=true</value>
+    <value type="QString" >KDE_MULTIHEAD=false</value>
+    <value type="QString" >KDE_SESSION_UID=</value>
+    <value type="QString" >KDE_SESSION_VERSION=4</value>
+    <value type="QString" >LANG=en_GB.UTF-8</value>
+    <value type="QString" >LANGUAGE=</value>
+    <value type="QString" >LOGNAME=simon</value>
+    <value type="QString" >PATH=/usr/bin:/home/simon/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
+    <value type="QString" >PWD=/home/simon</value>
+    <value type="QString" >QTDIR=/usr</value>
+    <value type="QString" >QT_PLUGIN_PATH=/home/simon/.kde/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
+    <value type="QString" >SESSION_MANAGER=local/azriphale:/tmp/.ICE-unix/4142</value>
+    <value type="QString" >SHELL=/bin/bash</value>
+    <value type="QString" >SHLVL=0</value>
+    <value type="QString" >SSH_AGENT_PID=4044</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-sbzpzy3995/agent.3995</value>
+    <value type="QString" >USER=simon</value>
+    <value type="QString" >WINDOWPATH=7</value>
+    <value type="QString" >XCURSOR_THEME=oxy-white</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
+    <value type="QString" >XDG_SESSION_COOKIE=e4a82c80143a7182a74fe77f49c02eed-1240040989.214725-1492627244</value>
+    <value type="QString" >XDM_MANAGED=method=classic</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
     <value type="QString" >clean</value>
     <value type="QString" >-w</value>
    </valuelist>
-   <value key="abstractProcess.command" type="QString" >C:/mingw/bin/mingw32-make.exe</value>
+   <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
    <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >D:/Vista/Users/Simon/Documents/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/simon/Documents/Programs/C++/EVE/API/evemanager/EVE_Manager/EVE_Manager</value>
   </valuemap>
  </data>
  <data>
