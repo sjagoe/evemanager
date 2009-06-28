@@ -1,13 +1,3 @@
-
-
-Before building EVE Manager (specifically EVE API Qt), some code must be
-generated.
-
-From the base source directory:
-   1 cd EVE_API_Qt/EVE_API
-   2 python generator/code_generator.py
-   3 cd -
-
 The following may not build all libraries as a large portion of the
 software is incomplete.  All that works is the EVE_API_Qt module, and
 a small application intended to verify that fetching data from the
